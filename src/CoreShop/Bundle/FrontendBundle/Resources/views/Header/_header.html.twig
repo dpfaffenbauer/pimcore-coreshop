@@ -1,0 +1,36 @@
+<header id="header-area">
+    <div class="header-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <button class="navbar-toggler ps-0" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-gear fs-6 "></i> <small>Menu</small>
+                </button>
+                {% include '@CoreShopFrontend/Header/_topbar_buttons.html.twig' %}
+                <div class="collapse navbar-collapse order-lg-1" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('coreshop_index') }}">
+                                {{ 'coreshop.ui.home'|trans }}
+                            </a>
+                        </li>
+                        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CustomerController::headerAction')) }}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        {% include '@CoreShopFrontend/Header/_navigation.html.twig' %}
+    </div>
+    <div class="main-header">
+        <div class="container">
+            MeNU
+        </div>
+    </div>
+
+    {% if is_granted('CORESHOP_CATEGORY_SHOW') %}
+        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CategoryController::menuAction')) }}
+    {% endif %}
+</header>

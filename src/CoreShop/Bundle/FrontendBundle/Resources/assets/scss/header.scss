@@ -8,4 +8,15 @@
     }
 
     background-color: var(--bs-primary);
+
+    .navbar-expand-lg .navbar-nav .dropdown-menu {
+        position: absolute;
+        left: auto;
+        right: 0;
+    }
+
+    .navbar-toggler {
+        border: 0;
+        box-shadow: none;
+    }
 }
