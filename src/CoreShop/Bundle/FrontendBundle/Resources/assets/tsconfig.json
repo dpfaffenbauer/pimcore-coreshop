@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "types": ["tsd", "node"],
+    "target": "es2022",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

@@ -40,3 +40,9 @@ services:
     CoreShop\Bundle\FrontendBundle\Twig\TypeCastExtension:
         tags:
             - { name: twig.extension }
+
+    CoreShop\Bundle\FrontendBundle\Twig\TranslationExtension:
+        arguments:
+            - '@Symfony\Contracts\Translation\TranslatorInterface'
+        tags:
+            - { name: twig.extension }

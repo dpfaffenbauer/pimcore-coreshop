@@ -1,0 +1,16 @@
+@function rem($px, $base-font-size: 16px) {
+    @return #{$px / $base-font-size}rem;
+}
+
+@mixin box-shadow-opacity($x, $y, $blur, $spread, $color, $opacity) {
+    $rgba-color: rgba($color, $opacity); 
+    box-shadow: $x $y $blur $spread $rgba-color;
+}
+
+@mixin color-opacity($color, $opacity) {
+    color: rgba($color, $opacity); 
+}
+
+@mixin fill-opacity($color, $opacity) {
+    fill: rgba($color, $opacity);
+}

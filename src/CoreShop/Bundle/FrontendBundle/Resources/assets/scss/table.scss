@@ -1,0 +1,63 @@
+@import 'breakpoints.scss';
+@import 'mixins.scss';
+
+.table {
+    > :not(caption) {
+        th {
+            padding: rem(16px);
+            font-family: var(--coreshop-font-family-heading), serif;
+            font-weight: var(--coreshop-font-500);
+        }
+
+        td {
+            padding: rem(16px);
+        }
+
+        @media (max-width: $md-max) {
+            tr:not(:last-child) {
+                border-bottom: rem(16px) solid transparent;
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                display: block;
+                border: 0;
+                padding-top: rem(4px);
+                padding-bottom: rem(4px);
+            }
+
+        }
+    }
+
+    &.layout-2 {
+        border-radius: 0.275rem;
+        outline: 1px solid var(--coreshop-accordion-border-color);
+
+        thead {
+            background: var(--coreshop-accordion-active-bg);
+
+            th {
+                background: transparent;
+                color: var(--coreshop-primary);
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    border: 0;
+                    padding: 0.5rem 1rem;
+                }
+            }
+        }
+    }
+
+    tr:last-child {
+        td {
+            border:0
+        }
+    }
+}

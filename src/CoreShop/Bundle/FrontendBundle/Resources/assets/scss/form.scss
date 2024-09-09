@@ -1,0 +1,18 @@
+@import "mixins";
+
+.was-validated .form-control:valid,
+.form-control.is-valid {
+    background-image: none;
+    padding-right: 0.75rem;
+}
+.form-check-input {
+    &:focus {
+        @include box-shadow-opacity(0, 0, 0, 0.15rem, var(--coreshop-primary-rgb), 0.25);
+        border-color: var(--coreshop-primary);
+    }
+
+    &:checked {
+        background-color: var(--coreshop-primary);
+        border-color: var(--coreshop-primary);
+    }
+}
