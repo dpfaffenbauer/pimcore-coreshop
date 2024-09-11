@@ -12,6 +12,7 @@
     "@types/node": "^22.5.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "bootstrap-touchspin": "^4.7.3",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
     "flag-icons": "^7.2.3",

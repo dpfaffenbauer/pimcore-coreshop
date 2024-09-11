@@ -16,3 +16,25 @@
         border-color: var(--coreshop-primary);
     }
 }
+
+.cart-button {
+    .bootstrap-touchspin {
+        max-width: 4rem;
+
+        .input-group-btn-vertical .btn {
+            width: rem(24px);
+            right: 0;
+            left: auto;
+            display: block;
+            border-radius: 0;
+
+            &.bootstrap-touchspin-up {
+                border-top-right-radius: 4px;
+            }
+
+            &.bootstrap-touchspin-down {
+                border-bottom-right-radius: 4px;
+            }
+        }
+    }
+}

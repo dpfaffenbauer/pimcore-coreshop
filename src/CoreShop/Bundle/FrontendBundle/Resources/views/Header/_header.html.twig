@@ -22,12 +22,10 @@
     </div>
 
     <div class="container">
-        {% include '@CoreShopFrontend/Header/_navigation.html.twig' %}
+        {% include '@CoreShopFrontend/Header/_widgetbar.html.twig' %}
     </div>
-    <div class="main-header">
-        <div class="container">
-            MeNU
-        </div>
+    <div class="main-nav">
+        {% include '@CoreShopFrontend/Header/_navigation.html.twig' %}
     </div>
 
     {% if is_granted('CORESHOP_CATEGORY_SHOW') %}

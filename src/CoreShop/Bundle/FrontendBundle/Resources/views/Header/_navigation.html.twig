@@ -1,17 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-light w-100">
-    <div class="d-flex align-items-center justify-content-between w-100">
-        <a href="{{ path('coreshop_index') }}" class="navbar-brand">
-            <img src="{{ asset('bundles/coreshopfrontend/static/images/logo-full.svg') }}" title="CoreShop" alt="CoreShop" class="img-fluid" width="160"/>
-        </a>
-        <div class="coreshop-main-nav-search d-none d-lg-block">
-            {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\SearchController::widgetAction')) }}
-        </div>
-        <div class="d-flex align-items-center">
-            {% if is_granted('CORESHOP_CART') %}
-                <div class="col-md-3 p-sm-2">
-                    {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
-                </div>
-            {% endif %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarNavMain" aria-controls="navbarNavMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavMain">
+            <ul class="navbar-nav justify-content-between w-100">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('coreshop_index') }}">{{ 'coreshop.ui.home'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('coreshop_cart_summary') }}">{{ 'coreshop.ui.cart'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('coreshop_checkout') }}">{{ 'coreshop.ui.checkout'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('coreshop_login') }}">{{ 'coreshop.ui.login'|trans }}</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

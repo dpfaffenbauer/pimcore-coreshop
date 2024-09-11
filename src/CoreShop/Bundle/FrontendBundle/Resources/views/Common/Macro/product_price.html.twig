@@ -1,4 +1,4 @@
-{% macro display_product_price(product, with_tax) %}
+{% macro display_product_price(product, with_tax, display_discount = true , order = true) %}
     {% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
 
     {% if with_tax is null %}
@@ -14,14 +14,19 @@
     {% set retailPriceUnformatted = product|coreshop_product_retail_price(coreshop.context, with_tax) %}
     {% set retailPrice = currency.convertAndFormat(retailPriceUnformatted) %}
 
-    <span class="price-new" {{ coreshop_test_html_attribute('product-price', price) }}>{{ price }}</span>
+    <span class="price-new order-{% if order %}1{% else %}2{% endif %}" {{ coreshop_test_html_attribute('product-price', price) }}>{{ price }}</span>
     {% if priceUnformatted < discountPriceUnformatted %}
-        <span class="price-old" {{ coreshop_test_html_attribute('product-original-price', discountPrice) }}>{{ discountPrice }}</span>
+        <span class="price-old order-{% if order %}2{% else %}1{% endif %} text-decoration-line-through text-red" {{ coreshop_test_html_attribute('product-original-price', discountPrice) }}><small>{{ discountPrice }}</small></span>
     {% elseif priceUnformatted < retailPriceUnformatted %}
-        <span class="price-old" {{ coreshop_test_html_attribute('product-original-price', discountPrice) }}>{{ retailPrice }}</span>
+        <span class="price-old order-{% if order %}2{% else %}1{% endif %} text-decoration-line-through text-red" {{ coreshop_test_html_attribute('product-original-price', discountPrice) }}><small>{{ retailPrice }}</small></span>
     {% endif %}
-    {% if discountUnformatted > 0 %}
+    {% if discountUnformatted > 0 and display_discount %}
         <span class="price-discount" {{ coreshop_test_html_attribute('product-discount', discount) }}>(-{{ discount }})</span>
+    {% endif %}
+    {% if with_tax %}
+        <span class="order-3"><small>{{ 'coreshop.ui.inc_vat'|trans }}</small></span>
+    {% else %}
+        <span class="order-3"><small>{{ 'coreshop.ui.excl_vat'|trans }}</small></span>
     {% endif %}
 {% endmacro %}
 

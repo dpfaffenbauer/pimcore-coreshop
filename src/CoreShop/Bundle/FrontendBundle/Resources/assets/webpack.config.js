@@ -70,7 +70,7 @@ Encore
 //.enableIntegrityHashes(Encore.isProduction())
 
 // uncomment if you're having problems with a jQuery plugin
-//.autoProvidejQuery()
+.autoProvidejQuery()
 .copyFiles([
     {
         from: "./node_modules/bootstrap-icons/font/fonts",
@@ -85,6 +85,9 @@ Encore
         to: "../build/fonts/[path][name].[ext]",
     },
 ])
+.addAliases({
+    '@': `${__dirname}/node_modules`
+})
 ;
 
 module.exports = Encore.getWebpackConfig();

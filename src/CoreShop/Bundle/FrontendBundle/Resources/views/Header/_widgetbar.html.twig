@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light w-100">
+    <div class="d-flex align-items-center justify-content-between w-100">
+        <a href="{{ path('coreshop_index') }}" class="navbar-brand">
+            <img src="{{ asset('bundles/coreshopfrontend/static/images/logo-full.svg') }}" title="CoreShop" alt="CoreShop" class="img-fluid" width="160"/>
+        </a>
+        <div class="coreshop-main-nav-search d-none d-lg-block">
+            {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\SearchController::widgetAction')) }}
+        </div>
+        <div class="d-flex align-items-center">
+            {% if is_granted('CORESHOP_CART') %}
+                <div class="col-md-3 p-sm-2">
+                    {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
