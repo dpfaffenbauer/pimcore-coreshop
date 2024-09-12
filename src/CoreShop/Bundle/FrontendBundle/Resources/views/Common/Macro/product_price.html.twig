@@ -1,4 +1,4 @@
-{% macro display_product_price(product, with_tax, display_discount = true , order = true) %}
+{% macro display_product_price(product, with_tax, display_discount = true , order = true, display_tax = true) %}
     {% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
 
     {% if with_tax is null %}
@@ -23,10 +23,13 @@
     {% if discountUnformatted > 0 and display_discount %}
         <span class="price-discount" {{ coreshop_test_html_attribute('product-discount', discount) }}>(-{{ discount }})</span>
     {% endif %}
-    {% if with_tax %}
-        <span class="order-3"><small>{{ 'coreshop.ui.inc_vat'|trans }}</small></span>
-    {% else %}
-        <span class="order-3"><small>{{ 'coreshop.ui.excl_vat'|trans }}</small></span>
+
+    {% if display_tax %}
+        {% if with_tax %}
+            <span class="order-3"><small>{{ 'coreshop.ui.inc_vat'|trans }}</small></span>
+        {% else %}
+            <span class="order-3"><small>{{ 'coreshop.ui.excl_vat'|trans }}</small></span>
+        {% endif %}
     {% endif %}
 {% endmacro %}
 

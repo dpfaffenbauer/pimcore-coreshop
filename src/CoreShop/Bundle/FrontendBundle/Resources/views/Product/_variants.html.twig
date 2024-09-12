@@ -5,7 +5,7 @@
     <div class="product-info__attributes" data-config="{{ config|json_encode() }}">
         {% for key, attributeGroup in attributeGroups %}
             <fieldset class="mt-1 mt-lg-3" id="attribute-group-{{ attributeGroup.group.id }}" {{ coreshop_test_html_attribute('attribute-group', attributeGroup.group.id) }}>
-                <label class="h2 fs-3">{{ 'coreshop.ui.attribute_group.label'|trans({ '%name%': attributeGroup.group.name }) }}</label>
+                <label class="mb-1">{{ 'coreshop.ui.attribute_group.label'|trans({ '%name%': attributeGroup.group.name }) }}:</label>
                 {% if attributeGroup.type == "Pimcore\\Model\\DataObject\\CoreShopAttributeColor" %}
                     {% include '@CoreShopFrontend/Product/attributes/detail/_color.html.twig' with { group: attributeGroup } %}
                 {% else %}
