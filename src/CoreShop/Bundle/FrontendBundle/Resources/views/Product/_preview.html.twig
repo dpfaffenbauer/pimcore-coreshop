@@ -1,22 +1,18 @@
 {% import "@CoreShopFrontend/Common/Macro/currency.html.twig" as currency %}
 {% import "@CoreShopFrontend/Common/Macro/product_price.html.twig" as product_price %}
 {% set href = pimcore_object_path(product) %}
-
+{% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
 
 <div class="position-relative">
     {% if product.image is pimcore_asset_image %}
         <a href="{{ href }}">
             {{ product.image|pimcore_image_thumbnail_html('coreshop_productList', {'imgAttributes': {'class': 'card-img-top object-fit-cover'}, 'alt': product.name, 'id': 'image' ~ product.id}) }}
         </a>
-        <div class="position-absolute top-0 start-0 p-3">
-            <a class="btn btn-primary btn-sm d-flex align-items-center justify-content-center with-icon" role="button" target="_self" href="/">
-                <i class="bi bi-search"></i>
-            </a>
-        </div>
-        <div class="position-absolute top-0 end-0 p-3">
-            <a class="btn btn-link  d-flex align-items-center justify-content-center with-icon" role="button" target="_self" href="/">
-                <i class="bi bi-heart"></i>
-            </a>
+
+        <div class="position-absolute top-0 end-0 pt-3 pe-2">
+            {% if wishlist_allowed %}
+                {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+            {% endif %}
         </div>
     {% endif %}
 </div>

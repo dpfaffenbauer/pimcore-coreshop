@@ -3,6 +3,9 @@
 {{ form_start(form, {'action': path('coreshop_cart_add', {'product': product.id|coreshop_string})}) }}
     {{ form_errors(form) }}
 
+    {% if form.cartItem.unitDefinition is not defined %}
+        <div class="d-flex gap-2 mt-2">
+    {% endif %}
     <div class="d-flex gap-2 mb-2">
         {% set relation_id = random() %}
         {{ form_row(form.cartItem.quantity, coreshop_test_form_attribute('quantity')|coreshop_merge_recursive({label: false, attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }})) }}
@@ -15,10 +18,14 @@
     </div>
 
     <div class="input-group-append ml-2">
-        <button type="submit" class="btn btn-primary mt-0" rel="nofollow" {{ coreshop_test_html_attribute('add-to-cart') }}>
+        <button type="submit" class="btn btn-primary mt-0" rel="nofollow">
            <i class="bi bi-cart-plus me-1"></i> {{ 'coreshop.ui.add_to_cart'|trans }}
         </button>
     </div>
+
+    {% if form.cartItem.unitDefinition is not defined %}
+        </div>
+    {% endif %}
 
     {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

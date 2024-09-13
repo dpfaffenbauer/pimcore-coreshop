@@ -1,21 +1,27 @@
 {% import "@CoreShopFrontend/Common/Macro/product_price.html.twig" as product_price %}
+{% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
 
 <div class="col-12 mb-4">
     <div class="product-col list clearfix">
         <div class="row" {{ coreshop_test_html_attribute('category-products') }}>
             <div class="col-12 col-sm-3">
-                <div class="image">
+                <div class="position-relative image">
                     {% if product.image is pimcore_asset_image %}
                         <a href="{{ pimcore_object_path(product) }}" >
                             {{ product.image|pimcore_image_thumbnail_html("coreshop_productList", {"imgAttributes": {"class": "img-fluid"}}) }}
                         </a>
                     {% endif %}
+                    <div class="position-absolute top-0 end-0 pt-1">
+                        {% if wishlist_allowed %}
+                            {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-9">
                 <div class="caption">
                     <h4>
-                        <a href="{{ pimcore_object_path(product) }}" {{ coreshop_test_html_attribute('cat_product-name') }}>{{ product.name }}</a>
+                        <a href="{{ pimcore_object_path(product) }}" class="text-decoration-none">{{ product.name }}</a>
                     </h4>
                     <div class="description">
                         {{ product.shortDescription }}
@@ -30,14 +36,13 @@
                         {% endif %}
                     {% endfor %}
 
-                    <div class="price">
-                        {{ product_price.display_product_price(product) }}
+                    <div class="product-price d-flex flex-column mb-2">
+                        {{ product_price.display_product_price(product, null, false, false) }}
                     </div>
 
                     {% if coreshop_add_to_cart_available(product) and is_granted('CORESHOP_CART') and is_granted('CORESHOP_CART_ADD_ITEM') %}
                         <div class="cart-button btn-group">
                             {% if coreshop_inventory_is_available(product) %}
-                                {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
                                 {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
                             {% endif %}
                         </div>
