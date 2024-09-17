@@ -2,13 +2,13 @@
 {% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
 
 <div class="col-12 mb-4">
-    <div class="product-col list clearfix">
+    <div class="product-col product-category list clearfix">
         <div class="row" {{ coreshop_test_html_attribute('category-products') }}>
             <div class="col-12 col-sm-3">
-                <div class="position-relative image">
+                <div class="position-relative image mb-2">
                     {% if product.image is pimcore_asset_image %}
                         <a href="{{ pimcore_object_path(product) }}" >
-                            {{ product.image|pimcore_image_thumbnail_html("coreshop_productList", {"imgAttributes": {"class": "img-fluid"}}) }}
+                            {{ product.image|pimcore_image_thumbnail_html("coreshop_productList", {"imgAttributes": {"class": "img-fluid w-100"}}) }}
                         </a>
                     {% endif %}
                     <div class="position-absolute top-0 end-0 pt-1">
@@ -28,13 +28,18 @@
                     </div>
 
                     {% set attributeGroups = coreshop_variant_attribute_list_variants(product, true)|sort((a, b) => a.group.sorting <=> b.group.sorting) %}
-                    {% for attributeGroup in attributeGroups %}
-                        {% if attributeGroup.type == "Pimcore\\Model\\DataObject\\CoreShopAttributeColor" %}
-                            {% include '@CoreShopFrontend/Product/attributes/detail/_color.html.twig' with { group: attributeGroup } %}
-                        {% else %}
-                            {% include '@CoreShopFrontend/Product/attributes/detail/_text.html.twig' with { group: attributeGroup } %}
-                        {% endif %}
-                    {% endfor %}
+                    {% if attributeGroups|length > 0 %}
+                        <div class="my-2">
+                        {% for attributeGroup in attributeGroups %}
+                            {% if attributeGroup.type == "Pimcore\\Model\\DataObject\\CoreShopAttributeColor" %}
+                                {% include '@CoreShopFrontend/Product/attributes/detail/_color.html.twig' with { group: attributeGroup } %}
+                            {% else %}
+                                {% include '@CoreShopFrontend/Product/attributes/detail/_text.html.twig' with { group: attributeGroup } %}
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+
 
                     <div class="product-price d-flex flex-column mb-2">
                         {{ product_price.display_product_price(product, null, false, false) }}
@@ -46,6 +51,10 @@
                                 {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
                             {% endif %}
                         </div>
+                    {% else %}
+                        <a href="{{ pimcore_object_path(product) }}" class="btn btn-primary mt-0">
+                            <i class="bi bi-info-circle me-1"></i><span>{{ 'coreshop.ui.read_more'|trans }}</span>
+                        </a>
                     {% endif %}
                 </div>
             </div>

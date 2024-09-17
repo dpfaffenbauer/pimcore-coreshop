@@ -14,6 +14,7 @@
     }
 }
 
+.product-category,
 .product-info__attributes {
     margin-bottom: 2rem;
 
@@ -51,7 +52,7 @@
 
             input:disabled + label {
                 cursor: not-allowed;
-                opacity: .3;
+                opacity: .6;
             }
         }
     }

@@ -174,6 +174,7 @@ coreshop.ui.price.per_unit_name: 'per %s'
 coreshop.ui.price.per_unit_name_and_quantity_factor: 'per %d %s'
 coreshop.ui.error.order_already_paid: "L'ordine è già stato pagato."
 coreshop.ui.payment_total: 'Totale da pagare'
+coreshop.ui.read_more: 'Saperne di più'
 coreshop.cart_item.quantity.min: "La quantità di un articolo nel carrello non può essere inferiore a 1."
 coreshop.form.address.choose_address: 'Scegli indirizzo'
 coreshop.form.address.shipping: 'Indirizzo di spedizione'

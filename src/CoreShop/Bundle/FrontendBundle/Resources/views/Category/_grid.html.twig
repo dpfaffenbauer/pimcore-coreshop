@@ -1,6 +1,6 @@
 {% import "@CoreShopFrontend/Common/Macro/product_price.html.twig" as product_price %}
 {% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
-<div class="d-flex col-12 col-md-6 col-xxl-4 mb-3">
+<div class="product-category d-flex col-12 col-md-6 col-xxl-4 mb-3">
     <div class="layout1 card flex-grow-1">
         <div class="position-relative">
             {% if product.image is pimcore_asset_image %}
@@ -22,7 +22,7 @@
             {{ product.shortDescription }}
         </div>
 
-        <div class="px-3">
+        <div class="px-3 mb-2">
             {% set attributeGroups = coreshop_variant_attribute_list_variants(product, true)|sort((a, b) => a.group.sorting <=> b.group.sorting) %}
             {% for attributeGroup in attributeGroups %}
                 {% if attributeGroup.type == "Pimcore\\Model\\DataObject\\CoreShopAttributeColor" %}
