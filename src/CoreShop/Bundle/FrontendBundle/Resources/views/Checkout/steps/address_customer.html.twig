@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-footer">
                             <a href="{{ path('coreshop_customer_address_new', {'_redirect': path('coreshop_checkout', {stepIdentifier: identifier}), address_identifier: 'invoice'}) }}"
-                               class="btn btn-info pull-left">
+                               class="btn btn-outline-secondary pull-left">
                                 {{ 'coreshop.ui.add_new_invoice_address'|trans }}
                             </a>
                         </div>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="card-footer d-none">
                                 <a href="{{ path('coreshop_customer_address_new', {'_redirect': path('coreshop_checkout', {stepIdentifier: identifier}), address_identifier: 'shipping'}) }}"
-                                   class="btn btn-info pull-left">
+                                   class="btn btn-outline-secondary pull-left">
                                     {{ 'coreshop.ui.add_new_shipping_address'|trans }}
                                 </a>
                             </div>
@@ -87,7 +87,7 @@
                     </div>
                 {% endif %}
                 <div class="col-12 {{ previousStep is not null ? 'col-sm-6' : '' }}">
-                    <button type="submit" class="btn btn-success pull-right" {{ coreshop_test_html_attribute('submit-address-step') }}>
+                    <button type="submit" class="btn btn-primary pull-right" {{ coreshop_test_html_attribute('submit-address-step') }}>
                         {{ 'coreshop.ui.proceed'|trans }}
                     </button>
                 </div>
@@ -100,7 +100,7 @@
             <div class="row">
                 <div class="col-12">
                     <a href="{{ path('coreshop_customer_address_new', {'_redirect': path('coreshop_checkout', {stepIdentifier: identifier}), address_identifier: 'invoice'}) }}"
-                       class="btn btn-info pull-left">
+                       class="btn btn-outline-secondary pull-left">
                         {{ 'coreshop.ui.add_new_invoice_address'|trans }}
                     </a>
                 </div>

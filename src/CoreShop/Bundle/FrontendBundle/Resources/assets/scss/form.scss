@@ -1,5 +1,15 @@
 @import "mixins";
 
+.form-group {
+    margin-bottom: 0.875rem;
+}
+
+.col-form-label {
+    font-family: var(--coreshop-font-family-heading), serif;
+    font-size: 1.25rem;
+    margin-bottom: 0.875rem;
+}
+
 .was-validated .form-control:valid,
 .form-control.is-valid {
     background-image: none;

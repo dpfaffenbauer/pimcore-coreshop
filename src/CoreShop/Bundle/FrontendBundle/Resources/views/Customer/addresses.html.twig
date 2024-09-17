@@ -33,7 +33,7 @@
                             <br/>
                             <br/>
                             {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_EDIT') %}
-                                <a href="{{ path('coreshop_customer_address_edit', {name: address.street, address: address.id|coreshop_string}) }}" class="btn btn-success" {{ coreshop_test_html_attribute('addresses-link',  address.street) }}>
+                                <a href="{{ path('coreshop_customer_address_edit', {name: address.street, address: address.id|coreshop_string}) }}" class="btn btn-primary" {{ coreshop_test_html_attribute('addresses-link',  address.street) }}>
                                     {{ 'coreshop.ui.edit'|trans }}
                                 </a>
                             {% endif %}
@@ -52,7 +52,7 @@
         {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_ADD') %}
             <div class="row">
                 <div class="col-12">
-                    <a href="{{ path('coreshop_customer_address_new') }}" class="btn btn-success" {{ coreshop_test_html_attribute('address-add') }}>
+                    <a href="{{ path('coreshop_customer_address_new') }}" class="btn btn-primary" {{ coreshop_test_html_attribute('address-add') }}>
                         {{ 'coreshop.ui.add_new_address'|trans }}
                     </a>
                 </div>

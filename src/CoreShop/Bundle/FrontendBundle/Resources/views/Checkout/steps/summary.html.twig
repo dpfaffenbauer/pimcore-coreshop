@@ -21,13 +21,13 @@
         <div class="row">
             {% if is_granted('CORESHOP_QUOTE_CREATE') %}
                 <div class="col-12 col-sm-1 offset-sm-10">
-                    {{ form_widget(form.submitQuote, coreshop_test_form_attribute('submit-quote')|coreshop_merge_recursive({attr: {class: 'btn btn-success w-100'}})) }}
+                    {{ form_widget(form.submitQuote, coreshop_test_form_attribute('submit-quote')|coreshop_merge_recursive({attr: {class: 'btn btn-primary w-100'}})) }}
                 </div>
             {% endif %}
 
             {% if is_granted('CORESHOP_ORDER_CREATE') %}
                 <div class="col-12 col-sm-1">
-                    {{ form_widget(form.submitOrder, coreshop_test_form_attribute('submit-order')|coreshop_merge_recursive({attr: {class: 'btn btn-success w-100'}})) }}
+                    {{ form_widget(form.submitOrder, coreshop_test_form_attribute('submit-order')|coreshop_merge_recursive({attr: {class: 'btn btn-primary w-100'}})) }}
                 </div>
             {% endif %}
         </div>

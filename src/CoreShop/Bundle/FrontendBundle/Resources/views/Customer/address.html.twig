@@ -47,7 +47,7 @@
                                 {{ form_row(form.phoneNumber,coreshop_test_form_attribute('address-phoneNumber')) }}
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success" {{ coreshop_test_html_attribute('address-save-changes') }} >
+                                    <button type="submit" class="btn btn-primary" {{ coreshop_test_html_attribute('address-save-changes') }} >
                                         {% if not address.id %}
                                             {{ 'coreshop.ui.add'|trans }}
                                         {% else %}
