@@ -39,17 +39,15 @@
 
 <body>
 {% block header %}
-    <header>
-        {% include '@CoreShopFrontend/Header/_header.html.twig' %}
-    </header>
+    {% include '@CoreShopFrontend/Header/_header.html.twig' %}
 {% endblock %}
 
-<div class="main-container container">
+<main class="main-container container pt-4">
     {% include '@CoreShopFrontend/Common/global_flash_messages.html.twig' %}
 
     {% block content %}
     {% endblock %}
-</div>
+</main>
 
 {% block footer %}
     {% include '@CoreShopFrontend/_footer.html.twig' %}

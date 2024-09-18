@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block checkout %}
-    <div class="card">
-        <div class="card-header">
+    <div class="card border-0">
+        <h4 class="px-3 pt-3 mb-0">
             {{ 'coreshop.ui.shipping'|trans }}
-        </div>
+        </h4>
         <div class="card-body">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
@@ -23,11 +23,11 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="clearfix">
-                            <div class="pull-left">
+                        <div class="d-flex">
+                            <div>
                                 {{ form_widget(carrier_form, coreshop_test_form_attribute('carrier-select')|coreshop_merge_recursive({'label': false})) }}
                             </div>
-                            <div class="pull-left">
+                            <div>
                                 <span {{ coreshop_test_html_attribute('carrier-label') }}>
                                     {{ carrier.title }}
                                 </span>
@@ -45,20 +45,21 @@
                 </div>
             {% endfor %}
 
-            {{ form_row(form.comment, coreshop_test_form_attribute('shipping-comment')) }}
-
+            <div class="mt-3">
+                {{ form_row(form.comment, coreshop_test_form_attribute('shipping-comment')) }}
+            </div>
             <div class="row">
                 {% set previousStep = coreshop_checkout_steps_get_previous() %}
                 {% if previousStep is not null %}
-                    <div class="col-12 col-sm-6">
+                    <div class="col-6">
                         <a href="{{ path('coreshop_checkout', {'stepIdentifier': previousStep}) }}"
                            class="btn btn-secondary">
                             {{ 'coreshop.ui.back'|trans }}
                         </a>
                     </div>
                 {% endif %}
-                <div class="col-12 {{ previousStep is not null ? 'col-sm-6' : '' }}">
-                    <button type="submit" class="btn btn-primary pull-right" {{ coreshop_test_html_attribute('submit-shipping-step') }}>
+                <div class="d-flex col-6">
+                    <button type="submit" class="btn btn-primary ms-auto" {{ coreshop_test_html_attribute('submit-shipping-step') }}>
                         {{ 'coreshop.ui.proceed'|trans }}
                     </button>
                 </div>

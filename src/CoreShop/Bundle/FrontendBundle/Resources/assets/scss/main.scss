@@ -1,5 +1,14 @@
 @import 'mixins.scss';
 
+html,
+body {
+    height: 100%;
+}
+
+main {
+    min-height: calc(100vh - var(--coreshop-header-height));
+}
+
 section {
     padding-bottom: rem(48px);
 }

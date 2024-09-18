@@ -28,7 +28,8 @@
         {% include '@CoreShopFrontend/Header/_navigation.html.twig' %}
     </div>
 
-    {% if is_granted('CORESHOP_CATEGORY_SHOW') %}
-        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CategoryController::menuAction')) }}
-    {% endif %}
+{#    {% if is_granted('CORESHOP_CATEGORY_SHOW') %}#}
+{#        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CategoryController::menuAction')) }}#}
+{#    {% endif %}#}
+
 </header>

@@ -1,0 +1,15 @@
+@import 'mixins';
+
+.footerpre {
+    background-color: var(--coreshop-gray-900);
+    color: var(--coreshop-white);
+    padding: rem(10px) 0;
+
+    .nav-link {
+        @include color-opacity(var(--coreshop-white-rgb), 80%);
+
+        &:hover {
+            color: var(--coreshop-white);
+        }
+    }
+}
