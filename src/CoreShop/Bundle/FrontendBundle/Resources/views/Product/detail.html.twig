@@ -107,7 +107,7 @@
                 <div class="options mt-3">
                     <div class="d-flex cart-button btn-group">
                         {% if cart_allowed %}
-                            {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
+                            {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string, '_redirect': app.request.requestUri})) }}
                         {% endif %}
                     </div>
                 </div>

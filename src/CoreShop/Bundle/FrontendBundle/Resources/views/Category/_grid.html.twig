@@ -10,7 +10,7 @@
 
                 <div class="position-absolute top-0 end-0 pt-3 pe-2">
                     {% if wishlist_allowed %}
-                        {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                        {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string, '_redirect': app.request.requestUri})) }}
                     {% endif %}
                 </div>
             {% endif %}
@@ -40,7 +40,7 @@
         {% if coreshop_add_to_cart_available(product) and is_granted('CORESHOP_CART') and is_granted('CORESHOP_CART_ADD_ITEM') %}
             <div class="cart-button px-3 pb-3">
                 {% if coreshop_inventory_is_available(product) %}
-                    {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
+                    {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string, '_redirect': app.request.requestUri})) }}
                 {% endif %}
             </div>
         {% endif %}

@@ -26,11 +26,11 @@
                     </a>
                 </div>
             </div>
-            <div class="d-flex col-md-5 col-lg-4">
+            <div class="d-flex col-md-5 col-lg-4 align-items-center my-3 mb-md-0">
                 {#
                     TODO: Maybe use form for this?
                 #}
-                <label class="col-form-label me-2">{{ 'coreshop.ui.sort'|trans }}</label>
+                <label class="me-2">{{ 'coreshop.ui.sort'|trans }}</label>
                 <select class="form-control site-reload" name="sort" {{ coreshop_test_html_attribute('order-selection') }}>
                     {% for value in validSortElements %}
                         {% set asc = value ~ '_asc' %}
@@ -40,8 +40,8 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="d-flex col-md-3 col-lg-2">
-                <label class="col-form-label me-2">{{ 'coreshop.ui.show'|trans }}</label>
+            <div class="d-flex col-md-3 col-lg-2 align-items-center">
+                <label class="me-2">{{ 'coreshop.ui.show'|trans }}</label>
                 <select class="form-control site-reload" name="perPage">
                     {% for perPageList in perPageAllowed %}
                         <option value="{{ perPageList }}" {% if perPageList == perPage %} selected="selected" {% endif %}>{{ perPageList }}</option>

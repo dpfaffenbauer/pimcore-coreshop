@@ -177,6 +177,7 @@ coreshop.ui.global_error.cart_has_changed: 'Some Products are not available anym
 coreshop.ui.product.tax.inc: 'incl. %s%% Tax'
 coreshop.ui.read_more: 'Read more'
 coreshop.ui.accept_terms: 'I have read and agree to the terms and conditions'
+coreshop.ui.copy: 'Copy'
 coreshop.form.address.choose_address: 'Choose Address'
 coreshop.form.address.shipping: 'Shipping Address'
 coreshop.form.address.invoice: 'Invoice Address'

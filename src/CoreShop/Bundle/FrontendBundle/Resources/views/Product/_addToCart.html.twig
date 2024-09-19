@@ -1,8 +1,7 @@
 {% if form %}
 {% form_theme form '@CoreShopFrontend/Form/theme.html.twig' %}
-{{ form_start(form, {'action': path('coreshop_cart_add', {'product': product.id|coreshop_string})}) }}
+{{ form_start(form, {'action': path('coreshop_cart_add', {'product': product.id|coreshop_string,'_redirect': _redirect})}) }}
     {{ form_errors(form) }}
-
     {% if form.cartItem.unitDefinition is not defined %}
         <div class="d-flex gap-2 mt-2">
     {% endif %}

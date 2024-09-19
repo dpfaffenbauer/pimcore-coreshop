@@ -33,3 +33,9 @@ section {
     font-size: rem(24px);
     line-height: 1;
 }
+
+.list-group {
+    --bs-list-group-active-color: var(--bs-primary);
+    --bs-list-group-active-bg: transparent;
+    --bs-list-group-active-border-color: transparent;
+}

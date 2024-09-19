@@ -250,7 +250,7 @@ class CartController extends FrontendController
                     $addToCart->getCartItem()->getQuantity(),
                 );
 
-                $this->addFlash('success', $this->container->get('translator')->trans('coreshop.ui.item_added'));
+                $this->addFlash('coreshop_global_success', $this->container->get('translator')->trans('coreshop.ui.item_added'));
 
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse([
@@ -262,7 +262,7 @@ class CartController extends FrontendController
             }
 
             foreach ($form->getErrors(true, true) as $error) {
-                $this->addFlash('error', $error->getMessage());
+                $this->addFlash('coreshop_global_error', $error->getMessage());
             }
 
             if ($request->isXmlHttpRequest()) {
@@ -288,6 +288,7 @@ class CartController extends FrontendController
             [
                 'form' => $form->createView(),
                 'product' => $product,
+                '_redirect' => $redirect,
             ],
         );
     }

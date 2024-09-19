@@ -27,7 +27,7 @@
 </div>
 {% if coreshop_inventory_is_available(product) %}
     <div class="cart-button px-3 pb-3">
-        {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
+        {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string, '_redirect': document.getFullPath() })) }}
     </div>
 {% endif %}
 
