@@ -1,7 +1,7 @@
 {% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
 
 <div id="cart" class="cart-widget btn-group btn-block">
-    <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+    <button type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
         <span class="cart-number">{% if cart.hasItems %}{{ cart.items|length }}{% else %}0{% endif %}</span>
         <i class="bi bi-cart"></i>
     </button>

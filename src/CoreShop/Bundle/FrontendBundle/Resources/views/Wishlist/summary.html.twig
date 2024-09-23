@@ -10,7 +10,7 @@
     {% if share_link is defined and share_link %}
         <div class="input-group mb-3">
             <input {{ coreshop_test_html_attribute('share-wishlist-link') }} type="text" class="form-control" readonly="readonly" id="link" value="{{ share_link }}" >
-            <button class="d-flex align-items-center justify-content-center with-icon  btn btn-secondary input-group-text  copy-to-clipboard" data-copied-text="{{ 'coreshop.ui.copied'|trans }}" data-target="link" type="button" id="button-addon2">{{ 'coreshop.ui.copy'|trans }}</button>
+            <button class="d-flex align-items-center justify-content-center with-icon  btn btn-secondary input-group-text  copy-to-clipboard" data-copied-text="{{ 'coreshop.ui.copied'|trans }}" data-bs-target="link" type="button" id="button-addon2">{{ 'coreshop.ui.copy'|trans }}</button>
         </div>
 
     {% endif %}

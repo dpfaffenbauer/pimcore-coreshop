@@ -3,37 +3,43 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {%- apply spaceless -%}
-        {% do pimcore_head_link().setCacheBuster(false) %}
+{#    {%- apply spaceless -%}#}
+{#        {% do pimcore_head_link().setCacheBuster(false) %}#}
 
-        {% do pimcore_head_link().appendStylesheet(asset('bundles/coreshopfrontend/build/app.css')) %}
+{#        {% do pimcore_head_link().appendStylesheet(asset('bundles/coreshopfrontend/build/app.css')) %}#}
 
-        {% do pimcore_head_link().appendStylesheet(asset('bundles/coreshopfrontend/static/css/owl.carousel.css')) %}
+{#        {% do pimcore_head_link().appendStylesheet(asset('bundles/coreshopfrontend/static/css/owl.carousel.css')) %}#}
 
-        {% do pimcore_head_script().setCacheBuster(false) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/jquery-1.11.1.min.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/jquery.spinner.min.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/popper.min.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/bootstrap.min.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/owl.carousel.min.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/owl.carousel2.thumbs.min.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/handle-prototypes.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/plugin/coreshop.plugin.quantity.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/plugin/coreshop.plugin.variant.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/custom.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/shop.js')) %}
-        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/variant.js')) %}
+{#        {% do pimcore_head_script().setCacheBuster(false) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/jquery-1.11.1.min.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/jquery.spinner.min.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/popper.min.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/bootstrap.min.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/owl.carousel.min.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/vendor/owl.carousel2.thumbs.min.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/handle-prototypes.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/plugin/coreshop.plugin.quantity.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/plugin/coreshop.plugin.variant.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/custom.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/shop.js')) %}#}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/static/js/variant.js')) %}#}
 
-        {% do pimcore_head_title().setSeparator(' | ') %}
-    {%- endapply -%}
+{#        {% do pimcore_head_script().appendFile(asset('bundles/coreshopfrontend/build/app.js')) %}#}
+
+{#        {% do pimcore_head_title().setSeparator(' | ') %}#}
+{#    {%- endapply -%}#}
 
     {% block layout_head_meta deferred %}
         {{ pimcore_head_title('CoreShop') }}
         {{ pimcore_head_meta() }}
     {% endblock %}
 
-    {% block head_stylesheets deferred %}
-        {{ pimcore_head_link() }}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts deferred %}
+        {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
 
@@ -53,8 +59,5 @@
     {% include '@CoreShopFrontend/_footer.html.twig' %}
 {% endblock %}
 
-{% block scripts deferred %}
-    {{ pimcore_head_script() }}
-{% endblock %}
 </body>
 </html>

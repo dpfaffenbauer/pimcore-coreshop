@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-main-menu navbar-dark bg-red">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCategories"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCategories"
                 aria-controls="navbarCategories" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,7 +10,7 @@
                     {% set dropdown = category.hasChildCategories %}
 
                     <li class="nav-item{% if dropdown %} dropdown {% endif %}">
-                        <a href="{{ pimcore_object_path(category) }}" class="nav-link{% if dropdown %} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10{%  endif %}" {{  coreshop_test_html_attribute('category-menu-top',category.name) }}>
+                        <a href="{{ pimcore_object_path(category) }}" class="nav-link{% if dropdown %} dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown" data-delay="10{%  endif %}" {{  coreshop_test_html_attribute('category-menu-top',category.name) }}>
                             {{ category.name }}
                         </a>
 

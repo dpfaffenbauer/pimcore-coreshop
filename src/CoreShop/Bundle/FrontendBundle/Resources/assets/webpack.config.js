@@ -5,12 +5,10 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
-// directory where compiled assets will be stored
 .setOutputPath('../public/build/')
-// public path used by the web server to access the output path
-.setPublicPath('/build')
-// only needed for CDN's or sub-directory deploy
-//.setManifestKeyPrefix('')
+.setPublicPath('/bundles/coreshopfrontend/build/')
+.setManifestKeyPrefix('bundles/coreshopfrontend/build/')
+.cleanupOutputBeforeBuild()
 
 /*
  * ENTRY CONFIG
@@ -25,7 +23,7 @@ Encore
 
 // will require an extra script tag for runtime.js
 // but, you probably want this, unless you're building a single-page app
-.enableSingleRuntimeChunk()
+.disableSingleRuntimeChunk()
 
 /*
  * FEATURE CONFIG
@@ -69,8 +67,6 @@ Encore
 // requires WebpackEncoreBundle 1.4 or higher
 //.enableIntegrityHashes(Encore.isProduction())
 
-// uncomment if you're having problems with a jQuery plugin
-.autoProvidejQuery()
 .copyFiles([
     {
         from: "./node_modules/bootstrap-icons/font/fonts",

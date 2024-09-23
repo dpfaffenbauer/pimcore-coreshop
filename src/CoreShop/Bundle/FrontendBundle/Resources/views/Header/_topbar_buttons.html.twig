@@ -10,7 +10,7 @@
         {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CurrencyController::widgetAction')) }}
     {% endif %}
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="fi fi-{% if app.request.locale is same as('en') %}gb{% else %}{{ app.request.locale }}{% endif %} border-radius-100 flag-border bg-cover me-lg-1"></span><span class="d-none d-lg-inline-block">{{ app.request.locale|upper|coreshop_country_name(app.request.locale) }}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="languageDropdown">
