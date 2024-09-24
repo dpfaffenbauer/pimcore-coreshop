@@ -75,7 +75,8 @@
                 {% endif %}
             {% else %}
                 <div class="input-group">
-                    {{ form_widget(form.quantity, coreshop_test_form_attribute('cart-item-quantity-input', item.name)) }}
+                    {% set relation_id = random() %}
+                    {{ form_widget(form.quantity, {attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }}) }}
                     {% if item.hasUnitDefinition %}
                         <div class="input-group-append">
                             <span class="input-group-text" {{ coreshop_test_html_attribute('cart-item-unit-' ~ item.unitDefinition.id, item.name) }}>

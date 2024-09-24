@@ -2,7 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/bundles/coreshopfrontend/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js.js",
+        "/bundles/coreshopfrontend/build/270.js",
         "/bundles/coreshopfrontend/build/app.js"
       ],
       "css": [

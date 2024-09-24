@@ -67,6 +67,8 @@ Encore
 // requires WebpackEncoreBundle 1.4 or higher
 //.enableIntegrityHashes(Encore.isProduction())
 
+.autoProvidejQuery()
+
 .copyFiles([
     {
         from: "./node_modules/bootstrap-icons/font/fonts",
