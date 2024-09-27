@@ -9,13 +9,14 @@
 {% block checkout %}
     <div class="card bg-light border-0">
         <h4 class="px-3 pt-3 mb-0">
-            {{ 'coreshop.ui.payment'|trans }}
+            {{ 'coreshop.ui.payment_provider'|trans }}
         </h4>
         <div class="card-body">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 {{ form_errors(form) }}
-
-                {{ form_row(form.paymentProvider, {attr: {class: 'form-select'}}) }}
+                <div class="form-group">
+                    {{ form_widget(form.paymentProvider, {attr: {class: 'form-select'}}) }}
+                </div>
 
                 <div class="paymentSettings">
                     {% if form.paymentSettings is defined %}
@@ -31,7 +32,7 @@
                     </div>
                 {% endfor %}
 
-                <div class="row">
+                <div class="row pt-3">
                     {% set previousStep = coreshop_checkout_steps_get_previous() %}
                     {% if previousStep is not null %}
                         <div class="col-6">

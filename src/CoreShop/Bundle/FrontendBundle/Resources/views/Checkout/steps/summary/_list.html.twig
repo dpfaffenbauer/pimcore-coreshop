@@ -5,7 +5,7 @@
             {{ form_errors(form) }}
 
             {% for item in cart.items %}
-                {% include '@CoreShopFrontend/Checkout/steps/summary/_item.html.twig' with {'item': item} %}
+                {% include '@CoreShopFrontend/Common/Cart/_item.html.twig' with {'item': item, 'btnremove': false} %}
             {% endfor %}
 
         </div>

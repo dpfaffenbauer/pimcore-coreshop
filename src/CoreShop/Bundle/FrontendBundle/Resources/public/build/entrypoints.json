@@ -2,7 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/bundles/coreshopfrontend/build/270.js",
+        "/bundles/coreshopfrontend/build/vendors-node_modules_bootstrap-touchspin_dist_jquery_bootstrap-touchspin_js-node_modules_boot-d89be2.js",
         "/bundles/coreshopfrontend/build/app.js"
       ],
       "css": [

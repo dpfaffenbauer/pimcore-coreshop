@@ -15,7 +15,11 @@
                     <a class="nav-link" href="{{ path('coreshop_checkout') }}">{{ 'coreshop.ui.checkout'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('coreshop_login') }}">{{ 'coreshop.ui.login'|trans }}</a>
+                    {% if app.user %}
+                        <a class="nav-link" href="{{ path('coreshop_customer_profile') }}">{{ 'coreshop.ui.profile'|trans }}</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ path('coreshop_login') }}">{{ 'coreshop.ui.login'|trans }}</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>

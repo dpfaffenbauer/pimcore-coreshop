@@ -7,6 +7,7 @@
             {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\SearchController::widgetAction')) }}
         </div>
         <div class="d-flex align-items-center">
+            {% include '@CoreShopFrontend/Customer/_userwidget.html.twig' %}
             {% if is_granted('CORESHOP_CART') %}
                 <div class="col-md-3 p-sm-2">
                     {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}

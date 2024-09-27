@@ -7,27 +7,30 @@
 {% endblock %}
 
 {% block checkout %}
-    <div class="card border-0">
+    <div class="card bg-light border-0">
         <h4 class="px-3 pt-3 mb-0">
             {{ 'coreshop.ui.shipping'|trans }}
         </h4>
         <div class="card-body">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
-
             {% set show_carrier_price = form.carrier.vars.show_carrier_price %}
-
             {% for key, carrier_form in form.carrier %}
                 {% set carrier = form.carrier.vars.choices[key].data %}
                 {% set price = form.carrier.vars.prices[carrier_form.vars.value] %}
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex">
+                <div class="card border-0 mb-3">
+                    <div class="card-header ps-1">
+                        <div class="d-flex align-items-center">
                             <div>
                                 {{ form_widget(carrier_form, coreshop_test_form_attribute('carrier-select')|coreshop_merge_recursive({'label': false})) }}
                             </div>
-                            <div>
+                            {% if carrier.logo and carrier.logo is pimcore_asset_image %}
+                                <div class="ms-2 me-3">
+                                    {{ carrier.logo|pimcore_image_thumbnail_html('coreshop_carrierLogo', { 'imgAttributes': { 'class': 'mb-1' }}) }}
+                                </div>
+                            {% endif %}
+                            <div class="d-flex align-items-end gap-2">
                                 <span {{ coreshop_test_html_attribute('carrier-label') }}>
                                     {{ carrier.title }}
                                 </span>
