@@ -1,44 +1,252 @@
-{% extends '@Emailizr/layout.html.twig' %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <style type="text/css">@media only screen {
+            html {
+                min-height: 100%;
+                background: #f3f3f3;
+            }
+        }
 
-{% block content %}
-    {{ emailizr_style_collector.add("@CoreShopFrontendBundle/Resources/public/static/css/mail.css") }}
+        a:visited {
+            color: #2199e8;
+        }
 
-    <container class="body-drip">
-        <spacer size="16"></spacer>
+        a:active, a:hover {
+            color: #147dc2;
+        }
 
-        <center>
-            <img src="/bundles/{{ asset('coreshopfrontend/static/images/logo-full.svg') }}" title="CoreShop" alt="CoreShop" class="img-fluid" width="300px"/>
-        </center>
+        table.button table tr td a:visited, table.button:active table tr td a, table.button:hover table tr td a {
+            color: #fefefe;
+        }
 
-        <spacer size="16"></spacer>
+        table.button:active table td, table.button:hover table td, table.button:visited table td {
+            background: #147dc2;
+            color: #fefefe;
+        }
 
-        <row>
-            <columns>
-                <h4 class="text-center">{{ pimcore_input('head') }}</h4>
-            </columns>
-        </row>
-        <hr/>
-        {% block mail %}
+        table.button:active table a, table.button:hover table a, table.button:visited table a {
+            border: 0 solid #147dc2;
+        }
 
-        {% endblock %}
-        <hr/>
+        @media only screen and (max-width: 596px) {
+            th.small-12 {
+                display: inline-block !important;
+                width: 100% !important;
+            }
 
-        <wrapper class="secondary">
+            .columns th.small-12 {
+                display: block !important;
+                width: 100% !important;
+            }
+        }
 
-            <spacer size="16"></spacer>
+        @media only screen {
+            html {
+                min-height: 100%;
+                background: #f3f3f3;
+            }
+        }
 
-            <row>
-                <columns large="6">
-                    <h5>Connect With Us:</h5>
-                    <button class="facebook expand" href="https://www.facebook.com/coreshop.onlineshop">Facebook</button>
-                    <button class="github expand" href="https://www.github.com/coreshop">Github</button>
-                </columns>
-                <columns large="6">
-                    <h5>Contact Info:</h5>
-                    <p>Phone: +43 660 36 177 85</p>
-                    <p>Email: <a href="mailto:info@coreshop.org">info@coreshop.org</a></p>
-                </columns>
-            </row>
-        </wrapper>
-    </container>
-{% endblock %}
+        a:visited {
+            color: #2199e8;
+        }
+
+        a:active, a:hover {
+            color: #147dc2;
+        }
+
+        table.button table tr td a:visited, table.button:active table tr td a, table.button:hover table tr td a {
+            color: #fefefe;
+        }
+
+        table.button:active table td, table.button:hover table td, table.button:visited table td {
+            background: #147dc2;
+            color: #fefefe;
+        }
+
+        table.button:active table a, table.button:hover table a, table.button:visited table a {
+            border: 0 solid #147dc2;
+        }
+
+        @media only screen and (max-width: 596px) {
+            th.small-12 {
+                display: inline-block !important;
+                width: 100% !important;
+            }
+
+            .columns th.small-12 {
+                display: block !important;
+                width: 100% !important;
+            }
+        }</style>
+</head>
+<body style="min-width: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; width: 100%;">
+<table align="center" class="container"
+       style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; background: #fefefe; width: 580px; margin: 0 auto; text-align: inherit;">
+    <tbody>
+    <tr style="padding: 0; vertical-align: top; text-align: left;">
+        <td style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; border-collapse: collapse;">
+            <table class="row"
+                   style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; padding: 0; position: relative; display: table;">
+                <tbody>
+                <tr style="padding: 0; vertical-align: top; text-align: left;">
+                    <th class="small-12 large-12 first last columns"
+                        style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; text-align: left; font-size: 16px; line-height: 1.3; margin: 0 auto; padding-bottom: 16px; width: 564px; padding-left: 16px; padding-right: 16px;">
+                        <table style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                            <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                <th style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3;">
+                                    <table align="center" class="body-drip container"
+                                           style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; border-top: 8px solid #cd1017; background: #fefefe; margin: 0 auto; text-align: inherit; width: 100%;">
+                                        <tbody>
+                                        <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                            <td style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; border-collapse: collapse;">
+                                                <table class="spacer"
+                                                       style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                    <tbody>
+                                                    <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                        <td height="16"
+                                                            style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; mso-line-height-rule: exactly; font-size: 16px; line-height: 16px; border-collapse: collapse;"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <center style="width: 100%; min-width: 532px;">
+                                                    <img align="center"
+                                                         class="img-fluid"
+                                                         src="/bundles/coreshopfrontend/static/images/logo-full.svg"
+                                                         title="CoreShop"
+                                                         alt="CoreShop"
+                                                         width="300px"
+                                                         style="text-decoration: none; outline: 0; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; clear: both; display: block;">
+                                                </center>
+                                                <table class="spacer"
+                                                       style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                    <tbody>
+                                                    <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                        <td height="16"
+                                                            style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; mso-line-height-rule: exactly; font-size: 16px; line-height: 16px; border-collapse: collapse;"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="row"
+                                                       style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; padding: 0; position: relative; width: 100%; display: table;">
+                                                    <tbody>
+                                                    <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                        <th class="small-12 large-12 first last columns"
+                                                            style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; text-align: left; font-size: 16px; line-height: 1.3; margin: 0 auto; padding-bottom: 16px; width: 564px; padding-left: 0; padding-right: 0;">
+                                                            <table style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                                <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                    <th style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3;">
+                                                                        <h4 class="text-center"
+                                                                            style="padding: 0; margin: 0; line-height: 1.3; margin-bottom: 10px; color: inherit; word-wrap: normal; font-family: Helvetica,Arial,sans-serif; font-weight: 400; font-size: 24px; text-align: center;">
+                                                                            {{ pimcore_input('head') }}
+                                                                        </h4>
+                                                                    </th>
+                                                                    <th class="expander"
+                                                                        style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; visibility: hidden; width: 0; padding: 0;"></th>
+                                                                </tr>
+                                                            </table>
+                                                        </th>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <hr>
+                                                {% block mail %}
+
+                                                {% endblock %}
+                                                <hr>
+                                                <table class="secondary wrapper" align="center"
+                                                       style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                    <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                        <td class="wrapper-inner"
+                                                            style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; border-collapse: collapse;">
+                                                            <table class="spacer"
+                                                                   style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                                <tbody>
+                                                                <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                    <td height="16"
+                                                                        style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; mso-line-height-rule: exactly; font-size: 16px; line-height: 16px; border-collapse: collapse;"></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="row"
+                                                                   style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; padding: 0; position: relative; width: 100%; display: table;">
+                                                                <tbody>
+                                                                <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                    <th class="small-12 large-6 first columns"
+                                                                        style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; text-align: left; font-size: 16px; line-height: 1.3; margin: 0 auto; padding-bottom: 16px; width: 274px; padding-left: 0; padding-right: 0;">
+                                                                        <table style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                                            <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                                <th style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3;">
+                                                                                    <h5 style="padding: 0; margin: 0; text-align: left; line-height: 1.3; margin-bottom: 10px; color: inherit; word-wrap: normal; font-family: Helvetica,Arial,sans-serif; font-weight: 400; font-size: 20px;">
+                                                                                        Connect With Us:</h5>
+                                                                                    <table class="github expand button"
+                                                                                           style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; margin: 0 0 16px 0; width: 100%;">
+                                                                                        <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                                            <td style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; border-collapse: collapse;">
+                                                                                                <table style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                                                                    <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                                                        <td style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; font-size: 16px; line-height: 1.3; text-align: left; color: #fefefe; background: #2199e8; border: 2px solid #2199e8; border-collapse: collapse;">
+                                                                                                            <center style="width: 100%; min-width: none;">
+                                                                                                                <a align="center"
+                                                                                                                   class="float-center"
+                                                                                                                   href="https://www.github.com/coreshop"
+                                                                                                                   style="margin: 0; line-height: 1.3; font-family: Helvetica,Arial,sans-serif; font-size: 16px; font-weight: 700; color: #fefefe; text-decoration: none; display: inline-block; padding: 8px 16px; border: 0 solid #2199e8; border-radius: 3px; text-align: center; width: 100%; padding-left: 0; padding-right: 0;">Github</a>
+                                                                                                            </center>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                            </td>
+                                                                                            <td class="expander"
+                                                                                                style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; vertical-align: top; color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; visibility: hidden; width: 0; border-collapse: collapse; padding: 0;"></td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </th>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </th>
+                                                                    <th class="small-12 large-6 last columns"
+                                                                        style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; text-align: left; font-size: 16px; line-height: 1.3; margin: 0 auto; padding-bottom: 16px; width: 274px; padding-left: 0; padding-right: 0;">
+                                                                        <table style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                                                                            <tr style="padding: 0; vertical-align: top; text-align: left;">
+                                                                                <th style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3;">
+                                                                                    <h5 style="padding: 0; margin: 0; text-align: left; line-height: 1.3; margin-bottom: 10px; color: inherit; word-wrap: normal; font-family: Helvetica,Arial,sans-serif; font-weight: 400; font-size: 20px;">
+                                                                                        Contact Info:</h5>
+                                                                                    <p style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; margin-bottom: 10px; font-size: 16px; line-height: 1.3;">
+                                                                                        Phone: +43 660 36 177 85</p>
+                                                                                    <p style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; margin-bottom: 10px; font-size: 16px; line-height: 1.3;">
+                                                                                        Email: <a
+                                                                                                href="mailto:info@coreshop.org"
+                                                                                                style="text-decoration: none; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; line-height: 1.3; color: #2199e8;">info@coreshop.org</a>
+                                                                                    </p></th>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </th>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </th>
+                                <th class="expander"
+                                    style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; visibility: hidden; width: 0; padding: 0;"></th>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table><!-- prevent Gmail on iOS font size manipulation -->
+<div style="display: none; white-space: nowrap; font: 15px courier; line-height: 0;"></div>
+</body>
+</html>

@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Order\Model\CartPriceRuleInterface;
 use CoreShop\Component\Order\Repository\CartPriceRuleRepositoryInterface;
 use CoreShop\Component\Rule\Model\ActionInterface;

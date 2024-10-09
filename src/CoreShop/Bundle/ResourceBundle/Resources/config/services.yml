@@ -77,7 +77,7 @@ services:
             - '@translator'
 
     CoreShop\Bundle\ResourceBundle\Serialization\Driver\PimcoreDataObjectDriver:
-        decorates: 'jms_serializer.metadata.annotation_driver'
+        decorates: 'jms_serializer.metadata_driver'
         arguments:
             - '@CoreShop\Bundle\ResourceBundle\Serialization\Driver\PimcoreDataObjectDriver.inner'
 
@@ -85,11 +85,14 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    coreshop.jms_serializer.object_constructor:
+        class: JMS\Serializer\Construction\UnserializeObjectConstructor
+
     CoreShop\Bundle\ResourceBundle\Serialization\VersionObjectConstructor:
         decorates: 'jms_serializer.object_constructor'
         arguments:
             - '@CoreShop\Bundle\ResourceBundle\Serialization\VersionObjectConstructor.inner'
-            - '@jms_serializer.unserialize_object_constructor'
+            - '@coreshop.jms_serializer.object_constructor'
 
     CoreShop\Component\Resource\Service\FolderCreationServiceInterface: '@CoreShop\Component\Resource\Service\FolderCreationService'
     CoreShop\Component\Resource\Service\FolderCreationService:

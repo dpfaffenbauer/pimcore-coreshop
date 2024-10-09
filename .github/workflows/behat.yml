@@ -1,23 +1,23 @@
 name: Behat
 on:
   push:
-    branches: [ '4.0' ]
-    paths-ignore:
-      - 'docs/**'
-      - '.github/workflows/docs_next.yml'
-      - 'README.md'
+    branches: [ '4.0', '4.1', 'next' ]
+    paths:
+      - 'composer.json'
+      - 'features/**'
+      - 'behat.yml.dist'
+      - '*.php'
+      - 'src/**'
   pull_request:
-    branches: [ '4.0' ]
-    paths-ignore:
-      - 'docs/**'
-      - '.github/workflows/docs_next.yml'
-      - 'README.md'
+    branches: [ '4.0', '4.1','next' ]
+    paths:
+      - 'composer.json'
+      - 'features/**'
+      - 'behat.yml.dist'
+      - '*.php'
+      - 'src/**'
   release:
     types: [ created ]
-    paths-ignore:
-      - 'docs/**'
-      - '.github/workflows/docs.yaml'
-      - 'README.md'
   schedule:
     - cron: "0 1 * * 1"
 
@@ -42,10 +42,8 @@ jobs:
       matrix:
         php: [ 8.1, 8.2 ]
         pimcore: [ ~11.1.0, ~11.2.0 ]
+        jms: [ ^4.0, ^5.0 ]
         dependencies: [ highest ]
-        exclude:
-          - php: 8.1
-            dependencies: lowest
 
     services:
       database:
@@ -55,7 +53,7 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    name: "${{ matrix.pimcore }}, PHP ${{ matrix.php }}, Deps ${{ matrix.dependencies }}"
+    name: "${{ matrix.pimcore }}, PHP ${{ matrix.php }}, Deps ${{ matrix.dependencies }}, JMS ${{ matrix.jms }}"
 
     steps:
     - uses: actions/checkout@v4
@@ -85,17 +83,19 @@ jobs:
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
         restore-keys: ${{ runner.os }}-composer-
 
+    - name: jms/serializer-bundle
+      run: composer require "jms/serializer-bundle:${{ matrix.jms }}" --no-update --no-scripts
+
+    - name: pimcore/pimcore
+      run: composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
+
     - if: matrix.dependencies == 'highest'
       name: Install dependencies highest
-      run: |
-        composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
-        composer update --no-progress --prefer-dist --optimize-autoloader
+      run: composer update --no-progress --prefer-dist --optimize-autoloader
 
     - if: matrix.dependencies == 'lowest'
       name: Install dependencies lowest
-      run: |
-        composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
-        composer update --no-progress --prefer-dist --optimize-autoloader --prefer-lowest
+      run: composer update --no-progress --prefer-dist --optimize-autoloader --prefer-lowest
 
     - name: Cache clear
       run: bin/console cache:clear

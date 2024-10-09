@@ -41,6 +41,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->enumNode('login_identifier')->values(['email', 'username'])->defaultValue('email')->end()
+                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
             ->end()
         ;
 

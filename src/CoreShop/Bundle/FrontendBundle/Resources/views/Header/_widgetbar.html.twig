@@ -10,7 +10,7 @@
             {% include '@CoreShopFrontend/Customer/_userwidget.html.twig' %}
             {% if is_granted('CORESHOP_CART') %}
                 <div class="col-md-3 p-sm-2">
-                    {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
+                   {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
                 </div>
             {% endif %}
         </div>

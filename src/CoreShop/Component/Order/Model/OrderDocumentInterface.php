@@ -19,10 +19,11 @@ declare(strict_types=1);
 namespace CoreShop\Component\Order\Model;
 
 use Carbon\Carbon;
+use CoreShop\Component\Pimcore\Print\PrintableInterface;
 use CoreShop\Component\Resource\Model\ResourceInterface;
 use CoreShop\Component\Resource\Pimcore\Model\PimcoreModelInterface;
 
-interface OrderDocumentInterface extends ResourceInterface, PimcoreModelInterface
+interface OrderDocumentInterface extends ResourceInterface, PimcoreModelInterface, PrintableInterface
 {
     public function getId(): ?int;
 

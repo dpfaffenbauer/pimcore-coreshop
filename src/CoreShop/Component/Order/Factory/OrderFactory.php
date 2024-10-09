@@ -25,8 +25,11 @@ use CoreShop\Component\Order\OrderShipmentStates;
 use CoreShop\Component\Order\OrderStates;
 use CoreShop\Component\Resource\Factory\FactoryInterface;
 use CoreShop\Component\Resource\TokenGenerator\UniqueTokenGenerator;
+use CoreShop\Component\StorageList\Factory\StorageListFactoryInterface;
+use CoreShop\Component\StorageList\Model\NameableStorageListInterface;
+use CoreShop\Component\StorageList\Model\StorageListInterface;
 
-class OrderFactory implements FactoryInterface
+class OrderFactory implements StorageListFactoryInterface
 {
     public function __construct(
         private FactoryInterface $cartFactory,
@@ -48,5 +51,19 @@ class OrderFactory implements FactoryInterface
         $cart->setInvoiceState(OrderInvoiceStates::STATE_NEW);
 
         return $cart;
+    }
+
+    public function createNewNamed(string $name)
+    {
+        /**
+         * @var StorageListInterface $storageList
+         */
+        $storageList = $this->createNew();
+
+        if ($storageList instanceof NameableStorageListInterface) {
+            $storageList->setName($name);
+        }
+
+        return $storageList;
     }
 }

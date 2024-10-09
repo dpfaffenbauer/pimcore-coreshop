@@ -57,6 +57,6 @@ core_shop_workflow:
             callbacks:
                 after:
                     resolve_state:
-                        on: ['pay']
+                        on: ['partially_authorize', 'authorize', 'partially_pay', 'pay']
                         do: ['@CoreShop\Bundle\OrderBundle\StateResolver\OrderStateResolver', 'resolve']
                         args: ['object']

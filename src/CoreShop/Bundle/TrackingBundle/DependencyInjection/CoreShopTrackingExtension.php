@@ -18,8 +18,11 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\TrackingBundle\DependencyInjection;
 
+use CoreShop\Bundle\TrackingBundle\Attribute\AsTracker;
+use CoreShop\Bundle\TrackingBundle\Attribute\AsTrackingExtractor;
 use CoreShop\Bundle\TrackingBundle\DependencyInjection\Compiler\TrackerPass;
 use CoreShop\Bundle\TrackingBundle\DependencyInjection\Compiler\TrackingExtractorPass;
+use CoreShop\Component\Registry\Autoconfiguration;
 use CoreShop\Component\Tracking\Extractor\TrackingExtractorInterface;
 use CoreShop\Component\Tracking\Tracker\TrackerInterface;
 use Symfony\Component\Config\FileLocator;
@@ -39,15 +42,21 @@ final class CoreShopTrackingExtension extends Extension
 
         $this->configureTrackers($configs, $container);
 
-        $container
-            ->registerForAutoconfiguration(TrackerInterface::class)
-            ->addTag(TrackerPass::TRACKER_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            TrackerInterface::class,
+            TrackerPass::TRACKER_TAG,
+            AsTracker::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(TrackingExtractorInterface::class)
-            ->addTag(TrackingExtractorPass::TRACKING_EXTRACTOR_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            TrackingExtractorInterface::class,
+            TrackingExtractorPass::TRACKING_EXTRACTOR_TAG,
+            AsTrackingExtractor::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 
     protected function configureTrackers(array $configs, ContainerBuilder $container): void

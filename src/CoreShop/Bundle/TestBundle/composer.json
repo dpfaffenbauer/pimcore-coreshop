@@ -24,7 +24,22 @@
     }
   ],
   "require": {
-    "pimcore/pimcore": "^11.0"
+    "pimcore/pimcore": "^11.0",
+    "pimcore/newsletter-bundle": "^1.0",
+    "coreshop/pimcore": "^4.0.0",
+    "behat/behat": "^3.8",
+    "robertfausk/behat-panther-extension": "^1.0",
+    "behat/mink": "^1.8",
+    "dbrekelmans/bdi": "^1.0.0",
+    "doctrine/orm": "^2.9",
+    "doctrine/data-fixtures": "^1.5",
+    "friends-of-behat/mink-debug-extension": "^2.0",
+    "friends-of-behat/mink-extension": "^2.4",
+    "friends-of-behat/page-object-extension": "^0.3.2",
+    "friends-of-behat/symfony-extension": "^2.1",
+    "lakion/mink-debug-extension": "^2.0",
+    "symfony/panther": "^2.0",
+    "webmozart/assert": "^1.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10",

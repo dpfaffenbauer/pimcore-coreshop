@@ -18,6 +18,8 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\CoreBundle\DependencyInjection;
 
+use CoreShop\Bundle\CoreBundle\Attribute\AsPortlet;
+use CoreShop\Bundle\CoreBundle\Attribute\AsReport;
 use CoreShop\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterPortletsPass;
 use CoreShop\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterReportsPass;
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
@@ -26,10 +28,12 @@ use CoreShop\Component\Core\Portlet\PortletInterface;
 use CoreShop\Component\Core\Report\ReportInterface;
 use CoreShop\Component\Order\Checkout\CheckoutManagerFactoryInterface;
 use CoreShop\Component\Order\Checkout\DefaultCheckoutManagerFactory;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Pimcore\Bundle\CustomReportsBundle\PimcoreCustomReportsBundle;
 use Pimcore\Bundle\SimpleBackendSearchBundle\PimcoreSimpleBackendSearchBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -39,21 +43,23 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 
 final class CoreShopCoreExtension extends AbstractModelExtension implements PrependExtensionInterface
 {
-    private static array $bundles = [
-        'coreshop_address',
-        'coreshop_currency',
-        'coreshop_customer',
-        'coreshop_index',
-        'coreshop_order',
-        'coreshop_product',
-        'coreshop_payment',
-        'coreshop_payum',
-        'coreshop_product',
-        'coreshop_rule',
-        'coreshop_sequence',
-        'coreshop_store',
-        'coreshop_shipping',
-        'coreshop_taxation',
+    private static array $bundlesWithAttributeConfiguration = [
+        'core_shop_address',
+        'core_shop_currency',
+        'core_shop_customer',
+        'core_shop_index',
+        'core_shop_locale',
+        'core_shop_menu',
+        'core_shop_payment',
+        'core_shop_pimcore',
+        'core_shop_product',
+        'core_shop_product_quantity_price_rules',
+        'core_shop_rule',
+        'core_shop_seo',
+        'core_shop_shipping',
+        'core_shop_store',
+        'core_shop_theme',
+        'core_shop_tracking',
     ];
 
     public function load(array $configs, ContainerBuilder $container): void
@@ -99,24 +105,33 @@ final class CoreShopCoreExtension extends AbstractModelExtension implements Prep
             throw new \InvalidArgumentException('No valid Checkout Manager has been configured!');
         }
 
-        $container
-            ->registerForAutoconfiguration(PortletInterface::class)
-            ->addTag(RegisterPortletsPass::PORTLET_TAG)
-        ;
-        $container
-            ->registerForAutoconfiguration(ReportInterface::class)
-            ->addTag(RegisterReportsPass::REPORT_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            PortletInterface::class,
+            RegisterPortletsPass::PORTLET_TAG,
+            AsPortlet::class,
+            $configs['autoconfigure_with_attributes'],
+        );
+
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            ReportInterface::class,
+            RegisterReportsPass::REPORT_TAG,
+            AsReport::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 
     public function prepend(ContainerBuilder $container): void
     {
-        $configs = $container->getExtensionConfig($this->getAlias());
-        $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+        $config = $container->getExtensionConfig($this->getAlias());
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
 
         foreach ($container->getExtensions() as $name => $extension) {
-            if (in_array($name, self::$bundles, true)) {
-                $container->prependExtensionConfig($name, ['driver' => $configs['driver']]);
+            if (in_array($name, self::$bundlesWithAttributeConfiguration, true)) {
+                $container->prependExtensionConfig($name, [
+                    'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
+                ]);
             }
         }
     }

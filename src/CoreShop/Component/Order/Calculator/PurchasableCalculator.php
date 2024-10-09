@@ -30,6 +30,7 @@ final class PurchasableCalculator implements PurchasableCalculatorInterface
         private PurchasableRetailPriceCalculatorInterface $purchasableRetailPriceCalculator,
         private PurchasableDiscountPriceCalculatorInterface $purchasableDiscountPriceCalculator,
         private PurchasableDiscountCalculatorInterface $purchasableDiscountCalculator,
+        private PurchasableCustomAttributesCalculatorInterface $purchasableIsDiscountableCalculator,
     ) {
     }
 
@@ -66,5 +67,10 @@ final class PurchasableCalculator implements PurchasableCalculatorInterface
         }
 
         return 0;
+    }
+
+    public function getCustomAttributes(PurchasableInterface $purchasable, array $context): array
+    {
+        return $this->purchasableIsDiscountableCalculator->getCustomAttributes($purchasable, $context);
     }
 }

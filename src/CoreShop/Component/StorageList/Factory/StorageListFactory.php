@@ -21,10 +21,11 @@ namespace CoreShop\Component\StorageList\Factory;
 use CoreShop\Component\Resource\Factory\FactoryInterface;
 use CoreShop\Component\Resource\Pimcore\Model\AbstractPimcoreModel;
 use CoreShop\Component\Resource\TokenGenerator\UniqueTokenGenerator;
+use CoreShop\Component\StorageList\Model\NameableStorageListInterface;
 use CoreShop\Component\StorageList\Model\StorageListInterface;
 use CoreShop\Component\StorageList\Model\TokenAwareStorageListInterface;
 
-class StorageListFactory implements FactoryInterface
+class StorageListFactory implements StorageListFactoryInterface
 {
     public function __construct(
         private FactoryInterface $storageListFactory,
@@ -46,6 +47,20 @@ class StorageListFactory implements FactoryInterface
         if ($storageList instanceof TokenAwareStorageListInterface) {
             $tokenGenerator = new UniqueTokenGenerator();
             $storageList->setToken($tokenGenerator->generate(10));
+        }
+
+        return $storageList;
+    }
+    
+    public function createNewNamed(string $name)
+    {
+        /**
+         * @var StorageListInterface $storageList
+         */
+        $storageList = $this->createNew();
+
+        if ($storageList instanceof NameableStorageListInterface) {
+            $storageList->setName($name);
         }
 
         return $storageList;

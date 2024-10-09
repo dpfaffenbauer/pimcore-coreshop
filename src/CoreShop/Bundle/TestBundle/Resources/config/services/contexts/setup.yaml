@@ -1,0 +1,28 @@
+services:
+  _defaults:
+    public: true
+
+  CoreShop\Bundle\TestBundle\Context\Setup\ClassContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+      - '@CoreShop\Bundle\TestBundle\Service\ClassStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Setup\SiteContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Setup\DocumentContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Setup\PropertyContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }

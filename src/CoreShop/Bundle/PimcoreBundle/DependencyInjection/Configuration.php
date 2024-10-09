@@ -29,7 +29,11 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('core_shop_pimcore');
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
-
+        $rootNode
+            ->children()
+            ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
+            ->end()
+        ;
         $this->addPimcoreResourcesSection($rootNode);
 
         return $treeBuilder;

@@ -2,6 +2,11 @@ CoreShop\Component\Customer\Model\Customer:
     exclusion_policy: ALL
     xml_root_name: customer
     virtual_properties:
+        id:
+            serialized_name: id
+            exp: object.getId()
+            type: string
+            groups: [Detailed]
         salutation:
             serialized_name: salutation
             exp: object.getSalutation()
@@ -36,5 +41,10 @@ CoreShop\Component\Customer\Model\Customer:
             serialized_name: customerGroups
             exp: object.getCustomerGroups()
             type: array
+            groups: [Detailed]
+        creationDate:
+            serialized_name: creationDate
+            exp: object.getCreationDate()
+            type: int
             groups: [Detailed]
 

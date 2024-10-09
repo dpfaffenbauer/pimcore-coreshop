@@ -33,12 +33,12 @@ class ConditionsFormMapper implements DataMapperInterface
     ) {
     }
 
-    public function mapDataToForms($viewData, $forms): void
+    public function mapDataToForms(mixed $viewData, \Traversable $forms): void
     {
 //        $this->propertyPathDataMapper->mapDataToForms($data, $forms);
     }
 
-    public function mapFormsToData($forms, &$viewData): void
+    public function mapFormsToData(\Traversable $forms, mixed &$viewData): void
     {
         if (!$viewData instanceof Collection && !is_array($viewData)) {
             return;

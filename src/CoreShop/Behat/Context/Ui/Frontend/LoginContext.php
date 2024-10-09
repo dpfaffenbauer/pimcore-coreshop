@@ -22,7 +22,7 @@ use Behat\Behat\Context\Context;
 use CoreShop\Behat\Page\Frontend\Account\LoginPageInterface;
 use CoreShop\Behat\Page\Frontend\Account\RequestPasswordResetPageInterface;
 use CoreShop\Behat\Page\Frontend\HomePageInterface;
-use CoreShop\Behat\Service\Resolver\CurrentPageResolverInterface;
+use CoreShop\Bundle\TestBundle\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context

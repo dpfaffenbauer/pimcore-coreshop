@@ -33,12 +33,12 @@ class BackendCartItemQuantityDataMapper implements DataMapperInterface
     ) {
     }
 
-    public function mapDataToForms($viewData, $forms): void
+    public function mapDataToForms(mixed $viewData, \Traversable $forms): void
     {
         $this->propertyPathDataMapper->mapDataToForms($viewData, $forms);
     }
 
-    public function mapFormsToData($forms, &$viewData): void
+    public function mapFormsToData(\Traversable $forms, mixed &$viewData): void
     {
         $formsOtherThanQuantity = [];
 

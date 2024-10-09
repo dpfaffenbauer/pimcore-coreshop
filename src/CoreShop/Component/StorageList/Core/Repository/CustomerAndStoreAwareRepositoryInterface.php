@@ -25,5 +25,10 @@ use CoreShop\Component\Store\Model\StoreInterface;
 
 interface CustomerAndStoreAwareRepositoryInterface extends PimcoreRepositoryInterface
 {
-    public function findLatestByStoreAndCustomer(StoreInterface $store, CustomerInterface $customer): ?StorageListInterface;
+    public function findLatestByStoreAndCustomer(StoreInterface $store, CustomerInterface $customer, string $name = null): ?StorageListInterface;
+
+    /**
+     * @return StorageListInterface[]
+     */
+    public function findNamedStorageLists(StoreInterface $store, CustomerInterface $customer): array;
 }

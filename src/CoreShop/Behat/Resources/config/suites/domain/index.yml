@@ -5,11 +5,11 @@ default:
                 - coreshop.behat.context.hook.pimcore_setup
                 - coreshop.behat.context.hook.coreshop_setup
 
-                - coreshop.behat.context.hook.doctrine_orm
+                - CoreShop\Bundle\TestBundle\Context\Hook\DoctrineORMContext
                 - coreshop.behat.context.hook.pimcore_dao
 
-                - coreshop.behat.context.transform.shared_storage
-                - coreshop.behat.context.transform.pimcore_class
+                - CoreShop\Bundle\TestBundle\Context\Transform\SharedStorageContext
+                - CoreShop\Bundle\TestBundle\Context\Transform\ClassContext
                 - coreshop.behat.context.transform.product
                 - coreshop.behat.context.transform.store
                 - coreshop.behat.context.transform.index
@@ -17,7 +17,7 @@ default:
                 - coreshop.behat.context.setup.index
                 - coreshop.behat.context.setup.product
                 - coreshop.behat.context.setup.store
-                - coreshop.behat.context.setup.pimcore_class
+                - CoreShop\Bundle\TestBundle\Context\Setup\ClassContext
 
                 - coreshop.behat.context.domain.index
             filters:

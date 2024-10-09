@@ -1,3 +1,6 @@
+imports:
+    - { resource: ../../../TestBundle/Resources/config/twig.yml }
+
 services:
     coreshop.frontend.controller.abstract:
         class: CoreShop\Bundle\FrontendBundle\Controller\FrontendController
@@ -21,18 +24,6 @@ services:
         tags:
             - { name: twig.extension }
 
-    CoreShop\Bundle\FrontendBundle\Twig\TestHtmlAttributeExtension:
-        arguments:
-            - '%kernel.environment%'
-        tags:
-            - { name: twig.extension }
-
-    CoreShop\Bundle\FrontendBundle\Twig\TestFormAttributeExtension:
-        arguments:
-            - '%kernel.environment%'
-        tags:
-            - { name: twig.extension }
-
     CoreShop\Bundle\FrontendBundle\Twig\MergeRecursiveExtension:
         tags:
             - { name: twig.extension }
@@ -46,3 +37,6 @@ services:
             - '@Symfony\Contracts\Translation\TranslatorInterface'
         tags:
             - { name: twig.extension }
+
+    Twig\DeferredExtension\DeferredExtension:
+        tags: [ 'twig.extension' ]

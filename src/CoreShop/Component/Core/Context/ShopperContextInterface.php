@@ -25,7 +25,13 @@ use CoreShop\Component\Locale\Context\LocaleContextInterface;
 use CoreShop\Component\Order\Context\CartContextInterface;
 use CoreShop\Component\Store\Context\StoreContextInterface;
 
-interface ShopperContextInterface extends StoreContextInterface, CurrencyContextInterface, LocaleContextInterface, CountryContextInterface, CustomerContextInterface, CartContextInterface
+interface ShopperContextInterface extends
+    StoreContextInterface,
+    CurrencyContextInterface,
+    LocaleContextInterface,
+    CountryContextInterface,
+    CustomerContextInterface,
+    CartContextInterface
 {
     public function getContext(): array;
 

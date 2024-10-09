@@ -1,0 +1,12 @@
+services:
+  CoreShop\Bundle\TestBundle\Twig\Extension\TestHtmlAttributeExtension:
+    arguments:
+      - '%kernel.environment%'
+    tags:
+      - { name: twig.extension }
+
+  CoreShop\Bundle\TestBundle\Twig\Extension\TestFormAttributeExtension:
+    arguments:
+      - '%kernel.environment%'
+    tags:
+      - { name: twig.extension }

@@ -1,0 +1,38 @@
+services:
+  _defaults:
+    public: true
+
+  CoreShop\Bundle\TestBundle\Context\Transform\ClassContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+      - '@CoreShop\Bundle\TestBundle\Service\ClassStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Transform\SharedStorageContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Transform\SiteContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Transform\DocumentContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Transform\ElementContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Transform\RgbaColorContext:
+    tags:
+      - { name: fob.context_service }

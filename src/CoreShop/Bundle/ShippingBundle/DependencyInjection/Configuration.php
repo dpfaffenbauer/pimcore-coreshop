@@ -49,6 +49,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
                 ->scalarNode('default_resolver')->cannotBeEmpty()->end()
             ->end()
         ;

@@ -25,6 +25,7 @@ use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\CartItemPriceRuleAc
 use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\CartItemPriceRuleConditionPass;
 use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\CartPriceRuleActionPass;
 use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\CartPriceRuleConditionPass;
+use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\PurchasableCustomAttributesCalculatorsPass;
 use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\PurchasableDiscountCalculatorsPass;
 use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\PurchasableDiscountPriceCalculatorsPass;
 use CoreShop\Bundle\OrderBundle\DependencyInjection\Compiler\PurchasablePriceCalculatorsPass;
@@ -39,6 +40,7 @@ use CoreShop\Bundle\RuleBundle\CoreShopRuleBundle;
 use CoreShop\Bundle\StorageListBundle\CoreShopStorageListBundle;
 use CoreShop\Bundle\StoreBundle\CoreShopStoreBundle;
 use CoreShop\Bundle\WorkflowBundle\CoreShopWorkflowBundle;
+use Pimcore\Bundle\WebToPrintBundle\PimcoreWebToPrintBundle;
 use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -66,6 +68,7 @@ final class CoreShopOrderBundle extends AbstractResourceBundle
         $container->addCompilerPass(new PurchasableDiscountPriceCalculatorsPass());
         $container->addCompilerPass(new PurchasableRetailPriceCalculatorsPass());
         $container->addCompilerPass(new PurchasableWholesalePriceCalculatorsPass());
+        $container->addCompilerPass(new PurchasableCustomAttributesCalculatorsPass());
     }
 
     public static function registerDependentBundles(BundleCollection $collection): void
@@ -80,6 +83,8 @@ final class CoreShopOrderBundle extends AbstractResourceBundle
         $collection->addBundle(new CoreShopPaymentBundle(), 2200);
         $collection->addBundle(new CoreShopMoneyBundle(), 1550);
         $collection->addBundle(new CoreShopStorageListBundle(), 100);
+
+        $collection->addBundle(new PimcoreWebToPrintBundle(), 70);
     }
 
     protected function getModelNamespace(): string

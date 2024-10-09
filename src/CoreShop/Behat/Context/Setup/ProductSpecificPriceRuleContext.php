@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CountriesConfigurationType;
 use CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CurrenciesConfigurationType;
 use CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CustomerGroupsConfigurationType;
@@ -278,6 +278,15 @@ final class ProductSpecificPriceRuleContext implements Context
             'price' => (int) $price,
             'currency' => $currency->getId(),
         ]));
+    }
+
+    /**
+     * @Given /^the (specific price rule "[^"]+") has a action not-discountable$/
+     * @Given /^the (specific price rule) has a action not-discountable$/
+     */
+    public function theProductSpecificPriceRuleHasANotDiscountableAction(ProductSpecificPriceRuleInterface $rule): void
+    {
+        $this->addAction($rule, $this->createActionWithForm('notDiscountableCustomAttributes'));
     }
 
     /**

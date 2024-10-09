@@ -37,9 +37,24 @@ final class OrderStateResolver implements StateResolverInterface
     public function resolve(OrderInterface $order): void
     {
         $stateMachine = $this->stateMachineManager->get($order, 'coreshop_order');
+
+        if ($this->canOrderBeConfirmed($order) && $stateMachine->can($order, OrderTransitions::TRANSITION_CONFIRM)) {
+            $stateMachine->apply($order, OrderTransitions::TRANSITION_CONFIRM);
+        }
+
         if ($this->canOrderBeComplete($order) && $stateMachine->can($order, OrderTransitions::TRANSITION_COMPLETE)) {
             $stateMachine->apply($order, OrderTransitions::TRANSITION_COMPLETE);
         }
+    }
+
+    private function canOrderBeConfirmed(OrderInterface $order): bool
+    {
+        return in_array($order->getPaymentState(), [
+            OrderPaymentStates::STATE_PAID,
+            OrderPaymentStates::STATE_PARTIALLY_PAID,
+            OrderPaymentStates::STATE_AUTHORIZED,
+            OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED,
+        ], true);
     }
 
     private function canOrderBeComplete(OrderInterface $order): bool

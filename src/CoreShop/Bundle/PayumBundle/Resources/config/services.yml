@@ -73,5 +73,5 @@ services:
 
     CoreShop\Bundle\PayumBundle\CoreGatewayFactoryBuilder:
         decorates: 'payum.core_gateway_factory_builder'
-        calls:
-            - [setContainer, ['@service_container']]
+        arguments:
+            - '@service_container'

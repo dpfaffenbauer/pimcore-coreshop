@@ -2,22 +2,48 @@ services:
     _defaults:
         public: true
 
-    CoreShop\Bundle\OrderBundle\Renderer\Pdf\PdfRendererInterface: '@CoreShop\Bundle\OrderBundle\Renderer\Pdf\WkHtmlToPdf'
+    CoreShop\Bundle\OrderBundle\Renderer\Pdf\PdfRendererInterface:
+        alias: 'CoreShop\Bundle\OrderBundle\Renderer\Pdf\WkHtmlToPdf'
+        deprecated:
+            package: 'coreshop/order-bundle'
+            version: '4.1'
+            message: 'The "%alias_id%" service is deprecated and will be removed in CoreShop 5.0'
+
     CoreShop\Bundle\OrderBundle\Renderer\Pdf\WkHtmlToPdf:
         arguments:
             - '%kernel.cache_dir%'
             - '%kernel.project_dir%'
+        deprecated:
+            package: 'coreshop/order-bundle'
+            version: '4.1'
+            message: 'The "%service_id%" service is deprecated and will be removed in CoreShop 5.0'
 
-    coreshop.renderer.order.pdf: '@CoreShop\Bundle\OrderBundle\Renderer\OrderDocumentPdfRenderer'
+    coreshop.renderer.order.pdf:
+        alias: 'CoreShop\Component\Order\Renderer\OrderDocumentRendererInterface'
+        deprecated:
+            package: 'coreshop/order-bundle'
+            version: '4.1'
+            message: 'The "%alias_id%" service is deprecated and will be removed in CoreShop 5.0'
+
+
     CoreShop\Bundle\OrderBundle\Renderer\OrderDocumentPdfRenderer:
         arguments:
             - '@fragment.renderer.inline'
             - '@event_dispatcher'
             - '@CoreShop\Bundle\OrderBundle\Renderer\Pdf\PdfRendererInterface'
             - '@CoreShop\Bundle\ThemeBundle\Service\ThemeHelperInterface'
+        deprecated:
+            package: 'coreshop/order-bundle'
+            version: '4.1'
+            message: 'The "%service_id%" service is deprecated and will be removed in CoreShop 5.0'
+
+    CoreShop\Bundle\OrderBundle\Renderer\PimcoreOrderDocumentPdfRenderer:
+        arguments:
+            - '@CoreShop\Component\Pimcore\Print\PrintablePdfRendererInterface'
+            - '@CoreShop\Bundle\ThemeBundle\Service\ThemeHelperInterface'
 
     CoreShop\Bundle\OrderBundle\Renderer\AssetOrderDocumentPdfRenderer:
-        decorates: coreshop.renderer.order.pdf
+        decorates: CoreShop\Component\Order\Renderer\OrderDocumentRendererInterface
         arguments:
             - '@CoreShop\Bundle\OrderBundle\Renderer\AssetOrderDocumentPdfRenderer.inner'
             - '%kernel.environment%'

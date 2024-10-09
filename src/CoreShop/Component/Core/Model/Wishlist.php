@@ -18,8 +18,18 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Core\Model;
 
+use CoreShop\Component\Resource\Exception\ImplementedByPimcoreException;
 use CoreShop\Component\Wishlist\Model\Wishlist as BaseWishlist;
 
 abstract class Wishlist extends BaseWishlist implements WishlistInterface
 {
+    public function getName(): ?string
+    {
+        throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
+    }
+
+    public function setName(?string $name)
+    {
+        throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
+    }
 }

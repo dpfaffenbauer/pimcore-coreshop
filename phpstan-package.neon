@@ -17,6 +17,8 @@ parameters:
         - 'Core/Context/CustomerAndStoreBasedStorageListContext.php'
         - 'Core/Context/SessionAndStoreBasedStorageListContext.php'
         - 'Core/Context/StoreBasedStorageListContext.php'
+        - 'Core/Provider/CoreContextProvider.php'
+        - 'Core/Storage/SessionStorageListStorage.php'
         - 'Core/Repository/CustomerAndStoreAwareRepositoryInterface.php'
         - 'DependencyInjection/CoreShopStorageListExtension.php'
 

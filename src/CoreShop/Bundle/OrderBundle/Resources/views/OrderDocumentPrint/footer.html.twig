@@ -1,21 +1,10 @@
 {% extends '@CoreShopOrder/layout.html.twig' %}
 
 {% block content %}
-<div id="footer">
+<div>
     www.coreshop.org
     <span class="pull-right">
-        <span class="page"></span> / <span class="topage"></span>
+        <span class="pageNumber"></span> / <span class="totalPages"></span>
     </span>
 </div>
-
-<script type="text/javascript">
-    var vars={};
-    var x=document.location.search.substring(1).split('&');
-    for (var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
-    var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
-    for (var i in x) {
-        var y = document.getElementsByClassName(x[i]);
-        for (var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
-    }
-</script>
 {% endblock %}

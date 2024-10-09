@@ -18,11 +18,14 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\PimcoreBundle\DependencyInjection;
 
+use CoreShop\Bundle\PimcoreBundle\Attribute\AsGridAction;
+use CoreShop\Bundle\PimcoreBundle\Attribute\AsGridFilter;
 use CoreShop\Bundle\PimcoreBundle\DependencyInjection\Compiler\RegisterGridActionPass;
 use CoreShop\Bundle\PimcoreBundle\DependencyInjection\Compiler\RegisterGridFilterPass;
 use CoreShop\Bundle\PimcoreBundle\DependencyInjection\Extension\AbstractPimcoreExtension;
 use CoreShop\Component\Pimcore\DataObject\Grid\GridActionInterface;
 use CoreShop\Component\Pimcore\DataObject\Grid\GridFilterInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -45,14 +48,20 @@ final class CoreShopPimcoreExtension extends AbstractPimcoreExtension
 
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(GridActionInterface::class)
-            ->addTag(RegisterGridActionPass::GRID_ACTION_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            GridActionInterface::class,
+            RegisterGridActionPass::GRID_ACTION_TAG,
+            AsGridAction::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(GridFilterInterface::class)
-            ->addTag(RegisterGridFilterPass::GRID_FILTER_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            GridFilterInterface::class,
+            RegisterGridFilterPass::GRID_FILTER_TAG,
+            AsGridFilter::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

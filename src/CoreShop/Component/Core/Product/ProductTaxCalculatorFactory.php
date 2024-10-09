@@ -19,8 +19,10 @@ declare(strict_types=1);
 namespace CoreShop\Component\Core\Product;
 
 use CoreShop\Component\Address\Model\AddressInterface;
+use CoreShop\Component\Core\Model\ProductInterface;
 use CoreShop\Component\Core\Taxation\TaxCalculatorFactoryInterface;
 use CoreShop\Component\Order\Model\PurchasableInterface;
+use CoreShop\Component\Store\Model\StoreInterface;
 use CoreShop\Component\Taxation\Calculator\TaxCalculatorInterface;
 use CoreShop\Component\Taxation\Model\TaxRuleGroupInterface;
 
@@ -36,7 +38,18 @@ class ProductTaxCalculatorFactory implements ProductTaxCalculatorFactoryInterfac
         AddressInterface $address,
         array $context = [],
     ): ?TaxCalculatorInterface {
-        $taxRuleGroup = $product->getTaxRule();
+        $store = $context['store'] ?? null;
+        $taxRuleGroup = null;
+
+        if ($product instanceof ProductInterface && $store instanceof StoreInterface) {
+            $storeValues = $product->getStoreValuesForStore($store);
+
+            $taxRuleGroup = $storeValues?->getTaxRule();
+        }
+
+        if (null === $taxRuleGroup && method_exists($product, 'getTaxRule')) {
+            $taxRuleGroup = $product->getTaxRule();
+        }
 
         if ($taxRuleGroup instanceof TaxRuleGroupInterface) {
             return $this->taxCalculatorFactory->getTaxCalculatorForAddress($taxRuleGroup, $address, $context);

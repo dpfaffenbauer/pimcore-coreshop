@@ -52,7 +52,7 @@ class PaymentProviderRulePriceCalculator implements PaymentProviderRulePriceCalc
                 $paymentProviderRule,
                 $paymentProvider,
                 $payable,
-                $payable->getPaymentTotal(),
+                $payable->getPaymentTotal() ?: 0,
                 $context,
             );
 

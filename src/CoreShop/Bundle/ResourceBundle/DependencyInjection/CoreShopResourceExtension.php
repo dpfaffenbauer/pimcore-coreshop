@@ -19,18 +19,22 @@ declare(strict_types=1);
 namespace CoreShop\Bundle\ResourceBundle\DependencyInjection;
 
 use CoreShop\Bundle\PimcoreBundle\DependencyInjection\Extension\AbstractPimcoreExtension;
+use CoreShop\Bundle\ResourceBundle\Attribute\AsPimcoreModel;
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterInstallersPass;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
 use CoreShop\Bundle\ResourceBundle\EventListener\BodyListener;
 use CoreShop\Bundle\ResourceBundle\Installer\ResourceInstallerInterface;
 use CoreShop\Component\Resource\Metadata\Metadata;
+use CoreShop\Component\Resource\Reflection\ClassReflection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use function Symfony\Component\String\u;
 
 final class CoreShopResourceExtension extends AbstractPimcoreExtension
 {
@@ -66,6 +70,9 @@ final class CoreShopResourceExtension extends AbstractPimcoreExtension
         }
 
         $container->setParameter('coreshop.resources', []);
+        $container->setParameter('coreshop.resource.mapping', $configs['mapping']);
+
+        $this->autoRegisterPimcoreModels($configs, $container);
 
         $this->loadPersistence($configs['drivers'], $configs['resources'], $loader);
         $this->loadResources($configs['resources'], $container);
@@ -84,6 +91,65 @@ final class CoreShopResourceExtension extends AbstractPimcoreExtension
             ->registerForAutoconfiguration(ResourceInstallerInterface::class)
             ->addTag(RegisterInstallersPass::INSTALLER_TAG)
         ;
+    }
+
+    private function autoRegisterPimcoreModels(array &$config, ContainerBuilder $container): void
+    {
+        /** @var array $pimcoreResources */
+        $pimcoreResources = $config['pimcore'];
+
+        /** @var array $mapping */
+        $mapping = $container->getParameter('coreshop.resource.mapping');
+        $paths = $mapping['paths'] ?? [];
+
+        /** @var class-string $className */
+        foreach (ClassReflection::getResourcesByPaths($paths) as $className) {
+            $resourceAttributes = ClassReflection::getClassAttributes($className, AsPimcoreModel::class);
+
+            foreach ($resourceAttributes as $resourceAttribute) {
+                /** @var AsPimcoreModel $resource */
+                $resource = $resourceAttribute->newInstance();
+                $alias = $this->getResourceAlias($resource, $className);
+
+                if ($pimcoreResources[$alias] ?? false) {
+                    continue;
+                }
+
+                $pimcoreResources[$alias] = [
+                    'options' => $resource->getOptions(),
+                    'path' => $resource->getPath(),
+                    'slug' => $resource->getSlug() ?: false,
+                    'route' => $resource->getRoute(),
+                    'classes' => [
+                        'model' => $resource->getPimcoreModel(),
+                        'pimcore_class_name' => '',
+                        'interface' => $resource->getInterface(),
+                        'factory' => $resource->getFactory(),
+                        'admin_controller' => $resource->getAdminController(),
+                        'repository' => $resource->getRepository(),
+                        'install_file' => $resource->getInstallFile(),
+                        'type' => $resource->getType(),
+                        'pimcore_controller' => $resource->getPimcoreController(),
+                    ],
+                    'driver' => CoreShopResourceBundle::DRIVER_PIMCORE,
+                ];
+            }
+        }
+
+        $config['pimcore'] = $pimcoreResources;
+    }
+
+    private function getResourceAlias(AsPimcoreModel $resource, string $className): string
+    {
+        $alias = $resource->getAlias();
+
+        if (null !== $alias) {
+            return $alias;
+        }
+
+        $shortName = Container::underscore(substr(strrchr($className, '\\'), 1));
+
+        return 'app.' . u($shortName)->snake()->toString();
     }
 
     private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader): void

@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Page\Frontend\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use CoreShop\Behat\Page\Frontend\AbstractFrontendPage;
+use CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage;
 
 class ChangeProfilePage extends AbstractFrontendPage implements ChangeProfilePageInterface
 {

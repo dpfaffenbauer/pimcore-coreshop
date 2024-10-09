@@ -5,10 +5,10 @@ default:
                 - coreshop.behat.context.hook.pimcore_setup
                 - coreshop.behat.context.hook.coreshop_setup
 
-                - coreshop.behat.context.hook.doctrine_orm
+                - CoreShop\Bundle\TestBundle\Context\Hook\DoctrineORMContext
                 - coreshop.behat.context.hook.pimcore_dao
 
-                - coreshop.behat.context.transform.shared_storage
+                - CoreShop\Bundle\TestBundle\Context\Transform\SharedStorageContext
                 - coreshop.behat.context.transform.tax_rate
                 - coreshop.behat.context.transform.tax_rule_group
                 - coreshop.behat.context.transform.store
@@ -23,6 +23,7 @@ default:
                 - coreshop.behat.context.transform.customer_group
                 - coreshop.behat.context.transform.zone
                 - coreshop.behat.context.transform.shipping
+                - coreshop.behat.context.transform.product_price_rule
                 - coreshop.behat.context.transform.product_specific_price_rule
 
                 - coreshop.behat.context.setup.tax_rate
@@ -40,6 +41,7 @@ default:
                 - coreshop.behat.context.setup.cart_price_rule_voucher_code
                 - coreshop.behat.context.setup.zone
                 - coreshop.behat.context.setup.shipping
+                - coreshop.behat.context.setup.product_price_rule
                 - coreshop.behat.context.setup.product_specific_price_rule
                 - coreshop.behat.context.setup.exchange_rate
                 - coreshop.behat.context.setup.product_specific_price_rule

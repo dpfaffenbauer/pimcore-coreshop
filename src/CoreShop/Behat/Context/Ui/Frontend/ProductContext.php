@@ -21,7 +21,7 @@ namespace CoreShop\Behat\Context\Ui\Frontend;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Session;
 use CoreShop\Behat\Page\Frontend\ProductPageInterface;
-use CoreShop\Behat\Service\JavascriptHelper;
+use CoreShop\Bundle\TestBundle\Service\JavascriptHelper;
 use CoreShop\Component\Core\Model\ProductInterface;
 use CoreShop\Component\Product\Model\ProductUnitInterface;
 use CoreShop\Component\Variant\Model\AttributeInterface;

@@ -1,3 +1,54 @@
 imports:
+  - { resource: services/contexts.yaml }
+  - { resource: services/pages.yaml }
 
 services:
+  CoreShop\Bundle\TestBundle\Service\ClassStorageInterface: '@CoreShop\Bundle\TestBundle\Service\ClassStorage'
+  CoreShop\Bundle\TestBundle\Service\ClassStorage: ~
+
+  CoreShop\Bundle\TestBundle\Service\SharedStorageInterface: '@CoreShop\Bundle\TestBundle\Service\SharedStorage'
+  CoreShop\Bundle\TestBundle\Service\SharedStorage: ~
+
+  CoreShop\Bundle\TestBundle\Service\Resolver\CurrentPageResolverInterface: '@CoreShop\Bundle\TestBundle\Service\Resolver\CurrentPageResolver'
+  CoreShop\Bundle\TestBundle\Service\Resolver\CurrentPageResolver:
+    arguments:
+      - '@behat.mink.default_session'
+      - '@router'
+
+  CoreShop\Bundle\TestBundle\Service\CookieSetterInterface: '@CoreShop\Bundle\TestBundle\Service\CookieSetter'
+  CoreShop\Bundle\TestBundle\Service\CookieSetter:
+    arguments:
+      - '@behat.mink.default_session'
+      - '@behat.mink.parameters'
+
+  CoreShop\Bundle\TestBundle\Service\PimcoreCookieSetter:
+    arguments:
+      - '@behat.mink.default_session'
+      - '@behat.mink.parameters'
+
+  coreshop.security_service.frontend:
+    class: CoreShop\Bundle\TestBundle\Service\SecurityService
+    arguments:
+      - '@session.factory'
+      - '@request_stack'
+      - '@CoreShop\Bundle\TestBundle\Service\CookieSetterInterface'
+      - 'shop'
+
+  coreshop.security_service.backend:
+    class: CoreShop\Bundle\TestBundle\Service\PimcoreSecurityService
+    arguments:
+      - '@session.factory'
+      - '@request_stack'
+      - '@CoreShop\Bundle\TestBundle\Service\PimcoreCookieSetter'
+      - 'pimcore_admin'
+
+  CoreShop\Bundle\TestBundle\Service\NotificationAccessorInterface: '@CoreShop\Bundle\TestBundle\Service\NotificationAccessor'
+  CoreShop\Bundle\TestBundle\Service\NotificationAccessor:
+    arguments:
+      - '@behat.mink.default_session'
+
+  CoreShop\Bundle\TestBundle\Service\NotificationCheckerInterface: '@CoreShop\Bundle\TestBundle\Service\NotificationChecker'
+  CoreShop\Bundle\TestBundle\Service\NotificationChecker:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\NotificationAccessorInterface'
+  

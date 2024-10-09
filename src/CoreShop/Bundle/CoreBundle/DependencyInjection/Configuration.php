@@ -39,6 +39,7 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('send_usage_log')->defaultValue(true)->end()
                 ->scalarNode('checkout_manager_factory')->cannotBeEmpty()->end()
                 ->scalarNode('after_logout_redirect_route')->defaultValue('coreshop_index')->cannotBeEmpty()->end()
+                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
             ->end()
         ;
         $this->addModelsSection($rootNode);

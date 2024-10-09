@@ -1504,6 +1504,54 @@
                                     }
                                 ],
                                 "locked": false
+                            },
+                            {
+                                "name": "attributes",
+                                "type": null,
+                                "region": null,
+                                "title": "coreshop.order.attributes",
+                                "width": "",
+                                "height": "",
+                                "collapsible": false,
+                                "collapsed": false,
+                                "bodyStyle": "",
+                                "datatype": "layout",
+                                "children": [
+                                    {
+                                        "name": "attributes",
+                                        "title": "coreshop.order.attributes",
+                                        "tooltip": "",
+                                        "mandatory": false,
+                                        "noteditable": false,
+                                        "index": false,
+                                        "locked": false,
+                                        "style": "",
+                                        "permissions": null,
+                                        "fieldtype": "fieldcollections",
+                                        "relationType": false,
+                                        "invisible": false,
+                                        "visibleGridView": false,
+                                        "visibleSearch": false,
+                                        "allowedTypes": [
+                                            "CoreShopOrderItemAttribute"
+                                        ],
+                                        "lazyLoading": true,
+                                        "maxItems": null,
+                                        "disallowAddRemove": false,
+                                        "disallowReorder": false,
+                                        "collapsed": false,
+                                        "collapsible": false,
+                                        "border": false,
+                                        "datatype": "data"
+                                    }
+                                ],
+                                "locked": false,
+                                "fieldtype": "panel",
+                                "layout": null,
+                                "border": false,
+                                "icon": "",
+                                "labelWidth": 100,
+                                "labelAlign": "left"
                             }
                         ],
                         "locked": false

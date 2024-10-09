@@ -1,0 +1,18 @@
+{% extends '@CoreShopFrontend/layout-full.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    {% include '@CoreShopFrontend/Common/flash_messages.html.twig' %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.name, coreshop_test_form_attribute('cart-name')) }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" {{ coreshop_test_html_attribute('cart-create-button') }} >
+                {{ 'coreshop.ui.save'|trans }}
+            </button>
+        </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}

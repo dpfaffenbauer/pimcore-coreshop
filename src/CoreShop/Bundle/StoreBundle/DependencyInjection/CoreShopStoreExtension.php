@@ -20,9 +20,12 @@ namespace CoreShop\Bundle\StoreBundle\DependencyInjection;
 
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
+use CoreShop\Bundle\StoreBundle\Attribute\AsRequestBasedResolverStoreContext;
+use CoreShop\Bundle\StoreBundle\Attribute\AsStoreContext;
 use CoreShop\Bundle\StoreBundle\Collector\StoreCollector;
 use CoreShop\Bundle\StoreBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
 use CoreShop\Bundle\StoreBundle\DependencyInjection\Compiler\CompositeStoreContextPass;
+use CoreShop\Component\Registry\Autoconfiguration;
 use CoreShop\Component\Store\Context\RequestBased\RequestResolverInterface;
 use CoreShop\Component\Store\Context\StoreContextInterface;
 use Symfony\Component\Config\FileLocator;
@@ -56,13 +59,20 @@ final class CoreShopStoreExtension extends AbstractModelExtension
             $container->getDefinition(StoreCollector::class)->replaceArgument(3, true);
         }
 
-        $container
-            ->registerForAutoconfiguration(StoreContextInterface::class)
-            ->addTag(CompositeStoreContextPass::STORE_CONTEXT_TAG)
-        ;
-        $container
-            ->registerForAutoconfiguration(RequestResolverInterface::class)
-            ->addTag(CompositeRequestResolverPass::STORE_REQUEST_RESOLVER_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            StoreContextInterface::class,
+            CompositeStoreContextPass::STORE_CONTEXT_TAG,
+            AsStoreContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
+
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            RequestResolverInterface::class,
+            CompositeRequestResolverPass::STORE_REQUEST_RESOLVER_TAG,
+            AsRequestBasedResolverStoreContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

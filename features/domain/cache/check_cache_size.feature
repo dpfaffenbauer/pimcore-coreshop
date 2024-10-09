@@ -1,4 +1,4 @@
-@domain @cache
+@domain @cache @wip
 Feature: Adding a new Product and adding it to the cache
 
   Background:

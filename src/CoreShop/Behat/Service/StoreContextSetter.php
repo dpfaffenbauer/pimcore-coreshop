@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Behat\Service;
 
+use CoreShop\Bundle\TestBundle\Service\CookieSetterInterface;
 use CoreShop\Component\Store\Model\StoreInterface;
 
 final class StoreContextSetter implements StoreContextSetterInterface

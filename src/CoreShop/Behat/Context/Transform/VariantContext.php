@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Resource\Repository\RepositoryInterface;
 use CoreShop\Component\Variant\Model\AttributeColorInterface;
 use CoreShop\Component\Variant\Model\AttributeGroupInterface;

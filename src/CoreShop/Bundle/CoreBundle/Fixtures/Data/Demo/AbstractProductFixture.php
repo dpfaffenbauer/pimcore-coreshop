@@ -644,9 +644,9 @@ abstract class AbstractProductFixture extends Fixture implements DependentFixtur
 
         foreach ($stores as $store) {
             $product->setStoreValuesOfType('price', (int) ($faker->randomFloat(2, 200, 400) * $decimalFactor), $store);
+            $product->setStoreValuesOfType('taxRule', $this->getReference('taxRule'), $store);
         }
 
-        $product->setTaxRule($this->getReference('taxRule'));
         $product->setWidth($faker->numberBetween(5, 10));
         $product->setHeight($faker->numberBetween(5, 10));
         $product->setDepth($faker->numberBetween(5, 10));

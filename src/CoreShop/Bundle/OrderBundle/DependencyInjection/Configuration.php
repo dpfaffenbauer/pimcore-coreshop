@@ -51,6 +51,7 @@ use CoreShop\Component\Order\Model\CartPriceRuleVoucherCodeInterface;
 use CoreShop\Component\Order\Model\OrderInterface;
 use CoreShop\Component\Order\Model\OrderInvoiceInterface;
 use CoreShop\Component\Order\Model\OrderInvoiceItemInterface;
+use CoreShop\Component\Order\Model\OrderItemAttributeInterface;
 use CoreShop\Component\Order\Model\OrderItemInterface;
 use CoreShop\Component\Order\Model\OrderShipmentInterface;
 use CoreShop\Component\Order\Model\OrderShipmentItemInterface;
@@ -73,8 +74,9 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->booleanNode('legacy_serialization')->defaultTrue()->end()
                 ->booleanNode('allow_order_edit')->defaultFalse()->end()
+                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
+                ->booleanNode('use_pimcore_pdf_rendering')->defaultFalse()->end()
             ->end()
         ;
         $this->addModelsSection($rootNode);
@@ -367,6 +369,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('factory')->defaultValue(PimcoreFactory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('install_file')->defaultValue('@CoreShopOrderBundle/Resources/install/pimcore/fieldcollections/CoreShopAdjustment.json')->end()
+                                        ->scalarNode('type')->defaultValue(CoreShopResourceBundle::PIMCORE_MODEL_TYPE_FIELD_COLLECTION)->cannotBeOverwritten(true)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('order_item_attribute')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Pimcore\Model\DataObject\Fieldcollection\Data\CoreShopOrderItemAttribute')->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(OrderItemAttributeInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(PimcoreFactory::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('install_file')->defaultValue('@CoreShopOrderBundle/Resources/install/pimcore/fieldcollections/CoreShopOrderItemAttribute.json')->end()
                                         ->scalarNode('type')->defaultValue(CoreShopResourceBundle::PIMCORE_MODEL_TYPE_FIELD_COLLECTION)->cannotBeOverwritten(true)->end()
                                     ->end()
                                 ->end()

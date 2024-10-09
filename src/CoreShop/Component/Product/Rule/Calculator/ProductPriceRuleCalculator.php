@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Product\Rule\Calculator;
 
+use CoreShop\Component\Product\Calculator\ProductCustomAttributesCalculatorInterface;
 use CoreShop\Component\Product\Calculator\ProductDiscountCalculatorInterface;
 use CoreShop\Component\Product\Calculator\ProductDiscountPriceCalculatorInterface;
 use CoreShop\Component\Product\Calculator\ProductRetailPriceCalculatorInterface;
@@ -25,6 +26,7 @@ use CoreShop\Component\Product\Exception\NoDiscountPriceFoundException;
 use CoreShop\Component\Product\Exception\NoRetailPriceFoundException;
 use CoreShop\Component\Product\Model\PriceRuleInterface;
 use CoreShop\Component\Product\Model\ProductInterface;
+use CoreShop\Component\Product\Rule\Action\ProductCustomAttributesActionProcessorInterface;
 use CoreShop\Component\Product\Rule\Action\ProductDiscountActionProcessorInterface;
 use CoreShop\Component\Product\Rule\Action\ProductDiscountPriceActionProcessorInterface;
 use CoreShop\Component\Product\Rule\Action\ProductPriceActionProcessorInterface;
@@ -35,7 +37,8 @@ use CoreShop\Component\Rule\Model\ActionInterface;
 final class ProductPriceRuleCalculator implements
     ProductDiscountCalculatorInterface,
     ProductRetailPriceCalculatorInterface,
-    ProductDiscountPriceCalculatorInterface
+    ProductDiscountPriceCalculatorInterface,
+    ProductCustomAttributesCalculatorInterface
 {
     public function __construct(
         private ValidRulesFetcherInterface $validRulesFetcher,
@@ -154,5 +157,37 @@ final class ProductPriceRuleCalculator implements
         }
 
         return $discount;
+    }
+
+
+    public function getCustomAttributes(ProductInterface $product, array $context): array
+    {
+        $customAttributes = [];
+
+        /**
+         * @var PriceRuleInterface[] $rules
+         */
+        $rules = $this->validRulesFetcher->getValidRules($product, $context);
+
+        foreach ($rules as $rule) {
+            /**
+             * @var ActionInterface $action
+             */
+            foreach ($rule->getActions() as $action) {
+                $processor = $this->actionServiceRegistry->get($action->getType());
+
+                if (!$processor instanceof ProductCustomAttributesActionProcessorInterface) {
+                    continue;
+                }
+
+                $customAttributes += $processor->getCustomAttributes($product, $context, $action->getConfiguration());
+            }
+
+            if ($rule->getStopPropagation()) {
+                break;
+            }
+        }
+
+        return $customAttributes;
     }
 }

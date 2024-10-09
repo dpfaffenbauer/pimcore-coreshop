@@ -18,7 +18,9 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\SEOBundle\DependencyInjection;
 
+use CoreShop\Bundle\SEOBundle\Attribute\AsSEOExtractor;
 use CoreShop\Bundle\SEOBundle\DependencyInjection\Compiler\ExtractorRegistryServicePass;
+use CoreShop\Component\Registry\Autoconfiguration;
 use CoreShop\Component\SEO\Extractor\ExtractorInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -29,14 +31,18 @@ final class CoreShopSEOExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
         $container->getParameter('kernel.bundles');
 
-        $container
-            ->registerForAutoconfiguration(ExtractorInterface::class)
-            ->addTag(ExtractorRegistryServicePass::EXTRACTOR_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            ExtractorInterface::class,
+            ExtractorRegistryServicePass::EXTRACTOR_TAG,
+            AsSEOExtractor::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

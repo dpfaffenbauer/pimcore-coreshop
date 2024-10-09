@@ -65,7 +65,7 @@ class VoucherCreditActionProcessor implements CartPriceRuleActionProcessorInterf
             return false;
         }
 
-        $this->cartRuleApplier->applyDiscount($cart, $cartPriceRuleItem, $discount, true);
+        $this->cartRuleApplier->applyDiscount($cart, $cartPriceRuleItem, $discount, true, true);
 
         return true;
     }

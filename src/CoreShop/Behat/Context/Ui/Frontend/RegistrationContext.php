@@ -23,7 +23,7 @@ use CoreShop\Behat\Element\Frontend\Account\RegisterElementInterface;
 use CoreShop\Behat\Page\Frontend\Account\LoginPageInterface;
 use CoreShop\Behat\Page\Frontend\Account\RegisterPageInterface;
 use CoreShop\Behat\Page\Frontend\HomePageInterface;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Core\Model\CountryInterface;
 use Webmozart\Assert\Assert;
 

@@ -15,7 +15,7 @@ services:
             - '@CoreShop\Behat\Page\Frontend\HomePageInterface'
             - '@CoreShop\Behat\Page\Frontend\Account\LoginPageInterface'
             - '@CoreShop\Behat\Page\Frontend\Account\RequestPasswordResetPageInterface'
-            - '@CoreShop\Behat\Service\Resolver\CurrentPageResolverInterface'
+            - '@CoreShop\Bundle\TestBundle\Service\Resolver\CurrentPageResolverInterface'
         tags:
             - { name: fob.context_service }
 
@@ -37,7 +37,7 @@ services:
             - '@CoreShop\Behat\Page\Frontend\Account\ChangePasswordPageInterface'
             - '@CoreShop\Behat\Page\Frontend\Account\ProfilePageInterface'
             - '@CoreShop\Behat\Page\Frontend\Account\ChangeProfilePageInterface'
-            - '@CoreShop\Behat\Service\NotificationCheckerInterface'
+            - '@CoreShop\Bundle\TestBundle\Service\NotificationCheckerInterface'
             - '@CoreShop\Behat\Page\Frontend\Account\ChangeAddressPageInterface'
         tags:
             - { name: fob.context_service }
@@ -54,8 +54,10 @@ services:
         class: CoreShop\Behat\Context\Ui\Frontend\CartContext
         arguments:
             - '@coreshop.behat.shared_storage'
-            - '@CoreShop\Behat\Service\NotificationCheckerInterface'
+            - '@CoreShop\Bundle\TestBundle\Service\NotificationCheckerInterface'
             - '@CoreShop\Behat\Page\Frontend\CartPageInterface'
+            - '@CoreShop\Behat\Page\Frontend\CartCreatePageInterface'
+            - '@CoreShop\Behat\Page\Frontend\CartsListPageInterface'
             - '@CoreShop\Behat\Page\Frontend\ProductPageInterface'
         tags:
             - { name: fob.context_service }

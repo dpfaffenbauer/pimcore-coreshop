@@ -3,6 +3,8 @@ parameters:
     coreshop.form.type.wishlist.validation_groups: [coreshop]
     coreshop.form.type.wishlist_item.validation_groups: [coreshop]
     coreshop.form.type.add_to_wishlist.validation_groups: [coreshop]
+    coreshop.form.type.add_to_selectable_wishlist.validation_groups: [coreshop]
+    coreshop.form.type.add_to_new_wishlist.validation_groups: [coreshop]
     coreshop.form.type.edit_wishlist.validation_groups: [coreshop]
 
 imports:
@@ -53,3 +55,14 @@ services:
         arguments:
             - '@event_dispatcher'
             - '@CoreShop\Component\StorageList\StorageListItemResolverInterface'
+
+    CoreShop\Component\Wishlist\Wishlist\WishlistResolver:
+        arguments:
+            - '@coreshop.repository.wishlist'
+            - '@coreshop.context.storage_list.wishlist'
+    
+    CoreShop\Bundle\WishlistBundle\Form\Type\WishlistChoiceType:
+        arguments:
+            - '@CoreShop\Component\Wishlist\Wishlist\WishlistResolver'
+        tags:
+            - { name: form.type }

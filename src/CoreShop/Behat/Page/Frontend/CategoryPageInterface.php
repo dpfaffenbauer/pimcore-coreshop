@@ -18,6 +18,8 @@ declare(strict_types=1);
 
 namespace CoreShop\Behat\Page\Frontend;
 
+use CoreShop\Bundle\TestBundle\Page\Frontend\FrontendPageInterface;
+
 interface CategoryPageInterface extends FrontendPageInterface
 {
     public function getRouteName(): string;

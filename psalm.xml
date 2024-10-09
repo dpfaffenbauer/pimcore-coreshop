@@ -82,6 +82,7 @@
                 <referencedClass name="Symfony\Component\DependencyInjection\ContainerAwareInterface" />
                 <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
                 <referencedClass name="Pimcore\Model\DataObject\ClassDefinition\DynamicOptionsProvider\MultiSelectOptionsProviderInterface" />
+                <referencedClass name="CoreShop\Bundle\OrderBundle\Renderer\Pdf\PdfRendererInterface" />
             </errorLevel>
         </DeprecatedInterface>
         <DeprecatedMethod>

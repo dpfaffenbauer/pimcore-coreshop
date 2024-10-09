@@ -1,5 +1,6 @@
 services:
     CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController:
         public: true
-        tags: [ 'controller.service_arguments', 'container.service_subscriber' ]
+        autoconfigure: true
+        autowire: true
 

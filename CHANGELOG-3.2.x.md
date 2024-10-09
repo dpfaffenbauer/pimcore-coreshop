@@ -1,4 +1,13 @@
-## 3.2.12
+# 3.2.13
+* [Currency/Money] implement Pimcore Grid Column by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2686
+* [StorageList] make sure to remove StorageList from Session on Logout by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2684
+* [InventoryBundle] add stock label renderer and hide onHand field by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2690
+* [InventoryBundle] add translations for stock label #2 by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2691
+* [Product] fix regression of price rules for products with default unit by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2698
+* [OrderBundle] fix precison/factor for Payment Total by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2700
+* [Payum] req payum/payum-bundle:^2.6 by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2710
+
+# 3.2.12
 * [MoneyBundle] money and moneyCurrency type should respect money_decimal_precision by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2671
 * [VariantBundle] Add possibility to exclude Variants from AttributeCollector via AttributePreconditionEvent by @almshadi in https://github.com/coreshop/CoreShop/pull/2674
 * [Product] don't allow Price and DiscountPrice Rule for unit prices by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2678

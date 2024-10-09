@@ -1,0 +1,27 @@
+services:
+  _defaults:
+    public: true
+
+  CoreShop\Bundle\TestBundle\Context\Domain\ClassContext:
+    arguments:
+      - '@CoreShop\Bundle\TestBundle\Service\ClassStorage'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Domain\PimcoreContext:
+    arguments:
+      - '%kernel.project_dir%/public'
+      - '%coreshop.all.pimcore.admin.js%'
+      - '%coreshop.all.pimcore.admin.css%'
+      - '%coreshop.all.pimcore.admin.editmode_js%'
+      - '%coreshop.all.pimcore.admin.editmode_css%'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Domain\SiteContext:
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Domain\DocumentContext:
+    tags:
+      - { name: fob.context_service }

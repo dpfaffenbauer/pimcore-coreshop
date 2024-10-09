@@ -18,11 +18,14 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\CurrencyBundle\DependencyInjection;
 
+use CoreShop\Bundle\CurrencyBundle\Attribute\AsCurrencyContext;
 use CoreShop\Bundle\CurrencyBundle\DependencyInjection\Compiler\CompositeCurrencyContextPass;
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
 use CoreShop\Component\Currency\Context\CurrencyContextInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
@@ -50,9 +53,12 @@ final class CoreShopCurrencyExtension extends AbstractModelExtension
         $container->setParameter('coreshop.currency.decimal_factor', $configs['money_decimal_factor']);
         $container->setParameter('coreshop.currency.decimal_precision', $configs['money_decimal_precision']);
 
-        $container
-            ->registerForAutoconfiguration(CurrencyContextInterface::class)
-            ->addTag(CompositeCurrencyContextPass::CURRENCY_CONTEXT_SERVICE_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            CurrencyContextInterface::class,
+            CompositeCurrencyContextPass::CURRENCY_CONTEXT_SERVICE_TAG,
+            AsCurrencyContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

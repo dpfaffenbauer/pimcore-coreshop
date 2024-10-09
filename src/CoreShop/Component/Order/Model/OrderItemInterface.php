@@ -28,7 +28,8 @@ interface OrderItemInterface extends
     AdjustableInterface,
     ConvertedAdjustableInterface,
     StorageListItemInterface,
-    ImmutableInterface
+    ImmutableInterface,
+    AttributesAwareInterface
 {
     public function getId(): ?int;
 

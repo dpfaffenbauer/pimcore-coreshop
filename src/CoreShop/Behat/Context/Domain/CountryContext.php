@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use CoreShop\Component\Address\Context\CompositeCountryContext;
 use CoreShop\Component\Address\Context\CountryContextInterface;
 use CoreShop\Component\Address\Formatter\AddressFormatterInterface;
 use CoreShop\Component\Address\Model\AddressInterface;
@@ -33,6 +34,7 @@ final class CountryContext implements Context
         private CountryRepositoryInterface $countryRepository,
         private CountryContextInterface $countryContext,
         private AddressFormatterInterface $addressFormatter,
+        private CompositeCountryContext $compositeCountryContext,
     ) {
     }
 
@@ -103,5 +105,28 @@ final class CountryContext implements Context
                 $actualFormattedAddress,
             ),
         );
+    }
+
+    /**
+     * @Then /^there should be a sample country context with priority 1 loaded by attribute as country context$/
+     */
+    public function thereShouldBeASampleCountryContextLoadedByAttributeAsCountryContext(): void
+    {
+        $reflection = new \ReflectionClass($this->compositeCountryContext);
+        $reflection->getProperty('countryContexts')->setAccessible(true);
+        /**
+         * @var \Laminas\Stdlib\PriorityQueue $priorityQueue
+         */
+        $priorityQueue = $reflection->getProperty('countryContexts')->getValue($this->compositeCountryContext);
+
+        foreach ($priorityQueue as $item) {
+            if ($item instanceof \CoreShop\Behat\Service\SampleCountryContext) {
+                return;
+            }
+
+            throw new \RuntimeException('SampleCountryContext was not found in the CompositeCountryContext.');
+        }
+
+        throw new \RuntimeException('SampleCountryContext was not found in the CompositeCountryContext.');
     }
 }

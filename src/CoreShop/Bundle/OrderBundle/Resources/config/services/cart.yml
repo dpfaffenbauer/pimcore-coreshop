@@ -59,3 +59,14 @@ services:
         tags:
             - { name: kernel.event_listener, event: pimcore.admin.object.list.beforeListLoad, method: checkObjectList }
 
+
+    CoreShop\Bundle\OrderBundle\Form\Type\CartListChoiceType:
+        arguments:
+            - '@CoreShop\Component\Order\Cart\CartResolver'
+        tags:
+            - { name: form.type }
+
+    CoreShop\Component\Order\Cart\CartResolver:
+        arguments:
+            - '@coreshop.repository.order'
+            - '@CoreShop\Component\Order\Context\CartContext'

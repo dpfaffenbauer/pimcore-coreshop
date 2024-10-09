@@ -19,3 +19,10 @@ services:
             - '@CoreShop\Bundle\WorkflowBundle\StateManager\WorkflowStateInfoManagerInterface'
         tags:
             - { name: twig.extension }
+
+    CoreShop\Bundle\OrderBundle\Twig\ImageToBase64Extension:
+        arguments:
+            - '@serializer'
+            - '%kernel.project_dir%'
+        tags:
+            - { name: twig.extension }

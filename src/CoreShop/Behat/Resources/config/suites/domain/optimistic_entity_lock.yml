@@ -5,16 +5,16 @@ default:
                 - coreshop.behat.context.hook.pimcore_setup
                 - coreshop.behat.context.hook.coreshop_setup
 
-                - coreshop.behat.context.hook.doctrine_orm
+                - CoreShop\Bundle\TestBundle\Context\Hook\DoctrineORMContext
                 - coreshop.behat.context.hook.pimcore_dao
 
-                - coreshop.behat.context.transform.shared_storage
-                - coreshop.behat.context.transform.pimcore_class
+                - CoreShop\Bundle\TestBundle\Context\Transform\SharedStorageContext
+                - CoreShop\Bundle\TestBundle\Context\Transform\ClassContext
 
-                - coreshop.behat.context.setup.pimcore_class
+                - CoreShop\Bundle\TestBundle\Context\Setup\ClassContext
                 - coreshop.behat.context.setup.optimistic_entity_lock
 
-                - coreshop.behat.context.domain.pimcore_class
-                - coreshop.behat.context.domain.pimcore
+                - CoreShop\Bundle\TestBundle\Context\Domain\ClassContext
+                - CoreShop\Bundle\TestBundle\Context\Domain\PimcoreContext
             filters:
                 tags: "@optimistic_entity_lock"

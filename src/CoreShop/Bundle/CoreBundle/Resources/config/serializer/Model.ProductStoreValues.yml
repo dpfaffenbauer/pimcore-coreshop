@@ -23,3 +23,7 @@ CoreShop\Component\Core\Model\ProductStoreValues:
             expose: true
             type: relation<CoreShop\Component\Core\Model\Store>
             groups: [List, Detailed, Version]
+        taxRule:
+            expose: true
+            type: relation<CoreShop\Component\Taxation\Model\TaxRuleGroup>
+            groups: [List, Detailed, Version]

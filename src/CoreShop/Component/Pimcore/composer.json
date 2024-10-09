@@ -25,6 +25,7 @@
   ],
   "require": {
     "pimcore/pimcore": "^11.0",
+    "pimcore/web-to-print-bundle": "^1.3",
     "pimcore/admin-ui-classic-bundle": "^1.0",
     "laminas/laminas-stdlib": "^3.6"
   },

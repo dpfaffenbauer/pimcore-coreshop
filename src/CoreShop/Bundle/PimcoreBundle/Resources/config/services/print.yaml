@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    public: true
+
+  CoreShop\Component\Pimcore\Print\PrintablePdfRendererInterface: '@CoreShop\Component\Pimcore\Print\PimcorePrintablePdfRenderer'
+  CoreShop\Component\Pimcore\Print\PimcorePrintablePdfRenderer:
+    arguments:
+      - '@fragment.renderer.inline'
+
+  CoreShop\Component\Pimcore\Print\PersistedPrintablePdfRenderer:
+    decorates: 'CoreShop\Component\Pimcore\Print\PrintablePdfRendererInterface'
+    arguments:
+      - '@CoreShop\Component\Pimcore\Print\PersistedPrintablePdfRenderer.inner'
+      - '%kernel.debug%'

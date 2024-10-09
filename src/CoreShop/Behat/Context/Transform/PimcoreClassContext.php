@@ -19,8 +19,8 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\ClassStorageInterface;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\ClassStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use Pimcore\Cache\RuntimeCache;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\Concrete;

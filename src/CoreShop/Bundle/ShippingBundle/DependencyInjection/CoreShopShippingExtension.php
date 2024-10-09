@@ -20,11 +20,17 @@ namespace CoreShop\Bundle\ShippingBundle\DependencyInjection;
 
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
+use CoreShop\Bundle\ShippingBundle\Attribute\AsCarrierPriceCalculator;
+use CoreShop\Bundle\ShippingBundle\Attribute\AsShippableValidator;
+use CoreShop\Bundle\ShippingBundle\Attribute\AsShippingRuleActionProcessor;
+use CoreShop\Bundle\ShippingBundle\Attribute\AsShippingRuleConditionChecker;
+use CoreShop\Bundle\ShippingBundle\Attribute\AsShippingTaxCalculatorStrategy;
 use CoreShop\Bundle\ShippingBundle\DependencyInjection\Compiler\CompositeShippableValidatorPass;
 use CoreShop\Bundle\ShippingBundle\DependencyInjection\Compiler\ShippingPriceCalculatorsPass;
 use CoreShop\Bundle\ShippingBundle\DependencyInjection\Compiler\ShippingRuleActionPass;
 use CoreShop\Bundle\ShippingBundle\DependencyInjection\Compiler\ShippingRuleConditionPass;
 use CoreShop\Bundle\ShippingBundle\DependencyInjection\Compiler\ShippingTaxCalculationStrategyPass;
+use CoreShop\Component\Registry\Autoconfiguration;
 use CoreShop\Component\Shipping\Calculator\CarrierPriceCalculatorInterface;
 use CoreShop\Component\Shipping\Resolver\DefaultCarrierResolverInterface;
 use CoreShop\Component\Shipping\Rule\Condition\ShippingConditionCheckerInterface;
@@ -62,29 +68,44 @@ final class CoreShopShippingExtension extends AbstractModelExtension
 
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(ShippableCarrierValidatorInterface::class)
-            ->addTag(CompositeShippableValidatorPass::SHIPABLE_VALIDATOR_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            ShippableCarrierValidatorInterface::class,
+            CompositeShippableValidatorPass::SHIPABLE_VALIDATOR_TAG,
+            AsShippableValidator::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(CarrierPriceCalculatorInterface::class)
-            ->addTag(ShippingPriceCalculatorsPass::SHIPPING_PRICE_CALCULATOR_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            CarrierPriceCalculatorInterface::class,
+            ShippingPriceCalculatorsPass::SHIPPING_PRICE_CALCULATOR_TAG,
+            AsCarrierPriceCalculator::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(ShippingRuleActionProcessorInterface::class)
-            ->addTag(ShippingRuleActionPass::SHIPPING_RULE_ACTION_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            ShippingRuleActionProcessorInterface::class,
+            ShippingRuleActionPass::SHIPPING_RULE_ACTION_TAG,
+            AsShippingRuleActionProcessor::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(ShippingConditionCheckerInterface::class)
-            ->addTag(ShippingRuleConditionPass::SHIPPING_RULE_CONDITION_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            ShippingConditionCheckerInterface::class,
+            ShippingRuleConditionPass::SHIPPING_RULE_CONDITION_TAG,
+            AsShippingRuleConditionChecker::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(TaxCalculationStrategyInterface::class)
-            ->addTag(ShippingTaxCalculationStrategyPass::SHIPPING_TAX_STRATEGY_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            TaxCalculationStrategyInterface::class,
+            ShippingTaxCalculationStrategyPass::SHIPPING_TAX_STRATEGY_TAG,
+            AsShippingTaxCalculatorStrategy::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

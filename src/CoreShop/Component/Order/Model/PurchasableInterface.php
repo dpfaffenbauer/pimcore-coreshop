@@ -29,6 +29,4 @@ interface PurchasableInterface extends ResourceInterface
     public function getName(?string $language = null): ?string;
 
     public function getWholesaleBuyingPrice(): ?Money;
-
-    public function getTaxRule(): ?TaxRuleGroupInterface;
 }

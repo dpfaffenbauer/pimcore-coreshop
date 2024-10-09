@@ -34,8 +34,12 @@ use CoreShop\Component\StorageList\Context\StorageListFactoryContext;
 use CoreShop\Component\StorageList\Core\Context\CustomerAndStoreBasedStorageListContext;
 use CoreShop\Component\StorageList\Core\Context\SessionAndStoreBasedStorageListContext;
 use CoreShop\Component\StorageList\Core\Context\StoreBasedStorageListContext;
+use CoreShop\Component\StorageList\Core\Provider\CoreContextProvider;
+use CoreShop\Component\StorageList\Core\Storage\SessionStorageListStorage;
 use CoreShop\Component\StorageList\Expiration\StorageListExpiration;
 use CoreShop\Component\StorageList\Maintenance\ExpireTask;
+use CoreShop\Component\StorageList\Provider\ContextProvider;
+use CoreShop\Component\StorageList\Storage\SimpleStorageListStorage;
 use CoreShop\Component\StorageList\StorageListsManager;
 use CoreShop\Component\Store\Context\StoreContextInterface;
 use CoreShop\Component\Store\Model\StoreAwareInterface;
@@ -140,6 +144,7 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                 $controllerDefinition->setArgument('$productRepository', new Reference($list['resource']['product_repository']));
                 $controllerDefinition->setArgument('$itemRepository', new Reference($list['resource']['item_repository']));
                 $controllerDefinition->setArgument('$context', new Reference($contextCompositeServiceName));
+                $controllerDefinition->setArgument('$storageListFactory', new Reference($list['resource']['factory']));
                 $controllerDefinition->setArgument('$storageListItemFactory', new Reference($list['resource']['item_factory']));
                 $controllerDefinition->setArgument('$addToStorageListFactory', new Reference($list['resource']['add_to_list_factory']));
                 $controllerDefinition->setArgument('$modifier', new Reference($list['services']['modifier']));
@@ -157,6 +162,51 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                 $container->setDefinition('coreshop.storage_list.controller.' . $name, $controllerDefinition);
             }
 
+            if ($list['multi_list']['enabled']) {
+                $container->setParameter(
+                    'coreshop.storage_list.multi_list.'.$name,
+                    $list['multi_list']['enabled']
+                );
+
+                if ($list['multi_list']['controller']['enabled']) {
+                    $class = $list['multi_list']['controller']['class'];
+                    if ($container->has($class)) {
+                        $controllerDefinition = $container->getDefinition($class);
+                    } else {
+                        $controllerDefinition = new Definition($class);
+                    }
+
+                    $controllerDefinition->setArgument('$identifier', $name);
+                    $controllerDefinition->setArgument('$context', new Reference($contextCompositeServiceName));
+                    $controllerDefinition->setArgument('$formFactory', new Reference('form.factory'));
+                    $controllerDefinition->setArgument('$repository', new Reference($list['resource']['repository']));
+                    $controllerDefinition->setArgument('$repository', new Reference($list['resource']['repository']));
+                    $controllerDefinition->setArgument(
+                        '$storageListFactory',
+                        new Reference($list['resource']['factory'])
+                    );
+                    $controllerDefinition->setArgument(
+                        '$contextProvider',
+                        new Reference('coreshop.storage_list.context_provider.'.$name)
+                    );
+                    $controllerDefinition->setArgument('$manager', new Reference($list['services']['manager']));
+                    $controllerDefinition->setArgument('$translator', new Reference('translator'));
+                    $controllerDefinition->setArgument('$storage', new Reference('coreshop.storage_list.storage.'.$name));
+                    $controllerDefinition->setArgument('$listResolver', new Reference($list['services']['list_resolver']));
+                    $controllerDefinition->setArgument('$listFormType', $list['multi_list']['form']['class']);
+                    $controllerDefinition->setArgument('$templateCreateNewList', $list['multi_list']['templates']['create_new_storage_list']);
+                    $controllerDefinition->setArgument('$templateListStorageLists', $list['multi_list']['templates']['list_storage_list']);
+
+                    $controllerDefinition->addTag('controller.service_arguments');
+                    $controllerDefinition->addTag('container.service_subscriber');
+
+                    $container->setDefinition(
+                        'coreshop.storage_list.controller_multi_list.'.$name,
+                        $controllerDefinition
+                    );
+                }
+            }
+
             $manager->addMethodCall('addList', [
                 $name,
                 new Reference($list['services']['manager']),
@@ -166,11 +216,22 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
 
             $contextsRegistered = false;
 
+            $coreContextProviderDefinition = new Definition(ContextProvider::class);
+            $container->setDefinition('coreshop.storage_list.context_provider.' . $name, $coreContextProviderDefinition);
+
+            $simpleStorage = new Definition(SimpleStorageListStorage::class);
+            $container->setDefinition('coreshop.storage_list.storage.' . $name, $simpleStorage);
+
             if (interface_exists(CustomerAwareInterface::class) && interface_exists(StoreAwareInterface::class)) {
                 $implements = \class_implements($list['resource']['interface']);
 
                 if (isset($implements[StoreAwareInterface::class], $implements[CustomerAwareInterface::class])) {
                     $contextsRegistered = true;
+
+                    $coreContextProviderDefinition = new Definition(CoreContextProvider::class);
+                    $coreContextProviderDefinition->setArgument('$shopperContext', new Reference(ShopperContextInterface::class));
+
+                    $container->setDefinition('coreshop.storage_list.context_provider.' . $name, $coreContextProviderDefinition);
 
                     $customerAndStoreBasedContextDefinition = new Definition(CustomerAndStoreBasedStorageListContext::class);
                     $customerAndStoreBasedContextDefinition->setArgument('$customerContext', new Reference(CustomerContextInterface::class));
@@ -190,8 +251,8 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                             new Reference('coreshop.storage_list.context.store_based.' . $name . '.inner'),
                         );
                         $storeBasedContextDefinition->setArgument(
-                            '$shopperContext',
-                            new Reference(ShopperContextInterface::class),
+                            '$contextProvider',
+                            new Reference('coreshop.storage_list.context_provider.' . $name),
                         );
 
                         $container->setDefinition(
@@ -201,12 +262,17 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                     }
 
                     if ($list['session']['enabled']) {
+                        $storageListStorageDefinition = new Definition(SessionStorageListStorage::class);
+                        $storageListStorageDefinition->setArgument('$requestStack', new Reference('request_stack'));
+                        $storageListStorageDefinition->setArgument('$sessionKeyName', $list['session']['key']);
+                        $storageListStorageDefinition->setArgument('$repository', new Reference($list['resource']['repository']));
+
+                        $container->setDefinition('coreshop.storage_list.storage.' . $name, $storageListStorageDefinition);
+
                         $sessionAndStoreBasedContextDefinition = new Definition(
                             SessionAndStoreBasedStorageListContext::class,
                         );
-                        $sessionAndStoreBasedContextDefinition->setArgument('$requestStack', new Reference('request_stack'));
-                        $sessionAndStoreBasedContextDefinition->setArgument('$sessionKeyName', $list['session']['key']);
-                        $sessionAndStoreBasedContextDefinition->setArgument('$repository', new Reference($list['resource']['repository']));
+                        $sessionAndStoreBasedContextDefinition->setArgument('$storageListStorage', new Reference('coreshop.storage_list.storage.' . $name));
                         $sessionAndStoreBasedContextDefinition->setArgument('$storeContext', new Reference(StoreContextInterface::class));
                         $sessionAndStoreBasedContextDefinition->addTag($list['context']['tag'], ['priority' => -555]);
 
@@ -215,7 +281,7 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                         $sessionAndStoreSubscriber = new Definition(SessionStoreStorageListSubscriber::class);
                         $sessionAndStoreSubscriber->setArgument('$pimcoreContext', new Reference(PimcoreContextResolver::class));
                         $sessionAndStoreSubscriber->setArgument('$context', new Reference($contextCompositeServiceName));
-                        $sessionAndStoreSubscriber->setArgument('$sessionKeyName', $list['session']['key']);
+                        $sessionAndStoreSubscriber->setArgument('$storageListStorage', new Reference('coreshop.storage_list.storage.' . $name));
                         $sessionAndStoreSubscriber->addTag('kernel.event_subscriber');
 
                         $container->setDefinition('coreshop.storage_list.session_and_store_subscriber.' . $name, $sessionAndStoreSubscriber);

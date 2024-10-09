@@ -18,13 +18,23 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\PayumBundle;
 
-class CoreGatewayFactoryBuilder extends \Payum\Core\Bridge\Symfony\Builder\CoreGatewayFactoryBuilder
-{
-    public function build(array $defaultConfig): CoreGatewayFactory
-    {
-        $coreGatewayFactory = new CoreGatewayFactory($defaultConfig);
-        $coreGatewayFactory->setContainer($this->container);
+use Payum\Bundle\PayumBundle\ContainerAwareCoreGatewayFactory;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-        return $coreGatewayFactory;
+class CoreGatewayFactoryBuilder extends \Payum\Bundle\PayumBundle\Builder\CoreGatewayFactoryBuilder
+{
+    private ContainerInterface $container;
+
+    public function __construct(
+        ContainerInterface $container,
+    ) {
+        parent::__construct($container);
+
+        $this->container = $container;
+    }
+
+    public function build(array $defaultConfig): ContainerAwareCoreGatewayFactory
+    {
+        return new ContainerAwareCoreGatewayFactory($this->container, $defaultConfig);
     }
 }

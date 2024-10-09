@@ -100,6 +100,7 @@ core_shop_core:
             core_extension_product_store_values_builder: '/bundles/coreshopcore/pimcore/js/product/storevalues/builder.js'
             core_extension_product_store_values_item_abstract: '/bundles/coreshopcore/pimcore/js/product/storevalues/items/abstract.js'
             core_extension_product_store_values_item_price: '/bundles/coreshopcore/pimcore/js/product/storevalues/items/price.js'
+            core_extension_product_store_values_item_tax_rule: '/bundles/coreshopcore/pimcore/js/product/storevalues/items/taxRule.js'
             core_extension_product_store_values_item_unit_price: '/bundles/coreshopcore/pimcore/js/product/storevalues/items/unitPrice.js'
             core_extension_tag_product_unit_definitions_builder: '/bundles/coreshopcore/pimcore/js/product/units/builder.js'
             notification_rule_condition_abstract_transition: '/bundles/coreshopcore/pimcore/js/notification/conditions/abstractTransition.js'

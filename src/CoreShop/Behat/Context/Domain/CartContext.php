@@ -943,6 +943,42 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^the cart item with (product) should have a custom attribute named "([^"]+)"$/
+     * @Then /^the cart item with (product "[^"]+") should have a custom attribute named "([^"]+)"$/
+     */
+    public function theCartItemWithProductShouldHaveACustomAttributeNamed(ProductInterface $product, string $attributeName): void
+    {
+        $cart = $this->cartContext->getCart();
+
+        /**
+         * @var OrderItemInterface $cartItem
+         */
+        $cartItem = $this->findCartItemByProduct($cart, $product);
+
+        Assert::notNull(
+            $cartItem->findAttribute($attributeName),
+        );
+    }
+
+    /**
+     * @Then /^the cart item with (product) should not have a custom attribute named "([^"]+)"$/
+     * @Then /^the cart item with (product "[^"]+") should not have a custom attribute named "([^"]+)"$/
+     */
+    public function theCartItemWithProductShouldNotHaveACustomAttributeNamed(ProductInterface $product, string $attributeName): void
+    {
+        $cart = $this->cartContext->getCart();
+
+        /**
+         * @var OrderItemInterface $cartItem
+         */
+        $cartItem = $this->findCartItemByProduct($cart, $product);
+
+        Assert::null(
+            $cartItem->findAttribute($attributeName),
+        );
+    }
+
+    /**
      * @Then /^the cart converted shipping should be "([^"]+)" excluding tax$/
      */
     public function cartConvertedShippingCostShouldBeExcludingTax($shipping): void

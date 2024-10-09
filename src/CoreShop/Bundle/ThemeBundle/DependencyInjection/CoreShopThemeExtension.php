@@ -18,10 +18,12 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\ThemeBundle\DependencyInjection;
 
+use CoreShop\Bundle\ThemeBundle\Attribute\AsThemeResolver;
 use CoreShop\Bundle\ThemeBundle\DependencyInjection\Compiler\CompositeThemeResolverPass;
 use CoreShop\Bundle\ThemeBundle\Service\PimcoreDocumentPropertyResolver;
 use CoreShop\Bundle\ThemeBundle\Service\PimcoreSiteThemeResolver;
 use CoreShop\Bundle\ThemeBundle\Service\ThemeResolverInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -31,22 +33,25 @@ class CoreShopThemeExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+        $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        if (false === $config['default_resolvers']['pimcore_site']) {
+        if (false === $configs['default_resolvers']['pimcore_site']) {
             $container->removeDefinition(PimcoreSiteThemeResolver::class);
         }
 
-        if (false === $config['default_resolvers']['pimcore_document_property']) {
+        if (false === $configs['default_resolvers']['pimcore_document_property']) {
             $container->removeDefinition(PimcoreDocumentPropertyResolver::class);
         }
-
-        $container
-            ->registerForAutoconfiguration(ThemeResolverInterface::class)
-            ->addTag(CompositeThemeResolverPass::THEME_RESOLVER_TAG)
-        ;
+        
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            ThemeResolverInterface::class,
+            CompositeThemeResolverPass::THEME_RESOLVER_TAG,
+            AsThemeResolver::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

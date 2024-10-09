@@ -20,6 +20,7 @@ namespace CoreShop\Bundle\StorageListBundle\Core\EventListener;
 
 use CoreShop\Component\StorageList\Context\StorageListContextInterface;
 use CoreShop\Component\StorageList\Context\StorageListNotFoundException;
+use CoreShop\Component\StorageList\Storage\StorageListStorageInterface;
 use CoreShop\Component\Store\Model\StoreAwareInterface;
 use Pimcore\Http\Request\Resolver\PimcoreContextResolver;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -32,7 +33,7 @@ final class SessionStoreStorageListSubscriber implements EventSubscriberInterfac
     public function __construct(
         private PimcoreContextResolver $pimcoreContext,
         private StorageListContextInterface $context,
-        private string $sessionKeyName,
+        private StorageListStorageInterface $storageListStorage
     ) {
     }
 
@@ -78,13 +79,8 @@ final class SessionStoreStorageListSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        if (0 !== $storageList->getId() && null !== $storageList->getId() && null !== $storageList->getStore()) {
-            $session = $request->getSession();
-
-            $session->set(
-                sprintf('%s.%s', $this->sessionKeyName, $storageList->getStore()->getId()),
-                $storageList->getId(),
-            );
+        if (0 !== $storageList->getId() && null !== $storageList->getStore()) {
+            $this->storageListStorage->setForContext(['store' => $storageList->getStore()], $storageList);
         }
     }
 }

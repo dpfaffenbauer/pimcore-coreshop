@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Page\Frontend;
 
 use Behat\Mink\Element\NodeElement;
+use CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage;
 
 class CategoryPage extends AbstractFrontendPage implements CategoryPageInterface
 {

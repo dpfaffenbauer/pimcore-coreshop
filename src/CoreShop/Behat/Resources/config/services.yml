@@ -10,15 +10,20 @@ payum:
         offline:
             factory: concurrency
 
+core_shop_address:
+    autoconfigure_with_attributes: true
+
+core_shop_resource:
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/CoreShop/Behat/Model'
+
 services:
     _defaults:
         public: true
 
-    coreshop.behat.shared_storage:
-        class: CoreShop\Behat\Service\SharedStorage
-
-    coreshop.behat.class_storage:
-        class: CoreShop\Behat\Service\ClassStorage
+    coreshop.behat.shared_storage: '@CoreShop\Bundle\TestBundle\Service\SharedStorageInterface'
+    coreshop.behat.class_storage: '@CoreShop\Bundle\TestBundle\Service\ClassStorageInterface'
 
     CoreShop\Behat\Service\Index\RelationalIndexExtension:
         tags:
@@ -32,57 +37,16 @@ services:
         tags:
             - { name: coreshop.index.interpreter, type: custom_relational }
 
-    CoreShop\Behat\Service\Resolver\CurrentPageResolverInterface: '@CoreShop\Behat\Service\Resolver\CurrentPageResolver'
-    CoreShop\Behat\Service\Resolver\CurrentPageResolver:
-        arguments:
-            - '@behat.mink.default_session'
-            - '@router'
-
-    CoreShop\Behat\Service\CookieSetterInterface: '@CoreShop\Behat\Service\CookieSetter'
-    CoreShop\Behat\Service\CookieSetter:
-        arguments:
-            - '@behat.mink.default_session'
-            - '@behat.mink.parameters'
-
-    CoreShop\Behat\Service\PimcoreCookieSetter:
-        arguments:
-            - '@behat.mink.default_session'
-            - '@behat.mink.parameters'
-
-    coreshop.security_service.frontend:
-        class: CoreShop\Behat\Service\SecurityService
-        arguments:
-            - '@session.factory'
-            - '@request_stack'
-            - '@CoreShop\Behat\Service\CookieSetterInterface'
-            - 'shop'
-
-    coreshop.security_service.backend:
-        class: CoreShop\Behat\Service\PimcoreSecurityService
-        arguments:
-            - '@session.factory'
-            - '@request_stack'
-            - '@CoreShop\Behat\Service\PimcoreCookieSetter'
-            - 'pimcore_admin'
-
-    CoreShop\Behat\Service\NotificationAccessorInterface: '@CoreShop\Behat\Service\NotificationAccessor'
-    CoreShop\Behat\Service\NotificationAccessor:
-        arguments:
-            - '@behat.mink.default_session'
-
-    CoreShop\Behat\Service\NotificationCheckerInterface: '@CoreShop\Behat\Service\NotificationChecker'
-    CoreShop\Behat\Service\NotificationChecker:
-        arguments:
-            - '@CoreShop\Behat\Service\NotificationAccessorInterface'
-
     CoreShop\Behat\Service\StoreContextSetterInterface: '@CoreShop\Behat\Service\StoreContextSetter'
     CoreShop\Behat\Service\StoreContextSetter:
         arguments:
-            - '@CoreShop\Behat\Service\CookieSetterInterface'
+            - '@CoreShop\Bundle\TestBundle\Service\CookieSetterInterface'
 
     payum.concurrency_gateway_factory:
-        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        class: Payum\Bundle\PayumBundle\Builder\GatewayFactoryBuilder
         arguments: [ CoreShop\Behat\Service\Payum\Concurrency\ConcurrencyGatewayFactory ]
         tags:
             - { name: payum.gateway_factory_builder, factory: concurrency }
 
+    CoreShop\Behat\Service\SampleCountryContext:
+        autoconfigure: true

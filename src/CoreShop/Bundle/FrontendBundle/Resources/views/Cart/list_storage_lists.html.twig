@@ -1,0 +1,75 @@
+{% extends '@CoreShopFrontend/layout.html.twig' %}
+{% import "@CoreShopFrontend/Common/Macro/currency.html.twig" as currency %}
+
+{% block content %}
+
+    <div id="main-container" class="container p-0">
+        <h2 class="main-heading text-center">
+            {{ 'coreshop.ui.carts'|trans }}
+        </h2>
+
+        <a href="{{ path('coreshop_cart_create_named') }}" class="btn btn-secondary mb-3">
+            Create New Cart
+        </a>
+
+        {% if form is defined %}
+            {{ form_start(form) }}
+                <table class="table hcart cart-items">
+                    <thead>
+                        <th></th>
+                        <th>{{ 'coreshop.ui.cart.name'|trans }}</th>
+                        <th class="text-right">{{ 'coreshop.ui.total'|trans }}</th>
+                    </thead>
+                    <tbody>
+                    {% for key, list_form in form.list %}
+                        {% set list = form.list.vars.choices[key].data %}
+                        {% set cart_name = list.name ?: 'My Cart' %}
+
+                        <tr {{ coreshop_test_html_attribute('named-cart', cart_name) }}>
+                            <td>
+                                {{ form_widget(list_form, coreshop_test_form_attribute('cart', cart_name)|coreshop_merge_recursive({'label': false})) }}
+                            </td>
+                            <td {{ coreshop_test_html_attribute('name') }}>
+                                {{ cart_name }}
+                            </td>
+
+                            <td class="text-right" {{ coreshop_test_html_attribute('total') }}>
+                                {{ currency.convertAndFormat(list.total) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {{ form_widget(form.selectList, coreshop_test_form_attribute('cart-select-button')) }}
+                {{ form_widget(form.deleteList, coreshop_test_form_attribute('cart-delete-button')) }}
+            {{ form_widget(form._token) }}
+            {{ form_end(form) }}
+        {% else %}
+            <div class="table-responsive compare-table">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td>{{ 'coreshop.ui.cart.name'|trans }}</td>
+                        <td>{{ 'coreshop.ui.date'|trans }}</td>
+                        <td>{{ 'coreshop.ui.total'|trans }}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for list in lists %}
+                        <tr>
+                            <td>{{ list.name ?: 'My Cart' }}</td>
+                            <td>
+                                {{ list.orderDate|date("d.m.Y") }}
+                            </td>
+                            <td>
+                                {{ currency.format(list.convertedTotal, list.currency.isoCode) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

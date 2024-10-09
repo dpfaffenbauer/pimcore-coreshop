@@ -1,3 +1,8 @@
 imports:
     - { resource: services.yml }
     - { resource: 'local/' }
+
+#payum:
+#    dynamic_gateways:
+#        encryption:
+#            defuse_secret_key: "%env(DEFUSE_SECRET)%"

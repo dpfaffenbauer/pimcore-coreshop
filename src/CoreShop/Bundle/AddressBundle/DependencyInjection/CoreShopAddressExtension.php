@@ -18,12 +18,15 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\AddressBundle\DependencyInjection;
 
+use CoreShop\Bundle\AddressBundle\Attribute\AsCountryContext;;
+use CoreShop\Bundle\AddressBundle\Attribute\AsRequestBasedResolverCountryContext;
 use CoreShop\Bundle\AddressBundle\DependencyInjection\Compiler\CompositeCountryContextPass;
 use CoreShop\Bundle\AddressBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
 use CoreShop\Component\Address\Context\CountryContextInterface;
 use CoreShop\Component\Address\Context\RequestBased\RequestResolverInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -33,9 +36,14 @@ final class CoreShopAddressExtension extends AbstractModelExtension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->registerResources('coreshop', CoreShopResourceBundle::DRIVER_DOCTRINE_ORM, $configs['resources'], $container);
+        $this->registerResources(
+            'coreshop',
+            CoreShopResourceBundle::DRIVER_DOCTRINE_ORM,
+            $configs['resources'],
+            $container
+        );
         $this->registerPimcoreModels('coreshop', $configs['pimcore'], $container);
 
         if (array_key_exists('pimcore_admin', $configs)) {
@@ -54,13 +62,20 @@ final class CoreShopAddressExtension extends AbstractModelExtension
 
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(CountryContextInterface::class)
-            ->addTag(CompositeCountryContextPass::COUNTRY_CONTEXT_SERVICE_TAG)
-        ;
-        $container
-            ->registerForAutoconfiguration(RequestResolverInterface::class)
-            ->addTag(CompositeRequestResolverPass::COUNTRY_REQUEST_RESOLVER_SERVICE_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            CountryContextInterface::class,
+            CompositeCountryContextPass::COUNTRY_CONTEXT_SERVICE_TAG,
+            AsCountryContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
+
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            RequestResolverInterface::class,
+            CompositeRequestResolverPass::COUNTRY_REQUEST_RESOLVER_SERVICE_TAG,
+            AsRequestBasedResolverCountryContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

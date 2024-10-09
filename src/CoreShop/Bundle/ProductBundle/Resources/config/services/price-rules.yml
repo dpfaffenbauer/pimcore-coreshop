@@ -121,6 +121,7 @@ services:
             - { name: coreshop.product.retail_price_calculator, type: product_price_rules, priority: 20 }
             - { name: coreshop.product.discount_price_calculator, type: product_price_rules, priority: 20 }
             - { name: coreshop.product.discount_calculator, type: product_price_rules, priority: 20 }
+            - { name: coreshop.product.custom_attributes_calculator, type: product_price_rules, priority: 20 }
 
     coreshop.product.price_calculator.product_price_valid_rules_fetcher.memory_cache:
         class: CoreShop\Component\Product\Rule\Fetcher\MemoryCachedValidRuleFetcher

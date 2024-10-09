@@ -23,6 +23,7 @@ use CoreShop\Component\Resource\Repository\RepositoryInterface;
 use CoreShop\Component\StorageList\Context\StorageListContextInterface;
 use CoreShop\Component\StorageList\DTO\AddToStorageListInterface;
 use CoreShop\Component\StorageList\Factory\AddToStorageListFactoryInterface;
+use CoreShop\Component\StorageList\Factory\StorageListFactoryInterface;
 use CoreShop\Component\StorageList\Factory\StorageListItemFactoryInterface;
 use CoreShop\Component\StorageList\Model\ShareableStorageListInterface;
 use CoreShop\Component\StorageList\Model\StorageListInterface;
@@ -52,6 +53,7 @@ class StorageListController extends AbstractController
         protected RepositoryInterface $productRepository,
         protected RepositoryInterface $itemRepository,
         protected StorageListContextInterface $context,
+        protected StorageListFactoryInterface $storageListFactory,
         protected StorageListItemFactoryInterface $storageListItemFactory,
         protected AddToStorageListFactoryInterface $addToStorageListFactory,
         protected StorageListModifierInterface $modifier,

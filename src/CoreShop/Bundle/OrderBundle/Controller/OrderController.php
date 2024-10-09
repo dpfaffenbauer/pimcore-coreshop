@@ -345,64 +345,6 @@ class OrderController extends PimcoreController
         return $this->viewHandler->handle(['success' => false]);
     }
 
-    protected function prepareSale(OrderInterface $order, ?string $locale = null): array
-    {
-        $date = $order->getOrderDate()->getTimestamp();
-
-        $element = [
-            'id' => $order->getId(),
-            'saleDate' => $date,
-            'saleNumber' => $order->getOrderNumber(),
-            'lang' => $order->getLocaleCode(),
-            'discount' => $order->getDiscount(),
-            'convertedDiscount' => $order->getConvertedDiscount(),
-            'subtotal' => $order->getSubtotal(),
-            'convertedSubtotal' => $order->getConvertedSubtotal(),
-            'totalTax' => $order->getTotalTax(),
-            'convertedTotalTax' => $order->getConvertedTotalTax(),
-            'total' => $order->getTotal(),
-            'convertedTotal' => $order->getConvertedTotal(),
-            'currency' => $this->getCurrency($order->getBaseCurrency() ?: $order->getStore()->getCurrency()),
-            'currencyName' => $order->getBaseCurrency() instanceof CurrencyInterface ? $order->getBaseCurrency(
-            )->getName() : '',
-            'customerName' => $order->getCustomer() instanceof CustomerInterface ? $order->getCustomer()->getFirstname(
-            ) . ' ' . $order->getCustomer()->getLastname() : '',
-            'customerEmail' => $order->getCustomer() instanceof CustomerInterface ? $order->getCustomer()->getEmail(
-            ) : '',
-            'store' => $order->getStore() instanceof StoreInterface ? $order->getStore()->getId() : null,
-            'orderState' => $this->container->get(WorkflowStateInfoManagerInterface::class)->getStateInfo(
-                'coreshop_order',
-                $order->getOrderState() ?? OrderStates::STATE_NEW,
-                false,
-                $locale,
-            ),
-            'orderPaymentState' => $this->container->get(WorkflowStateInfoManagerInterface::class)->getStateInfo(
-                'coreshop_order_payment',
-                $order->getPaymentState(),
-                false,
-                $locale,
-            ),
-            'orderShippingState' => $this->container->get(WorkflowStateInfoManagerInterface::class)->getStateInfo(
-                'coreshop_order_shipment',
-                $order->getShippingState(),
-                false,
-                $locale,
-            ),
-            'orderInvoiceState' => $this->container->get(WorkflowStateInfoManagerInterface::class)->getStateInfo(
-                'coreshop_order_invoice',
-                $order->getInvoiceState(),
-                false,
-                $locale,
-            ),
-        ];
-
-        return array_merge(
-            $element,
-            $this->prepareAddress($order->getShippingAddress(), 'shipping'),
-            $this->prepareAddress($order->getInvoiceAddress(), 'invoice'),
-        );
-    }
-
     protected function prepareAddress(AddressInterface $address, string $type): array
     {
         $prefix = 'address' . ucfirst($type);
@@ -466,8 +408,8 @@ class OrderController extends PimcoreController
             'billing' => $this->getDataForObject($order->getInvoiceAddress()),
         ];
 
-        if ($order->getShippingAddress() instanceof AddressInterface && $order->getShippingAddress()->getCountry(
-        ) instanceof CountryInterface) {
+        if ($order->getShippingAddress() instanceof AddressInterface &&
+            $order->getShippingAddress()->getCountry() instanceof CountryInterface) {
             $jsonSale['address']['shipping']['formatted'] = $this->container->get(
                 AddressFormatterInterface::class,
             )->formatAddress($order->getShippingAddress());
@@ -475,8 +417,8 @@ class OrderController extends PimcoreController
             $jsonSale['address']['shipping']['formatted'] = '';
         }
 
-        if ($order->getInvoiceAddress() instanceof AddressInterface && $order->getInvoiceAddress()->getCountry(
-        ) instanceof CountryInterface) {
+        if ($order->getInvoiceAddress() instanceof AddressInterface &&
+            $order->getInvoiceAddress()->getCountry() instanceof CountryInterface) {
             $jsonSale['address']['billing']['formatted'] = $this->container->get(
                 AddressFormatterInterface::class,
             )->formatAddress($order->getInvoiceAddress());

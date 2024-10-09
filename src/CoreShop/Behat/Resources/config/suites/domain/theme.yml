@@ -5,7 +5,7 @@ default:
                 - coreshop.behat.context.hook.pimcore_setup
                 - coreshop.behat.context.hook.coreshop_setup
 
-                - coreshop.behat.context.hook.doctrine_orm
+                - CoreShop\Bundle\TestBundle\Context\Hook\DoctrineORMContext
                 - coreshop.behat.context.hook.pimcore_dao
 
                 - coreshop.behat.context.transform.store

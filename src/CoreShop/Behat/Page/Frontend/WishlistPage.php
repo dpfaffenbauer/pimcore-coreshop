@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Page\Frontend;
 
 use Behat\Mink\Exception\ElementNotFoundException;
+use CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage;
 
 class WishlistPage extends AbstractFrontendPage implements WishlistPageInterface
 {

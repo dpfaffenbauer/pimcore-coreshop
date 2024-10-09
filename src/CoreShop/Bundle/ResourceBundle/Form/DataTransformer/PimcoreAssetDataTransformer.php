@@ -24,7 +24,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class PimcoreAssetDataTransformer implements DataTransformerInterface
 {
-    public function transform($value)
+    public function transform(mixed $value): ?int
     {
         if ($value instanceof Asset) {
             return $value->getId();
@@ -33,7 +33,7 @@ class PimcoreAssetDataTransformer implements DataTransformerInterface
         return null;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): ?Asset
     {
         if (!$value) {
             return null;

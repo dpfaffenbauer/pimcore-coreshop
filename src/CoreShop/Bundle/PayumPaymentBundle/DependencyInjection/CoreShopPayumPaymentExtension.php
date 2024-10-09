@@ -21,6 +21,7 @@ namespace CoreShop\Bundle\PayumPaymentBundle\DependencyInjection;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class CoreShopPayumPaymentExtension extends AbstractModelExtension
@@ -29,9 +30,11 @@ class CoreShopPayumPaymentExtension extends AbstractModelExtension
     {
         $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $phpLoader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('coreshop', $configs['driver'], $configs['resources'], $container);
 
         $loader->load('services.yml');
+        $phpLoader->load('services.php');
     }
 }

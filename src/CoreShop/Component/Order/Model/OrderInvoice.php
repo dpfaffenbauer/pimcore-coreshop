@@ -32,6 +32,21 @@ abstract class OrderInvoice extends AbstractPimcoreModel implements OrderInvoice
         return 'invoice';
     }
 
+    public function getPrintBodyController(array $params = []): string
+    {
+        return 'CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController::invoiceAction';
+    }
+
+    public function getPrintHeaderController(array $params = []): string
+    {
+        return 'CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController::headerAction';
+    }
+
+    public function getPrintFooterController(array $params = []): string
+    {
+        return 'CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController::footerAction';
+    }
+
     public function getTotalTax(): int
     {
         return $this->getTotal(true) - $this->getTotal(false);

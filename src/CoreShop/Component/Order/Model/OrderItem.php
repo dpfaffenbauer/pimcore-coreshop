@@ -33,6 +33,7 @@ abstract class OrderItem extends AbstractPimcoreModel implements OrderItemInterf
     use ConvertedAdjustableTrait;
     use ProposalPriceRuleTrait;
     use ImmutableTrait;
+    use AttributesAwareTrait;
 
     public function equals(StorageListItemInterface $storageListItem): bool
     {

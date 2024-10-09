@@ -18,6 +18,9 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\PaymentBundle\DependencyInjection;
 
+use CoreShop\Bundle\PaymentBundle\Attribute\AsPaymentPriceCalculator;
+use CoreShop\Bundle\PaymentBundle\Attribute\AsPaymentRuleActionProcessor;
+use CoreShop\Bundle\PaymentBundle\Attribute\AsPaymentRuleConditionChecker;
 use CoreShop\Bundle\PaymentBundle\DependencyInjection\Compiler\PaymentCalculatorsPass;
 use CoreShop\Bundle\PaymentBundle\DependencyInjection\Compiler\PaymentProviderRuleActionPass;
 use CoreShop\Bundle\PaymentBundle\DependencyInjection\Compiler\PaymentProviderRuleConditionPass;
@@ -26,6 +29,7 @@ use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelEx
 use CoreShop\Component\Payment\Calculator\PaymentPriceCalculatorInterface;
 use CoreShop\Component\Payment\Rule\Condition\PaymentConditionCheckerInterface;
 use CoreShop\Component\Payment\Rule\Processor\PaymentProviderRuleActionProcessorInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -52,17 +56,28 @@ final class CoreShopPaymentExtension extends AbstractModelExtension
 
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(PaymentConditionCheckerInterface::class)
-            ->addTag(PaymentProviderRuleConditionPass::PAYMENT_PROVIDER_RULE_CONDITION_TAG)
-        ;
-        $container
-            ->registerForAutoconfiguration(PaymentProviderRuleActionProcessorInterface::class)
-            ->addTag(PaymentProviderRuleActionPass::PAYMENT_PROVIDER_RULE_ACTION_TAG)
-        ;
-        $container
-            ->registerForAutoconfiguration(PaymentPriceCalculatorInterface::class)
-            ->addTag(PaymentCalculatorsPass::PAYMENT_PRICE_CALCULATOR_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            PaymentConditionCheckerInterface::class,
+            PaymentProviderRuleConditionPass::PAYMENT_PROVIDER_RULE_CONDITION_TAG,
+            AsPaymentRuleConditionChecker::class,
+            $configs['autoconfigure_with_attributes'],
+        );
+
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            PaymentProviderRuleActionProcessorInterface::class,
+            PaymentProviderRuleActionPass::PAYMENT_PROVIDER_RULE_ACTION_TAG,
+            AsPaymentRuleActionProcessor::class,
+            $configs['autoconfigure_with_attributes'],
+        );
+
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            PaymentPriceCalculatorInterface::class,
+            PaymentCalculatorsPass::PAYMENT_PRICE_CALCULATOR_TAG,
+            AsPaymentPriceCalculator::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

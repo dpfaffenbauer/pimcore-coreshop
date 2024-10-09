@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Product\Model\ProductPriceRuleInterface;
 use CoreShop\Component\Product\Repository\ProductPriceRuleRepositoryInterface;
 use Webmozart\Assert\Assert;

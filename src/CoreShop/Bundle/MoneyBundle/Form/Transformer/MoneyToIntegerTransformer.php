@@ -27,7 +27,7 @@ class MoneyToIntegerTransformer implements DataTransformerInterface
     ) {
     }
 
-    public function transform($value): ?float
+    public function transform(mixed $value): ?float
     {
         if (null === $value) {
             return null;
@@ -36,7 +36,7 @@ class MoneyToIntegerTransformer implements DataTransformerInterface
         return $value / $this->decimalFactor;
     }
 
-    public function reverseTransform($value): mixed
+    public function reverseTransform(mixed $value): ?int
     {
         return null === $value ? null : (int) (round($value * $this->decimalFactor));
     }

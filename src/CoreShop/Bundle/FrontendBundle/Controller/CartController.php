@@ -21,11 +21,13 @@ namespace CoreShop\Bundle\FrontendBundle\Controller;
 use CoreShop\Bundle\OrderBundle\DTO\AddToCartInterface;
 use CoreShop\Bundle\OrderBundle\Factory\AddToCartFactoryInterface;
 use CoreShop\Bundle\OrderBundle\Form\Type\AddToCartType;
+use CoreShop\Bundle\OrderBundle\Form\Type\CartListType;
 use CoreShop\Bundle\OrderBundle\Form\Type\CartType;
 use CoreShop\Bundle\OrderBundle\Form\Type\ShippingCalculatorType;
 use CoreShop\Bundle\ResourceBundle\Pimcore\Repository\StackRepositoryInterface;
 use CoreShop\Bundle\WorkflowBundle\Manager\StateMachineManagerInterface;
 use CoreShop\Component\Address\Model\AddressInterface;
+use CoreShop\Component\Core\Context\ShopperContextInterface;
 use CoreShop\Component\Core\Order\Modifier\CartItemQuantityModifier;
 use CoreShop\Component\Order\Cart\CartModifierInterface;
 use CoreShop\Component\Order\Cart\Rule\CartPriceRuleProcessorInterface;
@@ -42,6 +44,9 @@ use CoreShop\Component\Order\Repository\CartPriceRuleVoucherRepositoryInterface;
 use CoreShop\Component\Resource\Repository\RepositoryInterface;
 use CoreShop\Component\Shipping\Calculator\TaxedShippingCalculatorInterface;
 use CoreShop\Component\Shipping\Resolver\CarriersResolverInterface;
+use CoreShop\Component\StorageList\Factory\StorageListFactory;
+use CoreShop\Component\StorageList\Provider\ContextProviderInterface;
+use CoreShop\Component\StorageList\Storage\StorageListStorageInterface;
 use CoreShop\Component\StorageList\StorageListItemQuantityModifierInterface;
 use CoreShop\Component\Tracking\Tracker\TrackerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -57,11 +62,24 @@ use Symfony\Contracts\Service\Attribute\SubscribedService;
 
 class CartController extends FrontendController
 {
-    public function widgetAction(Request $request): Response
+    public function widgetAction(Request $request, ShopperContextInterface $shopperContext): Response
     {
-        return $this->render($this->getTemplateConfigurator()->findTemplate('Cart/_widget.html'), [
+        $multiCartEnabled = $this->getParameter('coreshop.storage_list.multi_list.order');
+
+        $params = [
             'cart' => $this->getCart(),
-        ]);
+            'multi_cart_enabled' => $this->getParameter('coreshop.storage_list.multi_list.order')
+        ];
+
+        if ($multiCartEnabled) {
+            $form = $this->container->get('form.factory')->createNamed('coreshop', CartListType::class, ['list' => $this->getCart()], [
+                'context' => $shopperContext->getContext(),
+            ]);
+
+            $params['form'] = $form->createView();
+        }
+
+        return $this->render($this->getTemplateConfigurator()->findTemplate('Cart/_widget.html'), $params);
     }
 
     public function createQuoteAction(Request $request, StateMachineManagerInterface $machineManager)
@@ -394,6 +412,7 @@ class CartController extends FrontendController
             [
                 new SubscribedService('coreshop.repository.stack.purchasable', StackRepositoryInterface::class, attributes: new Autowire(service: 'coreshop.repository.stack.purchasable')),
                 new SubscribedService('coreshop.factory.order_item', OrderItemFactoryInterface::class, attributes: new Autowire(service: 'coreshop.factory.order_item')),
+                new SubscribedService('coreshop.factory.order', StorageListFactory::class, attributes: new Autowire(service: 'coreshop.factory.order')),
                 new SubscribedService('coreshop.repository.order_item', RepositoryInterface::class, attributes: new Autowire(service: 'coreshop.repository.order_item')),
                 new SubscribedService(CartItemQuantityModifier::class, CartItemQuantityModifier::class),
                 new SubscribedService(AddToCartFactoryInterface::class, AddToCartFactoryInterface::class),
@@ -404,6 +423,9 @@ class CartController extends FrontendController
                 new SubscribedService('coreshop.repository.cart_price_rule_voucher_code', CartPriceRuleVoucherRepositoryInterface::class),
                 new SubscribedService(CartPriceRuleProcessorInterface::class, CartPriceRuleProcessorInterface::class),
                 new SubscribedService(CartPriceRuleUnProcessorInterface::class, CartPriceRuleUnProcessorInterface::class),
+                new SubscribedService('coreshop.storage', CartPriceRuleUnProcessorInterface::class),
+                new SubscribedService('coreshop.storage_list.context_provider.order', ContextProviderInterface::class, attributes: new Autowire(service: 'coreshop.storage_list.context_provider.order')),
+                new SubscribedService('coreshop.storage_list.storage.order', StorageListStorageInterface::class, attributes: new Autowire(service: 'coreshop.storage_list.storage.order')),
             ],
         );
     }

@@ -21,3 +21,6 @@ services:
   CoreShop\Component\StorageList\Factory\AddToStorageListFactory:
     arguments:
       - '%coreshop.storage_list.add_to_list_class%'
+
+  CoreShop\Component\StorageList\Provider\ContextProviderInterface: '@CoreShop\Component\StorageList\Provider\ContextProvider'
+  CoreShop\Component\StorageList\Provider\ContextProvider: ~

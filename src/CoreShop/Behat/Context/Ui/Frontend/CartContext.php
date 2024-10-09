@@ -19,11 +19,13 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Ui\Frontend;
 
 use Behat\Behat\Context\Context;
+use CoreShop\Behat\Page\Frontend\CartCreatePageInterface;
 use CoreShop\Behat\Page\Frontend\CartPageInterface;
+use CoreShop\Behat\Page\Frontend\CartsListPageInterface;
 use CoreShop\Behat\Page\Frontend\ProductPageInterface;
-use CoreShop\Behat\Service\NotificationCheckerInterface;
-use CoreShop\Behat\Service\NotificationType;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\NotificationCheckerInterface;
+use CoreShop\Bundle\TestBundle\Service\NotificationType;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Core\Model\ProductInterface;
 use CoreShop\Component\Product\Model\ProductUnitInterface;
 use Pimcore\Model\DataObject\Concrete;
@@ -35,6 +37,8 @@ final class CartContext implements Context
         private SharedStorageInterface $sharedStorage,
         private NotificationCheckerInterface $notificationChecker,
         private CartPageInterface $cartPage,
+        private CartCreatePageInterface $cartCreatePage,
+        private CartsListPageInterface $cartsListPage,
         private ProductPageInterface $productPage,
     ) {
     }
@@ -293,6 +297,60 @@ final class CartContext implements Context
     {
         $this->cartPage->open();
         $this->cartPage->changeQuantity($productName, $quantity);
+    }
+
+    /**
+     * @Given /^I create a new named cart "([^"]+)"$/
+     */
+    public function iCreatedANewNamedCart(string $cartName): void
+    {
+        $this->cartCreatePage->open();
+        $this->cartCreatePage->createNamedCart($cartName);
+    }
+
+    /**
+     * @Then /^I should be notified that the cart was created$/
+     */
+    public function iShouldBeNotifiedThatTheCartWasCreated(): void
+    {
+        Assert::true($this->cartCreatePage->checkValidationMessageFor(
+            'Cart was created',
+        ));
+    }
+
+    /**
+     * @Given /^I open the cart list page$/
+     */
+    public function iOpenTheCartListPage(): void
+    {
+        $this->cartsListPage->open();
+    }
+
+    /**
+     * @Given /^The cart named "([^"]+)" should be selected$/
+     */
+    public function theCartNamedShouldBeSelected(string $name): void
+    {
+        $this->cartsListPage->open();
+        Assert::true($this->cartsListPage->namedCartIsSelected($name));
+    }
+
+    /**
+     * @Given /^Cart with name "([^"]+)" should have total of "([^"]+)"$/
+     */
+    public function cartWithNameShouldHaveTotal(string $name, string $total): void
+    {
+        $this->cartsListPage->open();
+        Assert::same($this->cartsListPage->getNamedCartTotal($name), $total);
+    }
+
+    /**
+     * @Given /^I select named cart "([^"]+)"$/
+     */
+    public function iSelectTheNamedCart(string $name): void
+    {
+        $this->cartsListPage->open();
+        $this->cartsListPage->selectNamedCart($name);
     }
 
     /**

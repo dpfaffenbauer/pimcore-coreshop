@@ -1,44 +1,24 @@
 {% extends '@CoreShopFrontend/Mail/layout.html.twig' %}
 
 {% block mail %}
-    <row>
-        <columns>
-            {{ pimcore_wysiwyg('text') }}
-        </columns>
-    </row>
-
-    {% if order is defined %}
-        <callout class="secondary">
-            <row>
-                <columns large="6">
-                    {% if order.paymentProvider %}
-                    <p>
-                        <strong>{{ 'coreshop.ui.payment_method'|trans }}</strong><br/>
-                        {{ order.paymentProvider.title }}
-                    </p>
-                    {% endif %}
-                    <p>
-                        <strong>{{ 'coreshop.ui.email_address'|trans }}</strong><br/>
-                        {{ order.customer.email }}
-                    </p>
-                    <p>
-                        <strong>{{ 'coreshop.ui.order_number'|trans }}</strong><br/>
-                        {{ order.orderNumber }}
-                    </p>
-                </columns>
-                {% if order.carrier %}
-                    <columns large="6">
-                        <p>
-                            <strong>{{ 'coreshop.ui.shipping_method'|trans }}</strong><br/>
-                            {{ order.carrier.title }}<br/>
-                            {% if order.shippingAddress is defined %}
-                                <strong>{{ 'coreshop.ui.shipping_address'|trans }}</strong><br/>
-                                {{ order.shippingAddress|coreshop_format_address }}
-                            {% endif %}
-                        </p>
-                    </columns>
-                {% endif %}
-            </row>
-        </callout>
-    {% endif %}
+    <table class="row"
+           style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; padding: 0; position: relative; width: 100%; display: table;">
+        <tbody>
+        <tr style="padding: 0; vertical-align: top; text-align: left;">
+            <th class="small-12 large-12 first last columns"
+                style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; text-align: left; font-size: 16px; line-height: 1.3; margin: 0 auto; padding-bottom: 16px; width: 564px; padding-left: 0; padding-right: 0;">
+                <table style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: 100%;">
+                    <tr style="padding: 0; vertical-align: top; text-align: left;">
+                        <th style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; font-size: 16px; line-height: 1.3;">
+                            <p style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; padding: 0; margin: 0; text-align: left; margin-bottom: 10px; font-size: 16px; line-height: 1.3;">
+                                {{ pimcore_wysiwyg('text') }}
+                            </p></th>
+                        <th class="expander"
+                            style="color: #0a0a0a; font-family: Helvetica,Arial,sans-serif; font-weight: 400; margin: 0; text-align: left; font-size: 16px; line-height: 1.3; visibility: hidden; width: 0; padding: 0;"></th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}

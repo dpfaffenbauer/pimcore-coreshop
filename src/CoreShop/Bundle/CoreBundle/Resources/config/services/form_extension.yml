@@ -50,6 +50,10 @@ services:
         tags:
             - { name: form.type_extension, extended_type: CoreShop\Bundle\OrderBundle\Form\Type\CartCreationType }
 
+    CoreShop\Bundle\CoreBundle\Form\Extension\QuantityTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: CoreShop\Bundle\OrderBundle\Form\Type\QuantityType }
+
     CoreShop\Bundle\CoreBundle\Form\Extension\CartCreationCartItemTypeExtension:
         arguments:
             - '@coreshop.repository.stack.product'

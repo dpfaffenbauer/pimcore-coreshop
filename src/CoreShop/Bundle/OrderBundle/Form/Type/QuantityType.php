@@ -18,7 +18,6 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\OrderBundle\Form\Type;
 
-use CoreShop\Component\Product\Model\ProductUnitDefinitionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -47,7 +46,6 @@ final class QuantityType extends AbstractType
 
         $resolver->setDefaults([
             'html5' => true,
-            'unit_definition' => null,
             'attr' => [
                 'min' => 0,
                 'step' => 1,
@@ -61,15 +59,6 @@ final class QuantityType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
-        if ($options['unit_definition'] instanceof ProductUnitDefinitionInterface) {
-            $precision = $options['unit_definition']->getPrecision();
-            $view->vars['attr']['data-cs-unit-precision'] = $precision;
-
-            if ($precision > 0) {
-                $view->vars['attr']['step'] = sprintf('0.%s1', str_repeat('0', $precision - 1));
-            }
-        }
-
         if ($options['html5'] === true) {
             $view->vars['type'] = 'number';
         }

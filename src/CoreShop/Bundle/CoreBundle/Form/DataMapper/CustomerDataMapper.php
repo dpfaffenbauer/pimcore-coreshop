@@ -54,7 +54,7 @@ class CustomerDataMapper implements DataMapperInterface
         }
     }
 
-    public function mapFormsToData(\Traversable $forms, mixed &$viewData)
+    public function mapFormsToData(\Traversable $forms, mixed &$viewData): void
     {
         $formsOtherThanAddress = [];
 

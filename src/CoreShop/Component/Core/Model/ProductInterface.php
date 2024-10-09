@@ -58,8 +58,6 @@ interface ProductInterface extends
 
     public function setStoreValuesOfType(string $type, $value, \CoreShop\Component\Store\Model\StoreInterface $store): self;
 
-    public function setTaxRule(?TaxRuleGroupInterface $taxRule);
-
     public function getDigitalProduct(): ?bool;
 
     public function setDigitalProduct(?bool $digitalProduct);

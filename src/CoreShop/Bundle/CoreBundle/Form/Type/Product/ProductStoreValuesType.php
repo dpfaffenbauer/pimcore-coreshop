@@ -22,6 +22,7 @@ use CoreShop\Bundle\MoneyBundle\Form\Type\MoneyType;
 use CoreShop\Bundle\ProductBundle\Form\Type\Unit\ProductUnitDefinitionPriceCollectionType;
 use CoreShop\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use CoreShop\Bundle\StoreBundle\Form\Type\StoreChoiceType;
+use CoreShop\Bundle\TaxationBundle\Form\Type\TaxRuleGroupChoiceType;
 use CoreShop\Component\Core\Model\ProductStoreValuesInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
@@ -37,6 +38,7 @@ final class ProductStoreValuesType extends AbstractResourceType
         $builder
             ->add('store', StoreChoiceType::class)
             ->add('price', MoneyType::class)
+            ->add('taxRule', TaxRuleGroupChoiceType::class)
             ->add('productUnitDefinitionPrices', ProductUnitDefinitionPriceCollectionType::class)
         ;
     }

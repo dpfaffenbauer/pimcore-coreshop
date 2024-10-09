@@ -127,3 +127,4 @@ services:
           - { name: coreshop.product.retail_price_calculator, type: product_specific_price_rules, priority: 30 }
           - { name: coreshop.product.discount_price_calculator, type: product_specific_price_rules, priority: 30 }
           - { name: coreshop.product.discount_calculator, type: product_specific_price_rules, priority: 30 }
+          - { name: coreshop.product.custom_attributes_calculator, type: product_specific_price_rules, priority: 30 }

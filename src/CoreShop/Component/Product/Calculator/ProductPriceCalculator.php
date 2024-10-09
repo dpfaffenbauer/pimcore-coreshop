@@ -28,6 +28,7 @@ final class ProductPriceCalculator implements ProductPriceCalculatorInterface
         private ProductRetailPriceCalculatorInterface $retailPriceCalculator,
         private ProductDiscountPriceCalculatorInterface $discountPriceCalculator,
         private ProductDiscountCalculatorInterface $discountCalculator,
+        private ProductCustomAttributesCalculatorInterface $productCustomAttributeCalculator,
     ) {
     }
 
@@ -72,5 +73,10 @@ final class ProductPriceCalculator implements ProductPriceCalculatorInterface
     public function getDiscount(ProductInterface $product, array $context, int $price): int
     {
         return $this->discountCalculator->getDiscount($product, $context, $price);
+    }
+
+    public function getCustomAttributes(ProductInterface $product, array $context): array
+    {
+        return $this->productCustomAttributeCalculator->getCustomAttributes($product, $context);
     }
 }

@@ -20,8 +20,11 @@ namespace CoreShop\Bundle\RuleBundle\DependencyInjection;
 
 use CoreShop\Bundle\ResourceBundle\CoreShopResourceBundle;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
+use CoreShop\Bundle\RuleBundle\Attribute\AsRuleAvailabilityAssessor;
+use CoreShop\Bundle\RuleBundle\Attribute\AsRuleConditionsValidationProcessor;
 use CoreShop\Bundle\RuleBundle\DependencyInjection\Compiler\RuleAvailabilityAssessorPass;
 use CoreShop\Bundle\RuleBundle\DependencyInjection\Compiler\TraceableValidationProcessorPass;
+use CoreShop\Component\Registry\Autoconfiguration;
 use CoreShop\Component\Rule\Condition\Assessor\RuleAvailabilityAssessorInterface;
 use CoreShop\Component\Rule\Condition\RuleConditionsValidationProcessorInterface;
 use Symfony\Component\Config\FileLocator;
@@ -43,14 +46,20 @@ final class CoreShopRuleExtension extends AbstractModelExtension
 
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(RuleAvailabilityAssessorInterface::class)
-            ->addTag(RuleAvailabilityAssessorPass::RULE_AVAILABILITY_ASSESSOR_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            RuleAvailabilityAssessorInterface::class,
+            RuleAvailabilityAssessorPass::RULE_AVAILABILITY_ASSESSOR_TAG,
+            AsRuleAvailabilityAssessor::class,
+            $configs['autoconfigure_with_attributes'],
+        );
 
-        $container
-            ->registerForAutoconfiguration(RuleConditionsValidationProcessorInterface::class)
-            ->addTag(TraceableValidationProcessorPass::RULE_CONDITIONS_VALIDATIONS_PROCESSOR)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            RuleConditionsValidationProcessorInterface::class,
+            TraceableValidationProcessorPass::RULE_CONDITIONS_VALIDATIONS_PROCESSOR,
+            AsRuleConditionsValidationProcessor::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

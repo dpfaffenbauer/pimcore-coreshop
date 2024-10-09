@@ -2,7 +2,7 @@
     "id": "cs_product",
     "title": "",
     "description": "",
-    "modificationDate": 1724305861,
+    "modificationDate": 1725350845,
     "parentClass": "CoreShop\\Component\\Core\\Model\\Product",
     "implementsInterfaces": "",
     "listingParentClass": "",
@@ -155,8 +155,8 @@
                                         "permissionEdit": null,
                                         "labelWidth": 100,
                                         "labelAlign": "left",
-                                        "width": null,
-                                        "height": null,
+                                        "width": "",
+                                        "height": "",
                                         "datatype": "data"
                                     },
                                     {
@@ -427,8 +427,8 @@
                                 "permissionEdit": null,
                                 "labelWidth": 100,
                                 "labelAlign": "left",
-                                "width": null,
-                                "height": null,
+                                "width": "",
+                                "height": "",
                                 "datatype": "data"
                             }
                         ],
@@ -502,8 +502,8 @@
                                 "permissionEdit": null,
                                 "labelWidth": 100,
                                 "labelAlign": "left",
-                                "width": null,
-                                "height": null,
+                                "width": "",
+                                "height": "",
                                 "datatype": "data"
                             }
                         ],
@@ -888,13 +888,13 @@
                                                 "value": -1
                                             }
                                         ],
-                                        "width": null,
+                                        "width": "",
                                         "datatype": "data"
                                     }
                                 ],
                                 "locked": false,
                                 "fieldtype": "fieldset",
-                                "labelWidth": 100,
+                                "labelWidth": 0,
                                 "labelAlign": "left"
                             },
                             {
@@ -1111,24 +1111,6 @@
                                         "width": 0,
                                         "minValue": 0,
                                         "maxValue": 0,
-                                        "datatype": "data"
-                                    },
-                                    {
-                                        "name": "taxRule",
-                                        "title": "coreshop.product.tax_rule",
-                                        "tooltip": "",
-                                        "mandatory": false,
-                                        "noteditable": false,
-                                        "index": false,
-                                        "locked": false,
-                                        "style": "",
-                                        "permissions": null,
-                                        "fieldtype": "coreShopTaxRuleGroup",
-                                        "relationType": false,
-                                        "invisible": false,
-                                        "visibleGridView": false,
-                                        "visibleSearch": false,
-                                        "allowEmpty": true,
                                         "datatype": "data"
                                     }
                                 ],

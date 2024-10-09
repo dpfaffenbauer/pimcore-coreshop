@@ -87,3 +87,10 @@ services:
             - '@CoreShop\Component\Product\Calculator\ProductPriceCalculatorInterface'
         tags:
             - { name: coreshop.order.purchasable.discount_price_calculator, type: product, priority: 20 }
+
+    CoreShop\Component\Core\Order\Calculator\PurchasableProductCustomAttributesCalculator:
+        arguments:
+            - '@CoreShop\Component\Product\Calculator\ProductCustomAttributeCalculatorInterface'
+            - '@coreshop.factory.order_item_attribute'
+        tags:
+            - { name: coreshop.order.purchasable.custom_attributes_calculator, type: product, priority: 20 }

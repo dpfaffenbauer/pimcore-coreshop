@@ -29,7 +29,7 @@ class PimcoreResourceDataTransformer implements DataTransformerInterface
     ) {
     }
 
-    public function transform($value)
+    public function transform(mixed $value): int|string|null
     {
         if ($value instanceof ResourceInterface) {
             return $value->getId();
@@ -38,7 +38,7 @@ class PimcoreResourceDataTransformer implements DataTransformerInterface
         return null;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): ?ResourceInterface
     {
         if ($value) {
             return $this->repository->find($value);

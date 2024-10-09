@@ -18,11 +18,14 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\CustomerBundle\DependencyInjection;
 
+use CoreShop\Bundle\CustomerBundle\Attribute\AsCustomerContext;
+use CoreShop\Bundle\CustomerBundle\Attribute\AsRequestResolverBasedCustomerContext;
 use CoreShop\Bundle\CustomerBundle\DependencyInjection\Compiler\CompositeCustomerContextPass;
 use CoreShop\Bundle\CustomerBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
 use CoreShop\Component\Customer\Context\CustomerContextInterface;
 use CoreShop\Component\Customer\Context\RequestBased\RequestResolverInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Pimcore\Bundle\NewsletterBundle\PimcoreNewsletterBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -44,13 +47,20 @@ final class CoreShopCustomerExtension extends AbstractModelExtension
 
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(CustomerContextInterface::class)
-            ->addTag(CompositeCustomerContextPass::CUSTOMER_CONTEXT_SERVICE_TAG)
-        ;
-        $container
-            ->registerForAutoconfiguration(RequestResolverInterface::class)
-            ->addTag(CompositeRequestResolverPass::CUSTOMER_REQUEST_RESOLVER_SERVICE_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            CustomerContextInterface::class,
+            CompositeCustomerContextPass::CUSTOMER_CONTEXT_SERVICE_TAG,
+            AsCustomerContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
+
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            RequestResolverInterface::class,
+            CompositeRequestResolverPass::CUSTOMER_REQUEST_RESOLVER_SERVICE_TAG,
+            AsRequestResolverBasedCustomerContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

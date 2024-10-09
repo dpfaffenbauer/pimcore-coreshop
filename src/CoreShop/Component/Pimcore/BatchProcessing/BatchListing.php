@@ -80,11 +80,11 @@ final class BatchListing implements Iterator, Countable
         if (!$this->total) {
             $dao = $this->list->getDao();
 
-            if (!method_exists($dao, 'getTotalCount')) {
+            if (!method_exists($dao, 'getCount')) {
                 throw new \InvalidArgumentException(sprintf('%s listing class does not support count.', $this->list::class));
             }
 
-            $this->total = $dao->getTotalCount();
+            $this->total = $dao->getCount();
         }
 
         return $this->total;

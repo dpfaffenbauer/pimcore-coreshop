@@ -9,77 +9,82 @@ services:
         arguments:
             $router: '@router'
 
-    CoreShop\Behat\Page\Frontend\AbstractFrontendPage:
-        parent: FriendsOfBehat\PageObjectExtension\Page\SymfonyPage
-
     CoreShop\Behat\Page\Frontend\HomePageInterface: '@CoreShop\Behat\Page\Frontend\HomePage'
     CoreShop\Behat\Page\Frontend\HomePage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\LoginPageInterface: '@CoreShop\Behat\Page\Frontend\Account\LoginPage'
     CoreShop\Behat\Page\Frontend\Account\LoginPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\RegisterPageInterface: '@CoreShop\Behat\Page\Frontend\Account\RegisterPage'
     CoreShop\Behat\Page\Frontend\Account\RegisterPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\RequestPasswordResetPageInterface: '@CoreShop\Behat\Page\Frontend\Account\RequestPasswordResetPage'
     CoreShop\Behat\Page\Frontend\Account\RequestPasswordResetPage:
-            parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+            parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\ChangePasswordPageInterface: '@CoreShop\Behat\Page\Frontend\Account\ChangePasswordPage'
     CoreShop\Behat\Page\Frontend\Account\ChangePasswordPage:
-            parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+            parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\ProfilePageInterface: '@CoreShop\Behat\Page\Frontend\Account\ProfilePage'
     CoreShop\Behat\Page\Frontend\Account\ProfilePage:
-            parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+            parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\ChangeProfilePageInterface: '@CoreShop\Behat\Page\Frontend\Account\ChangeProfilePage'
     CoreShop\Behat\Page\Frontend\Account\ChangeProfilePage:
-            parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+            parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\ProductPageInterface: '@CoreShop\Behat\Page\Frontend\ProductPage'
     CoreShop\Behat\Page\Frontend\ProductPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\CartPageInterface: '@CoreShop\Behat\Page\Frontend\CartPage'
     CoreShop\Behat\Page\Frontend\CartPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
+
+    CoreShop\Behat\Page\Frontend\CartCreatePageInterface: '@CoreShop\Behat\Page\Frontend\CartCreatePage'
+    CoreShop\Behat\Page\Frontend\CartCreatePage:
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
+
+    CoreShop\Behat\Page\Frontend\CartsListPageInterface: '@CoreShop\Behat\Page\Frontend\CartsListPage'
+    CoreShop\Behat\Page\Frontend\CartsListPage:
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Checkout\AddressPageInterface: '@CoreShop\Behat\Page\Frontend\Checkout\AddressPage'
     CoreShop\Behat\Page\Frontend\Checkout\AddressPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Checkout\CustomerPageInterface: '@CoreShop\Behat\Page\Frontend\Checkout\CustomerPage'
     CoreShop\Behat\Page\Frontend\Checkout\CustomerPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Checkout\PaymentPageInterface: '@CoreShop\Behat\Page\Frontend\Checkout\PaymentPage'
     CoreShop\Behat\Page\Frontend\Checkout\PaymentPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Checkout\ShippingPageInterface: '@CoreShop\Behat\Page\Frontend\Checkout\ShippingPage'
     CoreShop\Behat\Page\Frontend\Checkout\ShippingPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Checkout\SummaryPageInterface: '@CoreShop\Behat\Page\Frontend\Checkout\SummaryPage'
     CoreShop\Behat\Page\Frontend\Checkout\SummaryPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Checkout\ThankYouPageInterface: '@CoreShop\Behat\Page\Frontend\Checkout\ThankYouPage'
     CoreShop\Behat\Page\Frontend\Checkout\ThankYouPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\WishlistPageInterface: '@CoreShop\Behat\Page\Frontend\WishlistPage'
     CoreShop\Behat\Page\Frontend\WishlistPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\Account\ChangeAddressPageInterface: '@CoreShop\Behat\Page\Frontend\Account\ChangeAddressPage'
     CoreShop\Behat\Page\Frontend\Account\ChangeAddressPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage
 
     CoreShop\Behat\Page\Frontend\CategoryPageInterface: '@CoreShop\Behat\Page\Frontend\CategoryPage'
     CoreShop\Behat\Page\Frontend\CategoryPage:
-        parent: CoreShop\Behat\Page\Frontend\AbstractFrontendPage
+        parent: CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage

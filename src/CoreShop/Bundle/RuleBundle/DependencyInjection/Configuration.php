@@ -36,6 +36,12 @@ final class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
+        $rootNode
+            ->children()
+            ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
+            ->end()
+        ;
+
         $this->addModelsSection($rootNode);
         $this->addPimcoreResourcesSection($rootNode);
 

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Behat\Page\Frontend\Account;
 
-use CoreShop\Behat\Page\Frontend\AbstractFrontendPage;
+use CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage;
 
 class RegisterPage extends AbstractFrontendPage implements RegisterPageInterface
 {

@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Bundle\ProductBundle;
 
 use CoreShop\Bundle\MoneyBundle\CoreShopMoneyBundle;
+use CoreShop\Bundle\ProductBundle\DependencyInjection\Compiler\ProductCustomAttributesCalculatorsPass;
 use CoreShop\Bundle\ProductBundle\DependencyInjection\Compiler\ProductDiscountCalculatorsPass;
 use CoreShop\Bundle\ProductBundle\DependencyInjection\Compiler\ProductDiscountPriceCalculatorsPass;
 use CoreShop\Bundle\ProductBundle\DependencyInjection\Compiler\ProductPriceRuleActionPass;
@@ -55,6 +56,7 @@ final class CoreShopProductBundle extends AbstractResourceBundle
         $container->addCompilerPass(new ProductRetailPriceCalculatorsPass());
         $container->addCompilerPass(new ProductDiscountPriceCalculatorsPass());
         $container->addCompilerPass(new ProductDiscountCalculatorsPass());
+        $container->addCompilerPass(new ProductCustomAttributesCalculatorsPass());
     }
 
     public static function registerDependentBundles(BundleCollection $collection): void

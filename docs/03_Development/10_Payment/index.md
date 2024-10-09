@@ -39,4 +39,5 @@ $this->container->get('coreshop.repository.payment')->add($payment);
 For more information on payment integration and management in CoreShop:
 
 - **[Payment Provider](./01_Payment_Provider.md)**
+- **[Encrypt Payment Gateway Configuration](./02_Encrypt_Config.md)**
 - **[Payum Providers](./03_Payum_Providers.md)**

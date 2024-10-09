@@ -1,8 +1,16 @@
+## 4.0.10
+
+* [PimcoreBundle] respect user language for grid filter labels (#2694) by @benwalch in https://github.com/coreshop/CoreShop/pull/2695
+* [Product] fix regression of price rules for products with default unit by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2698
+* [NotificationBundle] Mail Processor: Fix adding recipient twice by @benwalch in https://github.com/coreshop/CoreShop/pull/2701
+
 ## 4.0.9
+
 * [OrderBundle] use context language for OrderState Operator by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2677
 * [VariantBundle] Variant Creator by @breakone in https://github.com/coreshop/CoreShop/pull/2679
 
 ## 4.0.8
+
 * [PaymentBundle] fix null title for payment provider by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2640
 * [ProductBundle] fix missing cascade merge by @benwalch in https://github.com/coreshop/CoreShop/pull/2647
 * [PaymentBundle/ShippingBundle] fix logo select form type by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2654

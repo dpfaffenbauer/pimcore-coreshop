@@ -26,6 +26,7 @@ core_shop_storage_list:
             services:
                 manager: CoreShop\Bundle\OrderBundle\Manager\CartManager
                 modifier: CoreShop\Component\Order\Cart\CartModifier
+                list_resolver: CoreShop\Component\Order\Cart\CartResolver
             session:
                 enabled: true
                 key: 'coreshop.cart'
@@ -48,6 +49,15 @@ core_shop_storage_list:
                 summary: '@CoreShopFrontend/Cart/summary.html.twig'
             controller:
                 enabled: false
+            multi_list:
+                enabled: true
+                controller:
+                    enabled: true
+                templates:
+                    create_new_storage_list: '@CoreShopFrontend/Cart/created_named.html.twig'
+                    list_storage_list: '@CoreShopFrontend/Cart/list_storage_lists.html.twig'
+                form:
+                    class: CoreShop\Bundle\OrderBundle\Form\Type\CartListType
             expiration:
                 enabled: true
                 service: CoreShop\Bundle\OrderBundle\Expiration\OrderAndCartExpiration

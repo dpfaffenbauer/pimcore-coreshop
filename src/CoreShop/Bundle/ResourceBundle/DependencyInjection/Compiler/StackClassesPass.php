@@ -56,7 +56,7 @@ final class StackClassesPass implements CompilerPassInterface
                 if ($interface === $definition['classes']['interface'] || in_array($interface, class_implements($definition['classes']['interface']), true)) {
                     $classStack[$alias][] = $definition['classes']['model'];
 
-                    if (isset($definition['classes']['pimcore_class_name'])) {
+                    if (!empty($definition['classes']['pimcore_class_name'])) {
                         $class = $definition['classes']['pimcore_class_name'];
                     } else {
                         $fullClassName = $definition['classes']['model'];

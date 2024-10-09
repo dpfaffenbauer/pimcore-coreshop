@@ -3,6 +3,7 @@ imports:
     - { resource: services/dynamic_dropdown.yml }
     - { resource: services/pimcore.yml }
     - { resource: services/link_generator.yaml }
+    - { resource: services/print.yaml }
 
 parameters:
     coreshop.admin.route.base: /admin/coreshop

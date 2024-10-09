@@ -1,0 +1,13 @@
+services:
+  FriendsOfBehat\PageObjectExtension\Page\Page:
+    arguments:
+      $session: '@behat.mink.default_session'
+      $minkParameters: '@behat.mink.parameters'
+
+  FriendsOfBehat\PageObjectExtension\Page\SymfonyPage:
+    parent: FriendsOfBehat\PageObjectExtension\Page\Page
+    arguments:
+      $router: '@router'
+
+  CoreShop\Bundle\TestBundle\Page\Frontend\AbstractFrontendPage:
+    parent: FriendsOfBehat\PageObjectExtension\Page\SymfonyPage

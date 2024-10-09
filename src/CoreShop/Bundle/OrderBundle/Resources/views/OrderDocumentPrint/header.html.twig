@@ -1,10 +1,17 @@
 {% extends '@CoreShopOrder/layout.html.twig' %}
 
 {% block content %}
-<table class="table borderless">
+    <style>
+        body {
+            font-size: 8rem;
+            margin: 4rem auto;
+        }
+    </style>
+
+<table class="table borderless" style="width: 100%; margin-left:30px;margin-right:30px;">
     <tr>
         <td style="width:50%">
-            <img src="{{ asset('bundles/coreshopfrontend/static/images/logo.png') }}" title="CoreShop Demo" alt="CoreShop Demo" class="logo" />
+            <img src="{{ coreshop_image_path(asset('bundles/coreshopfrontend/static/images/logo.png'))|coreshop_image64 }}" width="200px" title="CoreShop Demo" alt="CoreShop Demo" class="logo" />
         </td>
         <td class="text-right">
             CoreShop DEMO Address<br/>

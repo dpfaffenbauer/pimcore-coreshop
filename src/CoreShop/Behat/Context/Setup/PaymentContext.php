@@ -21,7 +21,7 @@ namespace CoreShop\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 use Carbon\Carbon;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Bundle\CoreBundle\Form\Type\Payment\Rule\Action\AdditionAmountActionConfigurationType;
 use CoreShop\Bundle\CoreBundle\Form\Type\Payment\Rule\Action\DiscountAmountActionConfigurationType;
 use CoreShop\Bundle\CoreBundle\Form\Type\Payment\Rule\Action\PriceActionConfigurationType;

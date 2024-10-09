@@ -27,6 +27,7 @@ final class ProductPriceExtension extends AbstractExtension
     public function __construct(
         private TaxedProductPriceCalculatorInterface $productPriceCalculator,
     ) {
+
     }
 
     public function getFilters(): array

@@ -133,7 +133,9 @@ final class ProductContext implements Context
      */
     public function theProductShouldHaveTaxRuleGroup(ProductInterface $product, TaxRuleGroupInterface $taxRuleGroup): void
     {
-        Assert::eq($product->getTaxRule()->getId(), $taxRuleGroup->getId());
+        $taxRule = $product->getStoreValuesOfType('taxRule', $this->shopperContext->getStore());
+
+        Assert::eq($taxRule?->getId(), $taxRuleGroup->getId());
     }
 
     /**

@@ -2,12 +2,7 @@ services:
     _defaults:
         public: true
 
-    coreshop.behat.context.hook.doctrine_orm:
-        class: CoreShop\Behat\Context\Hook\DoctrineORMContext
-        arguments:
-            - '@doctrine.orm.entity_manager'
-        tags:
-            - { name: fob.context_service }
+    coreshop.behat.context.hook.doctrine_orm: '@CoreShop\Bundle\TestBundle\Context\Hook\DoctrineORMContext'
 
     coreshop.behat.context.hook.pimcore_dao:
         class: CoreShop\Behat\Context\Hook\PimcoreDaoContext

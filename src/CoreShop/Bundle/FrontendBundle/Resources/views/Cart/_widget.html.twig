@@ -12,19 +12,28 @@
                 <div class="mb-2">
                     <ul class="list-group">
                         {% for item in cart.items %}
-                        <li class="cart-widget-item list-group-item">
-                            <div><a href="{{ pimcore_object_path(item.product) }}">{{ item.product.name }}</a></div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>x{{ item.quantity }} - <span>{{ currency.convertAndFormat(item.total) }}</span></div>
-                                <div class="cart-close-item">
-                                    {% if not item.isGiftItem %}
-                                        <a href="{{ path('coreshop_cart_remove', {cartItem: item.id|coreshop_string}) }}" class="removeFromCart" data-id="{{ item.id }}" data-refresh="true">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    {% endif %}
+                            <li class="cart-widget-item list-group-item">
+                                <div><a href="{{ pimcore_object_path(item.product) }}">{{ item.product.name }}</a></div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>x{{ item.quantity }} - <span>{{ currency.convertAndFormat(item.total) }}</span></div>
+                                    <div class="cart-close-item">
+                                        {% if not item.isGiftItem %}
+                                            <a href="{{ path('coreshop_cart_remove', {cartItem: item.id|coreshop_string}) }}" class="removeFromCart" data-id="{{ item.id }}" data-refresh="true">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                            {% if is_granted('CORESHOP_STORAGE_LIST_MULTI_LIST_ORDER') %}
+                                <li>
+                                    <p class="text-right btn-block1">
+                                        <a href="{{ path('coreshop_cart_list') }}">
+                                            {{ 'coreshop.ui.cart_list'|trans }}
+                                        </a>
+                                    </p>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
@@ -35,10 +44,12 @@
                 {% if is_granted('CORESHOP_CART_SUMMARY') %}
                     <a class="btn btn-secondary  d-flex align-items-center justify-content-center  " role="button" target="_self" href="{{ path('coreshop_cart_summary') }}">{{ 'coreshop.ui.cart'|trans }}</a>
                 {% endif %}
+
                 {% if is_granted('CORESHOP_CHECKOUT') %}
                     <a class="btn btn-primary  d-flex align-items-center justify-content-center  " role="button" target="_self" href="{{ path('coreshop_checkout', {'stepIdentifier': coreshop_checkout_steps_get_first()}) }}">{{ 'coreshop.ui.checkout'|trans }}</a>
                 {% endif %}
             </div>
         </div>
     </div>
+
 </div>

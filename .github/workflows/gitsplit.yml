@@ -9,10 +9,10 @@ on:
             - 3.0
             - 3.1
             - 4.0
-        paths-ignore:
-            - 'docs/**'
-            - '.github/workflows/docs_next.yml'
-            - 'README.md'
+            - 4.1
+        paths:
+            - 'src/CoreShop/Bundle/**'
+            - 'src/CoreShop/Component/**'
     release:
         types: [ published ]
 

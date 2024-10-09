@@ -29,6 +29,9 @@ use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @deprecated Deprecated since CoreShop 4.1, to be removed in CoreShop 5.0. Use PimcoreOrderDocumentPdfRenderer instead.
+ */
 class OrderDocumentPdfRenderer implements OrderDocumentRendererInterface
 {
     public function __construct(
@@ -41,6 +44,14 @@ class OrderDocumentPdfRenderer implements OrderDocumentRendererInterface
 
     public function renderDocumentPdf(OrderDocumentInterface $orderDocument): string
     {
+        trigger_deprecation(
+            'coreshop/order-bundle',
+            '4.1',
+            'The "%s" class is deprecated and will be removed in CoreShop 5.0. Use "%s" instead.',
+            PimcoreOrderDocumentPdfRenderer::class,
+            self::class
+        );
+
         return $this->themeHelper->useTheme($orderDocument->getOrder()->getStore()->getTemplate(), function () use ($orderDocument) {
             $params = [
                 'id' => $orderDocument->getId(),

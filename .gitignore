@@ -62,4 +62,5 @@ docs/build
 docs/node_modules
 docs/.docusaurus
 node_modules
+cache/
 docker-compose.override.yaml

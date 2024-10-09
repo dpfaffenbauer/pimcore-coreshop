@@ -13,6 +13,11 @@ jms_serializer:
     property_naming:
         id: 'jms_serializer.identical_property_naming_strategy'
 
+core_shop_resource:
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Model'
+
 pimcore:
     objects:
         class_definitions:
@@ -38,6 +43,7 @@ doctrine:
             enum: string
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
+        default_entity_manager: default
         entity_managers:
             default:
                 auto_mapping: true

@@ -36,6 +36,19 @@ final class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
+        $rootNode
+            ->children()
+                ->arrayNode('mapping')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('paths')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
         $this->addResourcesSection($rootNode);
         $this->addTranslationsSection($rootNode);
         $this->addDriversSection($rootNode);

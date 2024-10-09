@@ -31,6 +31,8 @@ final class MemoryCachedProductPriceCalculator implements ProductPriceCalculator
 
     private array $cachedDiscount = [];
 
+    private array $cachedIsDiscountable = [];
+
     public function __construct(
         private ProductPriceCalculatorInterface $inner,
         private RequestStack $requestStack,
@@ -43,7 +45,7 @@ final class MemoryCachedProductPriceCalculator implements ProductPriceCalculator
             return $this->inner->getPrice($product, $context, $withDiscount);
         }
 
-        $identifier = sprintf('%s%s', $product->getId(), (string) $withDiscount);
+        $identifier = sprintf('%s%s', $product->getId(), (string)$withDiscount);
 
         if (!isset($this->cachedPrice[$identifier])) {
             $this->cachedPrice[$identifier] = $this->inner->getPrice($product, $context, $withDiscount);
@@ -89,5 +91,18 @@ final class MemoryCachedProductPriceCalculator implements ProductPriceCalculator
         }
 
         return $this->cachedDiscount[$product->getId()];
+    }
+
+    public function getCustomAttributes(ProductInterface $product, array $context): array
+    {
+        if (!$this->requestStack->getCurrentRequest()) {
+            return $this->inner->getCustomAttributes($product, $context);
+        }
+
+        if (!isset($this->cachedDiscount[$product->getId()])) {
+            $this->cachedIsDiscountable[$product->getId()] = $this->inner->getCustomAttributes($product, $context);
+        }
+
+        return $this->cachedIsDiscountable[$product->getId()];
     }
 }

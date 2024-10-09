@@ -18,9 +18,11 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\LocaleBundle\DependencyInjection;
 
+use CoreShop\Bundle\LocaleBundle\Attribute\AsLocaleContext;
 use CoreShop\Bundle\LocaleBundle\DependencyInjection\Compiler\CompositeLocaleContextPass;
 use CoreShop\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
 use CoreShop\Component\Locale\Context\LocaleContextInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -29,12 +31,17 @@ final class CoreShopLocaleExtension extends AbstractModelExtension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        $container
-            ->registerForAutoconfiguration(LocaleContextInterface::class)
-            ->addTag(CompositeLocaleContextPass::LOCALE_CONTEXT_SERVICE_TAG)
-        ;
+        Autoconfiguration::registerForAutoConfiguration(
+            $container,
+            LocaleContextInterface::class,
+            CompositeLocaleContextPass::LOCALE_CONTEXT_SERVICE_TAG,
+            AsLocaleContext::class,
+            $configs['autoconfigure_with_attributes'],
+        );
     }
 }

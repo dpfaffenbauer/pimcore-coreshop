@@ -33,6 +33,14 @@ services:
         tags:
             - { name: coreshop.registry, type_hint: productDiscountCalculators }
 
+    coreshop.registry.product.custom_attributes_calculators:
+        class: CoreShop\Component\Registry\PrioritizedServiceRegistry
+        arguments:
+            - CoreShop\Component\Product\Calculator\ProductCustomAttributesCalculatorInterface
+            - product-custom-attribute-calculators
+        tags:
+            - { name: coreshop.registry, type_hint: productCustomAttributesCalculators }
+
     CoreShop\Component\Product\Calculator\ProductRetailPriceCalculatorInterface: '@CoreShop\Component\Product\Calculator\CompositeRetailPriceCalculator'
     CoreShop\Component\Product\Calculator\CompositeRetailPriceCalculator:
         arguments:
@@ -47,6 +55,11 @@ services:
     CoreShop\Component\Product\Calculator\CompositeDiscountCalculator:
         arguments:
             - '@coreshop.registry.product.discount_calculators'
+
+    CoreShop\Component\Product\Calculator\ProductCustomAttributeCalculatorInterface: '@CoreShop\Component\Product\Calculator\CompositeProductCustomAttributesCalculator'
+    CoreShop\Component\Product\Calculator\CompositeProductCustomAttributesCalculator:
+        arguments:
+            - '@coreshop.registry.product.custom_attributes_calculators'
 
     # Product Price Rule CONDITIONS
     coreshop.product_price_rule.condition.nested:
@@ -98,6 +111,11 @@ services:
             - { name: coreshop.product_price_rule.action, type: discountPercent, form-type: CoreShop\Bundle\ProductBundle\Form\Type\Rule\Action\DiscountPercentConfigurationType }
             - { name: coreshop.product_specific_price_rule.action, type: discountPercent, form-type: CoreShop\Bundle\ProductBundle\Form\Type\Rule\Action\DiscountPercentConfigurationType }
 
+    CoreShop\Component\Product\Rule\Action\NotDiscountableCustomAttributeActionProcessor:
+        tags:
+            - { name: coreshop.product_price_rule.action, type: notDiscountableCustomAttributes, form-type: CoreShop\Bundle\RuleBundle\Form\Type\Rule\EmptyConfigurationFormType }
+            - { name: coreshop.product_specific_price_rule.action, type: notDiscountableCustomAttributes, form-type: CoreShop\Bundle\RuleBundle\Form\Type\Rule\EmptyConfigurationFormType }
+
     # Price Calculators
     coreshop.registry.product.price_calculators:
         class: CoreShop\Component\Registry\PrioritizedServiceRegistry
@@ -113,6 +131,7 @@ services:
             - '@CoreShop\Component\Product\Calculator\ProductRetailPriceCalculatorInterface'
             - '@CoreShop\Component\Product\Calculator\ProductDiscountPriceCalculatorInterface'
             - '@CoreShop\Component\Product\Calculator\ProductDiscountCalculatorInterface'
+            - '@CoreShop\Component\Product\Calculator\ProductCustomAttributeCalculatorInterface'
 
     CoreShop\Bundle\ProductBundle\EventListener\CategoryPersistEventListener:
         tags:

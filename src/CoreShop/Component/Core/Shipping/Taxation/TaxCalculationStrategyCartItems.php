@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Core\Shipping\Taxation;
 
 use CoreShop\Component\Address\Model\AddressInterface;
+use CoreShop\Component\Core\Model\ProductInterface;
 use CoreShop\Component\Core\Model\StoreInterface;
 use CoreShop\Component\Core\Taxation\TaxCalculatorFactoryInterface;
 use CoreShop\Component\Order\Distributor\ProportionalIntegerDistributorInterface;
@@ -60,7 +61,7 @@ class TaxCalculationStrategyCartItems implements TaxCalculationStrategyInterface
          */
         Assert::isInstanceOf($store, StoreInterface::class);
 
-        [$totalAmount, $taxRules] = $this->collectCartItemsTaxRules($shippable);
+        [$totalAmount, $taxRules] = $this->collectCartItemsTaxRules($shippable, $store);
 
         if (!$totalAmount || !$taxRules) {
             return [];
@@ -71,7 +72,7 @@ class TaxCalculationStrategyCartItems implements TaxCalculationStrategyInterface
         return $this->collectTaxes($address, $taxRules, $distributedAmount, $store->getUseGrossPrice(), $context);
     }
 
-    private function collectCartItemsTaxRules(ShippableInterface $cart): array
+    private function collectCartItemsTaxRules(ShippableInterface $cart, StoreInterface $store): array
     {
         $totalAmount = [];
         $taxRules = [];
@@ -86,15 +87,17 @@ class TaxCalculationStrategyCartItems implements TaxCalculationStrategyInterface
                 continue;
             }
 
-            if (!$item->getProduct() instanceof PurchasableInterface) {
+            $product = $item->getProduct();
+
+            if (!$product instanceof ProductInterface) {
                 continue;
             }
 
-            if (!$item->getProduct()->getTaxRule()) {
+            $taxRule = $product->getStoreValuesOfType('taxRule', $store);
+
+            if (!$taxRule) {
                 continue;
             }
-
-            $taxRule = $item->getProduct()->getTaxRule();
 
             if (!\array_key_exists($taxRule->getId(), $totalAmount)) {
                 $totalAmount[$taxRule->getId()] = 0;

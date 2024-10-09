@@ -87,6 +87,10 @@ body.pimcore_version_11 .coreshop_nav_icon_product {
     background: url(../img/currencies.svg) center center no-repeat !important;
 }
 
+.coreshop_rule_icon_action_notDiscountableCustomAttributes {
+    background: url(../img/not_discountable.svg) center center no-repeat !important;
+}
+
 .coreshop_icon_product_units {
     background: url(../img/product-units.svg) center center no-repeat !important;
 }

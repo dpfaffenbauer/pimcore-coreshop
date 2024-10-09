@@ -199,13 +199,7 @@ services:
         tags:
             - { name: fob.context_service }
 
-    coreshop.behat.context.setup.pimcore_class:
-        class: CoreShop\Behat\Context\Setup\PimcoreClassContext
-        arguments:
-            - '@coreshop.behat.shared_storage'
-            - '@coreshop.behat.class_storage'
-        tags:
-            - { name: fob.context_service }
+    coreshop.behat.context.setup.pimcore_class: '@CoreShop\Bundle\TestBundle\Context\Setup\ClassContext'
 
     coreshop.behat.context.setup.order:
         class: CoreShop\Behat\Context\Setup\OrderContext

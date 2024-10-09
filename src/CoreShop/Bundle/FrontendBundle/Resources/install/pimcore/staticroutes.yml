@@ -282,4 +282,24 @@ routes:
     variables: _locale,item
     priority: 3
 
+  coreshop_cart_create_named:
+    name: coreshop_cart_create_named
+    pattern: '/(\w+)\/shop\/cart\/create$/'
+    reverse: '/%_locale/shop/cart/create'
+    controller: 'coreshop.storage_list.controller_multi_list.order::createNamedStorageListAction'
+    variables: '_locale'
+    methods:
+      - POST
+      - GET
+    priority: 3
 
+  coreshop_cart_list:
+    name: coreshop_cart_list
+    pattern: '/(\w+)\/shop\/cart\/list/'
+    reverse: '/%_locale/shop/cart/list'
+    controller: 'coreshop.storage_list.controller_multi_list.order::listStorageListAction'
+    variables: '_locale'
+    methods:
+      - POST
+      - GET
+    priority: 3

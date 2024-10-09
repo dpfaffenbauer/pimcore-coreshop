@@ -112,6 +112,7 @@ services:
             - '@coreshop.repository.country'
             - '@CoreShop\Component\Address\Context\CountryContextInterface'
             - '@CoreShop\Component\Address\Formatter\AddressFormatterInterface'
+            - '@CoreShop\Component\Address\Context\CompositeCountryContext'
         tags:
             - { name: fob.context_service }
 
@@ -123,12 +124,7 @@ services:
         tags:
             - { name: fob.context_service }
 
-    coreshop.behat.context.domain.pimcore_class:
-        class: CoreShop\Behat\Context\Domain\PimcoreClassContext
-        arguments:
-            - '@coreshop.behat.class_storage'
-        tags:
-            - { name: fob.context_service }
+    coreshop.behat.context.domain.pimcore_class: '@CoreShop\Bundle\TestBundle\Context\Domain\ClassContext'
 
     coreshop.behat.context.domain.order:
         class: CoreShop\Behat\Context\Domain\OrderContext
@@ -160,16 +156,7 @@ services:
         tags:
             - { name: fob.context_service }
 
-    coreshop.behat.context.domain.pimcore:
-        class: CoreShop\Behat\Context\Domain\PimcoreContext
-        arguments:
-            - '%kernel.project_dir%/public'
-            - '%coreshop.all.pimcore.admin.js%'
-            - '%coreshop.all.pimcore.admin.css%'
-            - '%coreshop.all.pimcore.admin.editmode_js%'
-            - '%coreshop.all.pimcore.admin.editmode_css%'
-        tags:
-            - { name: fob.context_service }
+    coreshop.behat.context.domain.pimcore: '@CoreShop\Bundle\TestBundle\Context\Domain\PimcoreContext'
 
     coreshop.behat.context.domain.filter:
         class: CoreShop\Behat\Context\Domain\FilterContext
@@ -256,5 +243,12 @@ services:
         class: CoreShop\Behat\Context\Domain\CacheContext
         arguments:
             - '@coreshop.behat.shared_storage'
+        tags:
+            - { name: fob.context_service }
+
+    coreshop.behat.context.domain.resource:
+        class: CoreShop\Behat\Context\Domain\ResourceContext
+        arguments:
+            - '@CoreShop\Component\Resource\Metadata\RegistryInterface'
         tags:
             - { name: fob.context_service }

@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Index\Condition\CompareCondition;
 use CoreShop\Component\Index\Condition\ConcatCondition;
 use CoreShop\Component\Index\Condition\ConditionInterface;

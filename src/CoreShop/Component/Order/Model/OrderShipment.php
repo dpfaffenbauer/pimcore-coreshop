@@ -28,6 +28,21 @@ abstract class OrderShipment extends AbstractPimcoreModel implements OrderShipme
         return 'shipment';
     }
 
+    public function getPrintBodyController(array $params = []): string
+    {
+        return 'CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController::shipmentAction';
+    }
+
+    public function getPrintHeaderController(array $params = []): string
+    {
+        return 'CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController::headerAction';
+    }
+
+    public function getPrintFooterController(array $params = []): string
+    {
+        return 'CoreShop\Bundle\OrderBundle\Controller\OrderDocumentPrintController::footerAction';
+    }
+
     public function getRenderedAsset()
     {
         return $this->getProperty('rendered_asset');

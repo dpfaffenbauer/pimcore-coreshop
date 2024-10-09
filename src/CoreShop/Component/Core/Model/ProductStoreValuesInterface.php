@@ -20,27 +20,26 @@ namespace CoreShop\Component\Core\Model;
 
 use CoreShop\Component\Resource\Model\ResourceInterface;
 use CoreShop\Component\Store\Model\StoreAwareInterface;
+use CoreShop\Component\Taxation\Model\TaxRuleGroupInterface;
 use Doctrine\Common\Collections\Collection;
 
 interface ProductStoreValuesInterface extends ResourceInterface, StoreAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getPrice();
+    public function getPrice(): int;
 
     public function setPrice(int $price);
 
-    /**
-     * @return ProductInterface
-     */
-    public function getProduct();
+    public function getProduct(): ?ProductInterface;
 
-    public function setProduct(ProductInterface $product);
+    public function setProduct(ProductInterface $product): void;
 
-    public function addProductUnitDefinitionPrice(ProductUnitDefinitionPriceInterface $productUnitDefinitionPrice);
+    public function getTaxRule(): ?TaxRuleGroupInterface;
 
-    public function removeProductUnitDefinitionPrice(ProductUnitDefinitionPriceInterface $productUnitDefinitionPrice);
+    public function setTaxRule(?TaxRuleGroupInterface $taxRule): void;
+
+    public function addProductUnitDefinitionPrice(ProductUnitDefinitionPriceInterface $productUnitDefinitionPrice): void;
+
+    public function removeProductUnitDefinitionPrice(ProductUnitDefinitionPriceInterface $productUnitDefinitionPrice): void;
 
     /**
      * @return Collection<int, ProductUnitDefinitionPriceInterface>|ProductUnitDefinitionPriceInterface[]

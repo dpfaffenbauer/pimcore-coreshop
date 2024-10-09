@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Behat\Service\SharedStorageInterface;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Core\Model\CategoryInterface;
 use CoreShop\Component\Core\Model\ProductInterface;
 use CoreShop\Component\Core\Model\ProductStoreValuesInterface;
@@ -263,7 +263,9 @@ final class ProductContext implements Context
      */
     public function theProductHasTaxRuleGroup(ProductInterface $product, TaxRuleGroupInterface $taxRuleGroup): void
     {
-        $product->setTaxRule($taxRuleGroup);
+        $store = $this->sharedStorage->get('store');
+
+        $product->setStoreValuesOfType('taxRule', $taxRuleGroup, $store);
 
         $this->saveProduct($product);
     }

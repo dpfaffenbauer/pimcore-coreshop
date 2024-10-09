@@ -18,16 +18,11 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\StorageList\Core\Context;
 
-use CoreShop\Component\Core\Context\ShopperContextInterface;
-use CoreShop\Component\Core\Model\CustomerInterface;
-use CoreShop\Component\Core\Model\StoreInterface;
-use CoreShop\Component\Currency\Context\CurrencyNotFoundException;
 use CoreShop\Component\Customer\Model\CustomerAwareInterface;
-use CoreShop\Component\Locale\Context\LocaleNotFoundException;
 use CoreShop\Component\StorageList\Context\StorageListContextInterface;
 use CoreShop\Component\StorageList\Context\StorageListNotFoundException;
 use CoreShop\Component\StorageList\Model\StorageListInterface;
-use CoreShop\Component\Store\Context\StoreNotFoundException;
+use CoreShop\Component\StorageList\Provider\ContextProviderInterface;
 use CoreShop\Component\Store\Model\StoreAwareInterface;
 
 final class StoreBasedStorageListContext implements StorageListContextInterface
@@ -36,7 +31,7 @@ final class StoreBasedStorageListContext implements StorageListContextInterface
 
     public function __construct(
         private StorageListContextInterface $context,
-        private ShopperContextInterface $shopperContext,
+        private ContextProviderInterface $contextProvider,
     ) {
     }
 
@@ -59,20 +54,10 @@ final class StoreBasedStorageListContext implements StorageListContextInterface
             throw new StorageListNotFoundException();
         }
 
-        try {
-            /** @var StoreInterface $store */
-            $store = $this->shopperContext->getStore();
-            $storageList->setStore($store);
-        } catch (StoreNotFoundException|CurrencyNotFoundException|LocaleNotFoundException $exception) {
-            throw new StorageListNotFoundException('CoreShop was not able to prepare the wishlist.', $exception);
-        }
+        $this->contextProvider->provideContextForStorageList($storageList);
 
-        if ($this->shopperContext->hasCustomer()) {
-            /**
-             * @var CustomerInterface $customer
-             */
-            $customer = $this->shopperContext->getCustomer();
-            $storageList->setCustomer($customer);
+        if (null === $storageList->getStore()) {
+            throw new StorageListNotFoundException('CoreShop was not able to prepare the wishlist.');
         }
 
         $this->storageList = $storageList;

@@ -45,6 +45,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->integerNode('money_decimal_factor')->defaultValue(100)->end()
                 ->integerNode('money_decimal_precision')->defaultValue(2)->end()
+                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
             ->end()
         ;
         $this->addModelsSection($rootNode);

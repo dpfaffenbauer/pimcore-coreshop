@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    public: true
+
+  CoreShop\Bundle\TestBundle\Context\Hook\DoctrineORMContext:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: fob.context_service }
+
+  CoreShop\Bundle\TestBundle\Context\Hook\PimcoreDaoContext:
+    arguments:
+      - '@kernel'
+      - '@doctrine.dbal.default_connection'
+    tags:
+      - { name: fob.context_service }
+  

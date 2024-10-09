@@ -1,0 +1,6 @@
+imports:
+  - { resource: contexts/hook.yaml }
+  - { resource: contexts/setup.yaml }
+  - { resource: contexts/transform.yaml }
+  - { resource: contexts/domain.yaml }
+

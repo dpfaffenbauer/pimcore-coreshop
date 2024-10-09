@@ -6,6 +6,7 @@ core_shop_storage_list:
             services:
                 manager: CoreShop\Component\StorageList\Manager\StorageListPimcoreModelManager
                 modifier: CoreShop\Component\Wishlist\Wishlist\WishlistModifier
+                list_resolver: CoreShop\Component\Wishlist\Wishlist\WishlistResolver
                 enable_default_store_based_decorator: true
             session:
                 enabled: true

@@ -28,6 +28,7 @@ interface CartRuleApplierInterface
         PriceRuleItemInterface $cartPriceRuleItem,
         int $discount,
         bool $withTax = false,
+        bool $includeNonDiscountableItems = false,
     ): void;
 
     public function applySurcharge(
@@ -35,5 +36,6 @@ interface CartRuleApplierInterface
         PriceRuleItemInterface $cartPriceRuleItem,
         int $discount,
         bool $withTax = false,
+        bool $includeNonDiscountableItems = false,
     ): void;
 }

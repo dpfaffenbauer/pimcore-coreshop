@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Behat\Page\Frontend\Account;
 
-use CoreShop\Behat\Page\Frontend\FrontendPageInterface;
+use CoreShop\Bundle\TestBundle\Page\Frontend\FrontendPageInterface;
 
 interface ProfilePageInterface extends FrontendPageInterface
 {

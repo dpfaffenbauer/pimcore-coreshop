@@ -19,8 +19,8 @@ declare(strict_types=1);
 namespace CoreShop\Bundle\PayumBundle;
 
 use Http\Adapter\Guzzle7\Client;
+use Payum\Bundle\PayumBundle\ContainerAwareCoreGatewayFactory;
 use Payum\Core\Bridge\Spl\ArrayObject;
-use Payum\Core\Bridge\Symfony\ContainerAwareCoreGatewayFactory;
 
 class CoreGatewayFactory extends ContainerAwareCoreGatewayFactory
 {
