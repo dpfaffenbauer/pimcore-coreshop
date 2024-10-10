@@ -2,8 +2,6 @@
 @import "flag-icons/sass/flag-icons";
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
-@import "bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css";
-@import 'owl.carousel/dist/assets/owl.carousel.css';
 @import "fonts";
 @import "variables";
 @import "header";
@@ -23,3 +21,5 @@
 @import "flashmessage";
 @import "footer";
 @import "footerpre";
+@import "touchspin";
+@import "slider";

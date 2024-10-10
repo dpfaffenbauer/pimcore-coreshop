@@ -52,6 +52,11 @@ Encore
 .enableSassLoader((options) => {
     options.sassOptions = {
         outputStyle: 'compressed',
+        quietDeps: true,
+        silenceDeprecations: [
+            'legacy-js-api',
+            'slash-div',
+        ],
     };
 })
 .configureCssLoader((options) => {
@@ -66,8 +71,6 @@ Encore
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher
 //.enableIntegrityHashes(Encore.isProduction())
-
-.autoProvidejQuery()
 
 .copyFiles([
     {

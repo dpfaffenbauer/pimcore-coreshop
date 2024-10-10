@@ -1,19 +1,19 @@
-(function (variant, $) {
-    $(document).ready(function () {
-        $.variantReady = false;
+(function (variant) {
+    document.addEventListener('DOMContentLoaded', function () {
+        window.variantReady = false;
 
         variant.init();
 
-        $.variantReady = true;
+        window.variantReady = true;
     });
 
-    variant.init = function() {
+    variant.init = function () {
         const variants = document.querySelector('.product-info__attributes');
-        if(!variants) {
+        if (!variants) {
             return;
         }
 
-        $.coreshopVariantSelector(variants);
+        coreshopVariantSelector(variants); // Ensure this function is defined in your global scope
 
         variants.addEventListener('variant_selector.select', (e) => {
             const options = document.querySelector('.product-info .product-details .options');
@@ -29,4 +29,4 @@
             }
         });
     };
-}(window.variant = window.variant || {}, jQuery));
+}(window.variant = window.variant || {}));

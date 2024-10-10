@@ -20,20 +20,22 @@
     </nav>
 
     <div class="row product-info">
-
         <div class="col-12 col-lg-5 images-block">
-
             {% if product.images|length > 0 %}
-                <div id="owl-detail" class="owl-carousel" data-slider-id="1">
+                <div class="swiper js-slider mb-2">
+                    <div class="swiper-wrapper">
                     {% for image in product.images %}
-                        <div class="item">{{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}</div>
+                        <div class="swiper-slide">{{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}</div>
                     {% endfor %}
+                    </div>
                 </div>
 
-                <div class="owl-thumbs {% if product.images|length > 3 %}flex-wrap{% endif %} gap-2" data-slider-id="1">
-                    {% for image in product.images %}
-                        <button class="btn btn-link p-0 owl-thumb-item">{{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}</button>
-                    {% endfor %}
+                <div class="swiper js-slider-thumbnail">
+                    <div class="swiper-wrapper">
+                        {% for image in product.images %}
+                        <div class="swiper-slide">{{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}</div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endif %}
         </div>

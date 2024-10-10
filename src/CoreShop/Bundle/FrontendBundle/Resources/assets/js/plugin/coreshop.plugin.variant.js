@@ -1,10 +1,10 @@
-;(function ($) {
-    $.coreshopVariantSelector = function (attributeContainer) {
+(function () {
+    const coreshopVariantSelector = function (attributeContainer) {
         let _attributeContainer = undefined;
         let _config = {};
         let _attributeGroups = [];
 
-        let _clearGroup = function (group) {
+        const _clearGroup = function (group) {
             delete group.selected;
             group.elements.forEach((element) => {
                 element.disabled = true;
@@ -18,22 +18,22 @@
                     });
                 }
             });
-        }
+        };
 
-        let _clearGroups = function (group) {
+        const _clearGroups = function (group) {
             do {
                 _clearGroup(group);
                 group = group.nextGroup;
             } while (group);
-        }
+        };
 
-        let _filterAttributes = function (attributes, group) {
+        const _filterAttributes = function (attributes, group) {
             let filterAttributes = [];
 
             group = group.prevGroup;
             while (group) {
                 if (group.selected && group.nextGroup) {
-                    filterAttributes.push({group: group.group.id, selected: group.selected});
+                    filterAttributes.push({ group: group.group.id, selected: group.selected });
                 }
                 group = group.prevGroup;
             }
@@ -50,9 +50,9 @@
             });
 
             return filtered.length ? filtered : attributes;
-        }
+        };
 
-        let _configureGroup = function (group) {
+        const _configureGroup = function (group) {
             let attributes = group.attributes.slice();
             attributes = _filterAttributes(attributes, group);
 
@@ -80,9 +80,9 @@
                     });
                 });
             }
-        }
+        };
 
-        let _setupAttributeGroupSettings = function () {
+        const _setupAttributeGroupSettings = function () {
             let index = _attributeGroups.length;
 
             while (index--) {
@@ -98,9 +98,9 @@
                     _clearGroup(_attributeGroups[index]);
                 }
             }
-        }
+        };
 
-        let _setupChangeEvents = function () {
+        const _setupChangeEvents = function () {
             _attributeGroups.forEach((group) => {
                 group.elements.forEach((element) => {
                     element.onchange = (e) => {
@@ -108,9 +108,9 @@
                     };
                 });
             });
-        }
+        };
 
-        let _init = function (attributeContainer) {
+        const _init = function (attributeContainer) {
             if (!attributeContainer) {
                 return;
             }
@@ -119,14 +119,14 @@
             _config = JSON.parse(_attributeContainer.dataset.config);
             _config.attributes.forEach((group) => {
                 group.elements = _attributeContainer.querySelectorAll('[data-group="' + group.group.id + '"]');
-                _attributeGroups.push(group)
+                _attributeGroups.push(group);
             });
 
             _setupAttributeGroupSettings();
             _setupChangeEvents();
-        }
+        };
 
-        let _redirectToVariant = function () {
+        const _redirectToVariant = function () {
             const groups = _attributeGroups.filter((g) => g.selected);
 
             const selected = Object.fromEntries(
@@ -143,33 +143,33 @@
             if (filtered.length === 1 && filtered[0]['url']) {
                 window.location.href = filtered[0]['url'];
             }
-        }
+        };
 
-        let _createEvent = function (name, data = {}) {
+        const _createEvent = function (name, data = {}) {
             return new CustomEvent('variant_selector.' + name, {
                 bubbles: true,
                 cancelable: false,
-                data: data
-            })
-        }
+                detail: data
+            });
+        };
 
-        let _configureElement = function (group, element) {
-            $.variantReady = false;
+        const _configureElement = function (group, element) {
+            window.variantReady = false;
             _attributeContainer.dispatchEvent(
-                _createEvent('change', {element: element})
+                _createEvent('change', { element: element })
             );
 
             if (element.value) {
                 group.selected = parseInt(element.value);
                 if (group.nextGroup) {
                     _attributeContainer.dispatchEvent(
-                        _createEvent('select', {element: element})
-                    )
+                        _createEvent('select', { element: element })
+                    );
                     _clearGroups(group.nextGroup);
                     _configureGroup(group.nextGroup);
                 } else {
                     _attributeContainer.dispatchEvent(
-                        _createEvent('redirect', {element: element})
+                        _createEvent('redirect', { element: element })
                     );
                     _redirectToVariant();
                 }
@@ -179,9 +179,11 @@
                     _clearGroups(group.nextGroup);
                 }
             }
-            $.variantReady = true;
-        }
+            window.variantReady = true;
+        };
 
         _init(attributeContainer);
     };
-})(jQuery);
+
+    window.coreshopVariantSelector = coreshopVariantSelector;
+})();

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["tsd", "node", "jquery"],
+    "types": ["tsd", "node"],
     "target": "es5",
     "module": "esnext",
     "lib": ["dom", "es6"],

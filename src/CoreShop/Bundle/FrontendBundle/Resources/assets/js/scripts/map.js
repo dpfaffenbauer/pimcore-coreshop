@@ -1,15 +1,18 @@
-$(function() {
-    if($('#map-block').length > 0) {
-        $("#map-block").height($("#map-wrapper").height());
-        function initialize($) {
-            var mapOptions = {
+document.addEventListener('DOMContentLoaded', function () {
+    const mapBlock = document.getElementById('map-block');
+
+    if (mapBlock) {
+        mapBlock.style.height = document.getElementById('map-wrapper').clientHeight + 'px';
+
+        function initialize() {
+            const mapOptions = {
                 zoom: 18,
                 center: new google.maps.LatLng(48.1592513, 14.02302510000004),
                 disableDefaultUI: true
             };
-            var map = new google.maps.Map(document.getElementById('map-block'), mapOptions);
+            const map = new google.maps.Map(mapBlock, mapOptions);
         }
 
-        google.maps.event.addDomListener(window, 'load', initialize);
+        window.addEventListener('load', initialize);
     }
 });

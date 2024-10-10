@@ -1,65 +1,77 @@
-(function ($) {
+(function () {
     'use strict';
 
-    var methods = {
-        init: function(options) {
-            var settings = $.extend({
-              'prototypePrefix': false,
-              'containerSelector': false,
-              'selectorAttr': false
+    const methods = {
+        init: function (options) {
+            const settings = Object.assign({
+                'prototypePrefix': false,
+                'containerSelector': false,
+                'selectorAttr': false
             }, options);
 
-            return this.each(function() {
-                show($(this), false);
-                $(this).change(function() {
-                    show($(this), true);
+            const elements = document.querySelectorAll(this.selector);
+            elements.forEach(function (element) {
+                show(element, false);
+                element.addEventListener('change', function () {
+                    show(element, true);
                 });
 
                 function show(element, replace) {
-                    var selectedValue = element.val();
-                    var prototypePrefix = element.attr('id');
+                    let selectedValue = element.value;
+                    let prototypePrefix = element.id;
 
-                    if (false != settings.selectorAttr) {
-                        selectedValue = element.find('[value="'+element.val()+'"]').attr(settings.selectorAttr);
+                    if (settings.selectorAttr) {
+                        const selectedOption = Array.from(element.options).find(option => option.value === selectedValue);
+                        if (selectedOption) {
+                            selectedValue = selectedOption.getAttribute(settings.selectorAttr);
+                        }
                     }
 
-                    if (false != settings.prototypePrefix) {
+                    if (settings.prototypePrefix) {
                         prototypePrefix = settings.prototypePrefix;
                     }
 
-                    var prototypeElement = $('#' + prototypePrefix + '_' + selectedValue);
-                    var container;
+                    const prototypeElement = document.getElementById(prototypePrefix + '_' + selectedValue);
+                    let container;
 
                     if (settings.containerSelector) {
-                        container = $(settings.containerSelector);
+                        container = document.querySelector(settings.containerSelector);
                     } else {
-                        container = $(prototypeElement.data('container'));
+                        const dataContainerId = prototypeElement ? prototypeElement.dataset.container : null;
+                        container = document.getElementById(dataContainerId);
                     }
 
-                    if (!container.length) {
+                    if (!container) {
                         return;
                     }
 
-                    if (!prototypeElement.length) {
-                        container.empty();
+                    if (!prototypeElement) {
+                        container.innerHTML = '';
                         return;
                     }
 
-                    if (replace || !container.html().trim()) {
-                        container.html(prototypeElement.data('prototype'));
+                    if (replace || !container.innerHTML.trim()) {
+                        container.innerHTML = prototypeElement.dataset.prototype;
                     }
                 }
             });
         }
     };
 
-    $.fn.handlePrototypes = function(method) {
+    // Extending the prototype of NodeList
+    NodeList.prototype.handlePrototypes = function (method) {
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.handlePrototypes' );
+            throw new Error('Method ' + method + ' does not exist on handlePrototypes');
         }
     };
-})(jQuery);
+
+    // To allow calling handlePrototypes directly on any element
+    HTMLElement.prototype.handlePrototypes = function (method) {
+        return methods.handlePrototypes.call([this], method);
+    };
+
+}());
