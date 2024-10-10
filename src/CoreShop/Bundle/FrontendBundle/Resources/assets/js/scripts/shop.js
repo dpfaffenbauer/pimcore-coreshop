@@ -156,7 +156,8 @@ function handlePrototypes(options) {
 
         invoiceAddress.addEventListener('change', function () {
             const selected = this.options[this.selectedIndex];
-            const address = selected.dataset.address;
+            const addressDecode = JSON.parse(selected.dataset.address);
+            const address = addressDecode.html;
             const addressType = selected.dataset.addressType;
 
             if (useIasS) {
@@ -186,7 +187,9 @@ function handlePrototypes(options) {
         });
 
         shippingAddress.addEventListener('change', function () {
-            const address = this.options[this.selectedIndex].dataset.address;
+            const selected = this.options[this.selectedIndex];
+            const addressDecode = JSON.parse(selected.dataset.address);
+            const address = addressDecode.html;
             shippingPanel.innerHTML = address ? address : '';
         });
 
@@ -216,7 +219,10 @@ function handlePrototypes(options) {
         });
 
         if (invoiceAddress.querySelector('option:checked')) {
-            const address = invoiceAddress.querySelector('option:checked').dataset.address;
+            const selected = invoiceAddress.querySelector('option:checked');
+            const addressDecode = JSON.parse(selected.dataset.address);
+            const address = addressDecode.html;
+
             const addressType = invoiceAddress.querySelector('option:checked').dataset.addressType;
 
             if (useIasS) {
@@ -235,7 +241,9 @@ function handlePrototypes(options) {
         }
 
         if (shippingAddress.querySelector('option:checked')) {
-            const address = shippingAddress.querySelector('option:checked').dataset.address;
+            const selected = shippingAddress.querySelector('option:checked');
+            const addressDecode = JSON.parse(selected.dataset.address);
+            const address = addressDecode.html;
             if (address) {
                 shippingPanel.innerHTML = address;
             }
