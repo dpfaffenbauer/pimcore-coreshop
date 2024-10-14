@@ -25,15 +25,6 @@
                                     </div>
                                 </div>
                             </li>
-                            {% if is_granted('CORESHOP_STORAGE_LIST_MULTI_LIST_ORDER') %}
-                                <li>
-                                    <p class="text-right btn-block1">
-                                        <a href="{{ path('coreshop_cart_list') }}">
-                                            {{ 'coreshop.ui.cart_list'|trans }}
-                                        </a>
-                                    </p>
-                                </li>
-                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
