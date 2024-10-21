@@ -56,12 +56,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Service\Attribute\SubscribedService;
 
 class CartController extends FrontendController
 {
+    #[Route('/coreshop_get_cart_items', name: 'coreshop_get_cart_items')]
     public function widgetAction(Request $request, ShopperContextInterface $shopperContext): Response
     {
         $multiCartEnabled = $this->getParameter('coreshop.storage_list.multi_list.order');

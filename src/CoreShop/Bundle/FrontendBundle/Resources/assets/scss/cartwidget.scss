@@ -46,4 +46,18 @@
         border-radius: 100%;
         line-height: 1.5;
     }
+
+    &-loader {
+
+        &-wrapper {
+            position: relative;
+            padding: rem(6px) 1.25rem;
+        }
+
+        background: var(--coreshop-white);
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 2.5px solid var(--coreshop-gray-400);
+        border-bottom-color: var(--coreshop-primary);
+    }
 }

@@ -9,12 +9,14 @@
         <div class="d-flex align-items-center">
             {% if is_granted('CORESHOP_STORAGE_LIST_MULTI_LIST_ORDER') %}
                 <a href="{{ path('coreshop_cart_list') }}" class="d-flex align-items-center text-decoration-none text-body gap-2">
-                    <i class="bi bi-list-ul"></i> <span>{{ 'coreshop.ui.cart_list'|trans }}</span>
+                    <i class="bi bi-list-ul"></i> <span class="text-nowrap">{{ 'coreshop.ui.cart_list'|trans }}</span>
                 </a>
             {% endif %}
             {% if is_granted('CORESHOP_CART') %}
-                <div class="col-md-3 p-sm-2 me-sm-2">
-                   {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
+                <div class="col-md-3 p-sm-2 me-sm-2 js-cart-widget">
+                    <div class="js-cart-loader cart-loader-wrapper">
+                        <div class="loader cart-loader"></div>
+                    </div>
                 </div>
             {% endif %}
             {% include '@CoreShopFrontend/Customer/_userwidget.html.twig' %}

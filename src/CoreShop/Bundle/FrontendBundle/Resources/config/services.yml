@@ -38,5 +38,11 @@ services:
         tags:
             - { name: twig.extension }
 
+    CoreShop\Bundle\FrontendBundle\Controller\Extend\CartWidgetController:
+        arguments:
+            $shopperContext: '@CoreShop\Component\Core\Context\ShopperContextInterface'
+            $container: '@service_container'
+        tags: [ 'controller.service_arguments' ]
+
     Twig\DeferredExtension\DeferredExtension:
         tags: [ 'twig.extension' ]
