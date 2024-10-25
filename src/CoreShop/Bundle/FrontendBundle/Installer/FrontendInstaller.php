@@ -16,18 +16,18 @@ declare(strict_types=1);
  *
  */
 
-namespace CoreShop\Bundle\FrontendBundle\TemplateConfigurator;
+namespace CoreShop\Bundle\FrontendBundle\Installer;
 
-class TemplateConfigurator implements TemplateConfiguratorInterface
+class FrontendInstaller implements FrontendInstallerInterface
 {
-    public function __construct(
-        private string $tempaltePrefix,
-        private string $templateSuffix,
-    ) {
+    public function __construct(private readonly \IteratorAggregate $installers)
+    {
     }
 
-    public function findTemplate($templateName): string
+    public function installFrontend(string $frontendBundlePath, string $rootPath, string $templatePath): void
     {
-        return sprintf('%s/%s.%s', $this->tempaltePrefix, $templateName, $this->templateSuffix);
+        foreach ($this->installers as $installer) {
+            $installer->installFrontend($frontendBundlePath, $rootPath, $templatePath);
+        }
     }
 }

@@ -20,42 +20,4 @@ is meant as a Demo and not as a production-ready store.
 
 ## Best Practice
 
-Best practice is not to use any Templates from the Demo Frontend, but to create your own Templates and use the
-Controllers from the Demo Frontend.
-
-## Copy Templates
-
-To copy the Templates from the Demo Frontend, you can use the following command:
-
-```bash
-cp -R vendor/coreshop/core-shop/src/CoreShop/Bundle/FrontendBundle/Resources/views templates/coreshop
-```
-
-Overwrite the `TemplateConfiguratorInterface` by creating a new Service and decorate the original one:
-
-```php
-<?php
-// src/CoreShop/TemplateConfigurator/TemplateConfigurator.php
-declare(strict_types=1);
-
-namespace App\CoreShop\TemplateConfigurator;
-
-use CoreShop\Bundle\FrontendBundle\TemplateConfigurator\TemplateConfiguratorInterface;
-
-class TemplateConfigurator implements TemplateConfiguratorInterface
-{
-    public function findTemplate(string $templateName): string
-    {
-        return sprintf('coreshop/%s.twig', $templateName);
-    }
-}
-```
-
-And configure the new Service:
-
-```yaml
-# config/services.yaml
-services:
-  App\CoreShop\TemplateConfigurator\TemplateConfigurator:
-    decorates: 'CoreShop\Bundle\FrontendBundle\TemplateConfigurator\TemplateConfigurator'
-```
+We have a separate Guide how we recommend you use the Frontend Bundle: [Best Practices](02_Best_Practices.md)

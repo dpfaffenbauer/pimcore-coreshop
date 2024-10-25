@@ -1,0 +1,14 @@
+services:
+
+  CoreShop\Bundle\FrontendBundle\Installer\TemplatesInstaller:
+    tags:
+      - { name: coreshop.frontend.installer }
+
+  CoreShop\Bundle\FrontendBundle\Installer\TemplateConfiguratorInstaller:
+    tags:
+      - { name: coreshop.frontend.installer }
+
+  CoreShop\Bundle\FrontendBundle\Installer\FrontendInstallerInterface: '@CoreShop\Bundle\FrontendBundle\Installer\FrontendInstaller'
+  CoreShop\Bundle\FrontendBundle\Installer\FrontendInstaller:
+    arguments:
+      - !tagged_iterator coreshop.frontend.installer
