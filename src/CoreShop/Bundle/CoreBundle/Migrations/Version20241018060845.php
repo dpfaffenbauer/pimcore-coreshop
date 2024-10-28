@@ -94,7 +94,7 @@ final class Version20241018060845 extends AbstractMigration implements Container
 
     private function load(string $file): array
     {
-        $bundles = file_exists($file) ? (require_once $file) : [];
+        $bundles = file_exists($file) ? (require $file) : [];
         if (!\is_array($bundles)) {
             $bundles = [];
         }
