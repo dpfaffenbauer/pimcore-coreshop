@@ -16,18 +16,9 @@ declare(strict_types=1);
  *
  */
 
-namespace CoreShop\Bundle\FrontendBundle\TemplateConfigurator;
+namespace CoreShop\Bundle\FrontendBundle\Installer;
 
-class TemplateConfigurator implements TemplateConfiguratorInterface
+interface FrontendInstallerInterface
 {
-    public function __construct(
-        private string $tempaltePrefix,
-        private string $templateSuffix,
-    ) {
-    }
-
-    public function findTemplate($templateName): string
-    {
-        return sprintf('%s/%s.%s', $this->tempaltePrefix, $templateName, $this->templateSuffix);
-    }
+    public function installFrontend(string $frontendBundlePath, string $rootPath, string $templatePath): void;
 }
