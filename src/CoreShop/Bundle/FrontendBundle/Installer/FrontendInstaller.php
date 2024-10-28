@@ -18,15 +18,18 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\FrontendBundle\Installer;
 
+use CoreShop\Component\Registry\ServiceRegistryInterface;
+
 class FrontendInstaller implements FrontendInstallerInterface
 {
-    public function __construct(private readonly \IteratorAggregate $installers)
+    public function __construct(private readonly ServiceRegistryInterface $installers)
     {
     }
 
     public function installFrontend(string $frontendBundlePath, string $rootPath, string $templatePath): void
     {
-        foreach ($this->installers as $installer) {
+        /** @var FrontendInstallerInterface $installer */
+        foreach ($this->installers->all() as $installer) {
             $installer->installFrontend($frontendBundlePath, $rootPath, $templatePath);
         }
     }

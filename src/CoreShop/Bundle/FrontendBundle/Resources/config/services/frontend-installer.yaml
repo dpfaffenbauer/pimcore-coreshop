@@ -1,4 +1,11 @@
 services:
+  coreshop.registry.frontend.installers:
+    class: CoreShop\Component\Registry\ServiceRegistry
+    arguments:
+      - CoreShop\Bundle\FrontendBundle\Installer\FrontendInstallerInterface
+      - frontend-installers
+    tags:
+      - { name: coreshop.registry, type_hint: frontendInstallers }
 
   CoreShop\Bundle\FrontendBundle\Installer\TemplatesInstaller:
     tags:
@@ -11,4 +18,4 @@ services:
   CoreShop\Bundle\FrontendBundle\Installer\FrontendInstallerInterface: '@CoreShop\Bundle\FrontendBundle\Installer\FrontendInstaller'
   CoreShop\Bundle\FrontendBundle\Installer\FrontendInstaller:
     arguments:
-      - !tagged_iterator coreshop.frontend.installer
+      - '@coreshop.registry.cart_item_price_rule.actions'
