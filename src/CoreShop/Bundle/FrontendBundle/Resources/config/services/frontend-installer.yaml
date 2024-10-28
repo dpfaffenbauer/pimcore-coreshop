@@ -18,4 +18,4 @@ services:
   CoreShop\Bundle\FrontendBundle\Installer\FrontendInstallerInterface: '@CoreShop\Bundle\FrontendBundle\Installer\FrontendInstaller'
   CoreShop\Bundle\FrontendBundle\Installer\FrontendInstaller:
     arguments:
-      - '@coreshop.registry.cart_item_price_rule.actions'
+      - '@coreshop.registry.frontend.installers'
