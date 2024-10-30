@@ -62,7 +62,7 @@ use Symfony\Contracts\Service\Attribute\SubscribedService;
 
 class CartController extends FrontendController
 {
-public function widgetAction(Request $request): Response
+    public function widgetAction(Request $request): Response
     {
         $multiCartEnabled = $this->getParameter('coreshop.storage_list.multi_list.order');
 
