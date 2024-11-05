@@ -14,15 +14,17 @@ export class Carousel {
             spaceBetween: '8px',
             watchSlidesProgress: true,
         });
-        new Swiper('.js-slider', {
-            modules: [Thumbs],
+        const mainSlider = new Swiper('.js-slider', {
+            modules: [Thumbs], // Include the Thumbs module
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
             thumbs: {
-                swiper: sliderThumbnail
+                swiper: sliderThumbnail // Link thumbnail swiper
             }
         });
+
+        console.log(mainSlider);
     }
 }

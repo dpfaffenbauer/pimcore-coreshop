@@ -13,5 +13,7 @@ import './scripts/map.js';
 import {Carousel} from './scripts/carousel';
 import {CartInfo} from './scripts/cartInfo';
 
-new CartInfo('/coreshop_get_cart_items', '.js-cart-widget');
-new Carousel();
+document.addEventListener('DOMContentLoaded', function () {
+    new CartInfo('/coreshop_get_cart_items', '.js-cart-widget');
+    new Carousel();
+})

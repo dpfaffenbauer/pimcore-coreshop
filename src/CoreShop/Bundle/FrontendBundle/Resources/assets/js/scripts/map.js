@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 center: new google.maps.LatLng(48.1592513, 14.02302510000004),
                 disableDefaultUI: true
             };
-            new google.maps.Map(mapBlock, mapOptions); // Removed the unused 'map' variable
+            const mapNew = new google.maps.Map(mapBlock, mapOptions);
+            console.log(mapNew);
         }
 
         window.addEventListener('load', initialize);

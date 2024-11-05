@@ -1,46 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-    shop.init();
-});
-
-function handlePrototypes(options) {
-    const settings = {
-        prototypePrefix: options.prototypePrefix || false,
-        containerSelector: options.containerSelector || false,
-        selectorAttr: options.selectorAttr || false
-    };
-
-    document.querySelectorAll(`[data-${settings.prototypePrefix}]`).forEach(function (element) {
-        showElement(element, false);
-        element.addEventListener('change', function () {
-            showElement(element, true);
-        });
-    });
-
-    function showElement(element, replace) {
-        const selectedValue = getSelectedValue(element);
-        const prototypePrefix = settings.prototypePrefix || element.id;
-        const prototypeElement = document.getElementById(`${prototypePrefix}_${selectedValue}`);
-        const container = getContainer(prototypeElement);
-
-        if (container && (replace || !container.innerHTML.trim())) {
-            container.innerHTML = prototypeElement ? prototypeElement.dataset.prototype : '';
-        }
-    }
-
-    function getSelectedValue(element) {
-        if (settings.selectorAttr) {
-            return element.querySelector(`[value="${element.value}"]`).getAttribute(settings.selectorAttr);
-        }
-        return element.value;
-    }
-
-    function getContainer(prototypeElement) {
-        if (settings.containerSelector) {
-            return document.querySelector(settings.containerSelector);
-        }
-        return prototypeElement ? document.querySelector(prototypeElement.dataset.container) : null;
-    }
-}
+const shop = window.shop || {};
 
 (function (shop) {
     shop.init = function () {
@@ -57,6 +15,46 @@ function handlePrototypes(options) {
 
         setupCopyToClipboard();
     };
+
+    function handlePrototypes(options) {
+        const settings = {
+            prototypePrefix: options.prototypePrefix || false,
+            containerSelector: options.containerSelector || false,
+            selectorAttr: options.selectorAttr || false
+        };
+
+        document.querySelectorAll(`[data-${settings.prototypePrefix}]`).forEach(function (element) {
+            showElement(element, false);
+            element.addEventListener('change', function () {
+                showElement(element, true);
+            });
+        });
+
+        function showElement(element, replace) {
+            const selectedValue = getSelectedValue(element);
+            const prototypePrefix = settings.prototypePrefix || element.id;
+            const prototypeElement = document.getElementById(`${prototypePrefix}_${selectedValue}`);
+            const container = getContainer(prototypeElement);
+
+            if (container && (replace || !container.innerHTML.trim())) {
+                container.innerHTML = prototypeElement ? prototypeElement.dataset.prototype : '';
+            }
+        }
+
+        function getSelectedValue(element) {
+            if (settings.selectorAttr) {
+                return element.querySelector(`[value="${element.value}"]`).getAttribute(settings.selectorAttr);
+            }
+            return element.value;
+        }
+
+        function getContainer(prototypeElement) {
+            if (settings.containerSelector) {
+                return document.querySelector(settings.containerSelector);
+            }
+            return prototypeElement ? document.querySelector(prototypeElement.dataset.container) : null;
+        }
+    }
 
     function setupCopyToClipboard() {
         document.querySelectorAll('.copy-to-clipboard').forEach(function (button) {
@@ -192,4 +190,9 @@ function handlePrototypes(options) {
             if (shippingAddAddressButton) shippingAddAddressButton.classList.remove('d-none');
         }
     }
-}(window.shop = window.shop || {}));
+
+}(shop));
+
+document.addEventListener('DOMContentLoaded', function () {
+    shop.init();
+});
