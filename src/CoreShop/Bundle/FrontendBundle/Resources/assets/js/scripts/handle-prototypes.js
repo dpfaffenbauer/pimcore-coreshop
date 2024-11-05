@@ -3,58 +3,61 @@
 
     const methods = {
         init: function (options) {
-            const settings = Object.assign({
-                'prototypePrefix': false,
-                'containerSelector': false,
-                'selectorAttr': false
-            }, options);
+            const settings = {
+                prototypePrefix: false,
+                containerSelector: false,
+                selectorAttr: false,
+                ...options // Using object spread here
+            };
 
             const elements = document.querySelectorAll(this.selector);
-            elements.forEach(function (element) {
-                show(element, false);
-                element.addEventListener('change', function () {
-                    show(element, true);
+            elements.forEach(element => {
+                this.show(element, settings, false);
+                element.addEventListener('change', () => {
+                    this.show(element, settings, true);
                 });
-
-                function show(element, replace) {
-                    let selectedValue = element.value;
-                    let prototypePrefix = element.id;
-
-                    if (settings.selectorAttr) {
-                        const selectedOption = Array.from(element.options).find(option => option.value === selectedValue);
-                        if (selectedOption) {
-                            selectedValue = selectedOption.getAttribute(settings.selectorAttr);
-                        }
-                    }
-
-                    if (settings.prototypePrefix) {
-                        prototypePrefix = settings.prototypePrefix;
-                    }
-
-                    const prototypeElement = document.getElementById(prototypePrefix + '_' + selectedValue);
-                    let container;
-
-                    if (settings.containerSelector) {
-                        container = document.querySelector(settings.containerSelector);
-                    } else {
-                        const dataContainerId = prototypeElement ? prototypeElement.dataset.container : null;
-                        container = document.getElementById(dataContainerId);
-                    }
-
-                    if (!container) {
-                        return;
-                    }
-
-                    if (!prototypeElement) {
-                        container.innerHTML = '';
-                        return;
-                    }
-
-                    if (replace || !container.innerHTML.trim()) {
-                        container.innerHTML = prototypeElement.dataset.prototype;
-                    }
-                }
             });
+        },
+
+        show: function (element, settings, replace) {
+            let selectedValue = element.value;
+            let prototypePrefix = element.id;
+
+            if (settings.selectorAttr) {
+                const selectedOption = Array.from(element.options).find(option => option.value === selectedValue);
+                if (selectedOption) {
+                    selectedValue = selectedOption.getAttribute(settings.selectorAttr);
+                }
+            }
+
+            if (settings.prototypePrefix) {
+                prototypePrefix = settings.prototypePrefix;
+            }
+
+            const prototypeElement = document.getElementById(`${prototypePrefix}_${selectedValue}`);
+            let container = this.getContainer(settings, prototypeElement);
+
+            if (!container) {
+                return;
+            }
+
+            if (!prototypeElement) {
+                container.innerHTML = '';
+                return;
+            }
+
+            if (replace || !container.innerHTML.trim()) {
+                container.innerHTML = prototypeElement.dataset.prototype;
+            }
+        },
+
+        getContainer: function (settings, prototypeElement) {
+            if (settings.containerSelector) {
+                return document.querySelector(settings.containerSelector);
+            } else {
+                const dataContainerId = prototypeElement ? prototypeElement.dataset.container : null;
+                return document.getElementById(dataContainerId);
+            }
         }
     };
 

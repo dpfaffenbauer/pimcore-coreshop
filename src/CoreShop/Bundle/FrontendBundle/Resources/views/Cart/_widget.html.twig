@@ -33,11 +33,11 @@
             {% endif %}
             <div class="d-flex gap-2">
                 {% if is_granted('CORESHOP_CART_SUMMARY') %}
-                    <a class="btn btn-secondary  d-flex align-items-center justify-content-center  " role="button" target="_self" href="{{ path('coreshop_cart_summary') }}">{{ 'coreshop.ui.cart'|trans }}</a>
+                    <a class="btn btn-secondary  d-flex align-items-center justify-content-center  " target="_self" href="{{ path('coreshop_cart_summary') }}">{{ 'coreshop.ui.cart'|trans }}</a>
                 {% endif %}
 
                 {% if is_granted('CORESHOP_CHECKOUT') %}
-                    <a class="btn btn-primary  d-flex align-items-center justify-content-center  " role="button" target="_self" href="{{ path('coreshop_checkout', {'stepIdentifier': coreshop_checkout_steps_get_first()}) }}">{{ 'coreshop.ui.checkout'|trans }}</a>
+                    <a class="btn btn-primary  d-flex align-items-center justify-content-center  " target="_self" href="{{ path('coreshop_checkout', {'stepIdentifier': coreshop_checkout_steps_get_first()}) }}">{{ 'coreshop.ui.checkout'|trans }}</a>
                 {% endif %}
             </div>
         </div>

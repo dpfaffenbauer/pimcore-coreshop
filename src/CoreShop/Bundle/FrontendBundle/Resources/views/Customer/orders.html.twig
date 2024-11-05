@@ -30,11 +30,11 @@
                     <tbody>
                     {% for order in orders %}
                         <tr>
-                            <td valign="middle">{{ order.orderNumber }}</td>
-                            <td valign="middle">{{ order.orderDate|date("d.m.Y") }}</td>
-                            <td valign="middle">{{ currency.format(order.convertedTotal, order.currency.isoCode) }}</td>
-                            <td valign="middle"><span class="size-h6 badge bg-success">{{ order|coreshop_order_state.calculatedState }}</span></td>
-                            <td valign="middle" class="text-end text-md-start">
+                            <td class="align-middle">{{ order.orderNumber }}</td>
+                            <td class="align-middle">{{ order.orderDate|date("d.m.Y") }}</td>
+                            <td class="align-middle">{{ currency.format(order.convertedTotal, order.currency.isoCode) }}</td>
+                            <td class="align-middle"><span class="size-h6 badge bg-success">{{ order|coreshop_order_state.calculatedState }}</span></td>
+                            <td class="align-middle text-end text-md-start">
                                 {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDER_DETAIL') %}
                                     <a class="btn btn-link text-primary" href="{{ path('coreshop_customer_order_detail', {order: order.id}) }}">
                                         <i class="bi bi-arrow-up-right me-2"></i>

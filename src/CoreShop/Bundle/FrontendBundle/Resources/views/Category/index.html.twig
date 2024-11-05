@@ -30,8 +30,8 @@
                 {#
                     TODO: Maybe use form for this?
                 #}
-                <label class="me-2">{{ 'coreshop.ui.sort'|trans }}</label>
-                <select class="form-control site-reload" name="sort" {{ coreshop_test_html_attribute('order-selection') }}>
+                <label class="me-2" for="sort">{{ 'coreshop.ui.sort'|trans }}</label>
+                <select class="form-control site-reload" id="sort" name="sort" {{ coreshop_test_html_attribute('order-selection') }}>
                     {% for value in validSortElements %}
                         {% set asc = value ~ '_asc' %}
                         {% set desc = value ~ '_desc' %}
@@ -41,8 +41,8 @@
                 </select>
             </div>
             <div class="d-flex col-md-3 col-lg-2 align-items-center">
-                <label class="me-2">{{ 'coreshop.ui.show'|trans }}</label>
-                <select class="form-control site-reload" name="perPage">
+                <label class="me-2" for="perPage">{{ 'coreshop.ui.show'|trans }}</label>
+                <select class="form-control site-reload" id="perPage" name="perPage">
                     {% for perPageList in perPageAllowed %}
                         <option value="{{ perPageList }}" {% if perPageList == perPage %} selected="selected" {% endif %}>{{ perPageList }}</option>
                     {% endfor %}

@@ -14,7 +14,7 @@ export class Carousel {
             spaceBetween: '8px',
             watchSlidesProgress: true,
         });
-        const slider = new Swiper('.js-slider', {
+        new Swiper('.js-slider', {
             modules: [Thumbs],
             navigation: {
                 nextEl: '.swiper-button-next',

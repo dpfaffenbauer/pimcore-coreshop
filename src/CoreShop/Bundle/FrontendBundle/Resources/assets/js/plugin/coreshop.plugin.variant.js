@@ -1,147 +1,118 @@
 (function () {
     const coreshopVariantSelector = function (attributeContainer) {
-        let _attributeContainer = undefined;
+        let _attributeContainer = null;
         let _config = {};
         let _attributeGroups = [];
 
+        const _clearGroupElements = function (element) {
+            element.disabled = true;
+            element.checked = false;
+
+            // Remove options on select
+            if (element.tagName.toLowerCase() === 'select') {
+                const options = element.querySelectorAll('option:not([value=""])');
+                options.forEach((option) => element.removeChild(option));
+            }
+        };
+
         const _clearGroup = function (group) {
             delete group.selected;
-            group.elements.forEach((element) => {
-                element.disabled = true;
-                element.checked = false;
-
-                // remove options on select
-                if (element.tagName.toLowerCase() === 'select') {
-                    const options = element.querySelectorAll('option:not([value=""])');
-                    options.forEach((option) => {
-                        element.removeChild(option);
-                    });
-                }
-            });
+            group.elements.forEach(_clearGroupElements);
         };
 
         const _clearGroups = function (group) {
-            do {
+            while (group) {
                 _clearGroup(group);
                 group = group.nextGroup;
-            } while (group);
+            }
         };
 
         const _filterAttributes = function (attributes, group) {
-            let filterAttributes = [];
+            const filterAttributes = [];
+            let currentGroup = group.prevGroup;
 
-            group = group.prevGroup;
-            while (group) {
-                if (group.selected && group.nextGroup) {
-                    filterAttributes.push({ group: group.group.id, selected: group.selected });
+            while (currentGroup) {
+                if (currentGroup.selected && currentGroup.nextGroup) {
+                    filterAttributes.push({ group: currentGroup.group.id, selected: currentGroup.selected });
                 }
-                group = group.prevGroup;
+                currentGroup = currentGroup.prevGroup;
             }
 
-            let filtered = [];
-            attributes.forEach((attribute) => {
-                attribute.products.forEach((product) => {
-                    if (filterAttributes.every((x) => {
-                        return _config.index[product.id]['attributes'].hasOwnProperty(x.group) && _config.index[product.id]['attributes'][x.group] === x.selected;
-                    }) && !filtered.includes(attribute)) {
-                        filtered.push(attribute);
-                    }
-                });
-            });
+            return attributes.filter((attribute) =>
+                attribute.products.some((product) =>
+                    filterAttributes.every((filter) =>
+                        _config.index[product.id].attributes?.[filter.group] === filter.selected
+                    )
+                )
+            );
+        };
 
-            return filtered.length ? filtered : attributes;
+        const _addOptionToSelect = function (element, attribute, group) {
+            const option = new Option(attribute.attribute.name, attribute.attribute.id);
+            option.id = 'attribute-' + attribute.attribute.id;
+            if (group.selected === attribute.attribute.id) {
+                option.selected = true;
+            }
+            element.add(option);
+            element.disabled = false;
+        };
+
+        const _enableElementForAttribute = function (element, attribute, group) {
+            if (parseInt(element.dataset.group) === group.group.id && parseInt(element.value) === attribute.attribute.id) {
+                element.disabled = false;
+                if (group.selected === attribute.attribute.id) {
+                    element.checked = true;
+                }
+            }
+        };
+
+        const _configureGroupElements = function (group, attributes) {
+            group.elements.forEach((element) => {
+                if (element.tagName.toLowerCase() === 'select') {
+                    attributes.forEach((attribute) => _addOptionToSelect(element, attribute, group));
+                } else {
+                    attributes.forEach((attribute) => _enableElementForAttribute(element, attribute, group));
+                }
+            });
         };
 
         const _configureGroup = function (group) {
-            let attributes = group.attributes.slice();
-            attributes = _filterAttributes(attributes, group);
-
-            if (attributes) {
-                group.elements.forEach((element) => {
-                    attributes.forEach((attribute) => {
-                        // set options on select, otherwise only enable inputs
-                        if (element.tagName.toLowerCase() === 'select') {
-                            const option = new Option(attribute.attribute.name, attribute.attribute.id);
-                            option.id = 'attribute-' + attribute.attribute.id;
-                            if (group.selected === attribute.attribute.id) {
-                                option.selected = true;
-                            }
-                            element.add(option);
-                            element.disabled = false;
-                        } else {
-                            if (parseInt(element.dataset.group) === group.group.id && parseInt(element.value) === attribute.attribute.id) {
-                                element.disabled = false;
-
-                                if (group.selected === attribute.attribute.id) {
-                                    element.checked = true;
-                                }
-                            }
-                        }
-                    });
-                });
-            }
+            const filteredAttributes = _filterAttributes(group.attributes.slice(), group) || group.attributes;
+            _configureGroupElements(group, filteredAttributes);
         };
 
         const _setupAttributeGroupSettings = function () {
-            let index = _attributeGroups.length;
+            _attributeGroups.forEach((group, index) => {
+                group.prevGroup = _attributeGroups[index - 1] || null;
+                group.nextGroup = _attributeGroups[index + 1] || null;
 
-            while (index--) {
-                _attributeGroups[index].prevGroup = _attributeGroups[index - 1];
-                _attributeGroups[index].nextGroup = _attributeGroups[index + 1];
-            }
-
-            index = _attributeGroups.length;
-            while (index--) {
-                if (!index || _attributeGroups[index].selected) {
-                    _configureGroup(_attributeGroups[index]);
+                if (!index || group.selected) {
+                    _configureGroup(group);
                 } else {
-                    _clearGroup(_attributeGroups[index]);
+                    _clearGroup(group);
                 }
-            }
+            });
         };
 
         const _setupChangeEvents = function () {
             _attributeGroups.forEach((group) => {
                 group.elements.forEach((element) => {
-                    element.onchange = (e) => {
-                        _configureElement(group, element);
-                    };
+                    element.onchange = () => _configureElement(group, element);
                 });
             });
         };
 
-        const _init = function (attributeContainer) {
-            if (!attributeContainer) {
-                return;
-            }
-
-            _attributeContainer = attributeContainer;
-            _config = JSON.parse(_attributeContainer.dataset.config);
-            _config.attributes.forEach((group) => {
-                group.elements = _attributeContainer.querySelectorAll('[data-group="' + group.group.id + '"]');
-                _attributeGroups.push(group);
-            });
-
-            _setupAttributeGroupSettings();
-            _setupChangeEvents();
-        };
-
         const _redirectToVariant = function () {
-            const groups = _attributeGroups.filter((g) => g.selected);
-
-            const selected = Object.fromEntries(
-                groups.map((g) => {
-                    return [g.group.id, g.selected];
-                })
+            const selectedAttributes = Object.fromEntries(
+                _attributeGroups.filter((g) => g.selected).map((g) => [g.group.id, g.selected])
             );
 
-            const filtered = Object.values(_config.index).filter((p) => {
-                return JSON.stringify(p.attributes) === JSON.stringify(selected);
-            });
+            const matchingProduct = Object.values(_config.index).find((p) =>
+                JSON.stringify(p.attributes) === JSON.stringify(selectedAttributes)
+            );
 
-            // length should always be 1, but let's check it
-            if (filtered.length === 1 && filtered[0]['url']) {
-                window.location.href = filtered[0]['url'];
+            if (matchingProduct?.url) {
+                window.location.href = matchingProduct.url;
             }
         };
 
@@ -149,28 +120,23 @@
             return new CustomEvent('variant_selector.' + name, {
                 bubbles: true,
                 cancelable: false,
-                detail: data
+                detail: data,
             });
         };
 
         const _configureElement = function (group, element) {
             window.variantReady = false;
-            _attributeContainer.dispatchEvent(
-                _createEvent('change', { element: element })
-            );
+            _attributeContainer.dispatchEvent(_createEvent('change', { element }));
 
             if (element.value) {
                 group.selected = parseInt(element.value);
+                _attributeContainer.dispatchEvent(_createEvent('select', { element }));
+
                 if (group.nextGroup) {
-                    _attributeContainer.dispatchEvent(
-                        _createEvent('select', { element: element })
-                    );
                     _clearGroups(group.nextGroup);
                     _configureGroup(group.nextGroup);
                 } else {
-                    _attributeContainer.dispatchEvent(
-                        _createEvent('redirect', { element: element })
-                    );
+                    _attributeContainer.dispatchEvent(_createEvent('redirect', { element }));
                     _redirectToVariant();
                 }
             } else {
@@ -179,10 +145,25 @@
                     _clearGroups(group.nextGroup);
                 }
             }
+
             window.variantReady = true;
         };
 
-        _init(attributeContainer);
+        const _init = function () {
+            if (!attributeContainer) return;
+
+            _attributeContainer = attributeContainer;
+            _config = JSON.parse(_attributeContainer.dataset.config);
+            _config.attributes.forEach((group) => {
+                group.elements = _attributeContainer.querySelectorAll(`[data-group="${group.group.id}"]`);
+                _attributeGroups.push(group);
+            });
+
+            _setupAttributeGroupSettings();
+            _setupChangeEvents();
+        };
+
+        _init();
     };
 
     window.coreshopVariantSelector = coreshopVariantSelector;

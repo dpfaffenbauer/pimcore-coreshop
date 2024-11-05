@@ -13,8 +13,6 @@
                 if (!this.dataset.csUnitIdentifier) {
                     return;
                 }
-
-                const selectedOption = this.options[this.selectedIndex];
                 const quantityIdentifier = this.dataset.csUnitIdentifier;
                 const quantityInput = document.querySelector(`input[data-cs-unit-identifier="${quantityIdentifier}"]`);
 

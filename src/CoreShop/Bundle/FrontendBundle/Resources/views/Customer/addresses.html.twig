@@ -33,12 +33,12 @@
                     <tbody>
                     {% for address in customer|coreshop_allocate_valid_addresses %}
                         <tr>
-                            <td valign="middle">{{ address.street }}</td>
-                            <td valign="middle">{{ address.number }}</td>
-                            <td valign="middle">{{ address.postcode }}</td>
-                            <td valign="middle">{{ address.city }}</td>
-                            <td valign="middle">{{ address.country|upper|coreshop_country_name(app.request.locale) }}</td>
-                            <td colspan="2" class="text-end" valign="middle">
+                            <td class="align-middle">{{ address.street }}</td>
+                            <td class="align-middle">{{ address.number }}</td>
+                            <td class="align-middle">{{ address.postcode }}</td>
+                            <td class="align-middle">{{ address.city }}</td>
+                            <td class="align-middle">{{ address.country|upper|coreshop_country_name(app.request.locale) }}</td>
+                            <td colspan="2" class="text-end align-middle">
                                 <div class="d-inline-flex gap-2">
                                     {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_EDIT') %}
                                         <a href="{{ path('coreshop_customer_address_edit', {name: address.street, address: address.id|coreshop_string}) }}" class="btn btn-primary" {{ coreshop_test_html_attribute('addresses-link',  address.street) }}>

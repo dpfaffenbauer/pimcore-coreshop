@@ -29,4 +29,4 @@
             }
         });
     };
-}(window.variant = window.variant || {}));
+}(window.variant || (window.variant = {}))); // Extracted assignment

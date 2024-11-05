@@ -10,48 +10,37 @@ function handlePrototypes(options) {
     };
 
     document.querySelectorAll(`[data-${settings.prototypePrefix}]`).forEach(function (element) {
-        show(element, false);
+        showElement(element, false);
         element.addEventListener('change', function () {
-            show(element, true);
+            showElement(element, true);
         });
     });
 
-    function show(element, replace) {
-        let selectedValue = element.value;
-        let prototypePrefix = element.id;
-
-        if (settings.selectorAttr) {
-            selectedValue = element.querySelector(`[value="${element.value}"]`).getAttribute(settings.selectorAttr);
-        }
-
-        if (settings.prototypePrefix) {
-            prototypePrefix = settings.prototypePrefix;
-        }
-
+    function showElement(element, replace) {
+        const selectedValue = getSelectedValue(element);
+        const prototypePrefix = settings.prototypePrefix || element.id;
         const prototypeElement = document.getElementById(`${prototypePrefix}_${selectedValue}`);
-        let container;
+        const container = getContainer(prototypeElement);
 
-        if (settings.containerSelector) {
-            container = document.querySelector(settings.containerSelector);
-        } else {
-            container = prototypeElement ? document.querySelector(prototypeElement.dataset.container) : null;
-        }
-
-        if (!container) {
-            return;
-        }
-
-        if (!prototypeElement) {
-            container.innerHTML = '';
-            return;
-        }
-
-        if (replace || !container.innerHTML.trim()) {
-            container.innerHTML = prototypeElement.dataset.prototype;
+        if (container && (replace || !container.innerHTML.trim())) {
+            container.innerHTML = prototypeElement ? prototypeElement.dataset.prototype : '';
         }
     }
-}
 
+    function getSelectedValue(element) {
+        if (settings.selectorAttr) {
+            return element.querySelector(`[value="${element.value}"]`).getAttribute(settings.selectorAttr);
+        }
+        return element.value;
+    }
+
+    function getContainer(prototypeElement) {
+        if (settings.containerSelector) {
+            return document.querySelector(settings.containerSelector);
+        }
+        return prototypeElement ? document.querySelector(prototypeElement.dataset.container) : null;
+    }
+}
 
 (function (shop) {
     shop.init = function () {
@@ -66,43 +55,44 @@ function handlePrototypes(options) {
             'selectorAttr': 'data-factory'
         });
 
-        document.querySelectorAll('.copy-to-clipboard').forEach(function (button) {
-            button.addEventListener('click', function() {
-                const targetId = this.dataset.target;
-                const copyText = document.getElementById(targetId);
-
-                if (copyText) {
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999); // For mobile devices
-
-                    navigator.clipboard.writeText(copyText.value).then(() => {
-                        // Optionally show a tooltip or confirmation here
-                        // Example: using a tooltip library or custom implementation
-                        // Show tooltip logic goes here
-                        console.log(this.dataset.copiedText); // You can replace this with your tooltip logic
-                    });
-                }
-            });
-        });
+        setupCopyToClipboard();
     };
 
-    shop.initCategorySelect = function () {
-        function updateQueryStringParameter(uri, key, value) {
-            const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-            const separator = uri.indexOf('?') !== -1 ? "&" : "?";
-            if (uri.match(re)) {
-                return uri.replace(re, '$1' + key + "=" + value + '$2');
-            } else {
-                return uri + separator + key + "=" + value;
-            }
-        }
+    function setupCopyToClipboard() {
+        document.querySelectorAll('.copy-to-clipboard').forEach(function (button) {
+            button.addEventListener('click', function() {
+                copyTextToClipboard(this);
+            });
+        });
+    }
 
+    function copyTextToClipboard(button) {
+        const targetId = button.dataset.target;
+        const copyText = document.getElementById(targetId);
+
+        if (copyText) {
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                console.log(button.dataset.copiedText);
+            });
+        }
+    }
+
+    shop.initCategorySelect = function () {
         document.querySelectorAll(".site-reload").forEach(function (select) {
             select.addEventListener('change', function() {
                 location.href = updateQueryStringParameter(window.location.href, this.name, this.value);
             });
         });
     };
+
+    function updateQueryStringParameter(uri, key, value) {
+        const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        const separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        return uri.match(re) ? uri.replace(re, '$1' + key + "=" + value + '$2') : uri + separator + key + "=" + value;
+    }
 
     shop.initQuantityValidator = function () {
         coreshopQuantitySelector({
@@ -115,139 +105,91 @@ function handlePrototypes(options) {
         document.addEventListener('submit', function (ev) {
             const form = ev.target.closest('form[name="coreshop_shipping_calculator"]');
             if (form) {
-                ev.preventDefault();
-                form.classList.add('loading');
-                form.querySelector('button[type="submit"]').setAttribute('disabled', 'disabled');
-                form.closest('.cart-shipment-calculation-box').querySelector('.cart-shipment-available-carriers').style.opacity = 0.2;
-
-                fetch(form.action, {
-                    method: 'POST',
-                    body: new URLSearchParams(new FormData(form)) // Serialize form data
-                })
-                .then(response => response.text())
-                .then(res => {
-                    form.classList.remove('loading');
-                    form.closest('.cart-shipment-calculation-box').outerHTML = res; // Replace the entire container
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    form.classList.remove('loading');
-                    form.querySelector('button[type="submit"]').removeAttribute('disabled');
-                });
+                handleShipmentCalculation(form);
             }
         });
     };
+
+    function handleShipmentCalculation(form) {
+        event.preventDefault();
+        form.classList.add('loading');
+        form.querySelector('button[type="submit"]').setAttribute('disabled', 'disabled');
+        form.closest('.cart-shipment-calculation-box').querySelector('.cart-shipment-available-carriers').style.opacity = 0.2;
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new URLSearchParams(new FormData(form))
+        })
+        .then(response => response.text())
+        .then(res => updateShipmentCalculation(form, res))
+        .catch(error => handleShipmentError(form, error));
+    }
+
+    function updateShipmentCalculation(form, responseText) {
+        form.classList.remove('loading');
+        form.closest('.cart-shipment-calculation-box').outerHTML = responseText;
+    }
+
+    function handleShipmentError(form, error) {
+        console.error('Error:', error);
+        form.classList.remove('loading');
+        form.querySelector('button[type="submit"]').removeAttribute('disabled');
+    }
 
     shop.initChangeAddress = function () {
         const addressStep = document.querySelector('.checkout-step.step-address');
-
-        if (!addressStep) {
-            return;
-        }
+        if (!addressStep) return;
 
         const invoiceAddress = addressStep.querySelector('select[name="coreshop[invoiceAddress]"]');
-        const invoicePanel = addressStep.querySelector('.panel-invoice-address');
-        const invoiceField = addressStep.querySelector('.invoice-address-selector');
         const shippingAddress = addressStep.querySelector('select[name="coreshop[shippingAddress]"]');
-        const shippingPanel = addressStep.querySelector('.panel-shipping-address');
-        const shippingField = addressStep.querySelector('.shipping-address-selector');
-        const shippingAddAddressButton = shippingPanel.parentElement.querySelector('.card-footer');
         const useIasS = addressStep.querySelector('[name="coreshop[useInvoiceAsShipping]"]');
 
-        invoiceAddress.addEventListener('change', function () {
-            const selected = this.options[this.selectedIndex];
-            const addressDecode = JSON.parse(selected.dataset.address);
-            const address = addressDecode.html;
-            const addressType = selected.dataset.addressType;
-
-            if (useIasS) {
-                if (addressType === 'invoice') {
-                    useIasS.disabled = true;
-                    useIasS.checked = false;
-                    useIasS.dispatchEvent(new Event('change'));
-                } else {
-                    useIasS.disabled = false;
-                }
-            }
-
-            if (address) {
-                invoicePanel.innerHTML = address;
-                if (useIasS.checked) {
-                    shippingAddress.value = this.value;
-                    shippingAddress.dispatchEvent(new Event('change'));
-                }
-            } else {
-                invoicePanel.innerHTML = '';
-                if (useIasS.checked) {
-                    shippingPanel.innerHTML = '';
-                    shippingAddress.value = '';
-                    shippingAddress.dispatchEvent(new Event('change'));
-                }
-            }
-        });
-
-        shippingAddress.addEventListener('change', function () {
-            const selected = this.options[this.selectedIndex];
-            const addressDecode = JSON.parse(selected.dataset.address);
-            const address = addressDecode.html;
-            shippingPanel.innerHTML = address ? address : '';
-        });
-
-        if (!useIasS.checked && shippingAddAddressButton) {
-            shippingAddAddressButton.classList.remove('d-none');
-        }
-
-        useIasS.addEventListener('change', function () {
-            if (this.checked) {
-                shippingField.style.display = 'none';
-                const address = invoiceAddress.options[invoiceAddress.selectedIndex].dataset.address;
-                const value = invoiceAddress.value;
-
-                if (address) {
-                    shippingAddress.value = value;
-                    shippingAddress.dispatchEvent(new Event('change'));
-                }
-                if (shippingAddAddressButton) {
-                    shippingAddAddressButton.classList.add('d-none');
-                }
-            } else {
-                shippingField.style.display = '';
-                if (shippingAddAddressButton) {
-                    shippingAddAddressButton.classList.remove('d-none');
-                }
-            }
-        });
-
-        if (invoiceAddress.querySelector('option:checked')) {
-            const selected = invoiceAddress.querySelector('option:checked');
-            const addressDecode = JSON.parse(selected.dataset.address);
-            const address = addressDecode.html;
-
-            const addressType = invoiceAddress.querySelector('option:checked').dataset.addressType;
-
-            if (useIasS) {
-                if (addressType === 'invoice') {
-                    useIasS.disabled = true;
-                    useIasS.checked = false;
-                    useIasS.dispatchEvent(new Event('change'));
-                } else {
-                    useIasS.disabled = false;
-                }
-            }
-
-            if (address) {
-                invoicePanel.innerHTML = address;
-            }
-        }
-
-        if (shippingAddress.querySelector('option:checked')) {
-            const selected = shippingAddress.querySelector('option:checked');
-            const addressDecode = JSON.parse(selected.dataset.address);
-            const address = addressDecode.html;
-            if (address) {
-                shippingPanel.innerHTML = address;
-            }
-        }
+        setupAddressChangeEvents(invoiceAddress, shippingAddress, useIasS);
     };
 
+    function setupAddressChangeEvents(invoiceAddress, shippingAddress, useIasS) {
+        invoiceAddress.addEventListener('change', () => updateAddress(invoiceAddress, useIasS));
+        shippingAddress.addEventListener('change', () => updateShippingAddress(shippingAddress));
+        if (useIasS) useIasS.addEventListener('change', () => toggleShippingAddress(useIasS, invoiceAddress, shippingAddress));
+    }
+
+    function updateAddress(invoiceAddress, useIasS) {
+        const selected = invoiceAddress.options[invoiceAddress.selectedIndex];
+        const address = JSON.parse(selected.dataset.address).html;
+        const invoicePanel = document.querySelector('.panel-invoice-address');
+        invoicePanel.innerHTML = address || '';
+
+        toggleUseAsShipping(useIasS, selected.dataset.addressType === 'invoice');
+    }
+
+    function toggleUseAsShipping(useIasS, isInvoiceType) {
+        if (useIasS) {
+            useIasS.disabled = isInvoiceType;
+            if (isInvoiceType) {
+                useIasS.checked = false;
+                useIasS.dispatchEvent(new Event('change'));
+            }
+        }
+    }
+
+    function updateShippingAddress(shippingAddress) {
+        const selected = shippingAddress.options[shippingAddress.selectedIndex];
+        const address = JSON.parse(selected.dataset.address).html;
+        document.querySelector('.panel-shipping-address').innerHTML = address || '';
+    }
+
+    function toggleShippingAddress(useIasS, invoiceAddress, shippingAddress) {
+        const shippingField = document.querySelector('.shipping-address-selector');
+        const shippingAddAddressButton = document.querySelector('.card-footer');
+
+        if (useIasS.checked) {
+            shippingField.style.display = 'none';
+            shippingAddress.value = invoiceAddress.value;
+            shippingAddress.dispatchEvent(new Event('change'));
+            if (shippingAddAddressButton) shippingAddAddressButton.classList.add('d-none');
+        } else {
+            shippingField.style.display = '';
+            if (shippingAddAddressButton) shippingAddAddressButton.classList.remove('d-none');
+        }
+    }
 }(window.shop = window.shop || {}));
