@@ -70,12 +70,12 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
         $this->id = $id;
     }
 
-    public function getFieldName(): ?string
+    public function getFieldName()
     {
         return $this->fieldName;
     }
 
-    public function setFieldName(?string $fieldName): void
+    public function setFieldName(?string $fieldName)
     {
         $this->fieldName = $fieldName;
     }

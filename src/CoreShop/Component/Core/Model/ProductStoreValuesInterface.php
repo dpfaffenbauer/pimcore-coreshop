@@ -29,9 +29,6 @@ interface ProductStoreValuesInterface extends ResourceInterface, StoreAwareInter
      */
     public function getFieldName();
 
-    /**
-     * @return string
-     */
     public function setFieldName(string $fieldName);
 
     /**
