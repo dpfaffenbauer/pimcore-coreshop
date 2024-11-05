@@ -29,11 +29,19 @@ class ProductStoreValuesRepository extends EntityRepository implements ProductSt
 {
     public function findForProduct(ProductInterface $product): array
     {
+        if (!$product instanceof Concrete) {
+            throw new \InvalidArgumentException('Product must be instance of ' . Concrete::class);
+        }
+
         return $this->findForObject($product, 'storeValues');
     }
 
     public function findForProductAndStore(ProductInterface $product, StoreInterface $store): ?ProductStoreValuesInterface
     {
+        if (!$product instanceof Concrete) {
+            throw new \InvalidArgumentException('Product must be instance of ' . Concrete::class);
+        }
+
         return $this->findForObjectAndStore($product, 'storeValues', $store);
     }
 
