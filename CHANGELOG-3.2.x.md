@@ -1,3 +1,8 @@
+# 3.2.14
+* [Pimcore] introduce LocalizedFallbackHelper by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2723
+* [Translations] add missing translations by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2721
+* [Payum] 2.6 compatibility by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2722
+
 # 3.2.13
 * [Currency/Money] implement Pimcore Grid Column by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2686
 * [StorageList] make sure to remove StorageList from Session on Logout by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2684
