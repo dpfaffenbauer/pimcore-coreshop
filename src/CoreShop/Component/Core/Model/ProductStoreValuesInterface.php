@@ -25,6 +25,16 @@ use Doctrine\Common\Collections\Collection;
 interface ProductStoreValuesInterface extends ResourceInterface, StoreAwareInterface
 {
     /**
+     * @return string
+     */
+    public function getFieldName();
+
+    /**
+     * @return string
+     */
+    public function setFieldName(string $fieldName);
+
+    /**
      * @return int
      */
     public function getPrice();

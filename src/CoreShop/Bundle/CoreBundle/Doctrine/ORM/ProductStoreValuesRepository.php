@@ -23,28 +23,46 @@ use CoreShop\Component\Core\Model\ProductInterface;
 use CoreShop\Component\Core\Model\ProductStoreValuesInterface;
 use CoreShop\Component\Core\Repository\ProductStoreValuesRepositoryInterface;
 use CoreShop\Component\Store\Model\StoreInterface;
+use Pimcore\Model\DataObject\Concrete;
 
 class ProductStoreValuesRepository extends EntityRepository implements ProductStoreValuesRepositoryInterface
 {
     public function findForProduct(ProductInterface $product): array
     {
+        return $this->findForObject($product, 'storeValues');
+    }
+
+    public function findForProductAndStore(ProductInterface $product, StoreInterface $store): ?ProductStoreValuesInterface
+    {
+        return $this->findForObjectAndStore($product, 'storeValues', $store);
+    }
+
+    public function findForObject(Concrete $product, string $fieldName): array
+    {
         return $this->createQueryBuilder('o')
             ->andWhere('o.product = :product')
+            ->andWhere('o.fieldName = :fieldName')
             ->setParameter('product', $product->getId())
+            ->setParameter('fieldName', $fieldName)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    public function findForProductAndStore(ProductInterface $product, StoreInterface $store): ?ProductStoreValuesInterface
-    {
+    public function findForObjectAndStore(
+        Concrete $product,
+        string $fieldName,
+        StoreInterface $store
+    ): ?ProductStoreValuesInterface {
         return $this->createQueryBuilder('o')
             ->andWhere('o.product = :product')
+            ->andWhere('o.fieldName = :fieldName')
             ->andWhere('o.store = :store')
             ->setParameter('product', $product->getId())
             ->setParameter('store', $store)
+            ->setParameter('fieldName', $fieldName)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
 }

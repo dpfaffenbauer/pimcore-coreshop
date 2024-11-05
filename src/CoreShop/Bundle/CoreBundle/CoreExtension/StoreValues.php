@@ -401,7 +401,7 @@ class StoreValues extends Model\DataObject\ClassDefinition\Data implements
     public function load(Localizedfield|\Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData|AbstractData|Concrete $object, array $params = []): mixed
     {
         if (isset($params['force']) && $params['force']) {
-            return $this->getProductStoreValuesRepository()->findForProduct($object);
+            return $this->getProductStoreValuesRepository()->findForObject($object, $this->getName());
         }
 
         return null;
@@ -451,14 +451,17 @@ class StoreValues extends Model\DataObject\ClassDefinition\Data implements
                     if (count($changeSet) > 0) {
                         $productStoreValue = clone $productStoreValue;
                         $productStoreValue->setProduct($object);
+                        $productStoreValue->setFieldName($this->getName());
                     }
                 } else {
                     $productStoreValue->setProduct($object);
+                    $productStoreValue->setFieldName($this->getName());
                 }
             }
 
             if (null === $productStoreValue->getProduct()) {
                 $productStoreValue->setProduct($object);
+                $productStoreValue->setFieldName($this->getName());
             }
 
             $this->getEntityManager()->persist($productStoreValue);
@@ -669,6 +672,7 @@ class StoreValues extends Model\DataObject\ClassDefinition\Data implements
             if ($storeValuesEntity instanceof ProductStoreValuesInterface && $storeValuesEntity->getProduct() && $storeValuesEntity->getProduct()->getId() !== $object->getId()) {
                 $storeValuesEntity = clone $storeValuesEntity;
                 $storeValuesEntity->setProduct($object);
+                $storeValuesEntity->setFieldName($this->getName());
             }
 
             $form = $this->getFormFactory()->createNamed('', ProductStoreValuesType::class, $storeValuesEntity);
@@ -735,6 +739,7 @@ class StoreValues extends Model\DataObject\ClassDefinition\Data implements
         $newObject = $this->getFactory()->createNew();
         $newObject->setStore($store);
         $newObject->setProduct($object);
+        $newObject->setFieldName($this->getName());
 
         return $newObject;
     }
