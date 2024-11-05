@@ -12,3 +12,7 @@ directly, you might miss migrations. Always update to the latest Minor release v
 
 This also means that if you do major updates, you will have old migrations in your Database. You can manually remove those
 if you want to keep your Migrations Table clean.
+
+If you already updated the major version and recognize that some migrations from your previous version to latest minor release version are missing, you can compare the database structure via
+`bin/console doctrine:schema:update --dump-sql`
+Please manually review the SQL statements before executing
