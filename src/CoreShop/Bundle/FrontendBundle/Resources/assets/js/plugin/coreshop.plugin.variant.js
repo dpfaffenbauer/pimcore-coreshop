@@ -151,7 +151,7 @@
 
             return filterAttributes;
         };
-        
+
         const _addOptionToSelect = function (element, attribute, group) {
             const option = new Option(attribute.attribute.name, attribute.attribute.id);
             option.id = 'attribute-' + attribute.attribute.id;
