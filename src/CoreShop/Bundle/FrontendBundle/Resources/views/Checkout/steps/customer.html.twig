@@ -21,7 +21,7 @@
                             {{ form_start(guestForm, {'method': 'POST', attr: {'novalidate': 'novalidate'}}) }}
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(guestForm.gender, {attr:{class:'form-select'}}) }}
+                                        {{ form_row(guestForm.gender, coreshop_test_form_attribute('guest-gender'), {attr:{class:'form-select'}}) }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -42,7 +42,7 @@
 
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(guestForm.address.salutation,{attr:{class:'form-select'}}) }}
+                                        {{ form_row(guestForm.address.salutation,coreshop_test_form_attribute('guest-address-salutation'),{attr:{class:'form-select'}}) }}
                                     </div>
                                 </div>
 
@@ -72,7 +72,7 @@
                                         {{ form_row(guestForm.address.city, coreshop_test_form_attribute('guest-address-city')) }}
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(guestForm.address.country, {attr:{class:'form-select'}}) }}
+                                        {{ form_row(guestForm.address.country, coreshop_test_form_attribute('guest-address-country'), {attr:{class:'form-select'}}) }}
                                     </div>
 
                                 </div>

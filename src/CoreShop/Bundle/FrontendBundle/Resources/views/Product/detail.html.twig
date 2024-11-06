@@ -50,7 +50,6 @@
                 {% endif %}
             {% endif %}
 
-
             <h2 {{ coreshop_test_html_attribute('product-name', product.name) }}>{{ product.name }}</h2>
 
             <div class="d-flex justify-content-between mb-3 text-14">
@@ -84,16 +83,16 @@
             {% include '@CoreShopFrontend/Product/_variants.html.twig' %}
 
             <div class="product-price d-flex flex-column">
-                {{ product_price.display_product_price(product, null, false, false, product.hasUnitDefinitions) }}
+                {{ product_price.display_product_price(product, null, false, product.hasUnitDefinitions) }}
             </div>
 
             {% if product.hasUnitDefinitions == false %}
                 <div class="tax">
-                    <span>
+                    <span {{ coreshop_test_html_attribute('product-tax-rate', product|coreshop_product_tax_rate(coreshop.context)) }}>
                         {{ 'coreshop.ui.product.tax.inc'|trans|format(product|coreshop_product_tax_rate(coreshop.context)) }}
                     </span>
 
-                    <span>
+                    <span {{ coreshop_test_html_attribute('product-tax', currency.convertAndFormat(product|coreshop_product_tax_amount(coreshop.context))) }}>
                         ({{ currency.convertAndFormat(product|coreshop_product_tax_amount(coreshop.context)) }})
                     </span>
                 </div>

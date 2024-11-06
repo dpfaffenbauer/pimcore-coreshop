@@ -1,7 +1,7 @@
 <section class="product-carousel">
     <h2 class="product-head">{{ 'coreshop.ui.latest_products'|trans }}</h2>
 
-    <div class="row">
+    <div class="row" {{ coreshop_test_html_attribute('latest-products') }}>
         {% for product in products %}
             <div class="d-flex col-12 col-md-6 col-xxl-4 mb-3">
                 <div class="layout1 card flex-grow-1">

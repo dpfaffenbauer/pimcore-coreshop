@@ -8,8 +8,8 @@
 {% set taxes = cart.taxes %}
 
 <div class="input-group mt-3 mt-md-0">
-    {{ form_widget(form.cartRuleCoupon, { attr: {placeholder: 'coreshop.ui.voucher.code'|trans}}) }}
-    {{ form_widget(form.submit_voucher, { attr: { class: 'd-flex align-items-center justify-content-center btn btn-secondary btn btn-secondary' }, label: 'coreshop.ui.voucher.apply_code'|trans }) }}
+    {{ form_widget(form.cartRuleCoupon, coreshop_test_form_attribute('voucher-code'), { attr: {placeholder: 'coreshop.ui.voucher.code'|trans}}) }}
+    {{ form_widget(form.submit_voucher, coreshop_test_form_attribute('apply-voucher-button'), { attr: { class: 'd-flex align-items-center justify-content-center btn btn-secondary btn btn-secondary' }, label: 'coreshop.ui.voucher.apply_code'|trans }) }}
 </div>
 
 {% include '@CoreShopFrontend/Cart/Summary/_rules.html.twig' %}

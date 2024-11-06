@@ -4,10 +4,11 @@
 
         <div class="col-12 col-xl-8">
             {{ form_errors(form) }}
-
-            {% for item in cart.items %}
-                {% include '@CoreShopFrontend/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[loop.index0]} %}
-            {% endfor %}
+            <div  {{ coreshop_test_html_attribute('cart-items') }}>
+                {% for item in cart.items %}
+                    {% include '@CoreShopFrontend/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[loop.index0]} %}
+                {% endfor %}
+            </div>
 
             {% include '@CoreShopFrontend/Cart/Summary/_update.html.twig' %}
         </div>

@@ -15,7 +15,7 @@
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 {{ form_errors(form) }}
                 <div class="form-group">
-                    {{ form_widget(form.paymentProvider, {attr: {class: 'form-select'}}) }}
+                    {{ form_widget(form.paymentProvider, coreshop_test_form_attribute('select-payment-provider'), {attr: {class: 'form-select'}}) }}
                 </div>
 
                 <div class="paymentSettings">

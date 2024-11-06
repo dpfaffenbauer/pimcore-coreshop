@@ -25,10 +25,10 @@
                             {{ form_start(form, {'method': 'POST', attr: {'novalidate': 'novalidate'}}) }}
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.salutation, {attr:{class:'form-select'}}) }}
+                                        {{ form_row(form.salutation,coreshop_test_form_attribute('register-salutation'), {attr:{class:'form-select'}}) }}
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.gender, {attr:{class:'form-select'}}) }}
+                                        {{ form_row(form.gender, coreshop_test_form_attribute('register-gender'), {attr:{class:'form-select'}}) }}
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         {{ form_row(form.firstname, coreshop_test_form_attribute('register-firstname')) }}
@@ -61,7 +61,7 @@
                                     {{ form_label(form.address) }}
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.address.salutation, {attr:{class:'form-select'}}) }}
+                                        {{ form_row(form.address.salutation, coreshop_test_form_attribute('register-address-salutation'), {attr:{class:'form-select'}}) }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -90,7 +90,7 @@
                                     {{ form_row(form.address.city, coreshop_test_form_attribute('register-address-city')) }}
                                    </div>
                                    <div class="col-12 col-lg-6">
-                                    {{ form_row(form.address.country, {attr:{class:'form-select'}}) }}
+                                    {{ form_row(form.address.country, coreshop_test_form_attribute('register-address-country'), {attr:{class:'form-select'}}) }}
                                    </div>
                                </div>
                                 {{ form_row(form.termsAccepted, coreshop_test_form_attribute('register-terms')) }}

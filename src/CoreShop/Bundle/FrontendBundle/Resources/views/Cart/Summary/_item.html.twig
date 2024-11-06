@@ -3,7 +3,7 @@
 
 {% set productUrl = pimcore_object_path(item.product) %}
 
-<div class="shopping-cart-item mb-3">
+<div class="shopping-cart-item mb-3" {% if item.hasUnitDefinition %}{{ coreshop_test_html_attribute('cart-item-row-unit-' ~ item.unitDefinition.id, item.name) }}{% endif %}{{ coreshop_test_html_attribute('cart-item-row', item.name) }}>
     <div class="d-md-flex justify-content-md-between gap-md-3 mb-2">
         <div class="shopping-cart-item-info">
             <a class="text-decoration-none" href="{{ productUrl }}">
@@ -14,7 +14,7 @@
 
                     <div class="p-0 card-body">
                         <div class="mt-md-1">
-                            <h6 class="mb-1 card-title">
+                            <h6 class="mb-1 card-title" {{ coreshop_test_html_attribute('cart-item-name', item.name) }}>
                                 {{ item.name }}
                             </h6>
                             {% if item.isGiftItem %}
@@ -36,7 +36,7 @@
                 {% set retailPrice = item.itemRetailPrice %}
 
                 <div><small>Each:</small></div>
-                <span class="price-new">{{ currency.convertAndFormat(price) }}</span>
+                <span class="price-new" {{ coreshop_test_html_attribute('cart-item-unit-price', item.name) }}>{{ currency.convertAndFormat(price) }}</span>
                 {% if price < retailPrice %}
                     {% if discountPrice > 0 %}
                         <span class="price-old">{{ currency.convertAndFormat(retailPrice) }}</span>
@@ -49,7 +49,7 @@
             </div>
             <div class="text-right cart-item-total-price">
                 <div><small>Total:</small></div>
-                <div class="price-new">
+                <div class="price-new" {{ coreshop_test_html_attribute('cart-item-unit-price', item.name) }}>
                     {% if item.discount < 0 %}
                         <span>({{ currency.convertAndFormat(item.discount) }})</span>
                     {% endif %}
@@ -76,7 +76,7 @@
             {% else %}
                 <div class="input-group">
                     {% set relation_id = random() %}
-                    {{ form_widget(form.quantity, {attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }}) }}
+                    {{ form_widget(form.quantity, coreshop_test_form_attribute('cart-item-quantity-input', item.name), {attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }}) }}
                     {% if item.hasUnitDefinition %}
                         <div class="input-group-append">
                             <span class="input-group-text" {{ coreshop_test_html_attribute('cart-item-unit-' ~ item.unitDefinition.id, item.name) }}>
@@ -96,7 +96,7 @@
                         title="{{ 'coreshop.ui.remove'|trans }}"
                         class="btn btn-link"
                         data-id="{{ item.id }}"
-                        {{ coreshop_test_html_attribute('cart-remove-button', item.name) }}
+                        {{ coreshop_test_html_attribute('wishlist-remove-button', item.name) }}
                 >
                     <i class="bi bi-trash me-2"></i> {{ 'coreshop.ui.remove'|trans }}
                 </a>

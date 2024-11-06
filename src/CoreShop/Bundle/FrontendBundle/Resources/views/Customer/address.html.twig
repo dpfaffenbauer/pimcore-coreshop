@@ -37,15 +37,15 @@
                                 {% endif %}
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.salutation, {attr:{class:'form-select'}}) }}
+                                        {{ form_row(form.salutation, coreshop_test_form_attribute('address-salutation'), {attr:{class:'form-select'}}) }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.firstname) }}
+                                        {{ form_row(form.firstname, coreshop_test_form_attribute('address-firstname')) }}
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.lastname) }}
+                                        {{ form_row(form.lastname, coreshop_test_form_attribute('address-lastname')) }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -53,19 +53,19 @@
                                         {{ form_row(form.street,coreshop_test_form_attribute('address-street')) }}
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-3">
-                                        {{ form_row(form.number) }}
+                                        {{ form_row(form.number, coreshop_test_form_attribute('address-number') ) }}
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-3">
-                                        {{ form_row(form.postcode) }}
+                                        {{ form_row(form.postcode, coreshop_test_form_attribute('address-postcode')) }}
                                     </div>
                                     <div class="col-12 col-lg-6">
-                                        {{ form_row(form.phoneNumber) }}
+                                        {{ form_row(form.phoneNumber, coreshop_test_form_attribute('address-phoneNumber')) }}
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-3">
-                                        {{ form_row(form.city) }}
+                                        {{ form_row(form.city, coreshop_test_form_attribute('address-city')) }}
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-3">
-                                        {{ form_row(form.country, {attr: {class: 'form-select'}}) }}
+                                        {{ form_row(form.country, coreshop_test_form_attribute('address-country'), {attr: {class: 'form-select'}}) }}
                                     </div>
 
                                 </div>

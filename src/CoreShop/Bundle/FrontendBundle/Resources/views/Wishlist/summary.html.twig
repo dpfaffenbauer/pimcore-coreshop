@@ -17,9 +17,9 @@
 
 
     {% if storage_list.hasItems %}
-        <div class="row">
+        <div class="row" {{ coreshop_test_html_attribute('wishlist-items') }}>
         {% for item in storage_list.items %}
-            <div class="col-12 col-xl-6 mb-3">
+            <div class="col-12 col-xl-6 mb-3" {{ coreshop_test_html_attribute('wishlist-item-row', item.product.name) }}>
                 {% set product = item.product %}
                 {% set productUrl = pimcore_object_path(product) %}
                 <div class="card p-2">
@@ -34,7 +34,7 @@
                                 <div class="p-0 card-body">
                                     <div class="d-flex flex-column mt-md-1 h-100">
                                         <h5 class="mb-1 card-title">
-                                            <a class="text-decoration-none" href="{{ productUrl }}">{{ product.name }}</a>
+                                            <a class="text-decoration-none" href="{{ productUrl }}" {{ coreshop_test_html_attribute('wishlist-item-name', product.name) }}>{{ product.name }}</a>
                                         </h5>
                                         <div class="d-flex justify-content-between align-items-end mt-auto">
                                             <div class="fs-3">

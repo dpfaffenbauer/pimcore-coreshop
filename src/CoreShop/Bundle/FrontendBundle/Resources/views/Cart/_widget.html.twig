@@ -29,7 +29,7 @@
                     </ul>
                 </div>
                 <div class="my-1">{{ 'coreshop.ui.subtotal'|trans }}: <span>{{ currency.convertAndFormat(cart.subtotal) }}</span></div>
-                <div class="mb-3">{{ 'coreshop.ui.total'|trans }}: <span>{{ currency.convertAndFormat(cart.total) }}</span></div>
+                <div class="mb-3">{{ 'coreshop.ui.total'|trans }}: <span {{ coreshop_test_html_attribute('cart-total') }}>{{ currency.convertAndFormat(cart.total) }}</span></div>
             {% endif %}
             <div class="d-flex gap-2">
                 {% if is_granted('CORESHOP_CART_SUMMARY') %}

@@ -18,7 +18,7 @@
 </div>
 <div class="d-flex flex-column card-body">
     <div class="card-title h5">
-        <a href="{{ href }}" class="text-decoration-none text-body">{{ product.name }}</a>
+        <a href="{{ href }}" class="text-decoration-none text-body" {{ coreshop_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a>
     </div>
     {{ product.shortDescription }}
 </div>
