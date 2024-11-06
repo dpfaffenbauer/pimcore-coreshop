@@ -16,4 +16,7 @@ import {CartInfo} from './scripts/cartInfo';
 document.addEventListener('DOMContentLoaded', function () {
     new CartInfo('/coreshop_get_cart_items', '.js-cart-widget');
     new Carousel();
+
+    console.log(CartInfo);
+    console.log(Carousel);
 })
