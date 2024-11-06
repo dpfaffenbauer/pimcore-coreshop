@@ -36,6 +36,11 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
     protected $id;
 
     /**
+     * @var string|null
+     */
+    protected $fieldName;
+
+    /**
      * @var int
      */
     protected $price = 0;
@@ -63,6 +68,16 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    public function getFieldName()
+    {
+        return $this->fieldName;
+    }
+
+    public function setFieldName(?string $fieldName)
+    {
+        $this->fieldName = $fieldName;
     }
 
     public function getPrice()
