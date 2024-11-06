@@ -151,13 +151,7 @@
 
             return filterAttributes;
         };
-
-        const _matchesAllFilters = function (product, filterAttributes) {
-            return filterAttributes.every((filter) =>
-                _config.index[product.id].attributes?.[filter.group] === filter.selected
-            );
-        };
-
+        
         const _addOptionToSelect = function (element, attribute, group) {
             const option = new Option(attribute.attribute.name, attribute.attribute.id);
             option.id = 'attribute-' + attribute.attribute.id;
