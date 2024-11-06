@@ -33,10 +33,12 @@
             _attributeGroups.forEach((group) => _attachChangeEvent(group));
         };
 
+        const _assignOnChangeEvent = function (element, group) {
+            element.onchange = () => _handleElementChange(group, element);
+        };
+
         const _attachChangeEvent = function (group) {
-            group.elements.forEach((element) => {
-                element.onchange = () => _handleElementChange(group, element);
-            });
+            group.elements.forEach((element) => _assignOnChangeEvent(element, group));
         };
 
         const _handleElementChange = function (group, element) {
@@ -123,11 +125,17 @@
             }
         };
 
+        const _isProductMatchingFilters = function (product, filterAttributes) {
+            return filterAttributes.every((filter) => _config.index[product.id].attributes?.[filter.group] === filter.selected);
+        };
+
+        const _isAttributeRelevant = function (attribute, filterAttributes) {
+            return attribute.products.some((product) => _isProductMatchingFilters(product, filterAttributes));
+        };
+
         const _filterAttributes = function (attributes, group) {
             const filterAttributes = _getFilterAttributes(group);
-            return attributes.filter((attribute) =>
-                attribute.products.some((product) => _matchesAllFilters(product, filterAttributes))
-            );
+            return attributes.filter((attribute) => _isAttributeRelevant(attribute, filterAttributes));
         };
 
         const _getFilterAttributes = function (group) {
