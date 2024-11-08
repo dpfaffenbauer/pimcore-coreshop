@@ -25,7 +25,7 @@
   ],
   "require": {
     "coreshop/product": "^4.0",
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "coreshop/rule-bundle": "^4.0",
     "coreshop/currency-bundle": "^4.0",
     "coreshop/resource-bundle": "^4.0",
@@ -52,7 +52,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "4.1-dev"
     }
   },
   "config": {
