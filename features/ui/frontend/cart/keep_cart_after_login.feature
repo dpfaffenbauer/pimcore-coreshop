@@ -13,11 +13,11 @@ Feature: Maintaining cart after login
         When I log in as "elon@musk.com" with "cybertruck" password
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "TSHIRT"
+        And this item should have name "TShirt"
 
     Scenario: Having cart maintained after registration
         Given I add this product to the cart
         When I register with email "elon@spacex.com" and password "bigbigbooster"
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "TSHIRT"
+        And this item should have name "TShirt"

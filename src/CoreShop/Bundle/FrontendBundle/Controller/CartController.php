@@ -56,26 +56,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Service\Attribute\SubscribedService;
 
 class CartController extends FrontendController
 {
-    #[Route('/coreshop_get_cart_items', name: 'coreshop_get_cart_items')]
-    public function widgetAction(Request $request, ShopperContextInterface $shopperContext): Response
+    public function widgetAction(Request $request): Response
     {
         $multiCartEnabled = $this->getParameter('coreshop.storage_list.multi_list.order');
 
         $params = [
             'cart' => $this->getCart(),
-            'multi_cart_enabled' => $this->getParameter('coreshop.storage_list.multi_list.order')
+            'multi_cart_enabled' => $this->getParameter('coreshop.storage_list.multi_list.order'),
         ];
 
         if ($multiCartEnabled) {
             $form = $this->container->get('form.factory')->createNamed('coreshop', CartListType::class, ['list' => $this->getCart()], [
-                'context' => $shopperContext->getContext(),
+                'context' => $this->container->get(ShopperContextInterface::class)->getContext(),
             ]);
 
             $params['form'] = $form->createView();
@@ -270,7 +268,7 @@ class CartController extends FrontendController
                     $addToCart->getCartItem()->getQuantity(),
                 );
 
-                $this->addFlash('coreshop_global_success', $this->container->get('translator')->trans('coreshop.ui.item_added'));
+                $this->addFlash('success', $this->container->get('translator')->trans('coreshop.ui.item_added'));
 
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse([
@@ -282,7 +280,7 @@ class CartController extends FrontendController
             }
 
             foreach ($form->getErrors(true, true) as $error) {
-                $this->addFlash('coreshop_global_error', $error->getMessage());
+                $this->addFlash('error', $error->getMessage());
             }
 
             if ($request->isXmlHttpRequest()) {
@@ -308,7 +306,6 @@ class CartController extends FrontendController
             [
                 'form' => $form->createView(),
                 'product' => $product,
-                '_redirect' => $redirect,
             ],
         );
     }

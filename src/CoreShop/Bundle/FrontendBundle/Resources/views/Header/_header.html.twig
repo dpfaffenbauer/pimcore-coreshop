@@ -2,10 +2,17 @@
     <div class="header-top">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <button class="navbar-toggler ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-gear fs-6 "></i> <small>Menu</small>
-                </button>
+                <div>
+                    <button class="navbar-toggler ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="bi bi-gear fs-6 "></i> <small>Menu</small>
+                    </button>
+                    {% if(app.user) %}
+                        <a href="{{ path('coreshop_logout') }}" {{ coreshop_test_html_attribute('logout-button') }} class="d-flex align-items-center justify-content-center btn btn-secondary">
+                            {{ 'coreshop.ui.logout'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
                 {% include '@CoreShopFrontend/Header/_topbar_buttons.html.twig' %}
                 <div class="collapse navbar-collapse order-lg-1" id="navbarNav">
                     <ul class="navbar-nav me-auto">

@@ -20,25 +20,25 @@ namespace CoreShop\Bundle\FrontendBundle\Controller\Extend;
 
 use CoreShop\Bundle\FrontendBundle\Controller\FrontendController;
 use CoreShop\Component\Core\Context\ShopperContextInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Attribute\Route;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CartWidgetController extends FrontendController
 {
     private ShopperContextInterface $shopperContext;
 
-    public function __construct(ShopperContextInterface $shopperContext, ContainerInterface $container)
-    {
+    public function __construct(
+        ShopperContextInterface $shopperContext,
+        ContainerInterface $container,
+    ) {
         parent::__construct($container);
         $this->shopperContext = $shopperContext;
     }
 
-
     public function cartNumberAction(): JsonResponse
     {
         $items = $this->shopperContext->getCart()->getItems();
+
         return new JsonResponse(count($items));
     }
-
 }

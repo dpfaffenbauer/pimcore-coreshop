@@ -2,11 +2,11 @@
   "entrypoints": {
     "app": {
       "css": [
-        "/bundles/coreshopfrontend/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_swiper_swiper-bundle_css-0cdedb.css",
+        "/bundles/coreshopfrontend/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_swiper_swiper-bundle_css-d35cf9.css",
         "/bundles/coreshopfrontend/build/app.css"
       ],
       "js": [
-        "/bundles/coreshopfrontend/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_swiper_swiper-bundle_css-0cdedb.js",
+        "/bundles/coreshopfrontend/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_swiper_swiper-bundle_css-d35cf9.js",
         "/bundles/coreshopfrontend/build/app.js"
       ]
     }

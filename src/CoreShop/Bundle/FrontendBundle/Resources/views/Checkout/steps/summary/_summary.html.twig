@@ -54,7 +54,7 @@
 
 <hr>
 <div class="d-flex justify-content-between gap-2">
-    <strong>{{ 'coreshop.ui.total'|trans }}:</strong> {{ currency.convertAndFormat(cart.total) }}
+    <strong>{{ 'coreshop.ui.total'|trans }}:</strong> <span {{ coreshop_test_html_attribute('order-total') }}>{{ currency.convertAndFormat(cart.total) }}</span>
 </div>
 
 

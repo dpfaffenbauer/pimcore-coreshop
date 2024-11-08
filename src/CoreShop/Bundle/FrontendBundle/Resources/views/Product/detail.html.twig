@@ -59,7 +59,10 @@
                         {% if coreshop_inventory_is_available(product) %}
                             <i class="bi bi-circle-fill stock-available"></i><span>{{ 'coreshop.ui.in_stock'|trans }}</span>
                         {% else %}
-                            <i class="bi bi-circle-fill stock--outofstock"></i><span>{{ 'coreshop.ui.out_of_stock'|trans }}</span>
+                            <i class="bi bi-circle-fill stock--outofstock"></i>
+                            <span {{ coreshop_test_html_attribute('product-out-of-stock') }}>
+                                {{ 'coreshop.ui.out_of_stock'|trans }}
+                            </span>
                         {% endif %}
                     {% else %}
                         <i class="bi bi-circle-fill stock-available"></i><span>{{ 'coreshop.ui.in_stock'|trans }}</span>
@@ -82,8 +85,14 @@
 
             {% include '@CoreShopFrontend/Product/_variants.html.twig' %}
 
+            {% if product.hasUnitDefinitions == true %}
+                <div class="product-price d-flex flex-column">
+                    {{ product_price.display_product_unit_prices(product) }}
+                </div>
+            {% endif %}
+
             <div class="product-price d-flex flex-column">
-                {{ product_price.display_product_price(product, null, false, product.hasUnitDefinitions) }}
+                {{ product_price.display_product_price(product, null, false, true) }}
             </div>
 
             {% if product.hasUnitDefinitions == false %}
