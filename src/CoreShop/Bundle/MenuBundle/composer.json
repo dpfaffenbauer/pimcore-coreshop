@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "coreshop/pimcore-bundle": "^4.0",
     "knplabs/knp-menu-bundle": "^3.1",
     "pimcore/pimcore": "^11.0"

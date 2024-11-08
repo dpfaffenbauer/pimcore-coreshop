@@ -25,7 +25,7 @@
   ],
   "require": {
     "coreshop/shipping": "^4.0",
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "coreshop/address-bundle": "^4.0",
     "coreshop/rule-bundle": "^4.0",
     "coreshop/resource-bundle": "^4.0",

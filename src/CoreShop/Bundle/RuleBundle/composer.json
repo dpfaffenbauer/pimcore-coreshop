@@ -25,7 +25,7 @@
   ],
   "require": {
     "coreshop/rule": "^4.0",
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "coreshop/resource-bundle": "^4.0",
     "pimcore/pimcore": "^11.0"
   },
