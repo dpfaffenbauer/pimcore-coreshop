@@ -11,4 +11,4 @@
  */
 
 pimcore.registerNS('coreshop.product_quantity_price_rules.conditions.guest');
-coreshop.product_quantity_price_rules.conditions.customerGroups = Class.create(coreshop.product.pricerule.conditions.guest, {});
+coreshop.product_quantity_price_rules.conditions.guest = Class.create(coreshop.product.pricerule.conditions.guest, {});
