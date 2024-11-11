@@ -60,7 +60,7 @@ class ProductStoreValuesRepository extends EntityRepository implements ProductSt
     public function findForObjectAndStore(
         Concrete $product,
         string $fieldName,
-        StoreInterface $store
+        StoreInterface $store,
     ): ?ProductStoreValuesInterface {
         return $this->createQueryBuilder('o')
             ->andWhere('o.product = :product')
@@ -71,6 +71,6 @@ class ProductStoreValuesRepository extends EntityRepository implements ProductSt
             ->setParameter('fieldName', $fieldName)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 }
