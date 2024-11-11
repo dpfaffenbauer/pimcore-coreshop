@@ -1,3 +1,6 @@
+# 3.2.15
+* [PayumBundle] remove payment_state processing to confirm orders by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2743
+
 # 3.2.14
 * [Pimcore] introduce LocalizedFallbackHelper by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2723
 * [Translations] add missing translations by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2721
