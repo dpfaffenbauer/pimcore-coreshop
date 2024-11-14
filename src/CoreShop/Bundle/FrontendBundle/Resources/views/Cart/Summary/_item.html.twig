@@ -49,7 +49,7 @@
             </div>
             <div class="text-right cart-item-total-price">
                 <div><small>Total:</small></div>
-                <div class="price-new" {{ coreshop_test_html_attribute('cart-item-unit-price', item.name) }}>
+                <div class="price-new" {{ coreshop_test_html_attribute('cart-item-total-price', item.name) }}>
                     {% if item.discount < 0 %}
                         <span>({{ currency.convertAndFormat(item.discount) }})</span>
                     {% endif %}
@@ -96,7 +96,7 @@
                         title="{{ 'coreshop.ui.remove'|trans }}"
                         class="btn btn-link"
                         data-id="{{ item.id }}"
-                        {{ coreshop_test_html_attribute('wishlist-remove-button', item.name) }}
+                        {{ coreshop_test_html_attribute('cart-remove-button', item.name) }}
                 >
                     <i class="bi bi-trash me-2"></i> {{ 'coreshop.ui.remove'|trans }}
                 </a>

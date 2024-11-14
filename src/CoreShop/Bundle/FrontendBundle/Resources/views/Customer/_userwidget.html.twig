@@ -21,7 +21,7 @@
                 <a href="{{ path('coreshop_customer_change_password') }}" class="ms-2 dropdown-item">{{ 'coreshop.ui.change_password'|trans }}</a>
             {% endif %}
             <div class="px-3 mt-3">
-                <a href="{{ path('coreshop_logout') }}" class="d-flex align-items-center justify-content-center btn btn-secondary">
+                <a href="{{ path('coreshop_logout') }}" {{ coreshop_test_html_attribute('logout-button') }} class="d-flex align-items-center justify-content-center btn btn-secondary">
                     {{ 'coreshop.ui.logout'|trans }}
                 </a>
             </div>

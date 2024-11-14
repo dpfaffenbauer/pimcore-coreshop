@@ -4,8 +4,4 @@ coreshop_payment_after:
     defaults:
         _controller: CoreShop\Bundle\PayumBundle\Controller\PaymentController::afterCaptureAction
 
-coreshop_get_cart_items:
-    path: /coreshop_get_cart_items
-    methods: [GET]
-    defaults:
-        _controller: CoreShop\Bundle\FrontendBundle\Controller\CartController::widgetAction
+

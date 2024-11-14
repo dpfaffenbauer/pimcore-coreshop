@@ -28,7 +28,7 @@
                                         <span>{{ form_widget(list_form, coreshop_test_form_attribute('cart', cart_name)|coreshop_merge_recursive({'label': false,'attr': {'class': 'form-check-input'}})) }}</span>
                                         <span {{ coreshop_test_html_attribute('name') }}>{{ cart_name }}</span>
                                     </div>
-                                    <div {{ coreshop_test_html_attribute('total') }}><strong>{{ 'coreshop.ui.total'|trans }}: </strong>{{ currency.convertAndFormat(list.total) }}</div>
+                                    <div><strong>{{ 'coreshop.ui.total'|trans }}: </strong><span {{ coreshop_test_html_attribute('total') }}>{{ currency.convertAndFormat(list.total) }}</span></div>
                                 </div>
                             </div>
                         </div>

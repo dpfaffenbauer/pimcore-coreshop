@@ -13,10 +13,8 @@
                 </a>
             {% endif %}
             {% if is_granted('CORESHOP_CART') %}
-                <div class="col-md-3 p-sm-2 me-sm-2 js-cart-widget">
-                    <div class="js-cart-loader cart-loader-wrapper">
-                        <div class="loader cart-loader"></div>
-                    </div>
+                <div class="col-md-3 p-sm-2 me-sm-2 ">
+                    {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
                 </div>
             {% endif %}
             {% include '@CoreShopFrontend/Customer/_userwidget.html.twig' %}
