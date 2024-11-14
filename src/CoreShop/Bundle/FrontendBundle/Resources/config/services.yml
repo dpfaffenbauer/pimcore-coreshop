@@ -37,6 +37,3 @@ services:
             $shopperContext: '@CoreShop\Component\Core\Context\ShopperContextInterface'
             $container: '@service_container'
         tags: [ 'controller.service_arguments' ]
-
-    Twig\DeferredExtension\DeferredExtension:
-        tags: [ 'twig.extension' ]
