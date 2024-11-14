@@ -1,3 +1,4 @@
+const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -7,7 +8,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
 .setOutputPath('../public/build/')
 .setPublicPath('/bundles/coreshopfrontend/build/')
-.setManifestKeyPrefix('bundles/coreshopfrontend/build/')
+.setManifestKeyPrefix('bundles/coreshopfrontend/')
 .cleanupOutputBeforeBuild()
 
 /*
@@ -17,9 +18,6 @@ Encore
  * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
  */
 .addEntry('app', './js/app.ts')
-
-// When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
-.splitEntryChunks()
 
 // will require an extra script tag for runtime.js
 // but, you probably want this, unless you're building a single-page app
@@ -32,7 +30,6 @@ Encore
  * list of features, see:
  * https://symfony.com/doc/current/frontend.html#adding-more-features
  */
-.cleanupOutputBeforeBuild()
 .enableBuildNotifications()
 .enableSourceMaps(!Encore.isProduction())
 // enables hashed filenames (e.g. app.abc123.css)
@@ -75,15 +72,23 @@ Encore
 .copyFiles([
     {
         from: "./node_modules/bootstrap-icons/font/fonts",
-        to: "../build/fonts/[path][name].[ext]",
+        to: "fonts/[path][name].[ext]",
+        context: path.resolve(__dirname, "node_modules", "bootstrap-icons", "font", "fonts")
     },
     {
         from: "./node_modules/flag-icons/flags/4x3",
-        to: "../build/flag-icons/flags//4x3/[path][name].[ext]",
+        to: "flag-icons/flags/4x3/[path][name].[ext]",
+        context: path.resolve(__dirname, "node_modules", "flag-icons", "flags", "4x3")
     },
     {
         from: "./fonts",
-        to: "../build/fonts/[path][name].[ext]",
+        to: "fonts/[path][name].[ext]",
+        context: path.resolve(__dirname, "..", "assets", "fonts")
+    },
+    {
+        from: "./images",
+        to: "images/[path][name].[ext]",
+        context: path.resolve(__dirname, "..", "assets", "images")
     },
 ])
 .addAliases({

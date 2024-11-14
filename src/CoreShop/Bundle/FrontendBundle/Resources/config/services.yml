@@ -32,12 +32,6 @@ services:
         tags:
             - { name: twig.extension }
 
-    CoreShop\Bundle\FrontendBundle\Twig\TranslationExtension:
-        arguments:
-            - '@Symfony\Contracts\Translation\TranslatorInterface'
-        tags:
-            - { name: twig.extension }
-
     CoreShop\Bundle\FrontendBundle\Controller\Extend\CartWidgetController:
         arguments:
             $shopperContext: '@CoreShop\Component\Core\Context\ShopperContextInterface'

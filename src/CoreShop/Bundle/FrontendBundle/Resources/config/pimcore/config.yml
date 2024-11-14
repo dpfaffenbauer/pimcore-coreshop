@@ -2,8 +2,12 @@ twig:
     form_themes:
         - '@CoreShopFrontend/Form/fields.html.twig'
 
-# TODO SET CORRECT THE PATH #
 webpack_encore:
-    output_path: '%kernel.project_dir%/src/CoreShop/Bundle/FrontendBundle/Resources/public/build'
-    script_attributes:
-        defer: true
+    builds:
+        coreshop_frontend: '%coreshop.frontend_dir%/Resources/public/build'
+
+framework:
+    assets:
+        packages:
+            coreshop_frontend:
+                json_manifest_path: '%coreshop.frontend_dir%/Resources/public/build/manifest.json'

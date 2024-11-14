@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light w-100">
     <div class="d-flex align-items-center justify-content-between w-100">
         <a href="{{ path('coreshop_index') }}" class="navbar-brand">
-            <img src="{{ asset('bundles/coreshopfrontend/static/images/logo-full.svg') }}" title="CoreShop" alt="CoreShop" class="img-fluid" width="160"/>
+            <img src="{{ asset('bundles/coreshopfrontend/images/logo-full.svg', 'coreshop_frontend') }}" title="CoreShop" alt="CoreShop" class="img-fluid" width="160"/>
         </a>
         <div class="coreshop-main-nav-search d-none d-lg-block">
             {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\SearchController::widgetAction')) }}

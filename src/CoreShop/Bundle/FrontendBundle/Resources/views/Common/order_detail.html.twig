@@ -48,7 +48,7 @@
     <div class="row">
         <div class="col-12 col-xl-8">
             {% for item in order.items %}
-                {% include '@CoreShopFrontend/Common/Cart/_item.html.twig' with {'item': item, 'btnremove': true} %}
+                {% include '@CoreShopFrontend/Common/Order/_item.html.twig' with {'item': item, 'btnremove': true} %}
             {% endfor %}
         </div>
 
