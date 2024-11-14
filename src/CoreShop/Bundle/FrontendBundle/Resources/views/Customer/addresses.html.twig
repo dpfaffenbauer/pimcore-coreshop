@@ -37,7 +37,7 @@
                             <td class="align-middle">{{ address.number }}</td>
                             <td class="align-middle">{{ address.postcode }}</td>
                             <td class="align-middle">{{ address.city }}</td>
-                            <td class="align-middle">{{ address.country|upper|coreshop_country_name(app.request.locale) }}</td>
+                            <td class="align-middle">{{ address.country }}</td>
                             <td colspan="2" class="text-end align-middle">
                                 <div class="d-inline-flex gap-2">
                                     {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_EDIT') %}
