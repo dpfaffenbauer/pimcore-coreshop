@@ -1,3 +1,10 @@
+# 4.0.12
+
+* [PayumBundle] remove payment_state processing to confirm orders by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2743
+* [Docs] Upgrade guide: Mention emergency recovery if major version got updated without updating to latest minor version first by @BlackbitDevs in https://github.com/coreshop/CoreShop/pull/2745
+* [Core] allow multiple store-values by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2747
+* [CoreBundle] fix quantity price rules customerGroups condition by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2750
+
 ## 4.0.11
 
 * [Pimcore] use getCount() instead of getTotalCount() for BatchListing by @hethehe in https://github.com/coreshop/CoreShop/pull/2715
