@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "coreshop/pimcore-bundle": "^4.0",
     "sylius/theme-bundle": "^2.2",
     "pimcore/pimcore": "^11.0",
@@ -50,7 +50,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "4.1-dev"
     }
   },
   "config": {

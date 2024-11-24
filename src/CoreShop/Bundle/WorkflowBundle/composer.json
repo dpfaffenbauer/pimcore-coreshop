@@ -31,7 +31,7 @@
   ],
   "require": {
     "coreshop/pimcore": "^4.0",
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "symfony/config": "^6.3",
     "symfony/workflow": "^6.3",
     "symfony/yaml": "^6.3",
@@ -57,7 +57,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "4.1-dev"
     }
   },
   "config": {
