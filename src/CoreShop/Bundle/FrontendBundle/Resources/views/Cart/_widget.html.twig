@@ -1,11 +1,12 @@
 {% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
 
 <div id="cart" class="cart-widget btn-group btn-block">
-    <button type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
+    <button type="button" class="btn btn-link dropdown-toggle d-flex align-items-center gap-2" data-bs-toggle="dropdown">
         <span class="cart-number">{% if cart.hasItems %}{{ cart.items|length }}{% else %}0{% endif %}</span>
         <i class="bi bi-cart"></i>
+        <span class="cart-total" {{ coreshop_test_html_attribute('cart-total') }}>{{ currency.convertAndFormat(cart.total) }}</span>
     </button>
-    <span class="cart-total" {{ coreshop_test_html_attribute('cart-total') }}>{{ currency.convertAndFormat(cart.total) }}</span>
+
     <div class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
         <div class="pt-1 px-3">
             {% if cart.hasItems %}

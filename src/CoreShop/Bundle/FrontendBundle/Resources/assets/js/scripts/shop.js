@@ -142,6 +142,14 @@ const shop = window.shop || {};
         const shippingAddress = addressStep.querySelector('select[name="coreshop[shippingAddress]"]');
         const useIasS = addressStep.querySelector('[name="coreshop[useInvoiceAsShipping]"]');
 
+        if (invoiceAddress) {
+            updateAddress(invoiceAddress, useIasS);
+        }
+
+        if (shippingAddress) {
+            updateShippingAddress(shippingAddress)
+        }
+
         setupAddressChangeEvents(invoiceAddress, shippingAddress, useIasS);
     };
 

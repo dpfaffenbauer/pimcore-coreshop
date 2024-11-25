@@ -23,7 +23,7 @@
     {{ product.shortDescription }}
 </div>
 <div class="product-price d-flex flex-column mb-2 mt-auto px-3">
-    {{ product_price.display_product_price(product, null, false, false) }}
+    {{ product_price.display_product_price(product) }}
 </div>
 {% if coreshop_inventory_is_available(product) %}
     <div class="cart-button px-3 pb-3">

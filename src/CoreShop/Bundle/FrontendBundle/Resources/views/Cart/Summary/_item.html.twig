@@ -39,7 +39,7 @@
                 <span class="price-new" {{ coreshop_test_html_attribute('cart-item-unit-price', item.name) }}>{{ currency.convertAndFormat(price) }}</span>
                 {% if price < retailPrice %}
                     {% if discountPrice > 0 %}
-                        <span class="price-old">{{ currency.convertAndFormat(retailPrice) }}</span>
+                        <span class="price-old order-2 text-decoration-line-through text-red">{{ currency.convertAndFormat(retailPrice) }}</span>
                     {% endif %}
                     {% if discount < 0 %}
                         <span class="price-discount">(-{{ currency.convertAndFormat(discount) }})</span>
@@ -74,9 +74,10 @@
                     <span class="unit-definition unit-name">{{ item.unitDefinition.unit.name }}</span>
                 {% endif %}
             {% else %}
-                <div class="input-group">
+                <div class="input-group gap-2">
                     {% set relation_id = random() %}
-                    {{ form_widget(form.quantity, coreshop_test_form_attribute('cart-item-quantity-input', item.name), {attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }}) }}
+                    {{ form_widget(form.quantity, {attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }}, coreshop_test_form_attribute('cart-item-quantity-input', item.name)) }}
+
                     {% if item.hasUnitDefinition %}
                         <div class="input-group-append">
                             <span class="input-group-text" {{ coreshop_test_html_attribute('cart-item-unit-' ~ item.unitDefinition.id, item.name) }}>

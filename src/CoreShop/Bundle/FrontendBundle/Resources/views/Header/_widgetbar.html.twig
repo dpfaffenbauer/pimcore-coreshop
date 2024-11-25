@@ -13,7 +13,7 @@
                 </a>
             {% endif %}
             {% if is_granted('CORESHOP_CART') %}
-                <div class="col-md-3 p-sm-2 me-sm-2 ">
+                <div class="col-md-6 p-sm-2 me-sm-2 ">
                     {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
                 </div>
             {% endif %}

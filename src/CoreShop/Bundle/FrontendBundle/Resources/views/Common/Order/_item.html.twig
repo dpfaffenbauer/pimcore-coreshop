@@ -41,7 +41,7 @@
                     <span class="price-new">{{ currency.convertAndFormat(price) }}</span>
                     {% if price < retailPrice %}
                         {% if discountPrice > 0 %}
-                            <span class="price-old">{{ currency.convertAndFormat(retailPrice) }}</span>
+                            <span class="price-old order-2 text-decoration-line-through text-red">{{ currency.convertAndFormat(retailPrice) }}</span>
                         {% endif %}
                         {% if discount < 0 %}
                             <span class="price-discount">(-{{ currency.convertAndFormat(discount) }})</span>
@@ -72,7 +72,7 @@
         {% if item %}
         <div class="d-flex justify-content-end gap-3">
             <div class="text-center">
-                {% if is_granted('CORESHOP_CART_REMOVE_ITEM') and not btnremove %}sss
+                {% if is_granted('CORESHOP_CART_REMOVE_ITEM') and not btnremove %}
                     <a
                             href="{{ path('coreshop_cart_remove', {cartItem: item.id|coreshop_string}) }}"
                             title="{{ 'coreshop.ui.remove'|trans }}"
