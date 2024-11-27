@@ -1,3 +1,13 @@
 twig:
     form_themes:
         - '@CoreShopFrontend/Form/fields.html.twig'
+
+webpack_encore:
+    builds:
+        coreshop_frontend: '%coreshop.frontend_dir%/Resources/public/build'
+
+framework:
+    assets:
+        packages:
+            coreshop_frontend:
+                json_manifest_path: '%coreshop.frontend_dir%/Resources/public/build/manifest.json'

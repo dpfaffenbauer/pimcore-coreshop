@@ -1,0 +1,16 @@
+@import 'mixins';
+
+footer {
+    margin-top: rem(120px);
+    padding: rem(48px) 0;
+    background-color: var(--coreshop-theme-light);
+
+    a {
+        color: var(--coreshop-body-color);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

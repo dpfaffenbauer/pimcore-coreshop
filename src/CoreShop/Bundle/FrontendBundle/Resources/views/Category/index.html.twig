@@ -14,47 +14,42 @@
         {{ category.name }}
     </h2>
 
-    <div class="product-filter">
+    <div class="product-filter pb-4 pt-2">
         <div class="row">
             <div class="col-md-4">
-                <div class="display">
-                    <a href="{{ pimcore_url({'type': 'list'})  }}" class="{% if type == 'list' %} active {% endif %}" {{ coreshop_test_html_attribute('view-list') }}>
-                        <i class="fa fa-th-list" title="" data-original-title="{{ 'coreshop.ui.list_view'|trans }}"></i>
+                <div class="d-flex gap-2">
+                    <a href="{{ pimcore_url({'type': 'list'})  }}" class="text-decoration-none {% if type == 'list' %} active {% endif %}" {{ coreshop_test_html_attribute('view-list') }}>
+                        <i class="bi bi-view-list " title="" data-original-title="{{ 'coreshop.ui.list_view'|trans }}"></i>
                     </a>
-                    <a href="{{ pimcore_url({'type': 'grid'})  }}" class="{% if type == 'grid' %} active {% endif %}" {{ coreshop_test_html_attribute('view-grid') }}>
-                        <i class="fa fa-th" title="" data-original-title="{{ 'coreshop.ui.grid_view'|trans }}"></i>
+                    <a href="{{ pimcore_url({'type': 'grid'})  }}" class="text-decoration-none {% if type == 'grid' %} active {% endif %}" {{ coreshop_test_html_attribute('view-grid') }}>
+                        <i class="bi bi-grid" title="" data-original-title="{{ 'coreshop.ui.grid_view'|trans }}"></i>
                     </a>
                 </div>
             </div>
-            <div class="col-md-2 text-right">
-                <label class="col-form-label">{{ 'coreshop.ui.sort'|trans }}</label>
-            </div>
-            <div class="col-md-3 text-right">
-                {#
-                    TODO: Maybe use form for this?
-                #}
-                <select class="form-control site-reload" name="sort" {{ coreshop_test_html_attribute('order-selection') }}>
-                    {% for value in validSortElements %}
-                        {% set asc = value ~ '_asc' %}
-                        {% set desc = value ~ '_desc' %}
-                        <option value="{{ asc }}" {% if sort == asc %} selected="selected" {% endif %}>{{ value|capitalize ~ ' ' ~ ('coreshop.ui.ascending'|trans) }}</option>
-                        <option value="{{ desc }}" {% if sort == desc %} selected="selected" {% endif %}>{{ value|capitalize ~ ' ' ~ ('coreshop.ui.descending'|trans) }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-1 text-right">
-                <label class="col-form-label">{{ 'coreshop.ui.show'|trans }}</label>
-            </div>
-            <div class="col-md-2 text-right">
-                <select class="form-control site-reload" name="perPage">
-                    {% for perPageList in perPageAllowed %}
-                        <option value="{{ perPageList }}" {% if perPageList == perPage %} selected="selected" {% endif %}>{{ perPageList }}</option>
-                    {% endfor %}
-                </select>
+            <div class="d-flex col-md-8 gap-3 justify-content-end">
+                <div class="d-sm-flex align-items-center gap-sm-2">
+                    <label for="sorting" >{{ 'coreshop.ui.sort'|trans }}</label>
+                    <select id="sorting" class="form-control-sm site-reload" name="sort" {{ coreshop_test_html_attribute('order-selection') }}>
+                        {% for value in validSortElements %}
+                            {% set asc = value ~ '_asc' %}
+                            {% set desc = value ~ '_desc' %}
+                            <option value="{{ asc }}" {% if sort == asc %} selected="selected" {% endif %}>{{ value|capitalize ~ ' ' ~ ('coreshop.ui.ascending'|trans) }}</option>
+                            <option value="{{ desc }}" {% if sort == desc %} selected="selected" {% endif %}>{{ value|capitalize ~ ' ' ~ ('coreshop.ui.descending'|trans) }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="d-sm-flex align-items-center gap-sm-2">
+                    <label for="show-per-page">{{ 'coreshop.ui.show'|trans }}</label>
+                    <select id="show-per-page" class="form-control-sm site-reload" name="perPage">
+                        {% for perPageList in perPageAllowed %}
+                            <option value="{{ perPageList }}" {% if perPageList == perPage %} selected="selected" {% endif %}>{{ perPageList }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-
+    
     <div class="row">
         {% for product in paginator.items %}
             {% include '@CoreShopFrontend/Category/_'~type~'.html.twig' with {

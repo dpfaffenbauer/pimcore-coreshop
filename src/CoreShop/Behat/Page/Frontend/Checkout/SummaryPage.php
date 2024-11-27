@@ -34,12 +34,12 @@ class SummaryPage extends AbstractFrontendPage implements SummaryPageInterface
 
     public function acceptTermsOfService(): void
     {
-        $this->getElement('terms_of_service')->check();
+        $this->getElement('terms_of_service')->click();
     }
 
     public function declineTermsOfService(): void
     {
-        $this->getElement('terms_of_service')->uncheck();
+        $this->getElement('terms_of_service')->click();
     }
 
     public function submitQuote(): void

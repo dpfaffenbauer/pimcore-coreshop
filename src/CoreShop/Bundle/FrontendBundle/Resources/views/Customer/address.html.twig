@@ -27,7 +27,7 @@
         <section class="registration-area">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card card-smart">
+                    <div class="card bg-light border-0">
                         <div class="card-body">
                             {{ form_start(form) }}
                                 {{ form_errors(form,coreshop_test_form_attribute('address-validation-errors')) }}
@@ -35,19 +35,42 @@
                                 {% if form.addressAffiliation is defined %}
                                     {{ form_row(form.addressAffiliation) }}
                                 {% endif %}
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.salutation, coreshop_test_form_attribute('address-salutation'), {attr:{class:'form-select'}}) }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.firstname, coreshop_test_form_attribute('address-firstname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.lastname, coreshop_test_form_attribute('address-lastname')) }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.street,coreshop_test_form_attribute('address-street')) }}
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        {{ form_row(form.number, coreshop_test_form_attribute('address-number') ) }}
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        {{ form_row(form.postcode, coreshop_test_form_attribute('address-postcode')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.phoneNumber, coreshop_test_form_attribute('address-phoneNumber')) }}
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        {{ form_row(form.city, coreshop_test_form_attribute('address-city')) }}
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        {{ form_row(form.country, coreshop_test_form_attribute('address-country'), {attr: {class: 'form-select'}}) }}
+                                    </div>
 
-                                {{ form_row(form.salutation,coreshop_test_form_attribute('address-salutation')) }}
-                                {{ form_row(form.firstname,coreshop_test_form_attribute('address-firstname')) }}
-                                {{ form_row(form.lastname,coreshop_test_form_attribute('address-lastname')) }}
-                                {{ form_row(form.street,coreshop_test_form_attribute('address-street')) }}
-                                {{ form_row(form.number,coreshop_test_form_attribute('address-number')) }}
-                                {{ form_row(form.postcode,coreshop_test_form_attribute('address-postcode')) }}
-                                {{ form_row(form.city,coreshop_test_form_attribute('address-city')) }}
-                                {{ form_row(form.country,coreshop_test_form_attribute('address-country')) }}
-                                {{ form_row(form.phoneNumber,coreshop_test_form_attribute('address-phoneNumber')) }}
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success" {{ coreshop_test_html_attribute('address-save-changes') }} >
+                                </div>
+                                <div class="form-group d-flex">
+                                    <button type="submit" class="btn btn-primary ms-auto" {{ coreshop_test_html_attribute('address-save-changes') }} >
                                         {% if not address.id %}
                                             {{ 'coreshop.ui.add'|trans }}
                                         {% else %}

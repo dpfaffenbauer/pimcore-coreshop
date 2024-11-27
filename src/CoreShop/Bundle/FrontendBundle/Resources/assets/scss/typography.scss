@@ -1,0 +1,26 @@
+@import 'mixins.scss';
+
+.text-14 {
+    font-size: rem(14px);
+}
+
+.text-600 {
+    font-weight: var(--coreshop-font-600);
+}
+
+.gray-600 {
+    color: var(--coreshop-gray-600);
+}
+
+svg {
+    width: 0.875em;
+    height: 0.875em;
+}
+
+b, strong {
+    font-weight: 600;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    --bs-dropdown-link-active-bg: var(--coreshop-primary);
+}

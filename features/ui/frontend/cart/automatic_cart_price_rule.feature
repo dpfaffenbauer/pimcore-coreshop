@@ -15,7 +15,7 @@ Feature: Getting an automatic cart price rule
         Then I should be on the cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
-        And this item should have name "TSHIRT"
+        And this item should have name "TShirt"
         And I should see "TShirt" with unit price "€100.00" in my cart
         And my cart's total should be "€80.00"
 
@@ -25,6 +25,6 @@ Feature: Getting an automatic cart price rule
         Then I should be on the cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
-        And this item should have name "TSHIRT"
+        And this item should have name "TShirt"
         And I should see "TShirt" with unit price "€100.00" in my cart
         And my cart's total should be "€70.00"

@@ -1,4 +1,4 @@
-{% macro display_product_price(product, with_tax) %}
+{% macro display_product_price(product, with_tax, order = true, display_tax = true) %}
     {% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
 
     {% if with_tax is null %}
@@ -14,18 +14,26 @@
     {% set retailPriceUnformatted = product|coreshop_product_retail_price(coreshop.context, with_tax) %}
     {% set retailPrice = currency.convertAndFormat(retailPriceUnformatted) %}
 
-    <span class="price-new" {{ coreshop_test_html_attribute('product-price', price) }}>{{ price }}</span>
+    <span class="price-new order-{% if order %}1{% else %}2{% endif %}" {{ coreshop_test_html_attribute('product-price', price) }}>{{ price }}</span>
     {% if priceUnformatted < discountPriceUnformatted %}
-        <span class="price-old" {{ coreshop_test_html_attribute('product-original-price', discountPrice) }}>{{ discountPrice }}</span>
+        <span class="price-old order-{% if order %}2{% else %}1{% endif %} text-decoration-line-through text-red" {{ coreshop_test_html_attribute('product-discount', discountPrice) }}><small>{{ discountPrice }}</small></span>
     {% elseif priceUnformatted < retailPriceUnformatted %}
-        <span class="price-old" {{ coreshop_test_html_attribute('product-original-price', discountPrice) }}>{{ retailPrice }}</span>
+        <span class="price-old order-{% if order %}2{% else %}1{% endif %} text-decoration-line-through text-red" {{ coreshop_test_html_attribute('product-original-price', retailPrice) }}><small>{{ retailPrice }}</small></span>
     {% endif %}
     {% if discountUnformatted > 0 %}
         <span class="price-discount" {{ coreshop_test_html_attribute('product-discount', discount) }}>(-{{ discount }})</span>
     {% endif %}
+
+    {% if display_tax %}
+        {% if with_tax %}
+            <span class="order-3"><small>{{ 'coreshop.ui.inc_vat'|trans }}</small></span>
+        {% else %}
+            <span class="order-3"><small>{{ 'coreshop.ui.excl_vat'|trans }}</small></span>
+        {% endif %}
+    {% endif %}
 {% endmacro %}
 
-{% macro display_product_unit_prices(product, with_tax) %}
+{% macro display_product_unit_prices(product, with_tax, order = true, display_tax = true) %}
     {% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
     {% import _self as product_price %}
 
@@ -36,17 +44,20 @@
     {% set defaultUnitDefinition = product.unitDefinitions.defaultUnitDefinition %}
     {% set additionalUnitDefinitions = product.unitDefinitions.additionalUnitDefinitions %}
 
-    <div class="price default-unit-price">
+    <div class="d-flex flex-column price default-unit-price my-3">
 
         {% set price_suffix_label = product.itemQuantityFactor > 1
             ? 'coreshop.ui.price.per_unit_name_and_quantity_factor'|trans|format(product.itemQuantityFactor, defaultUnitDefinition.unit.translation(app.request.locale).fullLabel)
             : 'coreshop.ui.price.per_unit_name'|trans|format(defaultUnitDefinition.unit.translation(app.request.locale).fullLabel)
         %}
 
-        <span class="price-head">{{ 'coreshop.ui.price'|trans }} {{ price_suffix_label }}:</span> {{ product_price.display_product_price(product) }}
+        <span class="price-head">{{ 'coreshop.ui.price'|trans }} {{ price_suffix_label }}:</span>
+        {{ product_price.display_product_price(product, with_tax, order, display_tax) }}
+        {#
         <div class="tax">
             {{ 'coreshop.ui.product.tax.inc'|trans|format(product|coreshop_product_tax_rate(coreshop.context)) }} ({{ currency.convertAndFormat(product|coreshop_product_tax_amount(coreshop.context)) }})
         </div>
+        #}
     </div>
 
     {% if additionalUnitDefinitions|length > 0 %}
@@ -55,9 +66,9 @@
                 <div class="card-header">
                     {{ 'coreshop.ui.additional_units'|trans }}
                 </div>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush px-3 py-2">
                     {% for additionalUnit in additionalUnitDefinitions %}
-                        <li class="list-group-item">
+                        <li class="list-group-item py-1">
                             {% set additionalUnitPrice = product|coreshop_product_price(coreshop.context|merge({unitDefinition: additionalUnit}), with_tax) %}
                             {% set additionalUnitPrice = currency.convertAndFormat(additionalUnitPrice) %}
                             <span class="price-head">{{ 'coreshop.ui.price'|trans }} per {{ additionalUnit.unit.translation(app.request.locale).fullLabel }}:</span>

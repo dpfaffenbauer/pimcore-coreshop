@@ -1,0 +1,19 @@
+.coreshop-flash-message {
+    position: fixed;
+    bottom: 4rem;
+    right: 2rem;
+    min-width: 16rem;
+    animation: hideFlash 2s 2s linear forwards;
+    z-index: 999;
+}
+
+@keyframes hideFlash {
+    0% {
+        right: 2rem;
+    }
+
+    100% {
+        right: -100%
+    }
+
+}

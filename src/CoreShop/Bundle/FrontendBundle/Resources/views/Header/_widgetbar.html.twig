@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light w-100">
+    <div class="d-flex align-items-center justify-content-between w-100">
+        <a href="{{ path('coreshop_index') }}" class="navbar-brand">
+            <img src="{{ asset('bundles/coreshopfrontend/images/logo-full.svg', 'coreshop_frontend') }}" title="CoreShop" alt="CoreShop" class="img-fluid" width="160"/>
+        </a>
+        <div class="coreshop-main-nav-search d-none d-lg-block">
+            {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\SearchController::widgetAction')) }}
+        </div>
+        <div class="d-flex align-items-center">
+            {% if is_granted('CORESHOP_STORAGE_LIST_MULTI_LIST_ORDER') %}
+                <a href="{{ path('coreshop_cart_list') }}" class="d-flex align-items-center text-decoration-none text-body gap-2">
+                    <i class="bi bi-list-ul"></i> <span class="text-nowrap">{{ 'coreshop.ui.cart_list'|trans }}</span>
+                </a>
+            {% endif %}
+            {% if is_granted('CORESHOP_CART') %}
+                <div class="col-md-6 p-sm-2 me-sm-2 ">
+                    {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CartController::widgetAction')) }}
+                </div>
+            {% endif %}
+            {% include '@CoreShopFrontend/Customer/_userwidget.html.twig' %}
+        </div>
+    </div>
+</nav>

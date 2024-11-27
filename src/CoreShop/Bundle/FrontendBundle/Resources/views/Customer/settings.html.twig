@@ -12,35 +12,46 @@
             </ol>
         </nav>
 
-        <h2 class="main-heading text-center">
-            {{ 'coreshop.ui.settings'|trans }} <br/>
-        </h2>
-
-        <section class="registration-area">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card card-smart">
-                        <div class="card-body">
-                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                                {{ form_row(form.salutation, coreshop_test_form_attribute('salutation')) }}
-                                {{ form_row(form.gender, coreshop_test_form_attribute('gender')) }}
-                                {{ form_row(form.firstname, coreshop_test_form_attribute('firstname')) }}
-                                {{ form_row(form.lastname, coreshop_test_form_attribute('lastname')) }}
-                                {{ form_row(form.defaultAddress, coreshop_test_form_attribute('default-address')) }}
-                                {{ form_row(form.newsletterActive, coreshop_test_form_attribute('newsletter-active')) }}
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success" {{ coreshop_test_html_attribute('save-changes') }}>
-                                        {{ 'coreshop.ui.save'|trans }}
-                                    </button>
+        <div class="row">
+            {% include '@CoreShopFrontend/Customer/_sidebar.html.twig' %}
+            <div class="col-12 col-lg-9">
+                <h3>
+                    {{ 'coreshop.ui.settings'|trans }} <br/>
+                </h3>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card bg-light border-0">
+                            <div class="card-body">
+                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.salutation, coreshop_test_form_attribute('salutation')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.gender, coreshop_test_form_attribute('gender')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.firstname, coreshop_test_form_attribute('firstname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.lastname, coreshop_test_form_attribute('lastname')) }}
+                                    </div>
+                                    {{ form_row(form.defaultAddress, {attr: {class:'form-select'}}) }}
+                                    {{ form_row(form.newsletterActive, coreshop_test_form_attribute('newsletter-active')) }}
                                 </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" {{ coreshop_test_html_attribute('save-changes') }}>
+                                            {{ 'coreshop.ui.save'|trans }}
+                                        </button>
+                                    </div>
 
-                                {{ form_row(form._token) }}
-                            {{ form_end(form, {'render_rest': false}) }}
+                                    {{ form_row(form._token) }}
+                                {{ form_end(form, {'render_rest': false}) }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 {% endblock %}

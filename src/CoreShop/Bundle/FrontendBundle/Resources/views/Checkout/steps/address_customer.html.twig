@@ -1,8 +1,10 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<div class="card">
-    <div class="card-header">
-        {{ 'coreshop.ui.address'|trans }}
+{% include '@CoreShopFrontend/Common/flash_messages.html.twig' %}
+
+<div class="card border-0">
+    <div class="px-3 pt-3 border-0">
+        <h3 class="mb-0">{{ 'coreshop.ui.address'|trans }}</h3>
     </div>
     <div class="card-body">
         {% if form.invoiceAddress.vars.choices|length > 0 or form.shippingAddress.vars.choices|length > 0 %}
@@ -13,13 +15,13 @@
             <div class="row">
 
                 <div class="col-12 col-sm-6 invoice-address-selector">
-                    {{ form_row(form.invoiceAddress, coreshop_test_form_attribute('invoice-address')) }}
+                    {{ form_row(form.invoiceAddress, coreshop_test_form_attribute('invoice-address'), {attr: {class: 'form-select'}}) }}
                 </div>
 
                 {% if hasShippableItems %}
                     {% set hideShipmentSelector = form.shippingAddress.vars.choices|length > 0 and form.useInvoiceAsShipping is defined and form.useInvoiceAsShipping.vars.data and form.shippingAddress.vars.valid != false %}
                     <div class="col-12 col-sm-6 shipping-address-selector" style="{% if hideShipmentSelector == true %} display:none; {% endif %}">
-                        {{ form_row(form.shippingAddress, coreshop_test_form_attribute('shipping-address')) }}
+                        {{ form_row(form.shippingAddress, coreshop_test_form_attribute('shipping-address'), {attr: {class: 'form-select'}}) }}
                     </div>
                 {% endif %}
 
@@ -35,40 +37,43 @@
 
             <div class="row mb-4">
 
-                <div class="col-12 col-sm-6">
-                    <div class="card card-smart">
-                        <div class="card-header">
-                            <h4 class="card-title">
+                <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <div class="card bg-light border-0">
+                        <div class="px-3 pt-3 border-0">
+                            <h4 class="mb-0">
                                 {{ 'coreshop.ui.invoice_address'|trans }}
                             </h4>
                         </div>
                         <div class="card-body panel-invoice-address mb-2">
                             <!-- filled by js -->
                         </div>
-                        <div class="card-footer">
+                        <div class="p-3 border-0">
                             <a href="{{ path('coreshop_customer_address_new', {'_redirect': path('coreshop_checkout', {stepIdentifier: identifier}), address_identifier: 'invoice'}) }}"
-                               class="btn btn-info pull-left">
+                               class="btn btn-secondary">
                                 {{ 'coreshop.ui.add_new_invoice_address'|trans }}
+
+                                <i class="bi bi-plus-circle ms-2"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 {% if hasShippableItems %}
-                    <div class="col-12 col-sm-6">
-                        <div class="card card-smart">
-                            <div class="card-header">
-                                <h4 class="card-title">
+                    <div class="col-12 col-md-6">
+                        <div class="card bg-light border-0">
+                            <div class="px-3 pt-3 border-0">
+                                <h4 class="mb-0">
                                     {{ 'coreshop.ui.shipping_address'|trans }}
                                 </h4>
                             </div>
                             <div class="card-body panel-shipping-address mb-2">
                                 <!-- filled by js -->
                             </div>
-                            <div class="card-footer d-none">
+                            <div class="card-footer p-3 bg-light border-0 d-none">
                                 <a href="{{ path('coreshop_customer_address_new', {'_redirect': path('coreshop_checkout', {stepIdentifier: identifier}), address_identifier: 'shipping'}) }}"
-                                   class="btn btn-info pull-left">
+                                   class="btn btn-secondary">
                                     {{ 'coreshop.ui.add_new_shipping_address'|trans }}
+                                    <i class="bi bi-plus-circle ms-2"></i>
                                 </a>
                             </div>
                         </div>
@@ -80,14 +85,14 @@
             <div class="row">
                 {% set previousStep = coreshop_checkout_steps_get_previous() %}
                 {% if previousStep is not null %}
-                    <div class="col-12 col-sm-6">
+                    <div class="col-6">
                         <a href="{{ path('coreshop_checkout', {'stepIdentifier': previousStep}) }}" class="btn btn-secondary">
                             {{ 'coreshop.ui.back'|trans }}
                         </a>
                     </div>
                 {% endif %}
-                <div class="col-12 {{ previousStep is not null ? 'col-sm-6' : '' }}">
-                    <button type="submit" class="btn btn-success pull-right" {{ coreshop_test_html_attribute('submit-address-step') }}>
+                <div class="d-flex col-6">
+                    <button type="submit" class="btn btn-primary ms-auto" {{ coreshop_test_html_attribute('submit-address-step') }}>
                         {{ 'coreshop.ui.proceed'|trans }}
                     </button>
                 </div>
@@ -100,8 +105,9 @@
             <div class="row">
                 <div class="col-12">
                     <a href="{{ path('coreshop_customer_address_new', {'_redirect': path('coreshop_checkout', {stepIdentifier: identifier}), address_identifier: 'invoice'}) }}"
-                       class="btn btn-info pull-left">
+                       class="btn btn-secondary">
                         {{ 'coreshop.ui.add_new_invoice_address'|trans }}
+                        <i class="bi bi-plus-circle ms-2"></i>
                     </a>
                 </div>
             </div>

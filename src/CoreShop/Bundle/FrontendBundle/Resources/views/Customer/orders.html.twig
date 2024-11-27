@@ -12,45 +12,42 @@
             </ol>
         </nav>
 
-        <h2 class="main-heading text-center">
-            {{ 'coreshop.ui.orders'|trans }}
-        </h2>
+        <div class="row">
+            {% include '@CoreShopFrontend/Customer/_sidebar.html.twig' %}
 
-        <div class="table-responsive compare-table">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <td>{{ 'coreshop.ui.order_number'|trans }}</td>
-                    <td>{{ 'coreshop.ui.date'|trans }}</td>
-                    <td>{{ 'coreshop.ui.total'|trans }}</td>
-                    <td>{{ 'coreshop.ui.state'|trans }}</td>
-                    <td></td>
-                </tr>
-                </thead>
-                <tbody>
-                {% for order in orders %}
-                <tr>
-                    <td>{{ order.orderNumber }}</td>
-                    <td>
-                        {{ order.orderDate|date("d.m.Y") }}
-                    </td>
-                    <td>
-                        {{ currency.format(order.convertedTotal, order.currency.isoCode) }}
-                    </td>
-                    <td>
-                        <span class="badge badge-info">{{ order|coreshop_order_state.calculatedState }}</span>
-                    </td>
-                    <td>
-                        {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDER_DETAIL') %}
-                            <a class="btn btn-secondary" href="{{ path('coreshop_customer_order_detail', {order: order.id}) }}">
-                                {{ 'coreshop.ui.show_detail'|trans }}
-                            </a>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="col-12 col-lg-9">
+                <h3>{{ 'coreshop.ui.orders'|trans }}</h3>
+                <table class="mt-3 table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'coreshop.ui.order_number'|trans }}</th>
+                        <th>{{ 'coreshop.ui.date'|trans }}</th>
+                        <th>{{ 'coreshop.ui.total'|trans }}</th>
+                        <th>{{ 'coreshop.ui.state'|trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td class="align-middle">{{ order.orderNumber }}</td>
+                            <td class="align-middle">{{ order.orderDate|date("d.m.Y") }}</td>
+                            <td class="align-middle">{{ currency.format(order.convertedTotal, order.currency.isoCode) }}</td>
+                            <td class="align-middle"><span class="size-h6 badge bg-success">{{ order|coreshop_order_state.calculatedState }}</span></td>
+                            <td class="align-middle text-end text-md-start">
+                                {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDER_DETAIL') %}
+                                    <a class="btn btn-link text-primary" href="{{ path('coreshop_customer_order_detail', {order: order.id}) }}">
+                                        <i class="bi bi-arrow-up-right me-2"></i>
+                                        <span class="link-description text-body">{{ 'coreshop.ui.show_detail'|trans }}</span>
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}
