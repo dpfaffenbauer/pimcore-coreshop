@@ -24,6 +24,12 @@ services:
         tags:
             - { name: twig.extension }
 
+    CoreShop\Bundle\FrontendBundle\Twig\WishlistExtension:
+        arguments:
+            $wishlistContext: '@coreshop.context.storage_list.wishlist'
+        tags:
+            - { name: twig.extension }
+
     CoreShop\Bundle\FrontendBundle\Twig\MergeRecursiveExtension:
         tags:
             - { name: twig.extension }

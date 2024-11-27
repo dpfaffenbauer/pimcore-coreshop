@@ -43,10 +43,28 @@
         <div class="col-12 col-lg-7 product-details">
             {% if coreshop_add_to_cart_available(product) and (cart_allowed or wishlist_allowed) %}
                 {% if wishlist_allowed %}
-                    <div class="d-flex align-items-center">
-                        {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
-                        <span class="link-description">Add to favorites</span>
-                    </div>
+                    {%  if not coreshop_wishlist_product_in(product) %}
+                        <div class="d-flex align-items-center">
+                            {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                            <span class="link-description">Add to favorites</span>
+                        </div>
+                    {%  else %}
+                        <div class="d-flex align-items-center">
+                            {% set wishlist_product_id = coreshop_wishlist_product_id(product) %}
+                            {% if wishlist_product_id %}
+                                <a
+                                        href="{{ path('coreshop_wishlist_remove', {item: wishlist_product_id|coreshop_string}) }}"
+                                        title="{{ 'coreshop.ui.remove'|trans }}"
+                                        class="btn btn-link pb-0 ps-0"
+                                        data-id="{{ wishlist_product_id }}"
+                                        {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
+                                >
+                                    <i class="bi bi-heart-fill me-3"></i><span class="link-description">Remove to favorites</span>
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    {%  endif %}
                 {% endif %}
             {% endif %}
 
@@ -81,21 +99,18 @@
                     <span>{{ 'coreshop.ui.brand'|trans }}:</span> {{ product.manufacturer.name }}
                 </div>
             {% endif %}
-
-
             {% include '@CoreShopFrontend/Product/_variants.html.twig' %}
 
+
+            {# TODO THE PRICE PER UNIT #}
             {% if product.hasUnitDefinitions == true %}
                 <div class="product-price d-flex flex-column">
-                    {{ product_price.display_product_unit_prices(product) }}
+                    {{ product_price.display_product_unit_prices(product, true, false, true) }}
                 </div>
-            {% endif %}
-
-            <div class="product-price d-flex flex-column">
-                {{ product_price.display_product_price(product, null, false, true) }}
-            </div>
-
-            {% if product.hasUnitDefinitions == false %}
+            {% else %}
+                <div class="product-price d-flex flex-column">
+                    {{ product_price.display_product_price(product, null, false, true) }}
+                </div>
                 <div class="tax">
                     <span {{ coreshop_test_html_attribute('product-tax-rate', product|coreshop_product_tax_rate(coreshop.context)) }}>
                         {{ 'coreshop.ui.product.tax.inc'|trans|format(product|coreshop_product_tax_rate(coreshop.context)) }}

@@ -77,3 +77,22 @@
         }
     }
 }
+
+.product-category .attribute-color__item input:disabled+label {
+    opacity: 1;
+}
+
+.btn-wishlist-wrapper-white {
+    i {
+        color: var(--bs-white);
+    }
+}
+
+.product-grid {
+    .badge {
+        &-spec {
+            width: rem(24px);
+            height: rem(24px);
+        }
+    }
+}

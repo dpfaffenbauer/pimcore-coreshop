@@ -5,7 +5,12 @@
 
     {% for priceRule in cart.priceRuleItems %}
         <div class="d-flex justify-content-between align-items-center gap-2">
-            <strong>{{ priceRule.cartPriceRule.label ?: priceRule.cartPriceRule.name }}:</strong>
+            <span class="d-inline-block">
+                <strong>{{ priceRule.cartPriceRule.label ?: priceRule.cartPriceRule.name }}:</strong>
+                {% if priceRule.cartPriceRule.description %}
+                    <span>{{ priceRule.cartPriceRule.description }}</span>
+                {% endif %}
+            </span>
             {% if priceRule.discount != 0 %}
                 <span>
                     {{ currency.convertAndFormat(priceRule.discount(true)) }} <small>({{ currency.convertAndFormat(priceRule.discount(false)) }})</small>

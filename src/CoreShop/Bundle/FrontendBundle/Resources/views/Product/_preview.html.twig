@@ -9,11 +9,28 @@
             {{ product.image|pimcore_image_thumbnail_html('coreshop_productList', {'imgAttributes': {'class': 'card-img-top object-fit-cover'}, 'alt': product.name, 'id': 'image' ~ product.id}) }}
         </a>
 
-        <div class="position-absolute top-0 end-0 pt-3 pe-2">
-            {% if wishlist_allowed %}
-                {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
-            {% endif %}
-        </div>
+        {% if wishlist_allowed %}
+            {%  if not coreshop_wishlist_product_in(product) %}
+                <div class="position-absolute top-0 end-0 pt-3 pe-2 btn-wishlist-wrapper-white">
+                    {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                </div>
+            {%  else %}
+                <div class="position-absolute top-0 end-0 pt-3 pe-2 btn-wishlist-wrapper-white">
+                    {% set wishlist_product_id = coreshop_wishlist_product_id(product) %}
+                    {% if wishlist_product_id %}
+                        <a
+                                href="{{ path('coreshop_wishlist_remove', {item: wishlist_product_id|coreshop_string}) }}"
+                                title="{{ 'coreshop.ui.remove'|trans }}"
+                                class="btn btn-link pb-0"
+                                data-id="{{ wishlist_product_id }}"
+                                {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
+                        >
+                            <i class="bi bi-heart-fill"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {%  endif %}
+        {% endif %}
     {% endif %}
 </div>
 <div class="d-flex flex-column card-body">

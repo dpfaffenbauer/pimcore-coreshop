@@ -10,7 +10,7 @@
 
         <div class="d-flex">
             <a href="{{ path('coreshop_cart_create_named') }}" class="btn btn-secondary mb-3 ms-auto">
-                Create New Cart
+                {{ 'coreshop.ui.create_new_cart'|trans }}
             </a>
         </div>
 
@@ -34,22 +34,25 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="d-flex gap-2 mt-3">
-                    {{ form_widget(form.selectList, coreshop_test_form_attribute('cart-select-button'), {
-                        'attr': {
-                            'class': 'btn btn-primary'
-                        },
-                        'label_html': true,
-                        'label': '<i class="bi bi-cart"></i> Select'
-                    }) }}
-                    {{ form_widget(form.deleteList, coreshop_test_form_attribute('cart-delete-button'),  {
+
+                <div class="d-flex gap-2 mb-3 justify-content-end">
+                    {{ form_widget(form.deleteList, coreshop_test_form_attribute('cart-delete-button')|coreshop_merge_recursive({
                         'attr': {
                             'class': 'btn btn-link'
                         },
                         'label_html': true,
-                        'label': '<i class="bi bi-trash"></i> Delete'
-                    }) }}
+                        'label': '<i class="bi bi-trash"></i> ' ~ 'coreshop.ui.delete'|trans
+                    })) }}
+                    {{ form_widget(form.selectList, coreshop_test_form_attribute('cart-select-button')|coreshop_merge_recursive( {
+                        'attr': {
+                            'class': 'btn btn-primary'
+                        },
+                        'label_html': true,
+                        'label': '<i class="bi bi-cart"></i> ' ~ 'coreshop.ui.select_cart'|trans
+                    })) }}
+
                 </div>
+
             {{ form_widget(form._token) }}
             {{ form_end(form) }}
         {% endif %}

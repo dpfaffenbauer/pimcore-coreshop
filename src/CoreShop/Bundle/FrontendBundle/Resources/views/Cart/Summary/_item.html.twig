@@ -20,9 +20,6 @@
                             {% if item.isGiftItem %}
                                 <br/><span>{{ 'coreshop.ui.gift_item'|trans }}</span>
                             {% endif %}
-                            <p class="card-text">
-                                shortdescription
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -69,7 +66,7 @@
     <div class="d-flex justify-content-end gap-3">
         <div>
             {% if item.isGiftItem %}
-                <span>{{ item.quantity }}</span>
+                <span class="d-inline-block me-2">{{ item.quantity }}</span>
                 {% if item.hasUnitDefinition %}
                     <span class="unit-definition unit-name">{{ item.unitDefinition.unit.name }}</span>
                 {% endif %}
