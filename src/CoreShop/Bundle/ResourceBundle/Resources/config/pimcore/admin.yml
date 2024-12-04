@@ -25,6 +25,7 @@ core_shop_resource:
             selector_selector: '/bundles/coreshopresource/pimcore/js/selector/selector.js'
             resource_creation: '/bundles/coreshopresource/pimcore/js/resource/creation.js'
             events: '/bundles/coreshopresource/pimcore/js/events.js'
+            object_grid_column_resource_field_getter: '/bundles/coreshopresource/pimcore/js/object/gridcolumn/operator/coreshop_resource_field_getter.js'
         css:
             resource: '/bundles/coreshopresource/pimcore/css/resource.css'
         editmode_js:
