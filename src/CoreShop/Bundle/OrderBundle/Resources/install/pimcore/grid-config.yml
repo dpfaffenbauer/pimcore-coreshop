@@ -1,1052 +1,978 @@
 grid_config:
-    order_en:
-        name: 'Order Overview'
-        class: coreshop.order
-        data:
-            language: en
-            sortinfo:
-                field: id
-                direction: DESC
-            classId: null
-            columns:
-                id:
-                    name: id
-                    position: 1
-                    hidden: false
-                    width: 80
-                    fieldConfig:
-                        key: id
-                        label: ID
-                        type: system
-                        layout:
-                            title: id
-                            name: id
-                            datatype: data
-                            fieldtype: system
-                '#5a65a6bced7f5':
-                    name: '#5a65a6bced7f5'
-                    position: 2
-                    hidden: false
-                    width: 109
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Order Number'
-                            type: operator
-                            class: Trimmer
-                            trim: 0
-                            childs:
-                                -
-                                    label: 'Order Number (orderNumber)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: orderNumber
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bced7f5'
-                    isOperator: true
-                '#5a65a6bced85d':
-                    name: '#5a65a6bced85d'
-                    position: 3
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Email
-                            type: operator
-                            class: AnyGetter
-                            attribute: email
-                            param1: ''
-                            isArrayType: false
-                            forwardAttribute: ''
-                            forwardParam1: ''
-                            returnLastResult: false
-                            childs:
-                                -
-                                    label: 'Customer (customer)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: customer
-                                    dataType: coreShopRelation
-                                    childs: {  }
-                        key: '#5a65a6bced85d'
-                    isOperator: true
-                '#5a65a6bced8d0':
-                    name: '#5a65a6bced8d0'
-                    position: 4
-                    hidden: false
-                    width: 180
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Name
-                            type: operator
-                            class: Concatenator
-                            glue: ' '
-                            childs:
-                                -
-                                    label: 'First Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: firstname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Invoice Address (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                                -
-                                    label: 'Last Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: lastname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Invoice Address (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                        key: '#5a65a6bced8d0'
-                    isOperator: true
-                '#5a65a6bced959':
-                    name: '#5a65a6bced959'
-                    position: 5
-                    hidden: false
-                    width: 190
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Order State'
-                            type: operator
-                            class: coreshop_order_state
-                            orderState: orderState
-                            childs:
-                                -
-                                    label: 'Order State (orderState)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: orderState
-                                    dataType: input
-                                    childs: {  }
-                            highlightLabel: true
-                        key: '#5a65a6bced959'
-                    isOperator: true
-                '#5a65a6bced9e2':
-                    name: '#5a65a6bced9e2'
-                    position: 6
-                    hidden: false
-                    width: 231
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Payment State'
-                            type: operator
-                            class: coreshop_order_state
-                            highlightLabel: true
-                            childs:
-                                -
-                                    label: 'Payment State (paymentState)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: paymentState
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bced9e2'
-                    isOperator: true
-                '#5a65a6bceda82':
-                    name: '#5a65a6bceda82'
-                    position: 7
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Shipping State'
-                            type: operator
-                            class: coreshop_order_state
-                            highlightLabel: true
-                            childs:
-                                -
-                                    label: 'Shipping State (shippingState)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: shippingState
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bceda82'
-                    isOperator: true
-                '#5a65a6bcedae7':
-                    name: '#5a65a6bcedae7'
-                    position: 8
-                    hidden: false
-                    width: 145
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Total Amount'
-                            type: operator
-                            class: coreshop_price_formatter
-                            childs:
-                                -
-                                    label: 'Total gross (totalGross)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: totalGross
-                                    dataType: coreShopMoney
-                                    childs: {  }
-                        key: '#5a65a6bcedae7'
-                    isOperator: true
-                orderDate:
-                    name: orderDate
-                    position: 9
-                    hidden: false
-                    width: 183
-                    fieldConfig:
-                        key: orderDate
-                        label: 'Order Date'
-                        type: datetime
-                        layout:
-                            fieldtype: datetime
-                            queryColumnType: bigint(20)
-                            columnType: bigint(20)
-                            phpdocType: \Carbon\Carbon
-                            defaultValue: null
-                            useCurrentDate: false
-                            name: orderDate
-                            title: 'Order Date'
-                            tooltip: ''
-                            mandatory: false
-                            noteditable: true
-                            index: false
-                            locked: false
-                            style: ''
-                            permissions: null
-                            datatype: data
-                            relationType: false
-                            invisible: false
-                            visibleGridView: false
-                            visibleSearch: false
-                        width: 224
-            onlyDirectChildren: false
-            shareGlobally: true
-            setAsFavourite: true
-            pageSize: 25
+  order_en:
+    name: 'Order Overview'
+    class: coreshop.order
+    data:
+      language: en
+      pageSize: 25
+      sortinfo:
+        field: id
+        direction: DESC
+      columns:
+        id:
+          name: id
+          position: 1
+          hidden: false
+          width: 40
+          locked: false
+          fieldConfig:
+            key: id
+            label: ID
+            type: system
+        '#order_number':
+          name: order_number
+          position: 2
+          hidden: false
+          width: 97
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Order Number
+              type: operator
+              class: Trimmer
+              trim: 2
+              children:
+                - label: Ordernumber (orderNumber)
+                  type: value
+                  class: DefaultValue
+                  attribute: orderNumber
+                  dataType: input
+                  children: [ ]
+            key: '#order_number'
+          isOperator: true
+        orderDate:
+          name: orderDate
+          position: 3
+          hidden: false
+          width: 183
+          locked: false
+          fieldConfig:
+            key: orderDate
+            label: coreshop.order.date
+            type: datetime
+            width: 183
+        '#customer_email':
+          name: customer_email
+          position: 4
+          hidden: false
+          width: 49
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Email
+              type: operator
+              class: ObjectFieldGetter
+              attribute: email
+              forwardAttribute: ''
+              children:
+                - label: Customer (customer)
+                  type: value
+                  class: DefaultValue
+                  attribute: customer
+                  dataType: coreShopRelation
+                  children: [ ]
+            key: '#customer_email'
+          isOperator: true
+        '#customer_name':
+          name: customer_name
+          position: 5
+          hidden: false
+          width: 52
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Name
+              type: operator
+              class: Concatenator
+              glue: " "
+              forceValue: false
+              children:
+                - label: Firstname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: firstname
+                  forwardAttribute: ''
+                - label: Lastname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: lastname
+                  forwardAttribute: ''
+            key: '#customer_name'
+          isOperator: true
+        '#order_state':
+          name: order_state
+          position: 6
+          hidden: false
+          width: 80
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Order State
+              type: operator
+              class: coreshop_order_state
+              highlightLabel: true
+              children:
+                - label: Order State (orderState)
+                  type: value
+                  class: DefaultValue
+                  attribute: orderState
+                  dataType: input
+                  children: [ ]
+            key: '#order_state'
+          isOperator: true
+        '#payment_state':
+          name: payment_state
+          position: 7
+          hidden: false
+          width: 95
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Payment State
+              type: operator
+              class: coreshop_order_state
+              highlightLabel: true
+              children:
+                - label: Payment State (paymentState)
+                  type: value
+                  class: DefaultValue
+                  attribute: paymentState
+                  dataType: input
+                  children: [ ]
+            key: '#payment_state'
+          isOperator: true
+        '#shipping_state':
+          name: shipping_state
+          position: 8
+          hidden: false
+          width: 95
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Shipping State
+              type: operator
+              class: coreshop_order_state
+              highlightLabel: true
+              children:
+                - label: Shipping State (shippingState)
+                  type: value
+                  class: DefaultValue
+                  attribute: shippingState
+                  dataType: input
+                  children: [ ]
+            key: '#shipping_state'
+          isOperator: true
+        '#total_amount_gross':
+          name: total_amount_gross
+          position: 9
+          hidden: false
+          width: 91
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Total Amount
+              type: operator
+              class: coreshop_price_formatter
+              children:
+                - label: Total (Gross) (totalGross)
+                  type: value
+                  class: DefaultValue
+                  attribute: totalGross
+                  dataType: coreShopMoney
+                  children: [ ]
+            key: '#total_amount_gross'
+          isOperator: true
+        '#payment_provider':
+          name: payment_provider
+          position: 10
+          hidden: false
+          width: 113
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Payment Provider
+              type: operator
+              class: coreshop_resource_field_getter
+              attribute: title
+              forwardAttribute: ''
+              children:
+                - label: Payment Provider (paymentProvider)
+                  type: value
+                  class: DefaultValue
+                  attribute: paymentProvider
+                  dataType: coreShopPaymentProvider
+                  children: [ ]
+            key: '#payment_provider'
+          isOperator: true
+      onlyDirectChildren: false
+      searchFilter: ''
+      filter: [ ]
+      pimcore_version: v11.4.2
+      pimcore_revision: c3beefe92e4ac592d09b2e103ad509de97b10e69
+      context: "{}"
 
-    order_de:
-        name: Bestellübersicht
-        class: coreshop.order
-        data:
-            language: de
-            sortinfo:
-                field: id
-                direction: DESC
-            classId: null
-            columns:
-                id:
-                    name: id
-                    position: 1
-                    hidden: false
-                    width: 80
-                    fieldConfig:
-                        key: id
-                        label: ID
-                        type: system
-                        layout:
-                            title: id
-                            name: id
-                            datatype: data
-                            fieldtype: system
-                '#5a65a6bced7f5':
-                    name: '#5a65a6bced7f5'
-                    position: 2
-                    hidden: false
-                    width: 109
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Bestellnummer
-                            type: operator
-                            class: Trimmer
-                            trim: 0
-                            childs:
-                                -
-                                    label: 'Bestellnummer (orderNumber)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: orderNumber
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bced7f5'
-                    isOperator: true
-                '#5a65a6bced85d':
-                    name: '#5a65a6bced85d'
-                    position: 3
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Email
-                            type: operator
-                            class: AnyGetter
-                            attribute: email
-                            param1: ''
-                            isArrayType: false
-                            forwardAttribute: ''
-                            forwardParam1: ''
-                            returnLastResult: false
-                            childs:
-                                -
-                                    label: 'Kunde (customer)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: customer
-                                    dataType: coreShopRelation
-                                    childs: {  }
-                        key: '#5a65a6bced85d'
-                    isOperator: true
-                '#5a65a6bced8d0':
-                    name: '#5a65a6bced8d0'
-                    position: 4
-                    hidden: false
-                    width: 180
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Name
-                            type: operator
-                            class: Concatenator
-                            glue: ' '
-                            childs:
-                                -
-                                    label: 'First Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: firstname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Rechnungsadresse (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                                -
-                                    label: 'Last Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: lastname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Rechnungsadresse (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                        key: '#5a65a6bced8d0'
-                    isOperator: true
-                '#5a65a6bced959':
-                    name: '#5a65a6bced959'
-                    position: 5
-                    hidden: false
-                    width: 190
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Bestellstatus
-                            type: operator
-                            class: coreshop_order_state
-                            orderState: orderState
-                            childs:
-                                -
-                                    label: 'Order State (orderState)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: orderState
-                                    dataType: input
-                                    childs: {  }
-                            highlightLabel: true
-                        key: '#5a65a6bced959'
-                    isOperator: true
-                '#5a65a6bced9e2':
-                    name: '#5a65a6bced9e2'
-                    position: 6
-                    hidden: false
-                    width: 231
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Zahlungsstatus
-                            type: operator
-                            class: coreshop_order_state
-                            highlightLabel: true
-                            childs:
-                                -
-                                    label: 'Payment State (paymentState)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: paymentState
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bced9e2'
-                    isOperator: true
-                '#5a65a6bceda82':
-                    name: '#5a65a6bceda82'
-                    position: 7
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Lieferstatus
-                            type: operator
-                            class: coreshop_order_state
-                            highlightLabel: true
-                            childs:
-                                -
-                                    label: 'Shipping State (shippingState)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: shippingState
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bceda82'
-                    isOperator: true
-                '#5a65a6bcedae7':
-                    name: '#5a65a6bcedae7'
-                    position: 8
-                    hidden: false
-                    width: 145
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Gesamtpreis
-                            type: operator
-                            class: coreshop_price_formatter
-                            childs:
-                                -
-                                    label: 'Total Brutto (totalGross)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: totalGross
-                                    dataType: coreShopMoney
-                                    childs: {  }
-                        key: '#5a65a6bcedae7'
-                    isOperator: true
-                orderDate:
-                    name: orderDate
-                    position: 9
-                    hidden: false
-                    width: 183
-                    fieldConfig:
-                        key: orderDate
-                        label: 'Order Date'
-                        type: datetime
-                        layout:
-                            fieldtype: datetime
-                            queryColumnType: bigint(20)
-                            columnType: bigint(20)
-                            phpdocType: \Carbon\Carbon
-                            defaultValue: null
-                            useCurrentDate: false
-                            name: orderDate
-                            title: 'Order Date'
-                            tooltip: ''
-                            mandatory: false
-                            noteditable: true
-                            index: false
-                            locked: false
-                            style: ''
-                            permissions: null
-                            datatype: data
-                            relationType: false
-                            invisible: false
-                            visibleGridView: false
-                            visibleSearch: false
-                        width: 224
-            onlyDirectChildren: false
-            pageSize: 25
+  order_de:
+    name: 'Bestellübersicht'
+    class: coreshop.order
+    data:
+      language: de
+      pageSize: 25
+      sortinfo:
+        field: id
+        direction: DESC
+      columns:
+        id:
+          name: id
+          position: 1
+          hidden: false
+          width: 40
+          locked: false
+          fieldConfig:
+            key: id
+            label: ID
+            type: system
+        order_number:
+          name: order_number
+          position: 2
+          hidden: false
+          width: 97
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Bestellnummer
+              type: operator
+              class: Trimmer
+              trim: 2
+              children:
+                - label: Ordernumber (orderNumber)
+                  type: value
+                  class: DefaultValue
+                  attribute: orderNumber
+                  dataType: input
+                  children: [ ]
+            key: order_number
+          isOperator: true
+        orderDate:
+          name: orderDate
+          position: 3
+          hidden: false
+          width: 183
+          locked: false
+          fieldConfig:
+            key: orderDate
+            label: Bestelldatum
+            type: datetime
+            width: 183
+        '#customer_email':
+          name: customer_email
+          position: 4
+          hidden: false
+          width: 49
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Email
+              type: operator
+              class: ObjectFieldGetter
+              attribute: email
+              forwardAttribute: ''
+              children:
+                - label: Customer (customer)
+                  type: value
+                  class: DefaultValue
+                  attribute: customer
+                  dataType: coreShopRelation
+                  children: [ ]
+            key: '#customer_email'
+          isOperator: true
+        '#customer_name':
+          name: customer_name
+          position: 5
+          hidden: false
+          width: 52
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Name
+              type: operator
+              class: Concatenator
+              glue: " "
+              forceValue: false
+              children:
+                - label: Firstname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: firstname
+                  forwardAttribute: ''
+                - label: Lastname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: lastname
+                  forwardAttribute: ''
+            key: '#customer_name'
+          isOperator: true
+        '#order_state':
+          name: order_state
+          position: 6
+          hidden: false
+          width: 80
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Bestellstatus
+              type: operator
+              class: coreshop_order_state
+              highlightLabel: true
+              children:
+                - label: Order State (orderState)
+                  type: value
+                  class: DefaultValue
+                  attribute: orderState
+                  dataType: input
+                  children: [ ]
+            key: '#order_state'
+          isOperator: true
+        '#payment_state':
+          name: payment_state
+          position: 7
+          hidden: false
+          width: 95
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Zahlungsstatus
+              type: operator
+              class: coreshop_order_state
+              highlightLabel: true
+              children:
+                - label: Payment State (paymentState)
+                  type: value
+                  class: DefaultValue
+                  attribute: paymentState
+                  dataType: input
+                  children: [ ]
+            key: '#payment_state'
+          isOperator: true
+        '#shipping_state':
+          name: shipping_state
+          position: 8
+          hidden: false
+          width: 95
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Versandstatus
+              type: operator
+              class: coreshop_order_state
+              highlightLabel: true
+              children:
+                - label: Shipping State (shippingState)
+                  type: value
+                  class: DefaultValue
+                  attribute: shippingState
+                  dataType: input
+                  children: [ ]
+            key: '#shipping_state'
+          isOperator: true
+        '#total_amount_gross':
+          name: total_amount_gross
+          position: 9
+          hidden: false
+          width: 91
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Gesamt
+              type: operator
+              class: coreshop_price_formatter
+              children:
+                - label: Total (Gross) (totalGross)
+                  type: value
+                  class: DefaultValue
+                  attribute: totalGross
+                  dataType: coreShopMoney
+                  children: [ ]
+            key: '#total_amount_gross'
+          isOperator: true
+        '#payment_provider':
+          name: payment_provider
+          position: 10
+          hidden: false
+          width: 113
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Zahlungsanbieter
+              type: operator
+              class: coreshop_resource_field_getter
+              attribute: title
+              forwardAttribute: ''
+              children:
+                - label: Payment Provider (paymentProvider)
+                  type: value
+                  class: DefaultValue
+                  attribute: paymentProvider
+                  dataType: coreShopPaymentProvider
+                  children: [ ]
+            key: '#payment_provider'
+          isOperator: true
+      onlyDirectChildren: false
+      searchFilter: ''
+      filter: [ ]
+      pimcore_version: v11.4.2
+      pimcore_revision: c3beefe92e4ac592d09b2e103ad509de97b10e69
+      context: "{}"
 
-    quote_en:
-        name: 'Quote Overview'
-        class: coreshop.order
-        data:
-            language: en
-            sortinfo:
-                field: id
-                direction: DESC
-            classId: null
-            columns:
-                id:
-                    name: id
-                    position: 1
-                    hidden: false
-                    width: 80
-                    fieldConfig:
-                        key: id
-                        label: ID
-                        type: system
-                        layout:
-                            title: id
-                            name: id
-                            datatype: data
-                            fieldtype: system
-                '#5a65a6bced7f5':
-                    name: '#5a65a6bced7f5'
-                    position: 2
-                    hidden: false
-                    width: 109
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Quote Number'
-                            type: operator
-                            class: Trimmer
-                            trim: 0
-                            childs:
-                                -
-                                    label: 'Quote Number (quoteNumber)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: quoteNumber
-                                    dataType: input
-                                    childs: {  }
-                        key: '#5a65a6bced7f5'
-                    isOperator: true
-                '#5a65a6bced85d':
-                    name: '#5a65a6bced85d'
-                    position: 3
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Email
-                            type: operator
-                            class: AnyGetter
-                            attribute: email
-                            param1: ''
-                            isArrayType: false
-                            forwardAttribute: ''
-                            forwardParam1: ''
-                            returnLastResult: false
-                            childs:
-                                -
-                                    label: 'Customer (customer)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: customer
-                                    dataType: coreShopRelation
-                                    childs: {  }
-                        key: '#5a65a6bced85d'
-                    isOperator: true
-                '#5a65a6bced8d0':
-                    name: '#5a65a6bced8d0'
-                    position: 4
-                    hidden: false
-                    width: 180
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Name
-                            type: operator
-                            class: Concatenator
-                            glue: ' '
-                            childs:
-                                -
-                                    label: 'First Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: firstname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Invoice Address (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                                -
-                                    label: 'Last Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: lastname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Invoice Address (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                        key: '#5a65a6bced8d0'
-                    isOperator: true
-                '#5a65a6bcedae7':
-                    name: '#5a65a6bcedae7'
-                    position: 5
-                    hidden: false
-                    width: 145
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: 'Total Gross'
-                            type: operator
-                            class: coreshop_price_formatter
-                            childs:
-                                -
-                                    label: 'Total Gross (totalGross)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: totalGross
-                                    dataType: coreShopMoney
-                                    childs: {  }
-                        key: '#5a65a6bcedae7'
-                    isOperator: true
-                quoteDate:
-                    name: quoteDate
-                    position: 6
-                    hidden: false
-                    width: 183
-                    fieldConfig:
-                        key: quoteDate
-                        label: 'Quote Date'
-                        type: datetime
-                        layout:
-                            fieldtype: datetime
-                            queryColumnType: bigint(20)
-                            columnType: bigint(20)
-                            phpdocType: \Carbon\Carbon
-                            defaultValue: null
-                            useCurrentDate: false
-                            name: quoteDate
-                            title: 'Quote Date'
-                            tooltip: ''
-                            mandatory: false
-                            noteditable: true
-                            index: false
-                            locked: false
-                            style: ''
-                            permissions: null
-                            datatype: data
-                            relationType: false
-                            invisible: false
-                            visibleGridView: false
-                            visibleSearch: false
-                        width: 224
-            onlyDirectChildren: false
-            pageSize: 25
+  quote_en:
+    name: 'Quote Overview'
+    class: coreshop.order
+    data:
+      language: en
+      sortinfo:
+        field: id
+        direction: DESC
+      columns:
+        id:
+          name: id
+          position: 1
+          hidden: false
+          width: 80
+          fieldConfig:
+            key: id
+            label: ID
+            type: system
+            layout:
+              title: id
+              name: id
+              datatype: data
+              fieldtype: system
+        '#quote_number':
+          name: quote_number
+          position: 2
+          hidden: false
+          width: 97
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Quote Number
+              type: operator
+              class: Trimmer
+              trim: 2
+              children:
+                - label: Quote Number (quoteNumber)
+                  type: value
+                  class: DefaultValue
+                  attribute: quoteNumber
+                  dataType: input
+                  children: [ ]
+            key: '#quote_number'
+          isOperator: true
+        '#customer_email':
+          name: customer_email
+          position: 4
+          hidden: false
+          width: 49
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Email
+              type: operator
+              class: ObjectFieldGetter
+              attribute: email
+              forwardAttribute: ''
+              children:
+                - label: Customer (customer)
+                  type: value
+                  class: DefaultValue
+                  attribute: customer
+                  dataType: coreShopRelation
+                  children: [ ]
+            key: '#customer_email'
+          isOperator: true
+        '#customer_name':
+          name: customer_name
+          position: 5
+          hidden: false
+          width: 52
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Name
+              type: operator
+              class: Concatenator
+              glue: " "
+              forceValue: false
+              children:
+                - label: Firstname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: firstname
+                  forwardAttribute: ''
+                - label: Lastname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: lastname
+                  forwardAttribute: ''
+            key: '#customer_name'
+          isOperator: true
+        '#total_amount_gross':
+          name: total_amount_gross
+          position: 9
+          hidden: false
+          width: 91
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Total Amount
+              type: operator
+              class: coreshop_price_formatter
+              children:
+                - label: Total (Gross) (totalGross)
+                  type: value
+                  class: DefaultValue
+                  attribute: totalGross
+                  dataType: coreShopMoney
+                  children: [ ]
+            key: '#total_amount_gross'
+          isOperator: true
+        quoteDate:
+          name: quoteDate
+          position: 6
+          hidden: false
+          width: 183
+          fieldConfig:
+            key: quoteDate
+            label: 'Quote Date'
+            type: datetime
+            layout:
+              fieldtype: datetime
+              queryColumnType: bigint(20)
+              columnType: bigint(20)
+              phpdocType: \Carbon\Carbon
+              defaultValue: null
+              useCurrentDate: false
+              name: quoteDate
+              title: 'Quote Date'
+              tooltip: ''
+              mandatory: false
+              noteditable: true
+              index: false
+              locked: false
+              style: ''
+              permissions: null
+              datatype: data
+              relationType: false
+              invisible: false
+              visibleGridView: false
+              visibleSearch: false
+            width: 224
+      onlyDirectChildren: false
+      pageSize: 25
 
-    quote_de:
-        name: Angebotsübersicht
-        class: coreshop.order
-        data:
-            language: de
-            sortinfo:
-                field: id
-                direction: DESC
-            classId: null
-            columns:
-                id:
-                    name: id
-                    position: 1
-                    hidden: false
-                    width: 80
-                    fieldConfig:
-                        key: id
-                        label: ID
-                        type: system
-                        layout:
-                            title: id
-                            name: id
-                            datatype: data
-                            fieldtype: system
-                '#5a65a6bced7f5':
-                    name: '#5a65a6bced7f5'
-                    position: 2
-                    hidden: false
-                    width: 109
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Angebotsnummer
-                            type: operator
-                            class: Trimmer
-                            trim: 0
-                            childs:
-                                -
-                                    label: 'Angebotsnummer (quoteNumber)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: quoteNumber
-                                    dataType: input
-                                    childs: {  }
-                '#5a65a6bced85d':
-                    name: '#5a65a6bced85d'
-                    position: 3
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Email
-                            type: operator
-                            class: AnyGetter
-                            attribute: email
-                            param1: ''
-                            isArrayType: false
-                            forwardAttribute: ''
-                            forwardParam1: ''
-                            returnLastResult: false
-                            childs:
-                                -
-                                    label: 'Kunde (customer)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: customer
-                                    dataType: coreShopRelation
-                                    childs: {  }
-                        key: '#5a65a6bced85d'
-                    isOperator: true
-                '#5a65a6bced8d0':
-                    name: '#5a65a6bced8d0'
-                    position: 4
-                    hidden: false
-                    width: 180
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Name
-                            type: operator
-                            class: Concatenator
-                            glue: ' '
-                            childs:
-                                -
-                                    label: 'First Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: firstname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Rechnungsadresse (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                                -
-                                    label: 'Last Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: lastname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -
-                                            label: 'Rechnungsadresse (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                        key: '#5a65a6bced8d0'
-                    isOperator: true
-                '#5a65a6bcedae7':
-                    name: '#5a65a6bcedae7'
-                    position: 5
-                    hidden: false
-                    width: 145
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Gesamtpreis
-                            type: operator
-                            class: coreshop_price_formatter
-                            childs:
-                                -
-                                    label: 'Total Brutto (totalGross)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: totalGross
-                                    dataType: coreShopMoney
-                                    childs: {  }
-                        key: '#5a65a6bcedae7'
-                    isOperator: true
-                quoteDate:
-                    name: quoteDate
-                    position: 6
-                    hidden: false
-                    width: 183
-                    fieldConfig:
-                        key: quoteDate
-                        label: 'Quote Date'
-                        type: datetime
-                        layout:
-                            fieldtype: datetime
-                            queryColumnType: bigint(20)
-                            columnType: bigint(20)
-                            phpdocType: \Carbon\Carbon
-                            defaultValue: null
-                            useCurrentDate: false
-                            name: quoteDate
-                            title: 'Quote Date'
-                            tooltip: ''
-                            mandatory: false
-                            noteditable: true
-                            index: false
-                            locked: false
-                            style: ''
-                            permissions: null
-                            datatype: data
-                            relationType: false
-                            invisible: false
-                            visibleGridView: false
-                            visibleSearch: false
-                        width: 224
-            onlyDirectChildren: false
-            pageSize: 25
+  quote_de:
+    name: Angebotsübersicht
+    class: coreshop.order
+    data:
+      language: de
+      sortinfo:
+        field: id
+        direction: DESC
+      columns:
+        id:
+          name: id
+          position: 1
+          hidden: false
+          width: 80
+          fieldConfig:
+            key: id
+            label: ID
+            type: system
+            layout:
+              title: id
+              name: id
+              datatype: data
+              fieldtype: system
+        '#quote_number':
+          name: quote_number
+          position: 2
+          hidden: false
+          width: 97
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Angebotsnummer
+              type: operator
+              class: Trimmer
+              trim: 2
+              children:
+                - label: Quote Number (quoteNumber)
+                  type: value
+                  class: DefaultValue
+                  attribute: quoteNumber
+                  dataType: input
+                  children: [ ]
+            key: '#quote_number'
+          isOperator: true
+        '#customer_email':
+          name: customer_email
+          position: 4
+          hidden: false
+          width: 49
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Email
+              type: operator
+              class: ObjectFieldGetter
+              attribute: email
+              forwardAttribute: ''
+              children:
+                - label: Customer (customer)
+                  type: value
+                  class: DefaultValue
+                  attribute: customer
+                  dataType: coreShopRelation
+                  children: [ ]
+            key: '#customer_email'
+          isOperator: true
+        '#customer_name':
+          name: customer_name
+          position: 5
+          hidden: false
+          width: 52
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Name
+              type: operator
+              class: Concatenator
+              glue: " "
+              forceValue: false
+              children:
+                - label: Firstname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: firstname
+                  forwardAttribute: ''
+                - label: Lastname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: lastname
+                  forwardAttribute: ''
+            key: '#customer_name'
+          isOperator: true
+        '#total_amount_gross':
+          name: total_amount_gross
+          position: 9
+          hidden: false
+          width: 91
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Gesamt
+              type: operator
+              class: coreshop_price_formatter
+              children:
+                - label: Total (Gross) (totalGross)
+                  type: value
+                  class: DefaultValue
+                  attribute: totalGross
+                  dataType: coreShopMoney
+                  children: [ ]
+            key: '#total_amount_gross'
+          isOperator: true
+        quoteDate:
+          name: quoteDate
+          position: 6
+          hidden: false
+          width: 183
+          fieldConfig:
+            key: quoteDate
+            label: 'Quote Date'
+            type: datetime
+            layout:
+              fieldtype: datetime
+              queryColumnType: bigint(20)
+              columnType: bigint(20)
+              phpdocType: \Carbon\Carbon
+              defaultValue: null
+              useCurrentDate: false
+              name: quoteDate
+              title: 'Quote Date'
+              tooltip: ''
+              mandatory: false
+              noteditable: true
+              index: false
+              locked: false
+              style: ''
+              permissions: null
+              datatype: data
+              relationType: false
+              invisible: false
+              visibleGridView: false
+              visibleSearch: false
+            width: 224
+      onlyDirectChildren: false
+      pageSize: 25
 
-    cart_en:
-        name: 'Cart Overview'
-        class: coreshop.order
-        data:
-            language: en
-            sortinfo:
-                field: id
-                direction: DESC
-            classId: null
-            columns:
-                id:
-                    name: id
-                    position: 1
-                    hidden: false
-                    width: 80
-                    fieldConfig:
-                        key: id
-                        label: ID
-                        type: system
-                        layout:
-                            title: id
-                            name: id
-                            datatype: data
-                            fieldtype: system
-                '#5a65a6bced85d':
-                    name: '#5a65a6bced85d'
-                    position: 3
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Email
-                            type: operator
-                            class: AnyGetter
-                            attribute: email
-                            param1: ''
-                            isArrayType: false
-                            forwardAttribute: ''
-                            forwardParam1: ''
-                            returnLastResult: false
-                            childs:
-                                -   label: 'Customer (customer)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: customer
-                                    dataType: coreShopRelation
-                                    childs: {  }
-                        key: '#5a65a6bced85d'
-                    isOperator: true
-                '#5a65a6bced8d0':
-                    name: '#5a65a6bced8d0'
-                    position: 4
-                    hidden: false
-                    width: 180
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Name
-                            type: operator
-                            class: Concatenator
-                            glue: ' '
-                            childs:
-                                -   label: 'First Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: firstname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -   label: 'Invoice Address (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                                -   label: 'Last Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: lastname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -   label: 'Invoice Address (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                        key: '#5a65a6bced8d0'
-                    isOperator: true
-            onlyDirectChildren: false
-            pageSize: 25
+  cart_en:
+    name: 'Cart Overview'
+    class: coreshop.order
+    data:
+      language: en
+      sortinfo:
+        field: id
+        direction: DESC
+      columns:
+        id:
+          name: id
+          position: 1
+          hidden: false
+          width: 80
+          fieldConfig:
+            key: id
+            label: ID
+            type: system
+            layout:
+              title: id
+              name: id
+              datatype: data
+              fieldtype: system
+        '#customer_email':
+          name: customer_email
+          position: 4
+          hidden: false
+          width: 49
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Email
+              type: operator
+              class: ObjectFieldGetter
+              attribute: email
+              forwardAttribute: ''
+              children:
+                - label: Customer (customer)
+                  type: value
+                  class: DefaultValue
+                  attribute: customer
+                  dataType: coreShopRelation
+                  children: [ ]
+            key: '#customer_email'
+          isOperator: true
+        '#customer_name':
+          name: customer_name
+          position: 5
+          hidden: false
+          width: 52
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Name
+              type: operator
+              class: Concatenator
+              glue: " "
+              forceValue: false
+              children:
+                - label: Firstname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: firstname
+                  forwardAttribute: ''
+                - label: Lastname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: lastname
+                  forwardAttribute: ''
+            key: '#customer_name'
+          isOperator: true
+      onlyDirectChildren: false
+      pageSize: 25
 
-    cart_de:
-        name: 'Warenkorb Übersicht'
-        class: coreshop.order
-        data:
-            language: de
-            sortinfo:
-                field: id
-                direction: DESC
-            classId: null
-            columns:
-                id:
-                    name: id
-                    position: 1
-                    hidden: false
-                    width: 80
-                    fieldConfig:
-                        key: id
-                        label: ID
-                        type: system
-                        layout:
-                            title: id
-                            name: id
-                            datatype: data
-                            fieldtype: system
-                '#5a65a6bced85d':
-                    name: '#5a65a6bced85d'
-                    position: 3
-                    hidden: false
-                    width: 200
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Email
-                            type: operator
-                            class: AnyGetter
-                            attribute: email
-                            param1: ''
-                            isArrayType: false
-                            forwardAttribute: ''
-                            forwardParam1: ''
-                            returnLastResult: false
-                            childs:
-                                -   label: 'Kunde (customer)'
-                                    type: value
-                                    class: DefaultValue
-                                    attribute: customer
-                                    dataType: coreShopRelation
-                                    childs: {  }
-                        key: '#5a65a6bced85d'
-                    isOperator: true
-                '#5a65a6bced8d0':
-                    name: '#5a65a6bced8d0'
-                    position: 4
-                    hidden: false
-                    width: 180
-                    fieldConfig:
-                        isOperator: true
-                        attributes:
-                            label: Name
-                            type: operator
-                            class: Concatenator
-                            glue: ' '
-                            childs:
-                                -   label: 'First Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: firstname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -   label: 'Rechnungsadresse (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                                -   label: 'Last Name'
-                                    type: operator
-                                    class: AnyGetter
-                                    attribute: lastname
-                                    param1: ''
-                                    isArrayType: false
-                                    forwardAttribute: ''
-                                    forwardParam1: ''
-                                    returnLastResult: false
-                                    childs:
-                                        -   label: 'Rechnungsadresse (invoiceAddress)'
-                                            type: value
-                                            class: DefaultValue
-                                            attribute: invoiceAddress
-                                            dataType: coreShopRelation
-                                            childs: {  }
-                        key: '#5a65a6bced8d0'
-                    isOperator: true
-            onlyDirectChildren: false
-            shareGlobally: true
-            setAsFavourite: true
-            pageSize: 25
+  cart_de:
+    name: 'Warenkorb Übersicht'
+    class: coreshop.order
+    data:
+      language: de
+      sortinfo:
+        field: id
+        direction: DESC
+      columns:
+        id:
+          name: id
+          position: 1
+          hidden: false
+          width: 80
+          fieldConfig:
+            key: id
+            label: ID
+            type: system
+            layout:
+              title: id
+              name: id
+              datatype: data
+              fieldtype: system
+        '#customer_email':
+          name: customer_email
+          position: 4
+          hidden: false
+          width: 49
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Email
+              type: operator
+              class: ObjectFieldGetter
+              attribute: email
+              forwardAttribute: ''
+              children:
+                - label: Customer (customer)
+                  type: value
+                  class: DefaultValue
+                  attribute: customer
+                  dataType: coreShopRelation
+                  children: [ ]
+            key: '#customer_email'
+          isOperator: true
+        '#customer_name':
+          name: customer_name
+          position: 5
+          hidden: false
+          width: 52
+          locked: false
+          fieldConfig:
+            isOperator: true
+            attributes:
+              label: Name
+              type: operator
+              class: Concatenator
+              glue: " "
+              forceValue: false
+              children:
+                - label: Firstname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: firstname
+                  forwardAttribute: ''
+                - label: Lastname
+                  type: operator
+                  class: ObjectFieldGetter
+                  children:
+                    - label: Customer (customer)
+                      type: value
+                      class: DefaultValue
+                      attribute: customer
+                      dataType: coreShopRelation
+                      children: [ ]
+                  attribute: lastname
+                  forwardAttribute: ''
+            key: '#customer_name'
+          isOperator: true
+      onlyDirectChildren: false
+      shareGlobally: true
+      setAsFavourite: true
+      pageSize: 25
