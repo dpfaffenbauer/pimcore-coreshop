@@ -5,6 +5,7 @@ imports:
     - { resource: services/commands.yml }
     - { resource: services/validators.yml }
     - { resource: services/form.yml }
+    - { resource: services/grid.yml }
 
 services:
     _defaults:
