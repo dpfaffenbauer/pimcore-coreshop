@@ -26,10 +26,13 @@ use Pimcore\Model\Element\ElementInterface;
 class ResourceFieldGetter extends AbstractOperator
 {
     private string $attribute;
+
     private string $forwardAttribute;
 
-    public function __construct(\stdClass $config, array $context = [])
-    {
+    public function __construct(
+        \stdClass $config,
+        array $context = [],
+    ) {
         parent::__construct($config, $context);
 
         $this->attribute = $config->attribute ?? '';
