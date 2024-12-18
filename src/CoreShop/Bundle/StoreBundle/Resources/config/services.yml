@@ -29,6 +29,11 @@ services:
         tags:
             - { name: coreshop.context.store, priority: 2 }
 
+    CoreShop\Component\Store\Context\SiteBasedResolverInterface: '@CoreShop\Component\Store\Context\SiteBasedResolver'
+    CoreShop\Component\Store\Context\SiteBasedResolver:
+        arguments:
+            - '@coreshop.repository.store'
+
     CoreShop\Component\Store\Context\RequestBased\RequestResolverInterface: '@CoreShop\Component\Store\Context\RequestBased\CompositeRequestResolver'
     CoreShop\Component\Store\Context\RequestBased\CompositeRequestResolver:
         public: false
@@ -36,7 +41,7 @@ services:
     CoreShop\Component\Store\Context\RequestBased\PimcoreAdminSiteBasedRequestResolver:
         public: false
         arguments:
-            - '@coreshop.repository.store'
+            - '@CoreShop\Component\Store\Context\SiteBasedResolverInterface'
             - '@Pimcore\Http\RequestHelper'
             - '@Pimcore\Model\Document\Service'
         tags:
@@ -52,7 +57,7 @@ services:
     CoreShop\Component\Store\Context\RequestBased\SiteBasedRequestResolver:
         public: false
         arguments:
-            - '@coreshop.repository.store'
+            - '@CoreShop\Component\Store\Context\SiteBasedResolverInterface'
         tags:
             - { name: coreshop.context.store.request_based.resolver, priority: 100 }
 
