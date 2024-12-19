@@ -70,7 +70,7 @@ class DeepCopySubscriber implements EventSubscriberInterface
              */
             $copier->addFilter(
                 new PimcoreFieldCollectionDefinitionReplaceFilter(
-                    function (AbstractData $object, Data $fieldDefinition, $property, $currentValue) {
+                    function (AbstractData $object, Data $fieldDefinition, mixed $property, mixed $currentValue): mixed {
                         if ($fieldDefinition instanceof Data\CustomVersionMarshalInterface) {
                             return $fieldDefinition->marshalVersion($object->getObject(), $currentValue);
                         }
@@ -85,7 +85,7 @@ class DeepCopySubscriber implements EventSubscriberInterface
         if (($context['source'] ?? false) === 'Pimcore\Model\Version::unmarshalData') {
             $copier->addFilter(
                 new PimcoreFieldCollectionDefinitionReplaceFilter(
-                    function (AbstractData $object, Data $fieldDefinition, $property, $currentValue) {
+                    function (AbstractData $object, Data $fieldDefinition, mixed $property, mixed $currentValue): mixed {
                         if ($fieldDefinition instanceof Data\CustomVersionMarshalInterface) {
                             return $fieldDefinition->unmarshalVersion($object->getObject(), $currentValue);
                         }
