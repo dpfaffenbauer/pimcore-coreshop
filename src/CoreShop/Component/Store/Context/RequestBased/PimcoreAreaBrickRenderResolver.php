@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Store\Context\RequestBased;
 
+use CoreShop\Component\Store\Context\SiteBasedResolverInterface;
 use CoreShop\Component\Store\Context\StoreNotFoundException;
 use CoreShop\Component\Store\Model\StoreInterface;
 use CoreShop\Component\Store\Repository\StoreRepositoryInterface;
@@ -29,7 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class PimcoreAreaBrickRenderResolver implements RequestResolverInterface
 {
     public function __construct(
-        private StoreRepositoryInterface $storeRepository,
+        private SiteBasedResolverInterface $siteBasedResolver,
     ) {
     }
 
@@ -44,9 +45,13 @@ final class PimcoreAreaBrickRenderResolver implements RequestResolverInterface
                 if ($document) {
                     $site = Frontend::getSiteForDocument($document);
 
-                    if ($site instanceof Site) {
-                        return $this->storeRepository->findOneBySite($site->getId());
+                    $store = $this->siteBasedResolver->resolveSiteWithDefaultForStore($site);
+
+                    if (null === $store) {
+                        throw new StoreNotFoundException();
                     }
+
+                    return $store;
                 }
             }
         }

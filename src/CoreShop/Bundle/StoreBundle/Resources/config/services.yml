@@ -50,7 +50,7 @@ services:
     CoreShop\Component\Store\Context\RequestBased\PimcoreAreaBrickRenderResolver:
         public: false
         arguments:
-            - '@coreshop.repository.store'
+            - '@CoreShop\Component\Store\Context\SiteBasedResolverInterface'
         tags:
             - { name: coreshop.context.store.request_based.resolver, priority: 220 }
 
