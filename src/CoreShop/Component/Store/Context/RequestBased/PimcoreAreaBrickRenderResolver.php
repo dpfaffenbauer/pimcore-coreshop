@@ -21,9 +21,7 @@ namespace CoreShop\Component\Store\Context\RequestBased;
 use CoreShop\Component\Store\Context\SiteBasedResolverInterface;
 use CoreShop\Component\Store\Context\StoreNotFoundException;
 use CoreShop\Component\Store\Model\StoreInterface;
-use CoreShop\Component\Store\Repository\StoreRepositoryInterface;
 use Pimcore\Model\Document;
-use Pimcore\Model\Site;
 use Pimcore\Tool\Frontend;
 use Symfony\Component\HttpFoundation\Request;
 
