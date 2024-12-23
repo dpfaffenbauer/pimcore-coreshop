@@ -46,12 +46,10 @@ final class PimcoreAdminSiteBasedRequestResolver implements RequestResolverInter
             if ($id) {
                 $document = Document::getById((int) $id);
             }
-        }
-        else if ($this->requestHelper->isFrontendRequestByAdmin($request)) {
+        } elseif ($this->requestHelper->isFrontendRequestByAdmin($request)) {
             /** @psalm-suppress InternalMethod */
             $document = $this->documentService->getNearestDocumentByPath($request->getPathInfo());
-        }
-        else {
+        } else {
             throw new StoreNotFoundException();
         }
 
