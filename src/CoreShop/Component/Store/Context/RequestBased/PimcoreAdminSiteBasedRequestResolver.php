@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Store\Context\RequestBased;
 
+use CoreShop\Component\Store\Context\SiteBasedResolverInterface;
 use CoreShop\Component\Store\Context\StoreNotFoundException;
 use CoreShop\Component\Store\Model\StoreInterface;
-use CoreShop\Component\Store\Repository\StoreRepositoryInterface;
 use Pimcore\Http\RequestHelper;
 use Pimcore\Model\Document;
 use Pimcore\Model\Document\Service;
@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class PimcoreAdminSiteBasedRequestResolver implements RequestResolverInterface
 {
     public function __construct(
-        private StoreRepositoryInterface $storeRepository,
+        private SiteBasedResolverInterface $siteBasedResolver,
         private RequestHelper $requestHelper,
         private Service $documentService,
     ) {
@@ -46,11 +46,11 @@ final class PimcoreAdminSiteBasedRequestResolver implements RequestResolverInter
             if ($id) {
                 $document = Document::getById((int) $id);
             }
-        }
-
-        if ($this->requestHelper->isFrontendRequestByAdmin($request)) {
+        } elseif ($this->requestHelper->isFrontendRequestByAdmin($request)) {
             /** @psalm-suppress InternalMethod */
             $document = $this->documentService->getNearestDocumentByPath($request->getPathInfo());
+        } else {
+            throw new StoreNotFoundException();
         }
 
         if ($document instanceof Document) {
@@ -58,9 +58,13 @@ final class PimcoreAdminSiteBasedRequestResolver implements RequestResolverInter
                 try {
                     $site = Site::getByRootId($document->getId());
 
-                    if ($site instanceof Site) {
-                        return $this->storeRepository->findOneBySite($site->getId());
+                    $store = $this->siteBasedResolver->resolveSiteWithDefaultForStore($site);
+
+                    if (null === $store) {
+                        throw new StoreNotFoundException();
                     }
+
+                    return $store;
                 } catch (\Exception) {
                     //Ignore Exception and continue
                 }

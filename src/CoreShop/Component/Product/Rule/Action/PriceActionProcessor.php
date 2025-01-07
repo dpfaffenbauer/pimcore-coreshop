@@ -55,7 +55,7 @@ class PriceActionProcessor implements ProductPriceActionProcessorInterface
          * @var CurrencyInterface $contextCurrency
          */
         $contextCurrency = $context['base_currency'];
-        $price = $configuration['price'];
+        $price = (int) $configuration['price'];
 
         /**
          * @var CurrencyInterface $currency
