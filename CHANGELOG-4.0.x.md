@@ -1,3 +1,12 @@
+# 4.0.13
+* [Resource] fallback locale could be null for newly created entities by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2756
+* fix: CheckoutManager::getNextStep return type by @gander in https://github.com/coreshop/CoreShop/pull/2758
+* Added action price casting to int by @twin-elements in https://github.com/coreshop/CoreShop/pull/2760
+* [ResourceBundle/OrderBundle] fix order grid-configs and add a new CoreShop Resource Field Getter Operator by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2762
+* [Store] optimize Store Context resolving with fallback and admin/non-admin by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2766
+* [Store] optimize Store Context resolving with fallback and admin/non-admin also for area bricks by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2769
+* [CoreBundle] allow to pass site to link generation by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2772
+
 # 4.0.12
 
 * [PayumBundle] remove payment_state processing to confirm orders by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2743
