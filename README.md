@@ -6,7 +6,7 @@
 [![Software License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat)](LICENSE.md)
 [![Latest Pre-Release](https://img.shields.io/packagist/vpre/coreshop/core-shop.svg)](https://www.packagist.org/packages/coreshop/core-shop)
 
-[CoreShop](https://www.coreshop.org) is a eCommerce Platform for [Pimcore](http://www.pimcore.org).
+[CoreShop](https://www.coreshop.com) is a eCommerce Platform for [Pimcore](http://www.pimcore.org).
 
 ![CoreShop Interface](docs/img/screenshot5.png)
 
@@ -42,8 +42,8 @@ bin/console messenger:consume coreshop_notification coreshop_index --time-limit=
 ```
 
 # Further Information
- - [Website](https://www.coreshop.org)
- - [Documentation](https://docs.coreshop.org/latest)
+ - [Website](https://www.coreshop.com)
+ - [Documentation](https://docs.coreshop.com/latest)
  - [Pimcore Forum](https://talk.pimcore.org)
 
 # Demo
@@ -65,7 +65,7 @@ and run the tests.
 
 
 ## Copyright and license 
-Copyright: [CoreShop GmbH](https://www.coreshop.org)
+Copyright: [CoreShop GmbH](https://www.coreshop.com)
 For licensing details please visit [LICENSE.md](LICENSE.md) 
 
 ## Screenshots

@@ -27,7 +27,7 @@
         "repo": "pimcore/pimcore",
         "twitter": false,
         "links": {
-            "Website": "https://www.coreshop.org",
+            "Website": "https://www.coreshop.com",
             "Github": "https://github.com/coreshop/CoreShop"
         },
         "google_analytics": "UA-75356862-4",
@@ -46,7 +46,7 @@
         "edit_on_github": "coreshop/CoreShop/edit/master/doc",
         "disqus": {
             "include": false,
-            "url_prefix": "https://coreshop.org/docs/latest/"
+            "url_prefix": "https://coreshop.com/docs/latest/"
         },
         "version_info": {
             "include": true,
