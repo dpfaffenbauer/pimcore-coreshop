@@ -27,9 +27,8 @@ final class ImageToBase64Extension extends AbstractExtension
 {
     public function __construct(
         private NormalizerInterface $normalizer,
-        private string $kernelProjectDir
-    )
-    {
+        private string $kernelProjectDir,
+    ) {
     }
 
     public function getFilters(): array
@@ -38,7 +37,6 @@ final class ImageToBase64Extension extends AbstractExtension
             new TwigFilter('coreshop_image64', $this->createBase64Image(...)),
         ];
     }
-
 
     public function getFunctions(): array
     {
@@ -50,7 +48,7 @@ final class ImageToBase64Extension extends AbstractExtension
 
     public function createBase64Image(string $image): string
     {
-        return (string)$this->normalizer->normalize(new \SplFileObject($image));
+        return (string) $this->normalizer->normalize(new \SplFileObject($image));
     }
 
     public function getImagePath(string $image): string

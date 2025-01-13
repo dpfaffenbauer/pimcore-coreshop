@@ -33,7 +33,7 @@ final class SessionStoreStorageListSubscriber implements EventSubscriberInterfac
     public function __construct(
         private PimcoreContextResolver $pimcoreContext,
         private StorageListContextInterface $context,
-        private StorageListStorageInterface $storageListStorage
+        private StorageListStorageInterface $storageListStorage,
     ) {
     }
 

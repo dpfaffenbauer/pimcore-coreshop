@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 class PimcorePrintablePdfRenderer implements PrintablePdfRendererInterface
 {
     public function __construct(
-        private FragmentRendererInterface $fragmentRenderer
+        private FragmentRendererInterface $fragmentRenderer,
     ) {
     }
 
@@ -70,7 +70,7 @@ class PimcorePrintablePdfRenderer implements PrintablePdfRendererInterface
 
         return Processor::getInstance()->getPdfFromString(
             $content ?: '',
-            $params
+            $params,
         );
     }
 }

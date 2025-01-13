@@ -129,7 +129,7 @@ final class CartItemsProcessor implements CartProcessorInterface
         }
     }
 
-    protected function processCustomAttributes(OrderItemInterface $item, array $customAttributes): void
+    private function processCustomAttributes(OrderItemInterface $item, array $customAttributes): void
     {
         // Update Order Item Attributes
         $orderItemAttributes = $item->getAttributes();

@@ -68,8 +68,7 @@ trait AttributesAwareTrait
             }
 
             $this->setAttributes($items);
-        }
-        else {
+        } else {
             $existingAttribute = $this->findAttribute($attribute->getAttributeKey());
             $existingAttribute?->setAttributeValue($attribute->getAttributeValue());
         }
@@ -110,6 +109,4 @@ trait AttributesAwareTrait
 
         return null;
     }
-
-
 }

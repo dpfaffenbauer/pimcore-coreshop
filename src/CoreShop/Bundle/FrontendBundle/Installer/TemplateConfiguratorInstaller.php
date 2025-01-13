@@ -19,7 +19,6 @@ declare(strict_types=1);
 namespace CoreShop\Bundle\FrontendBundle\Installer;
 
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
 class TemplateConfiguratorInstaller implements FrontendInstallerInterface
@@ -35,6 +34,7 @@ CONFIG;
         $fs = new Filesystem();
         if (!file_exists($configFile)) {
             $fs->dumpFile($configFile, $configContent);
+
             return;
         }
 

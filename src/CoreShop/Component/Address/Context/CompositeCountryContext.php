@@ -30,8 +30,8 @@ final class CompositeCountryContext implements CountryContextInterface
      */
     private PriorityQueue $countryContexts;
 
-    public function __construct()
-    {
+    public function __construct(
+        ) {
         $this->countryContexts = new PriorityQueue();
     }
 

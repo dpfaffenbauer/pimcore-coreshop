@@ -37,7 +37,7 @@ final class AsNotificationRuleConditionChecker
     {
         return $this->notificationType;
     }
-    
+
     public function getFormType(): ?string
     {
         return $this->formType;

@@ -33,14 +33,14 @@ final class CartListType extends AbstractType
         $builder->add('deleteList', SubmitType::class, [
             'label' => 'coreshop.ui.delete',
             'attr' => [
-                'class' => 'btn btn-danger'
-            ]
+                'class' => 'btn btn-danger',
+            ],
         ]);
         $builder->add('selectList', SubmitType::class, [
             'label' => 'coreshop.ui.select',
             'attr' => [
-                'class' => 'btn btn-success'
-            ]
+                'class' => 'btn btn-success',
+            ],
         ]);
     }
 

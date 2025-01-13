@@ -2,6 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * CoreShop
+ *
+ * This source file is available under two different licenses:
+ *  - GNU General Public License version 3 (GPLv3)
+ *  - CoreShop Commercial License (CCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ * @copyright  Copyright (c) CoreShop GmbH (https://www.coreshop.org)
+ * @license    https://www.coreshop.org/license     GPLv3 and CCL
+ *
+ */
+
 namespace CoreShop\Bundle\CoreBundle\Migrations;
 
 use CoreShop\Bundle\FrontendBundle\CoreShopFrontendBundle;
@@ -85,7 +99,7 @@ final class Version20241018060845 extends AbstractMigration implements Container
                 $booleanValue = var_export($value, true);
                 $contents .= "'$env' => $booleanValue, ";
             }
-            $contents = substr($contents, 0, -2)."],\n";
+            $contents = substr($contents, 0, -2) . "],\n";
         }
         $contents .= "];\n";
 
@@ -104,6 +118,6 @@ final class Version20241018060845 extends AbstractMigration implements Container
 
     private function getConfigFile(): string
     {
-        return $this->container->getParameter('kernel.project_dir').'/config/bundles.php';
+        return $this->container->getParameter('kernel.project_dir') . '/config/bundles.php';
     }
 }

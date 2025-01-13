@@ -22,8 +22,9 @@ use CoreShop\Component\Registry\ServiceRegistryInterface;
 
 class FrontendInstaller implements FrontendInstallerInterface
 {
-    public function __construct(private readonly ServiceRegistryInterface $installers)
-    {
+    public function __construct(
+        private readonly ServiceRegistryInterface $installers,
+    ) {
     }
 
     public function installFrontend(string $frontendBundlePath, string $rootPath, string $templatePath): void

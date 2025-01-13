@@ -30,7 +30,7 @@ final class PurchasableProductCustomAttributesCalculator implements PurchasableC
 {
     public function __construct(
         private ProductCustomAttributesCalculatorInterface $productPriceCalculator,
-        private FactoryInterface $orderItemAttributeFactory
+        private FactoryInterface $orderItemAttributeFactory,
     ) {
     }
 
@@ -42,7 +42,7 @@ final class PurchasableProductCustomAttributesCalculator implements PurchasableC
 
         $productAttributes = $this->productPriceCalculator->getCustomAttributes($purchasable, $context);
 
-        return array_map(function(ProductAttribute $productAttribute): OrderItemAttributeInterface {
+        return array_map(function (ProductAttribute $productAttribute): OrderItemAttributeInterface {
             $orderItemAttribute = $this->orderItemAttributeFactory->createNew();
             $orderItemAttribute->setAttributeKey($productAttribute->getAttributeKey());
             $orderItemAttribute->setAttributeValue($productAttribute->getAttributeValue());
