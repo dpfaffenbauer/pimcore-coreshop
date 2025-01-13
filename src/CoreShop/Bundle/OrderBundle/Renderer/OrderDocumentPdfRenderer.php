@@ -49,7 +49,7 @@ class OrderDocumentPdfRenderer implements OrderDocumentRendererInterface
             '4.1',
             'The "%s" class is deprecated and will be removed in CoreShop 5.0. Use "%s" instead.',
             PimcoreOrderDocumentPdfRenderer::class,
-            self::class
+            self::class,
         );
 
         return $this->themeHelper->useTheme($orderDocument->getOrder()->getStore()->getTemplate(), function () use ($orderDocument) {

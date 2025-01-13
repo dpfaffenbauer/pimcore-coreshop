@@ -45,7 +45,7 @@ class CoreShopThemeExtension extends Extension
         if (false === $configs['default_resolvers']['pimcore_document_property']) {
             $container->removeDefinition(PimcoreDocumentPropertyResolver::class);
         }
-        
+
         Autoconfiguration::registerForAutoConfiguration(
             $container,
             ThemeResolverInterface::class,

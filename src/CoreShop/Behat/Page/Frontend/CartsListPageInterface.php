@@ -19,7 +19,6 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Page\Frontend;
 
 use CoreShop\Bundle\TestBundle\Page\Frontend\FrontendPageInterface;
-use CoreShop\Component\Product\Model\ProductUnitDefinitionInterface;
 
 interface CartsListPageInterface extends FrontendPageInterface
 {

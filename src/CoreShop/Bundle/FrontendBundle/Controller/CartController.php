@@ -68,7 +68,7 @@ class CartController extends FrontendController
 
         $params = [
             'cart' => $this->getCart(),
-            'multi_cart_enabled' => $this->getParameter('coreshop.storage_list.multi_list.order')
+            'multi_cart_enabled' => $this->getParameter('coreshop.storage_list.multi_list.order'),
         ];
 
         if ($multiCartEnabled) {

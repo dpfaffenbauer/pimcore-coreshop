@@ -69,7 +69,7 @@ class PersistedPrintablePdfRenderer implements PrintablePdfRendererInterface
         $assetPath = $printable->getPersistedPath();
         $assetName = sprintf('%s.pdf', $printable->getPersistedName($params));
 
-        $document = Asset\Document::getByPath($assetPath.'/'.$assetName);
+        $document = Asset\Document::getByPath($assetPath . '/' . $assetName);
 
         if ($document instanceof Asset\Document) {
             $document->delete();

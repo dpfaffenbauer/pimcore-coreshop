@@ -32,7 +32,7 @@ class CartItemQuantityDataMapper implements DataMapperInterface
     ) {
     }
 
-    public function mapDataToForms(mixed $viewData, \Traversable$forms): void
+    public function mapDataToForms(mixed $viewData, \Traversable $forms): void
     {
         $this->propertyPathDataMapper->mapDataToForms($viewData, $forms);
     }

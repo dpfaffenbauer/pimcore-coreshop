@@ -51,7 +51,7 @@ class StorageListFactory implements StorageListFactoryInterface
 
         return $storageList;
     }
-    
+
     public function createNewNamed(string $name)
     {
         /**

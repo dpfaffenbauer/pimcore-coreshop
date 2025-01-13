@@ -77,7 +77,6 @@ final class CoreShopProductExtension extends AbstractModelExtension
 
         $loader->load('services.yml');
 
-
         Autoconfiguration::registerForAutoConfiguration(
             $container,
             ProductDiscountCalculatorInterface::class,

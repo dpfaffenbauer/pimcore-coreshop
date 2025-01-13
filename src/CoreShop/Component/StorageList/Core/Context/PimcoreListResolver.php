@@ -29,8 +29,7 @@ class PimcoreListResolver implements StorageListResolverInterface
     public function __construct(
         protected CustomerAndStoreAwareRepositoryInterface $repository,
         protected StorageListContextInterface $storageListContext,
-    )
-    {
+    ) {
     }
 
     public function getStorageLists(array $context): array

@@ -19,16 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Component\Core\Model\CarrierInterface;
-use CoreShop\Component\Core\Model\OrderInterface;
-use CoreShop\Component\Core\Model\OrderItemInterface;
-use CoreShop\Component\Core\Model\ProductInterface;
-use CoreShop\Component\Order\Context\CartContextInterface;
-use CoreShop\Component\Product\Model\ProductUnitInterface;
 use CoreShop\Component\Resource\Metadata\Registry;
-use CoreShop\Component\Taxation\Model\TaxItemInterface;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Symfony\Component\Form\FormInterface;
 use Webmozart\Assert\Assert;
 
 final class ResourceContext implements Context

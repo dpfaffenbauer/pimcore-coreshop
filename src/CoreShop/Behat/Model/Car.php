@@ -23,9 +23,8 @@ use CoreShop\Component\Resource\Pimcore\Model\AbstractPimcoreModel;
 
 #[AsPimcoreModel(
     pimcoreModel: 'Pimcore\Model\DataObject\Car',
-    type: 'object'
+    type: 'object',
 )]
 class Car extends AbstractPimcoreModel
 {
-
 }

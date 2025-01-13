@@ -20,7 +20,6 @@ namespace CoreShop\Component\Order\Model;
 
 use CoreShop\Component\Currency\Model\Money;
 use CoreShop\Component\Resource\Model\ResourceInterface;
-use CoreShop\Component\Taxation\Model\TaxRuleGroupInterface;
 
 interface PurchasableInterface extends ResourceInterface
 {

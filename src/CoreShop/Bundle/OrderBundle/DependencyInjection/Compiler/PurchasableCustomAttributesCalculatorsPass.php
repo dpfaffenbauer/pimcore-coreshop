@@ -24,7 +24,8 @@ final class PurchasableCustomAttributesCalculatorsPass extends RegisterSimpleReg
 {
     public const PURCHASABLE_CUSTOM_ATTRIBUTES__CALCULATOR_TAG = 'coreshop.order.purchasable.custom_attributes_calculator';
 
-    public function __construct() {
+    public function __construct(
+        ) {
         parent::__construct(
             'coreshop.registry.order.purchasable.custom_attributes_calculators',
             'coreshop.order.purchasable.custom_attributes_calculators',

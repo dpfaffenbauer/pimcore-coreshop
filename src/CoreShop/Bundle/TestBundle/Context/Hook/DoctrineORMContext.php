@@ -35,7 +35,7 @@ class DoctrineORMContext implements Context
     public function purgeDatabase(): void
     {
         $this->entityManager->getConnection()->getConfiguration()->setMiddlewares(
-            [new \Doctrine\DBAL\Logging\Middleware(new \Psr\Log\NullLogger())]
+            [new \Doctrine\DBAL\Logging\Middleware(new \Psr\Log\NullLogger())],
         );
 
         $purger = new ORMPurger($this->entityManager);

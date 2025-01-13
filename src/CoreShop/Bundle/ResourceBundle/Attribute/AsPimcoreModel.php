@@ -46,7 +46,6 @@ final class AsPimcoreModel
         return $this->pimcoreModel;
     }
 
-
     public function getType(): string
     {
         return $this->type;
@@ -76,6 +75,7 @@ final class AsPimcoreModel
     {
         return $this->repository;
     }
+
     public function getInstallFile(): ?string
     {
         return $this->installFile;
