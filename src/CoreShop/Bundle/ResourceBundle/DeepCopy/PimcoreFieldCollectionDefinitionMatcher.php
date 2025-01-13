@@ -23,8 +23,9 @@ use Pimcore\Model\DataObject\Fieldcollection;
 
 class PimcoreFieldCollectionDefinitionMatcher implements Matcher
 {
-    public function __construct(private string $matchType)
-    {
+    public function __construct(
+        private string $matchType,
+    ) {
     }
 
     public function matches(mixed $object, mixed $property): bool
