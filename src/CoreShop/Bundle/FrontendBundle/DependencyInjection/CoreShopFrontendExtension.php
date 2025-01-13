@@ -45,8 +45,7 @@ final class CoreShopFrontendExtension extends AbstractModelExtension
 
         if (isset($configs['view_prefix'])) {
             $container->setParameter('coreshop.frontend.view_prefix', $configs['view_prefix']);
-        }
-        else {
+        } else {
             $container->setParameter('coreshop.frontend.view_prefix', '@' . $configs['view_bundle']);
         }
 

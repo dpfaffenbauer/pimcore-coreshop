@@ -54,7 +54,6 @@ final class QuantityTypeExtension extends AbstractTypeExtension
         }
     }
 
-
     public static function getExtendedTypes(): iterable
     {
         return [QuantityType::class];

@@ -20,13 +20,13 @@ namespace CoreShop\Bundle\ResourceBundle\DeepCopy;
 
 use DeepCopy\Filter\Filter;
 use DeepCopy\Reflection\ReflectionHelper;
-use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Fieldcollection;
 
 class PimcoreFieldCollectionDefinitionReplaceFilter implements Filter
 {
-    public function __construct(protected \Closure $callback)
-    {
+    public function __construct(
+        protected \Closure $callback,
+    ) {
     }
 
     public function apply($object, $property, $objectCopier)

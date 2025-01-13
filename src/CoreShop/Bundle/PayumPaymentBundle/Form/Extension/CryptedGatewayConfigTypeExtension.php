@@ -29,9 +29,9 @@ use Symfony\Component\Form\FormEvents;
 
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(private ?CypherInterface $cypher = null)
-    {
-
+    public function __construct(
+        private ?CypherInterface $cypher = null,
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -70,7 +70,8 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
                 $gatewayConfig->encrypt($this->cypher);
 
                 $event->setData($gatewayConfig);
-            });
+            })
+        ;
     }
 
     public static function getExtendedTypes(): array

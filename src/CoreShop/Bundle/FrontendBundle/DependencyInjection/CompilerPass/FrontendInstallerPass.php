@@ -24,8 +24,8 @@ final class FrontendInstallerPass extends RegisterSimpleRegistryTypePass
 {
     public const FRONTEND_INSTALLER_TAG = 'coreshop.frontend.installer';
 
-    public function __construct()
-    {
+    public function __construct(
+        ) {
         parent::__construct(
             'coreshop.registry.frontend.installers',
             'coreshop.frontend.installers',

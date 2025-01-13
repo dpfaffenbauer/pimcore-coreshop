@@ -28,7 +28,8 @@ class TemplatesInstaller implements FrontendInstallerInterface
         $finder = new Finder();
         $finder
             ->in($frontendBundlePath . '/Resources/views')
-            ->name('*.twig');
+            ->name('*.twig')
+        ;
 
         $twigFiles = $finder->files();
 
@@ -39,7 +40,7 @@ class TemplatesInstaller implements FrontendInstallerInterface
         }
 
         foreach ($twigFiles as $twigFile) {
-            $newFileName = $templatePath. '/coreshop/' . $twigFile->getRelativePathname();
+            $newFileName = $templatePath . '/coreshop/' . $twigFile->getRelativePathname();
 
             if ($fs->exists($newFileName)) {
                 continue;
@@ -47,9 +48,9 @@ class TemplatesInstaller implements FrontendInstallerInterface
 
             $twigContent = file_get_contents($twigFile->getRealPath());
             $twigContent = str_replace(
-                array('@CoreShopFrontend/', 'bundles/coreshopfrontend/'),
-                array('', 'coreshop/'),
-                $twigContent
+                ['@CoreShopFrontend/', 'bundles/coreshopfrontend/'],
+                ['', 'coreshop/'],
+                $twigContent,
             );
 
             $fs->dumpFile($newFileName, $twigContent);

@@ -37,7 +37,7 @@ final class AsNotificationRuleActionProcessor
     {
         return $this->notificationType;
     }
-    
+
     public function getFormType(): ?string
     {
         return $this->formType;

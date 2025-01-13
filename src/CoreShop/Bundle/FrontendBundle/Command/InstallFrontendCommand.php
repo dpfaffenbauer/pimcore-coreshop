@@ -62,7 +62,7 @@ EOT
         $this->frontendInstaller->installFrontend(
             $frontendBundlePath,
             $rootPath,
-            $templatePath
+            $templatePath,
         );
 
         return 0;
