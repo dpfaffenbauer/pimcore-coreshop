@@ -51,8 +51,9 @@ abstract class StorageListChoiceType extends AbstractType
                 },
                 'choice_translation_domain' => false,
                 'active' => true,
-                'expanded' => true
-            ]);
+                'expanded' => true,
+            ])
+        ;
     }
 
     public function getParent(): string

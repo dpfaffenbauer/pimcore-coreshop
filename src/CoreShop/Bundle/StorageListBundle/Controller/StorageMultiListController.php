@@ -82,7 +82,7 @@ class StorageMultiListController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                    $this->translator->trans(sprintf('coreshop.ui.%s.created', $this->identifier))
+                    $this->translator->trans(sprintf('coreshop.ui.%s.created', $this->identifier)),
                 );
 
                 if ($request->isXmlHttpRequest()) {
@@ -108,7 +108,7 @@ class StorageMultiListController extends AbstractController
     public function listStorageListAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $this->denyAccessUnlessGranted('CORESHOP_STORAGE_LIST_MULTI_LIST_'.$this->identifier);
+        $this->denyAccessUnlessGranted('CORESHOP_STORAGE_LIST_MULTI_LIST_' . $this->identifier);
 
         $storageLists = $this->listResolver->getStorageLists($this->contextProvider->getCurrentContext());
         $storageList = $this->context->getStorageList();
@@ -125,7 +125,7 @@ class StorageMultiListController extends AbstractController
                 ['list' => $storageList],
                 [
                     'context' => $this->contextProvider->getCurrentContext(),
-                ]
+                ],
             );
 
             if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'])) {
@@ -155,7 +155,7 @@ class StorageMultiListController extends AbstractController
                             }
 
                             return new RedirectResponse(
-                                $request->headers->get('referer', $request->getSchemeAndHttpHost())
+                                $request->headers->get('referer', $request->getSchemeAndHttpHost()),
                             );
                         }
                     }
@@ -163,11 +163,10 @@ class StorageMultiListController extends AbstractController
                     $this->storage->setForContext($this->contextProvider->getCurrentContext(), $list);
 
                     return new RedirectResponse(
-                        $request->headers->get('referer', $request->getSchemeAndHttpHost())
+                        $request->headers->get('referer', $request->getSchemeAndHttpHost()),
                     );
                 }
             }
-
 
             $params['form'] = $form;
         }

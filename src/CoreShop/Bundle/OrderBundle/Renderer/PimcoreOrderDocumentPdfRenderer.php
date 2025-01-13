@@ -37,7 +37,6 @@ class PimcoreOrderDocumentPdfRenderer implements OrderDocumentRendererInterface
             /**
              * Gotenberg Supported for now, Chromium Headless not properly tested
              * */
-
             $params = [
                 'id' => $orderDocument->getId(),
                 'order' => $orderDocument->getOrder(),
@@ -45,12 +44,12 @@ class PimcoreOrderDocumentPdfRenderer implements OrderDocumentRendererInterface
                 'language' => (string) $orderDocument->getOrder()->getLocaleCode(),
                 'type' => $orderDocument::getDocumentType(),
                 $orderDocument::getDocumentType() => $orderDocument,
-                'locale' => $orderDocument->getOrder()?->getLocaleCode()
+                'locale' => $orderDocument->getOrder()?->getLocaleCode(),
             ];
 
             return $this->pdfRenderer->renderPrintable(
                 $orderDocument,
-                $params
+                $params,
             );
         });
     }

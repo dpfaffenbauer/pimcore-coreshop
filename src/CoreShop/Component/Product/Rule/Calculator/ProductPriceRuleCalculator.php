@@ -159,7 +159,6 @@ final class ProductPriceRuleCalculator implements
         return $discount;
     }
 
-
     public function getCustomAttributes(ProductInterface $product, array $context): array
     {
         $customAttributes = [];

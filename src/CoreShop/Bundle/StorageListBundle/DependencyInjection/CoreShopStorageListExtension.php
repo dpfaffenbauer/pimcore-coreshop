@@ -164,8 +164,8 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
 
             if ($list['multi_list']['enabled']) {
                 $container->setParameter(
-                    'coreshop.storage_list.multi_list.'.$name,
-                    $list['multi_list']['enabled']
+                    'coreshop.storage_list.multi_list.' . $name,
+                    $list['multi_list']['enabled'],
                 );
 
                 if ($list['multi_list']['controller']['enabled']) {
@@ -183,15 +183,15 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                     $controllerDefinition->setArgument('$repository', new Reference($list['resource']['repository']));
                     $controllerDefinition->setArgument(
                         '$storageListFactory',
-                        new Reference($list['resource']['factory'])
+                        new Reference($list['resource']['factory']),
                     );
                     $controllerDefinition->setArgument(
                         '$contextProvider',
-                        new Reference('coreshop.storage_list.context_provider.'.$name)
+                        new Reference('coreshop.storage_list.context_provider.' . $name),
                     );
                     $controllerDefinition->setArgument('$manager', new Reference($list['services']['manager']));
                     $controllerDefinition->setArgument('$translator', new Reference('translator'));
-                    $controllerDefinition->setArgument('$storage', new Reference('coreshop.storage_list.storage.'.$name));
+                    $controllerDefinition->setArgument('$storage', new Reference('coreshop.storage_list.storage.' . $name));
                     $controllerDefinition->setArgument('$listResolver', new Reference($list['services']['list_resolver']));
                     $controllerDefinition->setArgument('$listFormType', $list['multi_list']['form']['class']);
                     $controllerDefinition->setArgument('$templateCreateNewList', $list['multi_list']['templates']['create_new_storage_list']);
@@ -201,8 +201,8 @@ final class CoreShopStorageListExtension extends AbstractModelExtension
                     $controllerDefinition->addTag('container.service_subscriber');
 
                     $container->setDefinition(
-                        'coreshop.storage_list.controller_multi_list.'.$name,
-                        $controllerDefinition
+                        'coreshop.storage_list.controller_multi_list.' . $name,
+                        $controllerDefinition,
                     );
                 }
             }

@@ -32,8 +32,11 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
     use StoreAwareTrait;
 
     protected ?int $id = null;
+
     protected int $price = 0;
+
     protected ?TaxRuleGroupInterface $taxRule = null;
+
     protected ?ProductInterface $product = null;
 
     /**
@@ -41,8 +44,8 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
      */
     protected $productUnitDefinitionPrices;
 
-    public function __construct()
-    {
+    public function __construct(
+        ) {
         $this->productUnitDefinitionPrices = new ArrayCollection();
     }
 

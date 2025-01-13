@@ -20,7 +20,6 @@ namespace CoreShop\Component\StorageList\Core\Provider;
 
 use CoreShop\Component\Core\Context\ShopperContextInterface;
 use CoreShop\Component\Currency\Model\CurrencyAwareInterface;
-use CoreShop\Component\Customer\Context\CustomerNotFoundException;
 use CoreShop\Component\Customer\Model\CustomerAwareInterface;
 use CoreShop\Component\StorageList\Model\StorageListInterface;
 use CoreShop\Component\StorageList\Provider\ContextProviderInterface;
