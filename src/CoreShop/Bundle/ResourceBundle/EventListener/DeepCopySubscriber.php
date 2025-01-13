@@ -21,7 +21,6 @@ namespace CoreShop\Bundle\ResourceBundle\EventListener;
 use CoreShop\Bundle\ResourceBundle\DeepCopy\PimcoreFieldCollectionDefinitionMatcher;
 use CoreShop\Bundle\ResourceBundle\DeepCopy\PimcoreFieldCollectionDefinitionReplaceFilter;
 use CoreShop\Bundle\ResourceBundle\Pimcore\CacheMarshallerInterface;
-use CoreShop\Component\Resource\Model\ResourceInterface;
 use DeepCopy\DeepCopy;
 use DeepCopy\Filter\Doctrine\DoctrineCollectionFilter;
 use DeepCopy\Matcher\PropertyTypeMatcher;
@@ -30,8 +29,6 @@ use Pimcore\Event\SystemEvents;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
-use Pimcore\Model\Element\DeepCopy\PimcoreClassDefinitionMatcher;
-use Pimcore\Model\Element\DeepCopy\PimcoreClassDefinitionReplaceFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -76,9 +73,9 @@ class DeepCopySubscriber implements EventSubscriberInterface
                         }
 
                         return $currentValue;
-                    }
+                    },
                 ),
-                new PimcoreFieldCollectionDefinitionMatcher(Data\CustomVersionMarshalInterface::class)
+                new PimcoreFieldCollectionDefinitionMatcher(Data\CustomVersionMarshalInterface::class),
             );
         }
 
@@ -91,9 +88,9 @@ class DeepCopySubscriber implements EventSubscriberInterface
                         }
 
                         return $currentValue;
-                    }
+                    },
                 ),
-                new PimcoreFieldCollectionDefinitionMatcher(Data\CustomVersionMarshalInterface::class)
+                new PimcoreFieldCollectionDefinitionMatcher(Data\CustomVersionMarshalInterface::class),
             );
         }
 
