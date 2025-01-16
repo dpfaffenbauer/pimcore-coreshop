@@ -50,27 +50,16 @@ final class ProductAvailabilityEventListener
             return;
         }
 
-        if (in_array($object->getId(), $this->productIdsToCheck, true)) {
-            return;
-        }
-
-        /** @psalm-suppress InternalMethod */
-        $originalItem = $this->pimcoreModelFactory->build($object::class);
-        $originalItem->getDao()->getById($object->getId());
-
-        if (!$originalItem instanceof PurchasableInterface) {
-            return;
-        }
-
         if (!$object instanceof Concrete) {
             return;
         }
 
-        if (!$originalItem instanceof Concrete) {
+        if (in_array($object->getId(), $this->productIdsToCheck, true)) {
             return;
         }
 
-        if ($object->getPublished() === $originalItem->isPublished()) {
+        $originalPublished = (bool)\Pimcore\Db::get()->fetchOne('SELECT published FROM objects WHERE id=?', [$object->getId()]);
+        if ($object->getPublished() === $originalPublished) {
             return;
         }
 
