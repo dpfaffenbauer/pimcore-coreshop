@@ -142,7 +142,7 @@ Ext.define('Ext.ux.form.MultiSelect', {
 
         me.bindStore(me.store, true);
 
-        if (me.store.autoCreated) {
+        if (me.store?.autoCreated) {
             me.valueField = me.displayField = 'field1';
             if (!me.store.expanded) {
                 me.displayField = 'field2';

@@ -12,8 +12,8 @@
   "authors": [
     {
       "name": "CoreShop Team",
-      "email": "info@coreshop.org",
-      "homepage": "https://www.coreshop.org/",
+      "email": "info@coreshop.com",
+      "homepage": "https://www.coreshop.com/",
       "role": "Developer"
     },
     {
@@ -31,7 +31,7 @@
     "coreshop/pimcore-bundle": "^4.0",
     "coreshop/locale-bundle": "^4.0",
     "coreshop/optimistic-entity-lock-bundle": "^4.0",
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^4.1",
     "coreshop/resource": "^4.0",
     "symfony/config": "^6.3",
     "symfony/expression-language": "^6.3",
@@ -66,7 +66,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "4.1-dev"
     }
   },
   "config": {

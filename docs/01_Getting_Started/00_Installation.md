@@ -13,6 +13,7 @@ CoreShop:
     return [
        ...
         CoreShop\Bundle\CoreBundle\CoreShopCoreBundle::class => ['all' => true],
+        CoreShop\Bundle\FrontendBundle\CoreShopFrontendBundle::class => ['all' => true],
     ];
     ```
 3. To configure the CoreShop Password Hasher, create or update the `config/packages/pimcore.yaml` and add:

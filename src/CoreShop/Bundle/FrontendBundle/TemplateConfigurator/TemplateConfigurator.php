@@ -21,13 +21,13 @@ namespace CoreShop\Bundle\FrontendBundle\TemplateConfigurator;
 class TemplateConfigurator implements TemplateConfiguratorInterface
 {
     public function __construct(
-        private string $bundleName,
+        private string $tempaltePrefix,
         private string $templateSuffix,
     ) {
     }
 
     public function findTemplate($templateName): string
     {
-        return sprintf('@%s/%s.%s', $this->bundleName, $templateName, $this->templateSuffix);
+        return sprintf('%s/%s.%s', $this->tempaltePrefix, $templateName, $this->templateSuffix);
     }
 }

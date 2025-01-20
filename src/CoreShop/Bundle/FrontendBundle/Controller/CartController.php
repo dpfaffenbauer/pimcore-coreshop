@@ -62,7 +62,7 @@ use Symfony\Contracts\Service\Attribute\SubscribedService;
 
 class CartController extends FrontendController
 {
-    public function widgetAction(Request $request, ShopperContextInterface $shopperContext): Response
+    public function widgetAction(Request $request): Response
     {
         $multiCartEnabled = $this->getParameter('coreshop.storage_list.multi_list.order');
 
@@ -73,7 +73,7 @@ class CartController extends FrontendController
 
         if ($multiCartEnabled) {
             $form = $this->container->get('form.factory')->createNamed('coreshop', CartListType::class, ['list' => $this->getCart()], [
-                'context' => $shopperContext->getContext(),
+                'context' => $this->container->get(ShopperContextInterface::class)->getContext(),
             ]);
 
             $params['form'] = $form->createView();

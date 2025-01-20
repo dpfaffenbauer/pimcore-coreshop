@@ -73,7 +73,7 @@ trait TranslatableTrait
             return $translation;
         }
 
-        if ($useFallbackTranslation) {
+        if ($useFallbackTranslation && null !== $this->fallbackLocale) {
             $fallbackTranslation = $this->translations->get($this->fallbackLocale);
             if (null !== $fallbackTranslation) {
                 $this->translationsCache[$this->fallbackLocale] = $fallbackTranslation;

@@ -18,13 +18,17 @@ declare(strict_types=1);
 
 namespace CoreShop\Bundle\ResourceBundle\EventListener;
 
+use CoreShop\Bundle\ResourceBundle\DeepCopy\PimcoreFieldCollectionDefinitionMatcher;
+use CoreShop\Bundle\ResourceBundle\DeepCopy\PimcoreFieldCollectionDefinitionReplaceFilter;
 use CoreShop\Bundle\ResourceBundle\Pimcore\CacheMarshallerInterface;
 use DeepCopy\DeepCopy;
 use DeepCopy\Filter\Doctrine\DoctrineCollectionFilter;
 use DeepCopy\Matcher\PropertyTypeMatcher;
 use DeepCopy\TypeMatcher\TypeMatcher;
 use Pimcore\Event\SystemEvents;
+use Pimcore\Model\DataObject\ClassDefinition\Data;
 use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -53,6 +57,41 @@ class DeepCopySubscriber implements EventSubscriberInterface
                 new PropertyTypeMatcher('Doctrine\Common\Collections\Collection'),
             );
             $event->setArgument('copier', $copier);
+        }
+
+        if (($context['source'] ?? false) === 'Pimcore\Model\Version::marshalData') {
+            /**
+             * Pimcore handles CustomVersionMarshallInterface for Objects, but not for Fieldcollections
+             * this means that our custom types, get fully copied and serialized in to the version file
+             * meaning that for Cart Price Rules, you can end up serializing 100MB of data.... 🙈
+             */
+            $copier->addFilter(
+                new PimcoreFieldCollectionDefinitionReplaceFilter(
+                    function (AbstractData $object, Data $fieldDefinition, mixed $property, mixed $currentValue): mixed {
+                        if ($fieldDefinition instanceof Data\CustomVersionMarshalInterface) {
+                            return $fieldDefinition->marshalVersion($object->getObject(), $currentValue);
+                        }
+
+                        return $currentValue;
+                    },
+                ),
+                new PimcoreFieldCollectionDefinitionMatcher(Data\CustomVersionMarshalInterface::class),
+            );
+        }
+
+        if (($context['source'] ?? false) === 'Pimcore\Model\Version::unmarshalData') {
+            $copier->addFilter(
+                new PimcoreFieldCollectionDefinitionReplaceFilter(
+                    function (AbstractData $object, Data $fieldDefinition, mixed $property, mixed $currentValue): mixed {
+                        if ($fieldDefinition instanceof Data\CustomVersionMarshalInterface) {
+                            return $fieldDefinition->unmarshalVersion($object->getObject(), $currentValue);
+                        }
+
+                        return $currentValue;
+                    },
+                ),
+                new PimcoreFieldCollectionDefinitionMatcher(Data\CustomVersionMarshalInterface::class),
+            );
         }
 
         if (($context['source'] ?? false) === 'Pimcore\Cache\Core\CoreCacheHandler::storeCacheData') {

@@ -51,7 +51,7 @@ class CheckoutManager implements CheckoutManagerInterface
         return $step;
     }
 
-    public function getNextStep(string $identifier): CheckoutStepInterface
+    public function getNextStep(string $identifier): ?CheckoutStepInterface
     {
         return $this->serviceRegistry->getNextTo($identifier);
     }

@@ -26,7 +26,7 @@ final class Version
 
     public const RELEASE_VERSION = '0';
 
-    public const EXTRA_VERSION = 'RC1';
+    public const EXTRA_VERSION = '';
 
     public static function getVersion(): string
     {

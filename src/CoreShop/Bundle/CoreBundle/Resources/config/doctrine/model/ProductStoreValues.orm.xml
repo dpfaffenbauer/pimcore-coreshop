@@ -4,13 +4,14 @@
     <mapped-superclass name="CoreShop\Component\Core\Model\ProductStoreValues"
                        table="coreshop_product_store_values">
         <unique-constraints>
-            <unique-constraint name="product_store" columns="product,store"/>
+            <unique-constraint name="product_store" columns="product,store,fieldName"/>
         </unique-constraints>
 
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="fieldName" column="fieldName" type="string"/>
         <field name="product" column="product" type="pimcoreObject"/>
         <field name="price" column="price" type="bigintInteger"/>
 

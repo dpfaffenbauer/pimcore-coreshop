@@ -33,6 +33,8 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
 
     protected ?int $id = null;
 
+    protected ?string $fieldName = null;
+
     protected int $price = 0;
 
     protected ?TaxRuleGroupInterface $taxRule = null;
@@ -57,6 +59,16 @@ class ProductStoreValues extends AbstractResource implements ProductStoreValuesI
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getFieldName(): ?string
+    {
+        return $this->fieldName;
+    }
+
+    public function setFieldName(?string $fieldName): void
+    {
+        $this->fieldName = $fieldName;
     }
 
     public function getPrice(): int
