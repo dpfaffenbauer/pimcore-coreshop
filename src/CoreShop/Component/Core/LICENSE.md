@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Alternatively, commercial and supported versions of the program - also known as
 Commercial Distributions - must be used in accordance with the terms and conditions
 contained in a separate written agreement between you and CoreShop GmbH.
-For more information about the CoreShop Commercial License (CCL) please contact info@coreshop.org.
+For more information about the CoreShop Commercial License (CCL) please contact info@coreshop.com.
 
 
 Please see also (files in this directory):  
