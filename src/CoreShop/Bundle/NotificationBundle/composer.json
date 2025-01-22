@@ -24,10 +24,10 @@
     }
   ],
   "require": {
-    "coreshop/notification": "^4.0",
+    "coreshop/notification": "^5.0",
     "coreshop/registry": "^4.1",
-    "coreshop/rule-bundle": "^4.0",
-    "coreshop/messenger-bundle": "^4.0",
+    "coreshop/rule-bundle": "^5.0",
+    "coreshop/messenger-bundle": "^5.0",
     "pimcore/pimcore": "^11.0 || ^12.0"
   },
   "require-dev": {
@@ -50,7 +50,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

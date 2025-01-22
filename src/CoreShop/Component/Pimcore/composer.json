@@ -26,7 +26,7 @@
   "require": {
     "pimcore/pimcore": "^11.0 || ^12.0",
     "pimcore/web-to-print-bundle": "^1.3",
-    "pimcore/admin-ui-classic-bundle": "^1.0",
+    "pimcore/admin-ui-classic-bundle": "^1.0 || ^2.0",
     "laminas/laminas-stdlib": "^3.6"
   },
   "require-dev": {
@@ -52,7 +52,7 @@
   "prefer-stable": true,
    "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

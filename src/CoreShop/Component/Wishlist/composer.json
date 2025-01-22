@@ -24,12 +24,12 @@
     }
   ],
   "require": {
-    "coreshop/resource": "^4.0",
-    "coreshop/store": "^4.0",
-    "coreshop/pimcore": "^4.0",
-    "coreshop/customer": "^4.0",
-    "coreshop/product": "^4.0",
-    "coreshop/storage-list": "^4.0",
+    "coreshop/resource": "^5.0",
+    "coreshop/store": "^5.0",
+    "coreshop/pimcore": "^5.0",
+    "coreshop/customer": "^5.0",
+    "coreshop/product": "^5.0",
+    "coreshop/storage-list": "^5.0",
     "pimcore/pimcore": "^11.0 || ^12.0",
     "laminas/laminas-stdlib": "^3.6"
   },
@@ -53,7 +53,7 @@
   "prefer-stable": true,
    "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   }
 }

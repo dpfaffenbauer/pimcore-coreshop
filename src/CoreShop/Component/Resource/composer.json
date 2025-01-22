@@ -24,8 +24,8 @@
     }
   ],
   "require": {
-    "coreshop/pimcore": "^4.0",
-    "coreshop/locale": "^4.0",
+    "coreshop/pimcore": "^5.0",
+    "coreshop/locale": "^5.0",
     "doctrine/common": "^3.1",
     "doctrine/orm": "^2.9",
     "webmozart/assert": "^1.10",
@@ -52,7 +52,7 @@
   "prefer-stable": true,
    "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

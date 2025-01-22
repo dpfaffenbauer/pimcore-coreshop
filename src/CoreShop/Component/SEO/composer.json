@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "coreshop/registry": "^4.0",
+    "coreshop/registry": "^5.0",
     "pimcore/pimcore": "^11.0 || ^12.0",
     "webmozart/assert": "^1.10"
   },
@@ -48,7 +48,7 @@
   "prefer-stable": true,
    "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

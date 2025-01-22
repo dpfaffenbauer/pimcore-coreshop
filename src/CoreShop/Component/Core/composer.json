@@ -24,28 +24,28 @@
     }
   ],
   "require": {
-    "coreshop/configuration": "^4.0",
-    "coreshop/store": "^4.0",
-    "coreshop/resource": "^4.0",
-    "coreshop/address": "^4.0",
-    "coreshop/order": "^4.0",
-    "coreshop/currency": "^4.0",
-    "coreshop/customer": "^4.0",
-    "coreshop/shipping": "^4.0",
-    "coreshop/inventory": "^4.0",
-    "coreshop/product": "^4.0",
-    "coreshop/product-quantity-price-rules": "^4.0",
-    "coreshop/index": "^4.0",
-    "coreshop/payment": "^4.0",
-    "coreshop/payum-payment": "^4.0",
-    "coreshop/taxation": "^4.0",
-    "coreshop/notification": "^4.0",
-    "coreshop/payum-bundle": "^4.0",
-    "coreshop/variant": "^4.0",
-    "coreshop/seo": "^4.0",
-    "coreshop/user": "^4.0",
-    "coreshop/tracking": "^4.0",
-    "coreshop/wishlist": "^4.0",
+    "coreshop/configuration": "^5.0",
+    "coreshop/store": "^5.0",
+    "coreshop/resource": "^5.0",
+    "coreshop/address": "^5.0",
+    "coreshop/order": "^5.0",
+    "coreshop/currency": "^5.0",
+    "coreshop/customer": "^5.0",
+    "coreshop/shipping": "^5.0",
+    "coreshop/inventory": "^5.0",
+    "coreshop/product": "^5.0",
+    "coreshop/product-quantity-price-rules": "^5.0",
+    "coreshop/index": "^5.0",
+    "coreshop/payment": "^5.0",
+    "coreshop/payum-payment": "^5.0",
+    "coreshop/taxation": "^5.0",
+    "coreshop/notification": "^5.0",
+    "coreshop/payum-bundle": "^5.0",
+    "coreshop/variant": "^5.0",
+    "coreshop/seo": "^5.0",
+    "coreshop/user": "^5.0",
+    "coreshop/tracking": "^5.0",
+    "coreshop/wishlist": "^5.0",
     "pimcore/pimcore": "^11.0 || ^12.0"
   },
   "require-dev": {
@@ -68,7 +68,7 @@
   "prefer-stable": true,
    "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

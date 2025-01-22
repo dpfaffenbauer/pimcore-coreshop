@@ -101,7 +101,7 @@
     "payum/payum-bundle": "^2.6",
     "php-http/guzzle7-adapter": "^1.0",
     "php-http/message-factory": "^1.1",
-    "pimcore/admin-ui-classic-bundle": "^1.2",
+    "pimcore/admin-ui-classic-bundle": "^1.2 || ^2.0",
     "pimcore/google-marketing-bundle": "^1.0",
     "pimcore/newsletter-bundle": "^1.0",
     "pimcore/pimcore": "^11.1 | ^12.0",
@@ -174,8 +174,7 @@
     "symfony-tests-dir": "tests",
     "symfony-assets-install": "relative",
     "branch-alias": {
-      "dev-next": "4.2-dev",
-      "dev-4.1": "4.2-dev"
+      "dev-next": "5.0-dev"
     }
   },
   "config": {

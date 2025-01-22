@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "coreshop/core-bundle": "^4.0",
+    "coreshop/core-bundle": "^5.0",
     "pimcore/pimcore": "^11.0 || ^12.0"
   },
   "require-dev": {
@@ -47,7 +47,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

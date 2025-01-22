@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "coreshop/resource-bundle": "^4.0",
+    "coreshop/resource-bundle": "^5.0",
     "coreshop/storage-list": "^4.0"
   },
   "require-dev": {
@@ -47,7 +47,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   }
 }
