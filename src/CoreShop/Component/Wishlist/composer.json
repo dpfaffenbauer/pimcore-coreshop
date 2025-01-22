@@ -30,7 +30,7 @@
     "coreshop/customer": "^4.0",
     "coreshop/product": "^4.0",
     "coreshop/storage-list": "^4.0",
-    "pimcore/pimcore": "^11.0",
+    "pimcore/pimcore": "^11.0 || ^12.0",
     "laminas/laminas-stdlib": "^3.6"
   },
   "require-dev": {

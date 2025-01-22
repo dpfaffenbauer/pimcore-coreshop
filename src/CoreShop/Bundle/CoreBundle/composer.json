@@ -57,7 +57,7 @@
     "doctrine/doctrine-fixtures-bundle": "^3.4",
     "fakerphp/faker": "^1.16",
     "rinvex/countries": "^7.3",
-    "pimcore/pimcore": "^11.0",
+    "pimcore/pimcore": "^11.0 || ^12.0",
     "pimcore/newsletter-bundle": "^1.0.1"
   },
   "require-dev": {
