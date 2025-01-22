@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Address\Context;
 
 use CoreShop\Component\Address\Model\CountryInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 final class CompositeCountryContext implements CountryContextInterface
 {

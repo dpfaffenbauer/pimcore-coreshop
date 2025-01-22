@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Order\Processor;
 
 use CoreShop\Component\Order\Model\OrderInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 final class CompositeCartProcessor implements CartProcessorInterface
 {

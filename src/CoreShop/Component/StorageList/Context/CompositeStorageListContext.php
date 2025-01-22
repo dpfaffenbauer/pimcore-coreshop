@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\StorageList\Context;
 
 use CoreShop\Component\StorageList\Model\StorageListInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 class CompositeStorageListContext implements StorageListContextInterface
 {

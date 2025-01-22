@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Locale\Context;
 
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 final class CompositeLocaleContext implements LocaleContextInterface
 {

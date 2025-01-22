@@ -21,7 +21,7 @@ namespace CoreShop\Component\Shipping\Validator;
 use CoreShop\Component\Address\Model\AddressInterface;
 use CoreShop\Component\Shipping\Model\CarrierInterface;
 use CoreShop\Component\Shipping\Model\ShippableInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 class CompositeShippableCarrierValidator implements ShippableCarrierValidatorInterface
 {
