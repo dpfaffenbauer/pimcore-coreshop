@@ -8,6 +8,7 @@ on:
       - 'behat.yml.dist'
       - '*.php'
       - 'src/**'
+      - '.github/workflows/behat.yml'
   pull_request:
     branches: [ '4.0', '4.1','next' ]
     paths:
@@ -16,6 +17,7 @@ on:
       - 'behat.yml.dist'
       - '*.php'
       - 'src/**'
+      - '.github/workflows/behat.yml'
   release:
     types: [ created ]
   schedule:

@@ -8,6 +8,7 @@ on:
       - 'behat.yml.dist'
       - '*.php'
       - 'src/**'
+      - '.github/workflows/behat_ui.yml'
 
   pull_request:
     branches: [ '4.0', '4.1','next' ]
@@ -17,6 +18,7 @@ on:
       - 'behat.yml.dist'
       - '*.php'
       - 'src/**'
+      - '.github/workflows/behat_ui.yml'
   release:
     types: [ created ]
   schedule:

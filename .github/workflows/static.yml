@@ -10,6 +10,7 @@ on:
       - '*.neon'
       - '*.xml'
       - 'composer.json'
+      - '.github/workflows/static.yml'
   pull_request:
     branches: [ '4.0', '4.1','next' ]
     paths:
@@ -20,6 +21,7 @@ on:
       - '*.neon'
       - '*.xml'
       - 'composer.json'
+      - '.github/workflows/static.yml'
   release:
     types: [ created ]
   schedule:

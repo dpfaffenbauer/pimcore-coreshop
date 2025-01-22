@@ -4,10 +4,12 @@ on:
     branches: [ '4.0', '4.1','next' ]
     paths:
       - 'src/CoreShop/Bundle/**'
+      - '.github/workflows/packages_bundles.yml'
   pull_request:
     branches: [ '4.0', '4.1','next' ]
     paths:
       - 'src/CoreShop/Bundle/**'
+      - '.github/workflows/packages_bundles.yml'
   release:
     types: [ created ]
   schedule:
