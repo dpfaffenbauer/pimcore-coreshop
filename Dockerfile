@@ -1,8 +1,9 @@
-FROM ghcr.io/cors-gmbh/pimcore-docker/php-fpm:8.3-alpine3.21-7.0-LATEST AS dev
+FROM ghcr.io/cors-gmbh/pimcore-docker/php-fpm:8.3-alpine3.21-7.1.0 AS dev
 RUN set -eux; \
     apk update; \
     apk add $PHPIZE_DEPS libxslt-dev; \
     docker-php-ext-install xsl; \
+    docker-php-ext-install sockets; \
     sync; \
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/*
 

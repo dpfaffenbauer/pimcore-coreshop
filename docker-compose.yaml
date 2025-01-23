@@ -59,7 +59,6 @@ services:
 
   php:
     <<: *php
-    image: coreshop/coreshop:PHP8.2-fpm-debug
     build:
       target: dev
       args:
@@ -69,7 +68,6 @@ services:
 
   behat:
     <<: *php
-    image: coreshop/coreshop:PHP8.2-fpm-debug-behat
     build:
       target: behat
       args:
