@@ -21,6 +21,9 @@
             <directory name="src/CoreShop/Bundle/FrontendBundle" />
             <directory name="src/CoreShop/Bundle/IndexBundle/ProcessManager" />
             <directory name="vendor" />
+
+            <file name="src/CoreShop/Component/Pimcore/SplPriorityQueue.php" />
+            <file name="src/CoreShop/Component/Pimcore/PriorityQueue.php" />
         </ignoreFiles>
     </projectFiles>
 

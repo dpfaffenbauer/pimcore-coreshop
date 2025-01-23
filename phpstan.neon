@@ -12,6 +12,8 @@ parameters:
         - '**/ProcessManager/IndexListener.php'
         - '**/ProcessManager/IndexProcess.php'
         - '**/DataHub/*.php'
+        - src/CoreShop/Component/Pimcore/SplPriorityQueue.php
+        - src/CoreShop/Component/Pimcore/PriorityQueue.php
 
     ignoreErrors:
         # Magic calls

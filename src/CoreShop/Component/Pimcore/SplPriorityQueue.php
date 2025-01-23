@@ -54,7 +54,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      *
      * @param  TValue    $value
      * @param  TPriority $priority
-     * @return true
+     * @return void
      */
     #[ReturnTypeWillChange] // Inherited return type should be bool
     public function insert($value, $priority)
@@ -63,7 +63,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
             $priority = [$priority, $this->serial--];
         }
 
-        return parent::insert($value, $priority);
+        parent::insert($value, $priority);
     }
 
     /**
