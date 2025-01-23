@@ -21,6 +21,8 @@ parameters:
         - 'Core/Storage/SessionStorageListStorage.php'
         - 'Core/Repository/CustomerAndStoreAwareRepositoryInterface.php'
         - 'DependencyInjection/CoreShopStorageListExtension.php'
+        - SplPriorityQueue.php
+        - PriorityQueue.php
 
     ignoreErrors:
         # Magic calls
