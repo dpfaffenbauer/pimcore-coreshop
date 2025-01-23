@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "coreshop/resource": "^4.0"
+    "coreshop/resource": "^5.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10",
