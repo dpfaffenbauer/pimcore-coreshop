@@ -25,7 +25,7 @@
   ],
   "require": {
     "coreshop/notification": "^5.0",
-    "coreshop/registry": "^4.1",
+    "coreshop/registry": "^5.0",
     "coreshop/rule-bundle": "^5.0",
     "coreshop/messenger-bundle": "^5.0",
     "pimcore/pimcore": "^11.0 || ^12.0"

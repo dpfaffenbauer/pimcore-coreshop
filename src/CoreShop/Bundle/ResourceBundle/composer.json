@@ -31,7 +31,7 @@
     "coreshop/pimcore-bundle": "^5.0",
     "coreshop/locale-bundle": "^5.0",
     "coreshop/optimistic-entity-lock-bundle": "^5.0",
-    "coreshop/registry": "^4.1",
+    "coreshop/registry": "^5.0",
     "coreshop/resource": "^5.0",
     "symfony/config": "^6.3",
     "symfony/expression-language": "^6.3",
