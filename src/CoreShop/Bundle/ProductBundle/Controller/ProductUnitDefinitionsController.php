@@ -80,7 +80,11 @@ class ProductUnitDefinitionsController extends ResourceController
             }
         }
 
-        return $definitions->filter(function (ProductUnitDefinitionInterface $unitDefinition) {
+        return $definitions->filter(function ($unitDefinition) {
+            if (!$unitDefinition instanceof ProductUnitDefinitionInterface) {
+                return false;
+            }
+
             return null !== $unitDefinition->getId();
         });
     }
