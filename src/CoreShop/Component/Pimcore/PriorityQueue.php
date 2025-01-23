@@ -356,7 +356,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
     /**
      * Get the inner priority queue instance
      *
-     * @throws Exception\DomainException
+     * @throws \Exception
      * @return \SplPriorityQueue<TPriority, TValue>
      * @psalm-assert !null $this->queue
      */
@@ -369,7 +369,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
             $this->queue = $queue;
             /** @psalm-suppress DocblockTypeContradiction */
             if (! $this->queue instanceof \SplPriorityQueue) {
-                throw new Exception\DomainException(sprintf(
+                throw new \Exception(sprintf(
                     'PriorityQueue expects an internal queue of type SplPriorityQueue; received "%s"',
                     $queue::class
                 ));
