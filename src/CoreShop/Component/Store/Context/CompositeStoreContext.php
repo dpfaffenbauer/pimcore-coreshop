@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Store\Context;
 
-use CoreShop\Component\Store\Model\StoreInterface;
 use CoreShop\Component\Pimcore\PriorityQueue;
+use CoreShop\Component\Store\Model\StoreInterface;
 
 final class CompositeStoreContext implements StoreContextInterface
 {
