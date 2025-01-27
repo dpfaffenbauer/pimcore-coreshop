@@ -19,9 +19,9 @@ declare(strict_types=1);
 namespace CoreShop\Component\Shipping\Validator;
 
 use CoreShop\Component\Address\Model\AddressInterface;
+use CoreShop\Component\Pimcore\PriorityQueue;
 use CoreShop\Component\Shipping\Model\CarrierInterface;
 use CoreShop\Component\Shipping\Model\ShippableInterface;
-use CoreShop\Component\Pimcore\PriorityQueue;
 
 class CompositeShippableCarrierValidator implements ShippableCarrierValidatorInterface
 {

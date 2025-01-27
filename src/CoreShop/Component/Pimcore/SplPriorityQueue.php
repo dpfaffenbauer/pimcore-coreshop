@@ -18,18 +18,16 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Pimcore;
 
-use ReturnTypeWillChange;
-use Serializable;
-use UnexpectedValueException;
-
 use function array_key_exists;
 use function get_debug_type;
 use function is_array;
+use const PHP_INT_MAX;
+use ReturnTypeWillChange;
+use Serializable;
 use function serialize;
 use function sprintf;
+use UnexpectedValueException;
 use function unserialize;
-
-use const PHP_INT_MAX;
 
 /**
  * Serializable version of SplPriorityQueue
@@ -39,6 +37,7 @@ use const PHP_INT_MAX;
  *
  * @template TValue
  * @template TPriority of int
+ *
  * @extends \SplPriorityQueue<TPriority, TValue>
  */
 class SplPriorityQueue extends \SplPriorityQueue implements Serializable
@@ -54,12 +53,11 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      *
      * @param  TValue    $value
      * @param  TPriority $priority
-     * @return void
      */
     #[ReturnTypeWillChange] // Inherited return type should be bool
     public function insert($value, $priority)
     {
-        if (! is_array($priority)) {
+        if (!is_array($priority)) {
             $priority = [$priority, $this->serial--];
         }
 
@@ -79,6 +77,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         foreach (clone $this as $item) {
             $array[] = $item;
         }
+
         return $array;
     }
 
@@ -106,6 +105,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         foreach ($clone as $item) {
             $data[] = $item;
         }
+
         return $data;
     }
 
@@ -113,15 +113,14 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      * Deserialize
      *
      * @param  string $data
-     * @return void
      */
     public function unserialize($data)
     {
         $toUnserialize = unserialize($data);
-        if (! is_array($toUnserialize)) {
+        if (!is_array($toUnserialize)) {
             throw new UnexpectedValueException(sprintf(
                 'Cannot deserialize %s instance; corrupt serialization data',
-                self::class
+                self::class,
             ));
         }
 
@@ -132,25 +131,24 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      * Magic method used to rebuild an instance.
      *
      * @param array<array-key, mixed> $data Data array.
-     * @return void
      */
     public function __unserialize($data)
     {
         $this->serial = PHP_INT_MAX;
 
         foreach ($data as $item) {
-            if (! is_array($item)) {
+            if (!is_array($item)) {
                 throw new UnexpectedValueException(sprintf(
                     'Cannot deserialize %s instance: corrupt item; expected array, received %s',
                     self::class,
-                    get_debug_type($item)
+                    get_debug_type($item),
                 ));
             }
 
-            if (! array_key_exists('data', $item)) {
+            if (!array_key_exists('data', $item)) {
                 throw new UnexpectedValueException(sprintf(
                     'Cannot deserialize %s instance: corrupt item; missing "data" element',
-                    self::class
+                    self::class,
                 ));
             }
 
