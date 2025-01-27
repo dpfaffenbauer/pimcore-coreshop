@@ -36,7 +36,7 @@ final class RegisterTypeHintRegistriesPass implements CompilerPassInterface
 
                 $definition = $container->findDefinition($id);
 
-                $implements = class_implements($definition->getClass());
+                $implements = class_implements($definition->getClass()) ?: [];
 
                 if (
                     !in_array(ServiceRegistryInterface::class, $implements) &&

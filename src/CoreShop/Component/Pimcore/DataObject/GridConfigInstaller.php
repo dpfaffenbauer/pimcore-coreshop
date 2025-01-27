@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Pimcore\DataObject;
 
 use Pimcore\Bundle\AdminBundle\Model\GridConfig;
+use Webmozart\Assert\Assert;
 
 class GridConfigInstaller implements GridConfigInstallerInterface
 {
@@ -41,6 +42,9 @@ class GridConfigInstaller implements GridConfigInstallerInterface
         $config['classId'] = $class;
 
         $configDataEncoded = json_encode($config);
+
+        Assert::string($configDataEncoded);
+
         /** @psalm-suppress InternalMethod */
         $gridConfig->setName($name);
         /** @psalm-suppress InternalMethod */

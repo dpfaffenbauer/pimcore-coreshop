@@ -34,7 +34,7 @@ class RegisterWorkflowValidatorPass implements CompilerPassInterface
 
             foreach ($attributes as $tag) {
                 if (!isset($tag['type'])) {
-                    $tag['type'] = Container::underscore(substr(strrchr($definition->getClass(), '\\'), 1));
+                    $tag['type'] = Container::underscore(substr((string)strrchr($definition->getClass(), '\\'), 1));
                 }
 
                 if (!isset($tag['manager'])) {

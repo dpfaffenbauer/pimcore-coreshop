@@ -65,7 +65,7 @@ final class CoreShopTrackingExtension extends Extension
             foreach ($attributes as $tag) {
                 $definition = $container->findDefinition($id);
 
-                $type = $tag['type'] ?? Container::underscore(substr(strrchr($definition->getClass(), '\\'), 1));
+                $type = $tag['type'] ?? Container::underscore(substr((string)strrchr($definition->getClass(), '\\'), 1));
 
                 if (!array_key_exists($type, $configs['trackers'])) {
                     $container->getDefinition($id)

@@ -51,8 +51,8 @@ class CartsReport implements ReportInterface, PortletInterface
 
     protected function getData(ParameterBag $parameterBag): array
     {
-        $fromFilter = $parameterBag->get('from', strtotime(date('01-m-Y')));
-        $toFilter = $parameterBag->get('to', strtotime(date('t-m-Y')));
+        $fromFilter = $parameterBag->get('from', (string)strtotime(date('01-m-Y')));
+        $toFilter = $parameterBag->get('to', (string)strtotime(date('t-m-Y')));
         $storeId = $parameterBag->get('store', null);
 
         $from = Carbon::createFromTimestamp($fromFilter);
@@ -102,7 +102,7 @@ class CartsReport implements ReportInterface, PortletInterface
         $data = $this->db->fetchAllAssociative(implode(\PHP_EOL . 'UNION ALL' . \PHP_EOL, $queries) . '  ORDER BY timestamp ASC');
 
         foreach ($data as &$day) {
-            $date = Carbon::createFromTimestamp(strtotime($day['timestamp']));
+            $date = Carbon::createFromTimestamp((string)strtotime($day['timestamp']));
 
             $day['datetext'] = $date->toDateString();
         }

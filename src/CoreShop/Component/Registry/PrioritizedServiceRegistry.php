@@ -40,7 +40,7 @@ final class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInte
             throw new ExistingServiceException($this->context, $identifier);
         }
 
-        if (!in_array($this->interface, class_implements($service), true)) {
+        if (!in_array($this->interface, class_implements($service) ?: [], true)) {
             throw new \InvalidArgumentException(
                 sprintf('%s needs to implement "%s", "%s" given.', ucfirst($this->context), $this->interface, $service::class),
             );

@@ -36,7 +36,7 @@ class AddToStorageListFactory implements AddToStorageListFactoryInterface
         StorageListInterface $storageList,
         StorageListItemInterface $storageListItem,
     ): AddToStorageListInterface {
-        if (!in_array(AddToStorageListInterface::class, class_implements($this->addToWishlistClass), true)) {
+        if (!in_array(AddToStorageListInterface::class, class_implements($this->addToWishlistClass) ?: [], true)) {
             throw new \InvalidArgumentException(
                 sprintf('%s needs to implement "%s".', $this->addToWishlistClass, AddToStorageListInterface::class),
             );

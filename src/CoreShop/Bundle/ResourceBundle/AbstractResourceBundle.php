@@ -107,7 +107,7 @@ abstract class AbstractResourceBundle extends Bundle implements PimcoreBundleInt
 
     protected function getBundlePrefix(): string
     {
-        return Container::underscore(substr(strrchr($this::class, '\\'), 1, -6));
+        return Container::underscore(substr((string)strrchr($this::class, '\\'), 1, -6));
     }
 
     protected function getDoctrineMappingDirectory(): string

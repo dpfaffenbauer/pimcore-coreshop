@@ -76,7 +76,7 @@ class StackRepository extends PimcoreRepository implements StackRepositoryInterf
             return null;
         }
 
-        if (!in_array($this->interface, class_implements($instance), true)) {
+        if (!in_array($this->interface, class_implements($instance) ?: [], true)) {
             return null;
         }
 
@@ -94,7 +94,7 @@ class StackRepository extends PimcoreRepository implements StackRepositoryInterf
     {
         $instance = parent::findOneBy($criteria);
 
-        if (!in_array($this->interface, class_implements($instance), true)) {
+        if (!in_array($this->interface, class_implements($instance) ?: [], true)) {
             return null;
         }
 

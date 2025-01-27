@@ -77,7 +77,7 @@ final class PimcoreDriver extends AbstractDriver
 
     protected function addPimcoreController(ContainerBuilder $container, MetadataInterface $metadata, string $classValue, string $suffix = null): void
     {
-        $parents = array_values(class_parents($classValue));
+        $parents = array_values(class_parents($classValue) ?: []);
 
         if (in_array(AdminController::class, $parents, true)) {
             $definition = new ChildDefinition(AdminController::class);
@@ -167,7 +167,7 @@ final class PimcoreDriver extends AbstractDriver
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
 
-        foreach (class_implements($repositoryClass) as $typehintClass) {
+        foreach (class_implements($repositoryClass) ?: [] as $typehintClass) {
             $container->registerAliasForArgument(
                 $metadata->getServiceId('repository'),
                 $typehintClass,
@@ -202,7 +202,7 @@ final class PimcoreDriver extends AbstractDriver
 
         $container->setDefinition($metadata->getServiceId('repository.factory'), $definition);
 
-        foreach (class_implements($repositoryClass) as $typehintClass) {
+        foreach (class_implements($repositoryClass) ?: [] as $typehintClass) {
             $container->registerAliasForArgument(
                 $metadata->getServiceId('repository.factory'),
                 $typehintClass,

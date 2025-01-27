@@ -32,8 +32,10 @@ class LockingStorage extends DoctrineStorage
         $modelClass = $this->modelClass;
 
         if ($objectManager instanceof EntityManager) {
+            $implements = class_implements($modelClass) ?: [];
+
             if (
-                in_array(PaymentInterface::class, class_implements($modelClass), true) &&
+                in_array(PaymentInterface::class, $implements, true) &&
                 $objectManager->getConnection()->isTransactionActive()
             ) {
                 $objectManager->getConnection()->setAutoCommit(false);

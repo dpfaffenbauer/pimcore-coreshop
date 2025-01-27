@@ -28,6 +28,7 @@ use Doctrine\DBAL\ArrayParameterType;
 use Pimcore\Cache;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Listing;
+use Pimcore\Model\DataObject\Listing\Concrete\Dao;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface, ProductVariantRepositoryInterface
@@ -65,6 +66,10 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         if (false === $variantIds = Cache::load($cacheKey)) {
             $list = $this->getList();
+
+            /**
+             * @var Dao $dao
+             */
             $dao = $list->getDao();
 
             /** @psalm-suppress InternalMethod */
@@ -107,6 +112,10 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function findRecursiveVariantIdsForProductAndStore(ProductInterface $product, StoreInterface $store): array
     {
         $list = $this->getList();
+
+        /**
+         * @var Dao $dao
+         */
         $dao = $list->getDao();
 
         /** @psalm-suppress InternalMethod */

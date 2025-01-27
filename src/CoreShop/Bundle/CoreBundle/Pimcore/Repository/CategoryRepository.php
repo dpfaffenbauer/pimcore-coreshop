@@ -23,6 +23,7 @@ use CoreShop\Component\Core\Repository\CategoryRepositoryInterface;
 use CoreShop\Component\Product\Model\CategoryInterface;
 use CoreShop\Component\Store\Model\StoreInterface;
 use Doctrine\DBAL\ArrayParameterType;
+use Pimcore\Model\DataObject\Listing\Concrete\Dao;
 use Pimcore\Model\DataObject\Listing;
 
 class CategoryRepository extends BaseCategoryRepository implements CategoryRepositoryInterface
@@ -59,6 +60,10 @@ class CategoryRepository extends BaseCategoryRepository implements CategoryRepos
     public function findRecursiveChildCategoryIdsForStoreByCategories(array $categories, StoreInterface $store): array
     {
         $list = $this->getList();
+
+        /**
+         * @var Dao $dao
+         */
         $dao = $list->getDao();
 
         /** @psalm-suppress InternalMethod */
@@ -94,6 +99,10 @@ class CategoryRepository extends BaseCategoryRepository implements CategoryRepos
     public function findRecursiveChildCategoryIdsForStore(CategoryInterface $category, StoreInterface $store): array
     {
         $list = $this->getList();
+
+        /**
+         * @var Dao $dao
+         */
         $dao = $list->getDao();
 
         $qb = $this->connection->createQueryBuilder();
@@ -134,7 +143,7 @@ class CategoryRepository extends BaseCategoryRepository implements CategoryRepos
         return $list->getObjects();
     }
 
-    private function setSortingForListing(Listing $list, CategoryInterface $category): void
+    protected function setSortingForListing(Listing $list, CategoryInterface $category): void
     {
         if (method_exists($category, 'getChildrenSortBy')) {
             $list->setOrderKey(

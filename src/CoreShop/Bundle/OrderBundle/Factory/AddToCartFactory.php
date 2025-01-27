@@ -35,8 +35,9 @@ class AddToCartFactory implements AddToCartFactoryInterface
     public function createWithCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartInterface
     {
         $class = new $this->addToCartClass($cart, $cartItem);
+        $implements = class_implements($class) ?: [];
 
-        if (!in_array(AddToCartInterface::class, class_implements($class), true)) {
+        if (!in_array(AddToCartInterface::class, $implements, true)) {
             throw new \InvalidArgumentException(
                 sprintf('%s needs to implement "%s".', $class::class, AddToCartInterface::class),
             );

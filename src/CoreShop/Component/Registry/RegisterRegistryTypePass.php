@@ -48,7 +48,7 @@ abstract class RegisterRegistryTypePass implements CompilerPassInterface
                 $definition = $container->findDefinition($id);
 
                 if (!isset($tag['type'])) {
-                    $tag['type'] = Container::underscore(substr(strrchr($definition->getClass(), '\\'), 1));
+                    $tag['type'] = Container::underscore(substr((string)strrchr($definition->getClass(), '\\'), 1));
                 }
 
                 $map[$tag['type']] = $tag['type'];

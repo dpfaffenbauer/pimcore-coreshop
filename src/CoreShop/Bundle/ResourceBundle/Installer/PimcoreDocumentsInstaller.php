@@ -63,7 +63,13 @@ final class PimcoreDocumentsInstaller implements ResourceInstallerInterface
                 $file = $this->kernel->locateResource($file);
 
                 if (file_exists($file)) {
-                    $documents = Yaml::parse(file_get_contents($file));
+                    $content = file_get_contents($file);
+
+                    if (!$content) {
+                        continue;
+                    }
+
+                    $documents = Yaml::parse($content);
                     $documents = $processor->processConfiguration(
                         $configurationDefinition,
                         ['documents' => $documents],

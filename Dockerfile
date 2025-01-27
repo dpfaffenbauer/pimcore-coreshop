@@ -1,4 +1,4 @@
-FROM ghcr.io/cors-gmbh/pimcore-docker/php-fpm:8.3-alpine3.21-7.1.0 AS dev
+FROM ghcr.io/cors-gmbh/pimcore-docker/php-fpm:8.4-alpine3.21-7.1.0 AS dev
 RUN set -eux; \
     apk update; \
     apk add $PHPIZE_DEPS libxslt-dev; \

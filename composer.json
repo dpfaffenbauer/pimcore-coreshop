@@ -136,7 +136,7 @@
     "symfony/panther": "^2.1",
     "symfony/runtime": "^6.3",
     "symplify/easy-coding-standard": "^11.1",
-    "vimeo/psalm": "^5.23"
+    "vimeo/psalm": "^5.23 || ^6.0"
   },
   "conflict": {
     "twig/twig": ">=3.9.0 <3.14.0",

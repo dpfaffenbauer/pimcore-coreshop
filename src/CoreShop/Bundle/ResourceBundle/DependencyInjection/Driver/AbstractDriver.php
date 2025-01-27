@@ -103,7 +103,7 @@ abstract class AbstractDriver implements DriverInterface
         $definition->setPublic(true);
 
         $definitionArgs = [$modelClass];
-        if (in_array(TranslatableFactoryInterface::class, class_implements($factoryClass))) {
+        if (in_array(TranslatableFactoryInterface::class, class_implements($factoryClass) ?: [])) {
             $decoratedDefinition = new Definition(Factory::class);
             $decoratedDefinition->setArguments($definitionArgs);
 
@@ -114,7 +114,7 @@ abstract class AbstractDriver implements DriverInterface
 
         $container->setDefinition($metadata->getServiceId('factory'), $definition);
 
-        foreach (class_implements($factoryClass) as $typehintClass) {
+        foreach (class_implements($factoryClass) ?: [] as $typehintClass) {
             $container->registerAliasForArgument(
                 $metadata->getServiceId('factory'),
                 $typehintClass,

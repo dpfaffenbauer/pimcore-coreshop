@@ -20,6 +20,7 @@ namespace CoreShop\Component\Pimcore\DataObject;
 
 use CoreShop\Component\Pimcore\Exception\ClassDefinitionNotFoundException;
 use Pimcore\Model\DataObject;
+use Webmozart\Assert\Assert;
 
 class FieldCollectionDefinitionUpdate extends AbstractDefinitionUpdate
 {
@@ -45,6 +46,10 @@ class FieldCollectionDefinitionUpdate extends AbstractDefinitionUpdate
 
     public function save(): bool
     {
-        return DataObject\ClassDefinition\Service::importFieldCollectionFromJson($this->fieldCollectionDefinition, json_encode($this->jsonDefinition), true);
+        $json = json_encode($this->jsonDefinition);
+
+        Assert::string($json);
+
+        return DataObject\ClassDefinition\Service::importFieldCollectionFromJson($this->fieldCollectionDefinition, $json, true);
     }
 }
