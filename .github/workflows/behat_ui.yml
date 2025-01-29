@@ -100,7 +100,14 @@ jobs:
       run: composer require "jms/serializer-bundle:${{ matrix.jms }}" --no-update --no-scripts
 
     - name: pimcore/pimcore
-      run: composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
+      run: |
+        composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
+        if [ "${{ matrix.pimcore }}" == "^11.5" ]; then
+          composer req pimcore/admin-ui-classic-bundle:^1.6 --no-interaction --no-scripts --no-update
+        else
+          composer req pimcore/admin-ui-classic-bundle:^2.0 --no-interaction --no-scripts --no-update
+          composer req payum/payum:1.7.x-dev --no-interaction --no-scripts --no-update
+        fi
 
     - if: matrix.dependencies == 'highest'
       name: Install dependencies highest
