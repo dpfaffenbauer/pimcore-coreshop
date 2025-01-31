@@ -24,6 +24,7 @@ use CoreShop\Bundle\OrderBundle\Factory\AddToCartFactoryInterface;
 use CoreShop\Bundle\OrderBundle\Form\Type\AddToCartType;
 use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Address\Model\AddressInterface;
+use CoreShop\Component\Core\Model\CarrierInterface;
 use CoreShop\Component\Core\Model\CustomerInterface;
 use CoreShop\Component\Core\Model\OrderInterface;
 use CoreShop\Component\Core\Model\OrderItemInterface;
@@ -214,6 +215,16 @@ final class CartContext implements Context
     public function myCartIsUsingCurrency(OrderInterface $cart, CurrencyInterface $currency): void
     {
         $cart->setCurrency($currency);
+
+        $this->cartManager->persistCart($cart);
+    }
+
+    /**
+     * @Given /^(my cart) uses (carrier "[^"]+")$/
+     */
+    public function myCartIsUsingCarrier(OrderInterface $cart, CarrierInterface $carrier): void
+    {
+        $cart->setCarrier($carrier);
 
         $this->cartManager->persistCart($cart);
     }
