@@ -130,7 +130,7 @@ jobs:
       run: vendor/bin/behat --strict --no-interaction -vvv -f progress --config behat.yml.dist -p ui
 
     - name: Upload Logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: "Logs (PHP ${{ matrix.php }}, Symfony ${{ matrix.pimcore }})"
