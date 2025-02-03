@@ -40,7 +40,7 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 
             foreach ($attributes as $tags) {
                 if (!isset($tags['type'])) {
-                    $tags['type'] = Container::underscore(substr((string)strrchr($definition->getClass(), '\\'), 1));
+                    $tags['type'] = Container::underscore(substr((string) strrchr($definition->getClass(), '\\'), 1));
                 }
 
                 $gatewayFactories[$tags['type']] = $tags['type'];

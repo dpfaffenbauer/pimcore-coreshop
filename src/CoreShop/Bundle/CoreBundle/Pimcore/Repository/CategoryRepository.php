@@ -23,8 +23,8 @@ use CoreShop\Component\Core\Repository\CategoryRepositoryInterface;
 use CoreShop\Component\Product\Model\CategoryInterface;
 use CoreShop\Component\Store\Model\StoreInterface;
 use Doctrine\DBAL\ArrayParameterType;
-use Pimcore\Model\DataObject\Listing\Concrete\Dao;
 use Pimcore\Model\DataObject\Listing;
+use Pimcore\Model\DataObject\Listing\Concrete\Dao;
 
 class CategoryRepository extends BaseCategoryRepository implements CategoryRepositoryInterface
 {
