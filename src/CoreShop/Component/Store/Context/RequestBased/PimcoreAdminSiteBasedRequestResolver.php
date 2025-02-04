@@ -58,13 +58,15 @@ final class PimcoreAdminSiteBasedRequestResolver implements RequestResolverInter
                 try {
                     $site = Site::getByRootId($document->getId());
 
-                    $store = $this->siteBasedResolver->resolveSiteWithDefaultForStore($site);
+                    if ($site) {
+                        $store = $this->siteBasedResolver->resolveSiteWithDefaultForStore($site);
 
-                    if (null === $store) {
-                        throw new StoreNotFoundException();
+                        if (null === $store) {
+                            throw new StoreNotFoundException();
+                        }
+
+                        return $store;
                     }
-
-                    return $store;
                 } catch (\Exception) {
                     //Ignore Exception and continue
                 }
