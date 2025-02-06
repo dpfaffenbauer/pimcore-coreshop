@@ -69,6 +69,10 @@ class SessionStorageListStorage implements StorageListStorageInterface
             throw new \InvalidArgumentException('Session is not available');
         }
 
+        if (null === $storageList->getId()) {
+            return;
+        }
+
         $this->getSession()->set($this->getKeyName($context), $storageList->getId());
     }
 
