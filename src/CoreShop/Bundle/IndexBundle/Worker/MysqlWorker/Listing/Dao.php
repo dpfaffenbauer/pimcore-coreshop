@@ -47,20 +47,27 @@ class Dao
      *
      * @return array
      */
-    public function load(QueryBuilder $queryBuilder)
+    public function load(QueryBuilder $queryBuilder, bool $rawSelect = false)
     {
         $queryBuilder->from($this->model->getQueryTableName(), 'q');
-        if ($this->model->getVariantMode() == ListingInterface::VARIANT_MODE_INCLUDE_PARENT_OBJECT) {
-            if (null !== $queryBuilder->getQueryPart('orderBy')) {
-                $queryBuilder->select('DISTINCT q.o_virtualObjectId as o_id');
-                $queryBuilder->addGroupBy('q.o_virtualObjectId');
-            } else {
-                $queryBuilder->select('DISTINCT q.o_virtualObjectId as o_id');
-            }
-        } else {
-            $queryBuilder->select('DISTINCT q.o_id');
-        }
 
+        if ($rawSelect) {
+            $queryBuilder->select('*');
+            $queryBuilder->distinct();
+        }
+        else {
+            if ($this->model->getVariantMode() == ListingInterface::VARIANT_MODE_INCLUDE_PARENT_OBJECT) {
+                if (null !== $queryBuilder->getQueryPart('orderBy')) {
+                    $queryBuilder->select('DISTINCT q.o_virtualObjectId as o_id');
+                    $queryBuilder->addGroupBy('q.o_virtualObjectId');
+                } else {
+                    $queryBuilder->select('DISTINCT q.o_virtualObjectId as o_id');
+                }
+            } else {
+                $queryBuilder->select('DISTINCT q.o_id');
+            }
+        }
+        
         $resultSet = $this->database->fetchAllAssociative($queryBuilder->getSQL());
 
         $this->lastRecordCount = count($resultSet);
