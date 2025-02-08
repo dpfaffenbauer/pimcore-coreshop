@@ -20,6 +20,7 @@ namespace CoreShop\Bundle\FrontendBundle\Controller;
 
 use CoreShop\Component\Core\Context\ShopperContextInterface;
 use CoreShop\Component\Core\Currency\CurrencyStorageInterface;
+use CoreShop\Component\Core\Model\CurrencyInterface;
 use CoreShop\Component\Core\Repository\CurrencyRepositoryInterface;
 use CoreShop\Component\Order\Context\CartContextInterface;
 use CoreShop\Component\Order\Manager\CartManagerInterface;
@@ -45,6 +46,11 @@ class CurrencyController extends FrontendController
 
         $currencyCode = $this->getParameterFromRequest($request, 'currencyCode');
         $currency = $this->getCurrencyRepository()->getByCode($currencyCode);
+
+        if (!$currency instanceof CurrencyInterface) {
+            throw $this->createNotFoundException();
+        }
+
         $cartManager = $this->get(CartManagerInterface::class);
         $cartContext = $this->get(CartContextInterface::class);
         $cart = $cartContext->getCart();
