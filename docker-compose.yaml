@@ -114,7 +114,6 @@ services:
       - PORT=3000
       - WORKSPACE_DELETE_EXPIRED=true
     container_name: coreshop4.1-chrome
-    restart: always
 
 volumes:
   db:
