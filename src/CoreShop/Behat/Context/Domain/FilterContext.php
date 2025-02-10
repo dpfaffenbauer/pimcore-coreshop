@@ -252,6 +252,7 @@ final class FilterContext implements Context
         foreach ($tableRaw as $index => $value) {
             if ($index === 0) {
                 $header = $value;
+
                 continue;
             }
 

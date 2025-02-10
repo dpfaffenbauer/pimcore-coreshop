@@ -265,7 +265,7 @@ class Listing extends AbstractListing implements OrderAwareListingInterface, Ext
     public function load(array $options = [])
     {
         $options['rawSelect'] = false;
-        
+
         $objectRaws = $this->loadRawResult($options);
         $this->totalCount = $this->count();
         $className = $this->index->getClass();
