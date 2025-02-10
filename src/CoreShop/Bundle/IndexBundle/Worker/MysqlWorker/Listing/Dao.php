@@ -54,8 +54,7 @@ class Dao
         if ($rawSelect) {
             $queryBuilder->select('*');
             $queryBuilder->distinct();
-        }
-        else {
+        } else {
             if ($this->model->getVariantMode() == ListingInterface::VARIANT_MODE_INCLUDE_PARENT_OBJECT) {
                 if (null !== $queryBuilder->getQueryPart('orderBy')) {
                     $queryBuilder->select('DISTINCT q.o_virtualObjectId as o_id');
@@ -67,7 +66,7 @@ class Dao
                 $queryBuilder->select('DISTINCT q.o_id');
             }
         }
-        
+
         $resultSet = $this->database->fetchAllAssociative($queryBuilder->getSQL());
 
         $this->lastRecordCount = count($resultSet);
