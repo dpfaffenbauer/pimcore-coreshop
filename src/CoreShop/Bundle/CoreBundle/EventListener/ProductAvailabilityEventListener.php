@@ -27,7 +27,6 @@ use CoreShop\Component\Pimcore\DataObject\VersionHelper;
 use Doctrine\DBAL\Connection;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Model\FactoryInterface;
 
 final class ProductAvailabilityEventListener
 {
