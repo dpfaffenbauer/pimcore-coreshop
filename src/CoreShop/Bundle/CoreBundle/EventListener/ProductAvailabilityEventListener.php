@@ -24,6 +24,7 @@ use CoreShop\Component\Order\Model\PurchasableInterface;
 use CoreShop\Component\Order\OrderSaleStates;
 use CoreShop\Component\Order\Repository\OrderItemRepositoryInterface;
 use CoreShop\Component\Pimcore\DataObject\VersionHelper;
+use Doctrine\DBAL\Connection;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\FactoryInterface;
@@ -34,7 +35,7 @@ final class ProductAvailabilityEventListener
 
     public function __construct(
         private OrderItemRepositoryInterface $cartItemRepository,
-        private FactoryInterface $pimcoreModelFactory,
+        private Connection $db,
     ) {
     }
 
@@ -58,7 +59,7 @@ final class ProductAvailabilityEventListener
             return;
         }
 
-        $originalPublished = (bool)\Pimcore\Db::get()->fetchOne('SELECT published FROM objects WHERE id=?', [$object->getId()]);
+        $originalPublished = (bool)$this->db->fetchOne('SELECT published FROM objects WHERE id=?', [$object->getId()]);
         if ($object->getPublished() === $originalPublished) {
             return;
         }
