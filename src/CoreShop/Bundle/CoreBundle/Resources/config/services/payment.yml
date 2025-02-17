@@ -54,6 +54,10 @@ services:
         tags:
             - { name: coreshop.payment_provider_rule.condition, type: currencies, form-type: CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CurrenciesConfigurationType }
 
+    CoreShop\Component\Core\Payment\Rule\Condition\CarrierConditionChecker:
+        tags:
+            - { name: coreshop.payment_provider_rule.condition, type: carriers, form-type: CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CarriersConfigurationType }
+
 
 
     # Actions
