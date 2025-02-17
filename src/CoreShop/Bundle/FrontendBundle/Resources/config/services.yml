@@ -1,18 +1,26 @@
 imports:
     - { resource: ../../../TestBundle/Resources/config/twig.yml }
+    - { resource: services/frontend-installer.yaml }
 
 services:
+    CoreShop\Bundle\FrontendBundle\Command\InstallFrontendCommand:
+        parent: CoreShop\Bundle\CoreBundle\Command\InstallResourcesCommand
+        arguments:
+            $frontendInstaller: '@CoreShop\Bundle\FrontendBundle\Installer\FrontendInstallerInterface'
+        tags:
+            - { name: console.command, command: coreshop:frontend:install }
+
     coreshop.frontend.controller.abstract:
         class: CoreShop\Bundle\FrontendBundle\Controller\FrontendController
+        abstract: true
         calls:
             - [setContainer, ['@service_container']]
-            - [setTemplateConfigurator, ['@CoreShop\Bundle\FrontendBundle\TemplateConfigurator\TemplateConfiguratorInterface']]
 
     CoreShop\Bundle\FrontendBundle\TemplateConfigurator\TemplateConfiguratorInterface: '@CoreShop\Bundle\FrontendBundle\TemplateConfigurator\TemplateConfigurator'
     CoreShop\Bundle\FrontendBundle\TemplateConfigurator\TemplateConfigurator:
         public: true
         arguments:
-            - '%coreshop.frontend.view_bundle%'
+            - '%coreshop.frontend.view_prefix%'
             - '%coreshop.frontend.view_suffix%'
 
     CoreShop\Bundle\FrontendBundle\Twig\LocaleSwitcherExtension:

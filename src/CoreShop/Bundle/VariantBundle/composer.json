@@ -12,8 +12,8 @@
   "authors": [
     {
       "name": "CoreShop Team",
-      "email": "info@coreshop.org",
-      "homepage": "https://www.coreshop.org/",
+      "email": "info@coreshop.com",
+      "homepage": "https://www.coreshop.com/",
       "role": "Developer"
     },
     {
@@ -24,8 +24,8 @@
     }
   ],
   "require": {
-    "coreshop/resource-bundle": "^4.0",
-    "coreshop/variant": "^4.0"
+    "coreshop/resource-bundle": "^5.0",
+    "coreshop/variant": "^5.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10",
@@ -47,7 +47,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

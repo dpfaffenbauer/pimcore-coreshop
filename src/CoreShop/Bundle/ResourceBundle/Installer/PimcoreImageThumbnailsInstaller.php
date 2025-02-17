@@ -57,7 +57,13 @@ final class PimcoreImageThumbnailsInstaller implements ResourceInstallerInterfac
                 $file = $this->kernel->locateResource($file);
 
                 if (file_exists($file)) {
-                    $thumbnails = Yaml::parse(file_get_contents($file));
+                    $content = file_get_contents($file);
+
+                    if (!$content) {
+                        continue;
+                    }
+
+                    $thumbnails = Yaml::parse($content);
                     $thumbnails = $processor->processConfiguration($configurationDefinition, ['thumbnails' => $thumbnails]);
                     $thumbnails = $thumbnails['thumbnails'];
 

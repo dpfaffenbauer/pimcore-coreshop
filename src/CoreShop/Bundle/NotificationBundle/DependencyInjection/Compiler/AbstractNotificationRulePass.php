@@ -59,7 +59,7 @@ abstract class AbstractNotificationRulePass extends RegisterRegistryTypePass
                 $definition = $container->findDefinition($id);
 
                 if (!isset($tag['type'])) {
-                    $tag['type'] = Container::underscore(substr(strrchr($definition->getClass(), '\\'), 1));
+                    $tag['type'] = Container::underscore(substr((string) strrchr($definition->getClass(), '\\'), 1));
                 }
 
                 if (!isset($tag['notification-type'])) {

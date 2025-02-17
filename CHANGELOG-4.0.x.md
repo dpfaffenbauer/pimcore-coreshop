@@ -1,3 +1,25 @@
+# 4.0.13
+* [Resource] fallback locale could be null for newly created entities by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2756
+* fix: CheckoutManager::getNextStep return type by @gander in https://github.com/coreshop/CoreShop/pull/2758
+* Added action price casting to int by @twin-elements in https://github.com/coreshop/CoreShop/pull/2760
+* [ResourceBundle/OrderBundle] fix order grid-configs and add a new CoreShop Resource Field Getter Operator by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2762
+* [Store] optimize Store Context resolving with fallback and admin/non-admin by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2766
+* [Store] optimize Store Context resolving with fallback and admin/non-admin also for area bricks by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2769
+* [CoreBundle] allow to pass site to link generation by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2772
+
+# 4.0.12
+
+* [PayumBundle] remove payment_state processing to confirm orders by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2743
+* [Docs] Upgrade guide: Mention emergency recovery if major version got updated without updating to latest minor version first by @BlackbitDevs in https://github.com/coreshop/CoreShop/pull/2745
+* [Core] allow multiple store-values by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2747
+* [CoreBundle] fix quantity price rules customerGroups condition by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2750
+
+## 4.0.11
+
+* [Pimcore] use getCount() instead of getTotalCount() for BatchListing by @hethehe in https://github.com/coreshop/CoreShop/pull/2715
+* [Store] fix cached store context by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2727
+* [Twig] twig >= 3.14 is compatible again by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2719
+
 ## 4.0.10
 
 * [PimcoreBundle] respect user language for grid filter labels (#2694) by @benwalch in https://github.com/coreshop/CoreShop/pull/2695

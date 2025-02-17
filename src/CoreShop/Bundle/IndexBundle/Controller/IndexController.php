@@ -64,8 +64,10 @@ class IndexController extends ResourceController
 
         foreach ($interpreters as $interpreter) {
             $class = $indexInterpreterRegistry->get($interpreter);
-            $localized = in_array(LocalizedInterpreterInterface::class, class_implements($class), true);
-            $relation = in_array(RelationInterpreterInterface::class, class_implements($class), true);
+            $implements = class_implements($class) ?: [];
+
+            $localized = in_array(LocalizedInterpreterInterface::class, $implements, true);
+            $relation = in_array(RelationInterpreterInterface::class, $implements, true);
 
             $interpretersResult[] = [
                 'type' => $interpreter,
@@ -95,8 +97,9 @@ class IndexController extends ResourceController
         foreach ($classes as $class) {
             if ($class instanceof DataObject\ClassDefinition) {
                 $pimcoreClass = 'Pimcore\Model\DataObject\\' . ucfirst($class->getName());
+                $implements = class_implements($pimcoreClass) ?: [];
 
-                if (in_array(IndexableInterface::class, class_implements($pimcoreClass), true)) {
+                if (in_array(IndexableInterface::class, $implements, true)) {
                     $availableClasses[] = [
                         'name' => $class->getName(),
                     ];

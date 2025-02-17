@@ -27,6 +27,7 @@ use CoreShop\Component\Index\Condition\MatchCondition;
 use CoreShop\Component\Index\Listing\ExtendedListingInterface;
 use CoreShop\Component\Index\Listing\ListingInterface;
 use CoreShop\Component\Index\Listing\OrderAwareListingInterface;
+use CoreShop\Component\Index\Listing\RawResultListingInterface;
 use CoreShop\Component\Index\Model\IndexInterface;
 use CoreShop\Component\Index\Order\OrderInterface;
 use CoreShop\Component\Index\Order\SimpleOrder;
@@ -36,7 +37,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Concrete;
 
-class Listing extends AbstractListing implements OrderAwareListingInterface, ExtendedListingInterface
+class Listing extends AbstractListing implements OrderAwareListingInterface, ExtendedListingInterface, RawResultListingInterface
 {
     protected ?array $objects = null;
 
@@ -263,20 +264,9 @@ class Listing extends AbstractListing implements OrderAwareListingInterface, Ext
 
     public function load(array $options = [])
     {
-        $queryBuilder = $this->dao->createQueryBuilder();
-        $this->addQueryFromConditions($queryBuilder);
-        $this->addOrderBy($queryBuilder);
-        $this->addJoins($queryBuilder);
+        $options['rawSelect'] = false;
 
-        if (null !== $this->getLimit()) {
-            $queryBuilder->setMaxResults($this->getLimit());
-        }
-
-        if (null !== $this->getOffset()) {
-            $queryBuilder->setFirstResult($this->getOffset());
-        }
-
-        $objectRaws = $this->dao->load($queryBuilder);
+        $objectRaws = $this->loadRawResult($options);
         $this->totalCount = $this->count();
         $className = $this->index->getClass();
         $this->objects = [];
@@ -291,6 +281,24 @@ class Listing extends AbstractListing implements OrderAwareListingInterface, Ext
         }
 
         return $this->objects;
+    }
+
+    public function loadRawResult(array $options = []): array
+    {
+        $queryBuilder = $this->dao->createQueryBuilder();
+        $this->addQueryFromConditions($queryBuilder);
+        $this->addOrderBy($queryBuilder);
+        $this->addJoins($queryBuilder);
+
+        if (null !== $this->getLimit()) {
+            $queryBuilder->setMaxResults($this->getLimit());
+        }
+
+        if (null !== $this->getOffset()) {
+            $queryBuilder->setFirstResult($this->getOffset());
+        }
+
+        return $this->dao->load($queryBuilder, $options['rawSelect'] ?? true);
     }
 
     protected function loadElementById($elementId)

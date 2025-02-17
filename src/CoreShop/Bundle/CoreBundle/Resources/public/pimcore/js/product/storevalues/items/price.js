@@ -51,6 +51,13 @@ coreshop.product.storeValues.items.price = Class.create(coreshop.product.storeVa
             priceField.setMaxValue(this.builder.fieldConfig.maxValue);
         }
 
+        priceField.on('blur', function (field) {
+            var value = field.getValue();
+            if (value === null || value === '') {
+                field.setValue(0);
+            }
+        });
+
         priceField.resumeEvents(true);
 
         return priceField;

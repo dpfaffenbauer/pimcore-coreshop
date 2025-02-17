@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Customer\Context;
 
 use CoreShop\Component\Customer\Model\CustomerInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 final class CompositeCustomerContext implements CustomerContextInterface
 {

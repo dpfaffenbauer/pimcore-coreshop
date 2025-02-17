@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Address\Context;
 
 use CoreShop\Component\Address\Model\CountryInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 final class CompositeCountryContext implements CountryContextInterface
 {
@@ -30,8 +30,8 @@ final class CompositeCountryContext implements CountryContextInterface
      */
     private PriorityQueue $countryContexts;
 
-    public function __construct()
-    {
+    public function __construct(
+        ) {
         $this->countryContexts = new PriorityQueue();
     }
 

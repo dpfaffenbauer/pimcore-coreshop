@@ -1,0 +1,7 @@
+services:
+  coreshop.data_object.grid_column_config.operator.factory.resource_field_getter:
+    class: Pimcore\Bundle\AdminBundle\DataObject\GridColumnConfig\Operator\Factory\DefaultOperatorFactory
+    arguments:
+      $className: CoreShop\Bundle\ResourceBundle\Pimcore\GridColumnConfig\ResourceFieldGetter
+    tags:
+      - { name: pimcore.data_object.grid_column_config.operator_factory, id: coreshop_resource_field_getter }

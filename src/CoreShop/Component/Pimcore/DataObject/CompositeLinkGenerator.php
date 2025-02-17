@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Pimcore\DataObject;
 
 use CoreShop\Component\Pimcore\Exception\LinkGenerationNotPossibleException;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 use Pimcore\Model\DataObject\ClassDefinition\LinkGeneratorInterface;
 
 class CompositeLinkGenerator implements LinkGeneratorInterface

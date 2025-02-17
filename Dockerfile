@@ -1,21 +1,18 @@
-FROM pimcore/pimcore:php8.2-debug-latest as dev
+FROM ghcr.io/cors-gmbh/pimcore-docker/php-fpm:8.4-alpine3.21-7.1.0 AS dev
 RUN set -eux; \
-    apt-get update; \
-    apt-get install -y $PHPIZE_DEPS libxslt1-dev; \
+    apk update; \
+    apk add $PHPIZE_DEPS libxslt-dev; \
     docker-php-ext-install xsl; \
+    docker-php-ext-install sockets; \
     sync; \
-    apt-get purge -y $PHPIZE_DEPS; \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+    rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN echo 'xdebug.idekey = PHPSTORM' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo 'xdebug.mode = debug' >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-ARG uid=1000
-RUN usermod -u $uid www-data && chown -R www-data:www-data /var/www
-
-FROM dev as behat
-RUN apt update && \
-    apt install -y chromium chromium-driver
+FROM dev AS behat
+RUN apk update && \
+    apk add -y chromium chromium-driver
 
 # Install Symfony, Pimcore and CoreShop inside Tests container
 # RUN wget https://get.symfony.com/cli/installer -O - | bash

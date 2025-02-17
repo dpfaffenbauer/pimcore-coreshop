@@ -33,7 +33,9 @@ final class Autoconfiguration
         if (!$autoconfigureWithAttributes) {
             $container
                 ->registerForAutoconfiguration($interface)
-                ->addTag($tag);
+                ->addTag($tag)
+            ;
+
             return;
         }
 
@@ -47,7 +49,7 @@ final class Autoconfiguration
         $container->registerAttributeForAutoconfiguration(
             $attribute,
             static function (ChildDefinition $definition, $attribute) use ($tag): void {
-                $definition->addTag($tag, Autoconfiguration::getProperties($attribute));
+                $definition->addTag($tag, self::getProperties($attribute));
             },
         );
     }

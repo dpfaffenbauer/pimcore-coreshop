@@ -59,7 +59,7 @@ final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
         $metadataDriver = $configuration->getMetadataDriverImpl();
         Assert::isInstanceOf($metadataDriver, MappingDriver::class);
 
-        foreach (class_parents($class) as $parent) {
+        foreach (class_parents($class) ?: [] as $parent) {
             if (false === in_array($parent, $metadataDriver->getAllClassNames(), true)) {
                 continue;
             }

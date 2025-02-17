@@ -1,3 +1,18 @@
+## 4.1.0
+* [Registry] require registry 4.1 in all bundles by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2748
+* Update CartController - remove Argument Injection by @steinerCors in https://github.com/coreshop/CoreShop/pull/2741
+* [Frontend] introduce template installer and better define best-practice by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2739
+
+## 4.1.0-RC2
+
+> **Important** The FrontendBundle is now disabled by default. We added a migration to enable it
+> Please check if it actually is enabled in the bundles.php file
+> If you don't need it, feel free to disable it.
+* [ResourceBundle] check also for empty "pimcore_class_name" by @breakone in https://github.com/coreshop/CoreShop/pull/2716
+* [CoreBundle] implement name functions and add migration for order-name and wishlist-name by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2717
+* [Pimcore] introduce the Printable by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2720
+* [Printable] further improvements to new printable feature by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2724
+
 ## 4.1.0-RC1 
 
 > **Important**: Dependency to dachcom-digital/emailizr has been removed due to licensing issues with GPL and CCL. If

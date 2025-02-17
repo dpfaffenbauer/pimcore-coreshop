@@ -115,7 +115,7 @@ final class CountryContext implements Context
         $reflection = new \ReflectionClass($this->compositeCountryContext);
         $reflection->getProperty('countryContexts')->setAccessible(true);
         /**
-         * @var \Laminas\Stdlib\PriorityQueue $priorityQueue
+         * @var \CoreShop\Component\Pimcore\PriorityQueue $priorityQueue
          */
         $priorityQueue = $reflection->getProperty('countryContexts')->getValue($this->compositeCountryContext);
 

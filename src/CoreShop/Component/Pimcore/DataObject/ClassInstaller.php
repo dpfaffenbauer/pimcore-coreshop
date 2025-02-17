@@ -20,6 +20,7 @@ namespace CoreShop\Component\Pimcore\DataObject;
 
 use Pimcore\Model\DataObject;
 use Pimcore\Model\Exception\NotFoundException;
+use Webmozart\Assert\Assert;
 
 class ClassInstaller implements ClassInstallerInterface
 {
@@ -37,6 +38,8 @@ class ClassInstaller implements ClassInstallerInterface
         }
 
         $json = file_get_contents($jsonFile);
+
+        Assert::string($json);
 
         DataObject\ClassDefinition\Service::importObjectBrickFromJson($objectBrick, $json, true);
 
@@ -68,6 +71,8 @@ class ClassInstaller implements ClassInstallerInterface
 
             $class->setName($className);
             $class->setUserOwner(0);
+
+            Assert::string($json);
 
             DataObject\ClassDefinition\Service::importClassDefinitionFromJson($class, $json, true);
 
@@ -108,6 +113,8 @@ class ClassInstaller implements ClassInstallerInterface
         }
 
         $json = file_get_contents($jsonFile);
+
+        Assert::string($json);
 
         DataObject\ClassDefinition\Service::importFieldCollectionFromJson($fieldCollection, $json, true);
 

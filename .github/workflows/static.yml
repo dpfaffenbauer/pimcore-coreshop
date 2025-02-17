@@ -10,6 +10,7 @@ on:
       - '*.neon'
       - '*.xml'
       - 'composer.json'
+      - '.github/workflows/static.yml'
   pull_request:
     branches: [ '4.0', '4.1','next' ]
     paths:
@@ -20,6 +21,7 @@ on:
       - '*.neon'
       - '*.xml'
       - 'composer.json'
+      - '.github/workflows/static.yml'
   release:
     types: [ created ]
   schedule:
@@ -34,8 +36,8 @@ jobs:
 
     strategy:
       matrix:
-        php: [ 8.1, 8.2 ]
-        pimcore: [ ~11.1.0, ~11.2.0 ]
+        php: [ 8.3, 8.4 ]
+        pimcore: [ ^11.5, ^12.0 ]
         jms: [ ^4.0, ^5.0 ]
         dependencies: [ highest ]
     services:

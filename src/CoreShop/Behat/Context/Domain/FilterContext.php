@@ -24,6 +24,7 @@ use CoreShop\Component\Index\Factory\FilteredListingFactoryInterface;
 use CoreShop\Component\Index\Filter\FilterProcessorInterface;
 use CoreShop\Component\Index\Listing\ListingInterface;
 use CoreShop\Component\Index\Listing\OrderAwareListingInterface;
+use CoreShop\Component\Index\Listing\RawResultListingInterface;
 use CoreShop\Component\Index\Model\FilterConditionInterface;
 use CoreShop\Component\Index\Model\FilterInterface;
 use CoreShop\Component\Index\Model\IndexableInterface;
@@ -227,6 +228,45 @@ final class FilterContext implements Context
         }
 
         Assert::eq([$firstResult, $secondResult], $result);
+    }
+
+    /**
+     * @Then /^the raw result for the (filter) should look like:$/
+     */
+    public function theRawResultForTheFilterShouldLookLike(FilterInterface $filter, TableNode $table): void
+    {
+        $parameterBag = new ParameterBag();
+
+        $filteredList = $this->filterListFactory->createList($filter, $parameterBag);
+        $filteredList->setLocale('en');
+        $filteredList->setVariantMode(ListingInterface::VARIANT_MODE_HIDE);
+
+        if (!$filteredList instanceof RawResultListingInterface) {
+            throw new \RuntimeException('FilteredList is not an instance of RawResultListingInterface');
+        }
+
+        $tableRaw = array_values($table->getTable());
+        $header = null;
+        $data = [];
+
+        foreach ($tableRaw as $index => $value) {
+            if ($index === 0) {
+                $header = $value;
+
+                continue;
+            }
+
+            $data[] = array_combine($header, $value);
+        }
+
+        $rawResult = $filteredList->loadRawResult();
+
+        foreach ($data as $rowIndex => $entry) {
+            foreach ($entry as $key => $value) {
+                Assert::keyExists($rawResult[$rowIndex], $key);
+                Assert::eq($rawResult[$rowIndex][$key], $value);
+            }
+        }
     }
 
     private function prepareFilter(FilterInterface $filter, array $filterParams = []): array

@@ -57,7 +57,13 @@ final class PimcoreRoutesInstaller implements ResourceInstallerInterface
                 $file = $this->kernel->locateResource($file);
 
                 if (file_exists($file)) {
-                    $routes = Yaml::parse(file_get_contents($file));
+                    $content = file_get_contents($file);
+
+                    if (!$content) {
+                        continue;
+                    }
+
+                    $routes = Yaml::parse($content);
                     $routes = $processor->processConfiguration($configurationDefinition, ['staticroutes' => $routes]);
                     $routes = $routes['routes'];
 

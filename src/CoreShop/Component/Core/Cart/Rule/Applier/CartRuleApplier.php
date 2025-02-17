@@ -68,7 +68,7 @@ class CartRuleApplier implements CartRuleApplierInterface
         int $discount,
         bool $withTax = false,
         bool $positive = false,
-        bool $includeNonDiscountableItems = false
+        bool $includeNonDiscountableItems = false,
     ): void {
         $context = $this->cartContextResolver->resolveCartContext($cart);
         $totalAmount = [];
@@ -146,9 +146,9 @@ class CartRuleApplier implements CartRuleApplierInterface
             $totalDiscountGross += $itemDiscountGross;
         }
 
-        $totalDiscountNet = (int)round($totalDiscountNet);
-        $totalDiscountGross = (int)round($totalDiscountGross);
-        $totalDiscountFloat = (int)round($totalDiscountFloat);
+        $totalDiscountNet = (int) round($totalDiscountNet);
+        $totalDiscountGross = (int) round($totalDiscountGross);
+        $totalDiscountFloat = (int) round($totalDiscountFloat);
 
         //Add missing cents caused by rounding issues
         if ($totalDiscountFloat > ($withTax ? $totalDiscountNet : $totalDiscountGross)) {
@@ -245,7 +245,7 @@ class CartRuleApplier implements CartRuleApplierInterface
             if ($item->getTotal() <= 0) {
                 continue;
             }
-            
+
             if (null === $item->findAttribute('not_discountable')) {
                 $discountableItems[] = $item;
             }

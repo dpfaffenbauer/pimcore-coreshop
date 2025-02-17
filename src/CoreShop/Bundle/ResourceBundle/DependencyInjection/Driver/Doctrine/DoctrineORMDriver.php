@@ -66,7 +66,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
 
-        foreach (class_implements($repositoryClass) as $typehintClass) {
+        foreach (class_implements($repositoryClass) ?: [] as $typehintClass) {
             $container->registerAliasForArgument(
                 $metadata->getServiceId('repository'),
                 $typehintClass,
@@ -99,7 +99,7 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
 
         $container->setDefinition($metadata->getServiceId('repository.factory'), $definition);
 
-        foreach (class_implements($repositoryClass) as $typehintClass) {
+        foreach (class_implements($repositoryClass) ?: [] as $typehintClass) {
             $container->registerAliasForArgument(
                 $metadata->getServiceId('repository.factory'),
                 $typehintClass,

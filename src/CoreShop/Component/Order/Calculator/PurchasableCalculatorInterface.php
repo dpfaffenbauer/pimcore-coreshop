@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Order\Calculator;
 
-interface PurchasableCalculatorInterface extends 
+interface PurchasableCalculatorInterface extends
     PurchasablePriceCalculatorInterface,
     PurchasableDiscountCalculatorInterface,
     PurchasableDiscountPriceCalculatorInterface,

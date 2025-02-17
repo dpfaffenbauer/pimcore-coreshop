@@ -46,8 +46,8 @@ use CoreShop\Component\Order\Calculator\PurchasableRetailPriceCalculatorInterfac
 use CoreShop\Component\Order\Calculator\PurchasableWholesalePriceCalculatorInterface;
 use CoreShop\Component\Order\Cart\Rule\Action\CartPriceRuleActionProcessorInterface;
 use CoreShop\Component\Order\Cart\Rule\Condition\CartRuleConditionCheckerInterface;
-use CoreShop\Component\Registry\Autoconfiguration;
 use CoreShop\Component\Order\Renderer\OrderDocumentRendererInterface;
+use CoreShop\Component\Registry\Autoconfiguration;
 use Pimcore\Bundle\WebToPrintBundle\PimcoreWebToPrintBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -70,8 +70,7 @@ final class CoreShopOrderExtension extends AbstractModelExtension
 
         if ($configs['use_pimcore_pdf_rendering']) {
             $container->setAlias(OrderDocumentRendererInterface::class, PimcoreOrderDocumentPdfRenderer::class);
-        }
-        else {
+        } else {
             /**
              * @psalm-suppress DeprecatedClass
              */

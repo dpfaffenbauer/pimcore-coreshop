@@ -8,6 +8,7 @@ on:
       - 'behat.yml.dist'
       - '*.php'
       - 'src/**'
+      - '.github/workflows/behat_ui.yml'
 
   pull_request:
     branches: [ '4.0', '4.1','next' ]
@@ -17,6 +18,7 @@ on:
       - 'behat.yml.dist'
       - '*.php'
       - 'src/**'
+      - '.github/workflows/behat_ui.yml'
   release:
     types: [ created ]
   schedule:
@@ -43,13 +45,13 @@ jobs:
 
     strategy:
       matrix:
-        php: [ 8.1, 8.2 ]
-        pimcore: [ ~11.1.0, ~11.2.0 ]
+        php: [ 8.3, 8.4 ]
+        pimcore: [ ^11.5, ^12.0 ]
         jms: [ ^4.0, ^5.0 ]
         dependencies: [ highest ]
         exclude:
-          - php: 8.1
-            dependencies: lowest
+          - pimcore: ^11.5
+            php: 8.4
 
     services:
       database:
@@ -98,7 +100,14 @@ jobs:
       run: composer require "jms/serializer-bundle:${{ matrix.jms }}" --no-update --no-scripts
 
     - name: pimcore/pimcore
-      run: composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
+      run: |
+        composer req pimcore/pimcore:${{ matrix.pimcore }} --no-interaction --no-scripts --no-update
+        if [ "${{ matrix.pimcore }}" == "^11.5" ]; then
+          composer req pimcore/admin-ui-classic-bundle:^1.6 --no-interaction --no-scripts --no-update
+        else
+          composer req pimcore/admin-ui-classic-bundle:^2.0 --no-interaction --no-scripts --no-update
+          composer req payum/payum:1.7.x-dev --no-interaction --no-scripts --no-update
+        fi
 
     - if: matrix.dependencies == 'highest'
       name: Install dependencies highest
@@ -132,7 +141,7 @@ jobs:
       run: vendor/bin/behat --strict --no-interaction -vvv -f progress --config behat.yml.dist -p ui
 
     - name: Upload Logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: "Logs (PHP ${{ matrix.php }}, Symfony ${{ matrix.pimcore }})"

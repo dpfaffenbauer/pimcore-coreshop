@@ -41,8 +41,13 @@ final class CoreShopFrontendExtension extends AbstractModelExtension
             }
         }
 
-        $container->setParameter('coreshop.frontend.view_bundle', $configs['view_bundle']);
         $container->setParameter('coreshop.frontend.view_suffix', $configs['view_suffix']);
+
+        if (isset($configs['view_prefix'])) {
+            $container->setParameter('coreshop.frontend.view_prefix', $configs['view_prefix']);
+        } else {
+            $container->setParameter('coreshop.frontend.view_prefix', '@' . $configs['view_bundle']);
+        }
 
         $container->setParameter('coreshop.frontend.category.valid_sort_options', $configs['category']['valid_sort_options']);
         $container->setParameter('coreshop.frontend.category.default_sort_name', $configs['category']['default_sort_name']);

@@ -33,8 +33,9 @@ class AddMultipleToCartFactory implements AddMultipleToCartFactoryInterface
     public function createWithMultipleAddToCarts(array $addToCarts): AddMultipleToCartInterface
     {
         $class = new $this->addMultipleToCartClass($addToCarts);
+        $implements = class_implements($class) ?: [];
 
-        if (!in_array(AddMultipleToCartInterface::class, class_implements($class), true)) {
+        if (!in_array(AddMultipleToCartInterface::class, $implements, true)) {
             throw new \InvalidArgumentException(
                 sprintf('%s needs to implement "%s".', $class::class, AddMultipleToCartInterface::class),
             );

@@ -27,6 +27,10 @@ interface ProductStoreValuesInterface extends ResourceInterface, StoreAwareInter
 {
     public function getPrice(): int;
 
+    public function getFieldName(): ?string;
+
+    public function setFieldName(string $fieldName): void;
+
     public function setPrice(int $price);
 
     public function getProduct(): ?ProductInterface;

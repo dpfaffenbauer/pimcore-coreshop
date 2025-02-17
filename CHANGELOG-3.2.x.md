@@ -1,3 +1,11 @@
+# 3.2.16
+* [PimcoreBundle] fix MultiSelect (check for existing store) by @breakone in https://github.com/coreshop/CoreShop/pull/2754
+* [priceNull - 3.2] - add listener for null/empty price on field by @codingioanniskrikos in https://github.com/coreshop/CoreShop/pull/2757
+* [ResourceBundle] Version Marshalling for FieldCollections by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2768
+
+# 3.2.15
+* [PayumBundle] remove payment_state processing to confirm orders by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2743
+
 # 3.2.14
 * [Pimcore] introduce LocalizedFallbackHelper by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2723
 * [Translations] add missing translations by @dpfaffenbauer in https://github.com/coreshop/CoreShop/pull/2721

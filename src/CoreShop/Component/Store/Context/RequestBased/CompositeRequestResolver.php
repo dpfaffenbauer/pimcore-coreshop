@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace CoreShop\Component\Store\Context\RequestBased;
 
+use CoreShop\Component\Pimcore\PriorityQueue;
 use CoreShop\Component\Store\Context\StoreNotFoundException;
 use CoreShop\Component\Store\Model\StoreInterface;
-use Laminas\Stdlib\PriorityQueue;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CompositeRequestResolver implements RequestResolverInterface

@@ -147,7 +147,7 @@ final class CoreShopResourceExtension extends AbstractPimcoreExtension
             return $alias;
         }
 
-        $shortName = Container::underscore(substr(strrchr($className, '\\'), 1));
+        $shortName = Container::underscore(substr((string) strrchr($className, '\\'), 1));
 
         return 'app.' . u($shortName)->snake()->toString();
     }

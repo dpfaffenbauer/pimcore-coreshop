@@ -34,10 +34,10 @@ final class DynamicDropdownController extends AdminAbstractController
 
     public function optionsAction(Request $request): JsonResponse
     {
-        $folderName = (string) $request->query->get('folderName');
+        $folderName = $request->query->getString('folderName', '/');
         $parts = array_map(static function (string $part) {
             return Service::getValidKey($part, 'object');
-        }, preg_split('/\//', $folderName, 0, \PREG_SPLIT_NO_EMPTY));
+        }, preg_split('/\//', $folderName, 0, \PREG_SPLIT_NO_EMPTY) ?: []);
         $parentFolderPath = sprintf('/%s', implode('/', $parts));
         $sort = (string) $request->query->get('sortBy', '');
         $options = [];

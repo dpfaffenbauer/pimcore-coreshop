@@ -24,7 +24,8 @@ final class ProductCustomAttributesCalculatorsPass extends RegisterSimpleRegistr
 {
     public const PRODUCT_CUSTOM_ATTRIBUTES_CALCULATOR_TAG = 'coreshop.product.custom_attributes_calculator';
 
-    public function __construct() {
+    public function __construct(
+        ) {
         parent::__construct(
             'coreshop.registry.product.custom_attributes_calculators',
             'coreshop.product.custom_attributes_calculators',

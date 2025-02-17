@@ -19,7 +19,6 @@ declare(strict_types=1);
 namespace CoreShop\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CountriesConfigurationType;
 use CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CurrenciesConfigurationType;
 use CoreShop\Bundle\CoreBundle\Form\Type\Rule\Condition\CustomerGroupsConfigurationType;
@@ -35,6 +34,7 @@ use CoreShop\Bundle\ProductBundle\Form\Type\Rule\Condition\ProductSpecificPriceN
 use CoreShop\Bundle\ProductBundle\Form\Type\Rule\Condition\TimespanConfigurationType;
 use CoreShop\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use CoreShop\Bundle\RuleBundle\Form\Type\Rule\EmptyConfigurationFormType;
+use CoreShop\Bundle\TestBundle\Service\SharedStorageInterface;
 use CoreShop\Component\Address\Model\ZoneInterface;
 use CoreShop\Component\Core\Model\CountryInterface;
 use CoreShop\Component\Core\Model\CurrencyInterface;

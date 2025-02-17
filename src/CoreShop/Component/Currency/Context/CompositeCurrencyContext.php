@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace CoreShop\Component\Currency\Context;
 
 use CoreShop\Component\Currency\Model\CurrencyInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 
 final class CompositeCurrencyContext implements CurrencyContextInterface
 {

@@ -20,7 +20,7 @@ namespace CoreShop\Component\Address\Context\RequestBased;
 
 use CoreShop\Component\Address\Context\CountryNotFoundException;
 use CoreShop\Component\Address\Model\CountryInterface;
-use Laminas\Stdlib\PriorityQueue;
+use CoreShop\Component\Pimcore\PriorityQueue;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CompositeRequestResolver implements RequestResolverInterface

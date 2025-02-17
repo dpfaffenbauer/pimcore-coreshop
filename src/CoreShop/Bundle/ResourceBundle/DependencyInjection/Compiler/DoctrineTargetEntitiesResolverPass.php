@@ -61,7 +61,7 @@ final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
         foreach ($resources as $alias => $configuration) {
             $model = $this->getModel($alias, $configuration);
 
-            foreach (class_implements($model) as $interface) {
+            foreach (class_implements($model) ?: [] as $interface) {
                 if ($interface === ResourceInterface::class) {
                     continue;
                 }

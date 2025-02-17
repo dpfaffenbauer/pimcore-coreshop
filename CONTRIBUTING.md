@@ -6,7 +6,7 @@ We use GitHub issues exclusively to track all bugs and features.
 
 * [Open an issue](https://github.com/coreshop/CoreShop/issues) here on GitHub. 
 If you can, **please provide a fix and create a pull request (PR) instead**; this will automatically create an issue for you.
-* Report security issues only to info@coreshop.org 
+* Report security issues only to info@coreshop.com 
 * Please be patient as not all items will be tested immediately - remember, CoreShop is open source and free of charge. 
 * Occasionally we'll close issues if they appear stale or are too vague - please don't take this personally! 
 Please feel free to re-open issues we've closed if there's something we've missed and they still need to be addressed.

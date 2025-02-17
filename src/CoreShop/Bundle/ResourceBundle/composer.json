@@ -12,8 +12,8 @@
   "authors": [
     {
       "name": "CoreShop Team",
-      "email": "info@coreshop.org",
-      "homepage": "https://www.coreshop.org/",
+      "email": "info@coreshop.com",
+      "homepage": "https://www.coreshop.com/",
       "role": "Developer"
     },
     {
@@ -26,13 +26,13 @@
   "require": {
     "doctrine/orm": "^2.9",
     "doctrine/doctrine-bundle": "^2.4",
-    "jms/serializer-bundle": "^4.0 | ^5.0",
+    "jms/serializer-bundle": "^5.0",
     "stof/doctrine-extensions-bundle": "^1.6",
-    "coreshop/pimcore-bundle": "^4.0",
-    "coreshop/locale-bundle": "^4.0",
-    "coreshop/optimistic-entity-lock-bundle": "^4.0",
-    "coreshop/registry": "^4.0",
-    "coreshop/resource": "^4.0",
+    "coreshop/pimcore-bundle": "^5.0",
+    "coreshop/locale-bundle": "^5.0",
+    "coreshop/optimistic-entity-lock-bundle": "^5.0",
+    "coreshop/registry": "^5.0",
+    "coreshop/resource": "^5.0",
     "symfony/config": "^6.3",
     "symfony/expression-language": "^6.3",
     "symfony/form": "^6.3",
@@ -43,8 +43,8 @@
     "symfony/validator": "^6.3",
     "symfony/yaml": "^6.3",
     "gedmo/doctrine-extensions": "^3.11.0",
-    "pimcore/pimcore": "^11.0",
-    "pimcore/admin-ui-classic-bundle": "^1.0"
+    "pimcore/pimcore": "^11.5 || ^12.0",
+    "pimcore/admin-ui-classic-bundle": "^1.6 || ^2.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10",
@@ -66,7 +66,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.0-dev"
+      "dev-master": "5.0-dev"
     }
   },
   "config": {

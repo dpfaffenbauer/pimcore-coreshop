@@ -198,6 +198,9 @@ class PriorityMap implements \Iterator, \Countable
     {
         $item = current($this->list);
 
+        /**
+         * @psalm-suppress InvalidPropertyFetch
+         */
         return $item->value;
     }
 

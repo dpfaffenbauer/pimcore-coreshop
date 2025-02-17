@@ -22,7 +22,6 @@ use CoreShop\Component\Resource\Model\ResourceInterface;
 
 interface OrderItemAttributeInterface extends ResourceInterface
 {
-
     public function getId(): ?int;
 
     public function getAttributeKey(): ?string;
