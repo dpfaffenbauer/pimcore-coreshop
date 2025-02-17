@@ -42,7 +42,7 @@ services:
     CoreShop\Bundle\CoreBundle\EventListener\ProductAvailabilityEventListener:
         arguments:
             - '@coreshop.repository.order_item'
-            - '@Pimcore\Model\Factory'
+            - '@doctrine.dbal.default_connection'
         tags:
             - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: preUpdateListener }
             - { name: kernel.event_listener, event: pimcore.dataobject.postUpdate, method: postUpdateListener }
