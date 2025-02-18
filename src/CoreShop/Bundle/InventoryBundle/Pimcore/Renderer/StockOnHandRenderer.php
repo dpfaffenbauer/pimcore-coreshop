@@ -33,7 +33,9 @@ class StockOnHandRenderer implements DynamicTextLabelInterface
 
     public function renderLayoutText(string $data, ?Concrete $object, array $params): string
     {
-        Assert::isInstanceOf($object, StockableInterface::class);
+        if (!$object instanceof StockableInterface) {
+            return '';
+        }
 
         return $this->twig->render('@CoreShopInventory/pimcore/stock_text.html.twig', [
             'stockable' => $object,
