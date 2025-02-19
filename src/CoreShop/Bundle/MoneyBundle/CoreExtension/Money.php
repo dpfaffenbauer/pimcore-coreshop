@@ -612,7 +612,7 @@ class Money extends DataObject\ClassDefinition\Data implements
                 throw new ValidationException('Value in field [ ' . $this->getName() . ' ] is not at least ' . $this->getMinValue());
             }
 
-            if (null !== $this->getMaxValue() && $data > $this->getMaxValue()) {
+            if (null !== $this->getMaxValue() && $this->getMaxValue() > 0 && $data > $this->getMaxValue()) {
                 throw new ValidationException('Value in field [ ' . $this->getName() . ' ] is bigger than ' . $this->getMaxValue());
             }
         }

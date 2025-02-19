@@ -263,7 +263,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
                 );
             }
 
-            if ((string) $this->getMaxValue() !== '' && $data->getValue() > $this->getMaxValue()) {
+            if ((string) $this->getMaxValue() !== '' && $this->getMaxValue() > 0 && $data->getValue() > $this->getMaxValue()) {
                 throw new Model\Element\ValidationException(
                     'Value in field [ ' . $this->getName() . ' ] is bigger than ' . $this->getMaxValue(),
                 );
