@@ -95,7 +95,7 @@
     "gedmo/doctrine-extensions": "^3.11",
     "jms/serializer-bundle": "^5.0",
     "knplabs/knp-menu-bundle": "^3.1",
-    "payum/payum": "^1.7",
+    "payum/payum": "^2.0",
     "payum/payum-bundle": "^2.6",
     "php-http/guzzle7-adapter": "^1.0",
     "php-http/message-factory": "^1.1",
