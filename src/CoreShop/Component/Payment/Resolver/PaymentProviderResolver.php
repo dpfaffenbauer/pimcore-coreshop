@@ -28,7 +28,7 @@ class PaymentProviderResolver implements PaymentProviderResolverInterface
     ) {
     }
 
-    public function resolvePaymentProviders(ResourceInterface $subject = null): array
+    public function resolvePaymentProviders(?ResourceInterface $subject = null): array
     {
         return $this->paymentProviderRepository->findActive();
     }

@@ -20,5 +20,5 @@ namespace CoreShop\Component\Pimcore\Slug;
 
 interface SluggableSluggerInterface
 {
-    public function slug(SluggableInterface $sluggable, string $locale, string $suffix = null): string;
+    public function slug(SluggableInterface $sluggable, string $locale, ?string $suffix = null): string;
 }

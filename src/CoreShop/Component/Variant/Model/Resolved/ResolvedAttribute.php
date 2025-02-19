@@ -29,7 +29,7 @@ class ResolvedAttribute
     private ArrayCollection $products;
 
     public function __construct(
-        AttributeInterface $attribute = null,
+        ?AttributeInterface $attribute = null,
     ) {
         $this->products = new ArrayCollection();
         if ($attribute) {

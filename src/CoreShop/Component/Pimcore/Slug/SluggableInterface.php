@@ -29,12 +29,12 @@ interface SluggableInterface
     /**
      * @return UrlSlug[]
      */
-    public function getSlug(string $language = null): array;
+    public function getSlug(?string $language = null): array;
 
     /**
      * @param UrlSlug[] $slug
      */
     public function setSlug(array $slug, ?string $language = null);
 
-    public function getNameForSlug(string $language = null): ?string;
+    public function getNameForSlug(?string $language = null): ?string;
 }

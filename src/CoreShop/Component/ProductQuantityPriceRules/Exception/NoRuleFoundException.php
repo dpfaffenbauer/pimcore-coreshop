@@ -22,7 +22,7 @@ class NoRuleFoundException extends \RuntimeException
 {
     public function __construct(
         $message = null,
-        \Exception $previousException = null,
+        ?\Exception $previousException = null,
     ) {
         parent::__construct($message ?: 'No matching Quantity Price Rule found.', 0, $previousException);
     }

@@ -31,7 +31,7 @@ class StoreBasedPaymentProviderResolver implements PaymentProviderResolverInterf
     ) {
     }
 
-    public function resolvePaymentProviders(ResourceInterface $subject = null): array
+    public function resolvePaymentProviders(?ResourceInterface $subject = null): array
     {
         return $this->paymentProviderRepository->findActiveForStore($this->storeContext->getStore());
     }

@@ -28,7 +28,7 @@ class SluggableSlugger implements SluggableSluggerInterface
     ) {
     }
 
-    public function slug(SluggableInterface $sluggable, string $locale, string $suffix = null): string
+    public function slug(SluggableInterface $sluggable, string $locale, ?string $suffix = null): string
     {
         $fallback = (string) $sluggable->getId();
 
