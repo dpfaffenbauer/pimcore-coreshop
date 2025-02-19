@@ -7,6 +7,35 @@
 {% endblock %}
 
 {% block checkout %}
+    <h1>{{ 'coreshop.ui.summary'|trans }}</h1>
+    {%  set invoiceAddress = cart.invoiceAddress %}
+    {%  set shippingAddress = cart.shippingAddress ?? false %}
+
+    <div class="row mb-5">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+            <div class="card bg-light border-0">
+                <div class="px-3 pt-3 border-0">
+                    <h4 class="mb-0">
+                        {{ 'coreshop.ui.invoice_address'|trans }}
+                    </h4>
+                </div>
+                <div class="card-body panel-invoice-address mb-2">{{ invoiceAddress|coreshop_format_address }}</div>
+            </div>
+        </div>
+        {%  if shippingAddress %}
+            <div class="col-12 col-md-6">
+                <div class="card bg-light border-0">
+                    <div class="px-3 pt-3 border-0">
+                        <h4 class="mb-0">
+                            {{ 'coreshop.ui.shipping_address'|trans }}
+                        </h4>
+                    </div>
+                    <div class="card-body panel-invoice-address mb-2">{{ shippingAddress|coreshop_format_address }}</div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_errors(form) }}
 
@@ -21,13 +50,13 @@
         <div class="row">
             {% if is_granted('CORESHOP_QUOTE_CREATE') %}
                 <div class="col-12 col-sm-1 offset-sm-10">
-                    {{ form_widget(form.submitQuote, coreshop_test_form_attribute('submit-quote')|coreshop_merge_recursive({attr: {class: 'btn btn-success w-100'}})) }}
+                    {{ form_widget(form.submitQuote, coreshop_test_form_attribute('submit-quote')|coreshop_merge_recursive({attr: {class: 'btn btn-primary w-100'}})) }}
                 </div>
             {% endif %}
 
             {% if is_granted('CORESHOP_ORDER_CREATE') %}
                 <div class="col-12 col-sm-1">
-                    {{ form_widget(form.submitOrder, coreshop_test_form_attribute('submit-order')|coreshop_merge_recursive({attr: {class: 'btn btn-success w-100'}})) }}
+                    {{ form_widget(form.submitOrder, coreshop_test_form_attribute('submit-order')|coreshop_merge_recursive({attr: {class: 'btn btn-primary w-100'}})) }}
                 </div>
             {% endif %}
         </div>

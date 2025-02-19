@@ -28,5 +28,5 @@ interface OrderRendererInterface
      *
      * @return mixed
      */
-    public function render(WorkerInterface $worker, OrderInterface $condition, string $prefix = null);
+    public function render(WorkerInterface $worker, OrderInterface $condition, ?string $prefix = null);
 }

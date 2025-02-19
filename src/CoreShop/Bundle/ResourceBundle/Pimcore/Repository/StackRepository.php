@@ -83,7 +83,7 @@ class StackRepository extends PimcoreRepository implements StackRepositoryInterf
         return $instance;
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
     {
         $criteria['variable'] = implode(',', $this->classNames);
 

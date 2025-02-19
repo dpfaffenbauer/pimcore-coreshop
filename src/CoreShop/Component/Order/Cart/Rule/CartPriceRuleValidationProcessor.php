@@ -32,7 +32,7 @@ class CartPriceRuleValidationProcessor implements CartPriceRuleValidationProcess
     ) {
     }
 
-    public function isValidCartRule(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, CartPriceRuleVoucherCodeInterface $voucherCode = null): bool
+    public function isValidCartRule(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, ?CartPriceRuleVoucherCodeInterface $voucherCode = null): bool
     {
         if (null === $voucherCode && $cartPriceRule->getIsVoucherRule()) {
             return false;

@@ -1,0 +1,22 @@
+<ul class="navbar-nav d-flex flex-row align-items-center justify-content-center order-lg-2">
+    {% if is_granted('CORESHOP_WISHLIST') %}
+        <li class="nav-item me-2 me-lg-1">
+            <a class="nav-link" href="{{ path('coreshop_wishlist_summary') }}">
+                <i class="bi bi-heart-fill me-lg-1"></i><span class="d-none d-lg-inline-block"> {{ 'coreshop.ui.wishlist'|trans }}</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('CORESHOP_CURRENCY_SWITCH') %}
+        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CurrencyController::widgetAction')) }}
+    {% endif %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fi fi-{% if app.request.locale is same as('en') %}gb{% else %}{{ app.request.locale }}{% endif %} border-radius-100 flag-border bg-cover me-lg-1"></span><span class="d-none d-lg-inline-block">{{ app.request.locale|upper(app.request.locale) }}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="languageDropdown">
+            {% for document in coreshop_locale_switcher(document) %}
+                <a class="dropdown-item" href="{{ document.target }}"><span class="fi fi-{% if document.language is same as('en') %}gb{% else %}{{ document.language }}{% endif %} border-radius-100 bg-cover me-1"></span>{{ document.language|upper }}</a>
+            {% endfor %}
+        </div>
+    </li>
+</ul>

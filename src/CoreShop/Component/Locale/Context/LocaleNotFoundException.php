@@ -22,23 +22,17 @@ final class LocaleNotFoundException extends \RuntimeException
 {
     public function __construct(
         $message = null,
-        \Exception $previousException = null,
+        ?\Exception $previousException = null,
     ) {
         parent::__construct($message ?: 'Locale could not be found!', 0, $previousException);
     }
 
-    /**
-     * @param string $localeCode
-     */
-    public static function notFound($localeCode): self
+    public static function notFound(string $localeCode): self
     {
         return new self(sprintf('Locale "%s" cannot be found!', $localeCode));
     }
 
-    /**
-     * @param string $localeCode
-     */
-    public static function notAvailable($localeCode, array $availableLocalesCodes): self
+    public static function notAvailable(string $localeCode, array $availableLocalesCodes): self
     {
         return new self(sprintf(
             'Locale "%s" is not available! The available ones are: "%s".',

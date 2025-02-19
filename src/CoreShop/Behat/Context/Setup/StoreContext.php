@@ -111,8 +111,8 @@ final class StoreContext implements Context
 
     private function createStore(
         string $name,
-        CurrencyInterface $currency = null,
-        CountryInterface $country = null,
+        ?CurrencyInterface $currency = null,
+        ?CountryInterface $country = null,
         $grossValues = false,
         $defaultStore = false,
     ): StoreInterface {

@@ -36,7 +36,7 @@ class ProposalCartPriceRuleCalculator implements ProposalCartPriceRuleCalculator
     ) {
     }
 
-    public function calculatePriceRule(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, CartPriceRuleVoucherCodeInterface $voucherCode = null): ?PriceRuleItemInterface
+    public function calculatePriceRule(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, ?CartPriceRuleVoucherCodeInterface $voucherCode = null): ?PriceRuleItemInterface
     {
         $priceRuleItem = $cart->getPriceRuleByCartPriceRule($cartPriceRule, $voucherCode);
         $existingPriceRule = null !== $priceRuleItem;

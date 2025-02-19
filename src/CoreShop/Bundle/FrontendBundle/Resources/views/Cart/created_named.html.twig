@@ -4,15 +4,23 @@
 {% block content %}
     {% include '@CoreShopFrontend/Common/flash_messages.html.twig' %}
 
-    {{ form_start(form) }}
-        {{ form_row(form.name, coreshop_test_form_attribute('cart-name')) }}
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" {{ coreshop_test_html_attribute('cart-create-button') }} >
-                {{ 'coreshop.ui.save'|trans }}
-            </button>
+    <div class="row">
+        <div class="col-12 col-lg-6 col-xl-4">
+            <div class="card bg-light border-0">
+                <h4 class="px-3 pt-3 mb-0">
+                    {{ 'coreshop.ui.cart_name'|trans }}
+                </h4>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="input-group mt-3 mt-md-0">
+                            {{ form_widget(form.name, coreshop_test_form_attribute('cart-name')) }}
+                            <button type="submit" class="d-flex align-items-center justify-content-center btn btn-secondary btn btn-secondary" {{ coreshop_test_html_attribute('cart-create-button') }} >
+                                {{ 'coreshop.ui.save'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </div>
-
-    {{ form_end(form) }}
-
+    </div>
 {% endblock %}

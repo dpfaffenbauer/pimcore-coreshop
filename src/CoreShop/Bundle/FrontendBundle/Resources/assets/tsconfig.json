@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "types": ["tsd", "node"],
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "es6"],
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+  },
+  "include": ["./js/**/*"]
+}

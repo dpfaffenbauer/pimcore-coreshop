@@ -21,7 +21,7 @@ namespace CoreShop\Component\Store\Context;
 class StoreNotFoundException extends \RuntimeException
 {
     public function __construct(
-        \Exception $previousException = null,
+        ?\Exception $previousException = null,
     ) {
         parent::__construct('Store could not be found!', 0, $previousException);
     }

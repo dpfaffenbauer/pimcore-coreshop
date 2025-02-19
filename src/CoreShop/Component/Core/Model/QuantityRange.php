@@ -61,7 +61,7 @@ class QuantityRange extends BaseQuantityRange implements QuantityRangeInterface
         return $this->currency;
     }
 
-    public function setCurrency(CurrencyInterface $currency = null)
+    public function setCurrency(?CurrencyInterface $currency = null)
     {
         $this->currency = $currency;
     }
@@ -71,7 +71,7 @@ class QuantityRange extends BaseQuantityRange implements QuantityRangeInterface
         return $this->unitDefinition;
     }
 
-    public function setUnitDefinition(ProductUnitDefinitionInterface $unitDefinition = null)
+    public function setUnitDefinition(?ProductUnitDefinitionInterface $unitDefinition = null)
     {
         $this->unitDefinition = $unitDefinition;
     }

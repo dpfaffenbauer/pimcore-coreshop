@@ -60,7 +60,7 @@ final class CountryContext implements CountryContextInterface
         return $masterRequest;
     }
 
-    private function assertCountryWasFound(CountryInterface $country = null): void
+    private function assertCountryWasFound(?CountryInterface $country = null): void
     {
         if (null === $country) {
             throw new \UnexpectedValueException('Country was not found for given request');

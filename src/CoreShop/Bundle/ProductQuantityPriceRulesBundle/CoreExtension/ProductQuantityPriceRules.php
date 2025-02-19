@@ -121,12 +121,12 @@ class ProductQuantityPriceRules extends Data implements
         return false;
     }
 
-    public function getDiffDataForEditMode(mixed $data, Concrete $object = null, array $params = []): ?array
+    public function getDiffDataForEditMode(mixed $data, ?Concrete $object = null, array $params = []): ?array
     {
         return [];
     }
 
-    public function getDataFromResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         return [];
     }
@@ -266,7 +266,7 @@ class ProductQuantityPriceRules extends Data implements
         return $this->unmarshalVersion($concrete, $data);
     }
 
-    public function getDataForEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         $calculationBehaviourTypes = [];
         $pricingBehaviourTypes = [];
@@ -310,7 +310,7 @@ class ProductQuantityPriceRules extends Data implements
         return $serializedData;
     }
 
-    public function getDataFromEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         $prices = [];
         $errors = [];

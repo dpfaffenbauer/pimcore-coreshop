@@ -1,0 +1,26 @@
+@import 'breakpoints';
+
+.shopping-cart-item {
+    padding: 1rem;
+    border: 1px solid var(--coreshop-gray-400);
+    border-radius: var(--bs-border-radius);
+
+    img {
+        flex-shrink: 0;
+    }
+
+    &-info {
+        @media (min-width: $md) {
+            flex-basis: 55%;
+        }
+    }
+
+    &-cart-rule {
+        .cart-rule {
+            border-radius: var(--bs-border-radius);
+            border: 1px solid var(--coreshop-gray-400);
+            padding: 1rem 1.5rem;
+            flex: 1;
+        }
+    }
+}

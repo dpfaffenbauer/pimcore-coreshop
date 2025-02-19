@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMain" aria-controls="navbarNavMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavMain">
+            <ul class="navbar-nav justify-content-between w-100">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('coreshop_index') }}">{{ 'coreshop.ui.home'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('coreshop_cart_summary') }}">{{ 'coreshop.ui.cart'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('coreshop_checkout') }}">{{ 'coreshop.ui.checkout'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    {% if app.user %}
+                        <a class="nav-link" href="{{ path('coreshop_customer_profile') }}">{{ 'coreshop.ui.profile'|trans }}</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ path('coreshop_login') }}">{{ 'coreshop.ui.login'|trans }}</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

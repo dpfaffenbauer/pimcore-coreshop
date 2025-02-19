@@ -24,7 +24,7 @@ class CartNotFoundException extends StorageListNotFoundException
 {
     public function __construct(
         $message = null,
-        \Exception $previousException = null,
+        ?\Exception $previousException = null,
     ) {
         parent::__construct($message ?: 'CoreShop was not able to figure out the current cart.', $previousException);
     }

@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "app": {
+      "css": [
+        "/bundles/coreshopfrontend/build/app.css"
+      ],
+      "js": [
+        "/bundles/coreshopfrontend/build/app.js"
+      ]
+    }
+  }
+}

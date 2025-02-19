@@ -108,7 +108,7 @@ abstract class Select extends Data implements
         return false;
     }
 
-    public function getDiffDataForEditMode(mixed $data, Concrete $object = null, array $params = []): ?array
+    public function getDiffDataForEditMode(mixed $data, ?Concrete $object = null, array $params = []): ?array
     {
         return [];
     }
@@ -166,7 +166,7 @@ abstract class Select extends Data implements
      *
      * @return int|string|null
      */
-    public function getDataForResource($data, $object = null, $params = []): mixed
+    public function getDataForResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if ($data !== null && method_exists($data, 'getId') && is_a($data, $this->getModel())) {
             return $data->getId();
@@ -182,7 +182,7 @@ abstract class Select extends Data implements
      *
      * @return ResourceInterface|object|null
      */
-    public function getDataFromResource($data, $object = null, $params = []): mixed
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if ((int) $data > 0) {
             return $this->getRepository()->find($data);

@@ -35,7 +35,7 @@ class ConcatRenderer extends AbstractMysqlDynamicRenderer
         parent::__construct($connection);
     }
 
-    public function render(WorkerInterface $worker, ConditionInterface $condition, string $prefix = null): string
+    public function render(WorkerInterface $worker, ConditionInterface $condition, ?string $prefix = null): string
     {
         /**
          * @var ConcatCondition $condition

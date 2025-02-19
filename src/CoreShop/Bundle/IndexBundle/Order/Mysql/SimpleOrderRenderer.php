@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 
 class SimpleOrderRenderer extends AbstractMysqlDynamicRenderer
 {
-    public function render(WorkerInterface $worker, OrderInterface $order, string $prefix = null): string
+    public function render(WorkerInterface $worker, OrderInterface $order, ?string $prefix = null): string
     {
         /**
          * @var SimpleOrder $order

@@ -1,0 +1,132 @@
+@import '../../assets/scss/mixins.scss';
+
+.btn {
+    white-space: nowrap;
+    --bs-btn-font-family: 'RedHatText';
+
+    &.icon-only {
+        padding: rem(10px);
+        
+        svg {
+            fill: var(--coreshop-white);
+        } 
+    }
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--coreshop-primary);
+    --bs-btn-border-color: var(--coreshop-primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--coreshop-primary-hover);
+    --bs-btn-hover-border-color: var(--coreshop-primary);
+    --bs-btn-focus-shadow-rgb: 205, 16, 23;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--coreshop-primary);
+    --bs-btn-active-border-color: var(--coreshop-primary-hover);
+    --bs-btn-active-shadow: inset 0 rem(3px) rem(5px) rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--coreshop-primary);
+    --bs-btn-disabled-border-color: var(--coreshop-primary);
+
+    &:hover {
+        @include box-shadow-opacity(0px, 0px, 0px, rem(4px), var(--coreshop-primary-rgb), 0.10);
+    }
+
+    svg {
+        fill: var(--coreshop-white);
+    }
+}
+
+.btn-secondary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--coreshop-secondary);
+    --bs-btn-border-color: var(--coreshop-secondary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--coreshop-secondary-hover);
+    --bs-btn-hover-border-color: var(--coreshop-secondary);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--coreshop-secondary);
+    --bs-btn-active-border-color: var(--coreshop-secondary-hover);
+    --bs-btn-active-shadow: inset 0 rem(3px) rem(5px) rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--coreshop-secondary);
+    --bs-btn-disabled-border-color: var(--coreshop-secondary);
+
+    &:hover {
+        @include box-shadow-opacity(0px, 0px, 0px, rem(4px), var(--coreshop-secondary-rgb), 0.10);
+    }
+
+    svg {
+        fill: var(--coreshop-white);
+    }
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--coreshop-primary);
+    --bs-btn-border-color: var(--coreshop-primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--coreshop-primary);
+    --bs-btn-hover-border-color: var(--coreshop-primary);
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--coreshop-primary);
+    --bs-btn-active-border-color: var(--coreshop-primary);
+    --bs-btn-active-shadow: inset 0 rem(3px) rem(5px) rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--coreshop-primary);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--coreshop-primary);
+    --bs-gradient: none;
+
+    &:hover {
+        @include box-shadow-opacity(0px, 0px, 0px, rem(4px), var(--coreshop-primary-rgb), 0.10);
+    }
+
+    svg {
+        fill: var(--coreshop-primary);
+    }
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: var(--coreshop-secondary);
+    --bs-btn-border-color: var(--coreshop-secondary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--coreshop-secondary);
+    --bs-btn-hover-border-color: var(--coreshop-secondary);
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--coreshop-secondary);
+    --bs-btn-active-border-color: var(--coreshop-secondary);
+    --bs-btn-active-shadow: inset 0 rem(3px) rem(5px) rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--coreshop-secondary);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--coreshop-secondary);
+    --bs-gradient: none;
+
+
+    svg {
+        fill: var(--coreshop-secondary);
+    }
+
+    &:hover {
+        @include box-shadow-opacity(0px, 0px, 0px, rem(4px), var(--coreshop-secondary-rgb), 0.10);
+
+        svg {
+            fill: #fff;
+        }
+    }
+}
+
+.btn-link {
+    --bs-btn-color: var(--coreshop-btn-link-color);
+    text-decoration: none;
+
+    svg {
+        fill: var(--coreshop-body-color);
+    }
+
+    &:hover {
+        color: var(--coreshop-btn-link-hover);
+    }
+}

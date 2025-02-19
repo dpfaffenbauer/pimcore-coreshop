@@ -16,29 +16,66 @@
         <section class="registration-area">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card">
+                    <div class="card bg-light border-0">
                         <div class="card-body">
                             {{ form_start(guestForm, {'method': 'POST', attr: {'novalidate': 'novalidate'}}) }}
-                                {{ form_row(guestForm.gender, coreshop_test_form_attribute('guest-gender')) }}
-                                {{ form_row(guestForm.firstname, coreshop_test_form_attribute('guest-firstname')) }}
-                                {{ form_row(guestForm.lastname, coreshop_test_form_attribute('guest-lastname')) }}
-
-                                {{ form_row(guestForm.email.first, coreshop_test_form_attribute('guest-email-first')) }}
-                                {{ form_row(guestForm.email.second, coreshop_test_form_attribute('guest-email-second')) }}
-
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.gender, coreshop_test_form_attribute('guest-gender'), {attr:{class:'form-select'}}) }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.firstname, coreshop_test_form_attribute('guest-firstname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.lastname, coreshop_test_form_attribute('guest-lastname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.email.first, coreshop_test_form_attribute('guest-email-first')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.email.second, coreshop_test_form_attribute('guest-email-second')) }}
+                                    </div>
+                                </div>
                                 {{ form_label(guestForm.address) }}
 
-                                {{ form_row(guestForm.address.company, coreshop_test_form_attribute('guest-address-company')) }}
-                                {{ form_row(guestForm.address.salutation, coreshop_test_form_attribute('guest-address-salutation')) }}
-                                {{ form_row(guestForm.address.firstname, coreshop_test_form_attribute('guest-address-firstname')) }}
-                                {{ form_row(guestForm.address.lastname, coreshop_test_form_attribute('guest-address-lastname')) }}
-                                {{ form_row(guestForm.address.street, coreshop_test_form_attribute('guest-address-street')) }}
-                                {{ form_row(guestForm.address.number, coreshop_test_form_attribute('guest-address-number')) }}
-                                {{ form_row(guestForm.address.postcode, coreshop_test_form_attribute('guest-address-post-code')) }}
-                                {{ form_row(guestForm.address.city, coreshop_test_form_attribute('guest-address-city')) }}
-                                {{ form_row(guestForm.address.country, coreshop_test_form_attribute('guest-address-country')) }}
-                                {{ form_row(guestForm.address.phoneNumber, coreshop_test_form_attribute('guest-address-phone-number')) }}
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.salutation,coreshop_test_form_attribute('guest-address-salutation'),{attr:{class:'form-select'}}) }}
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.firstname, coreshop_test_form_attribute('guest-address-firstname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.lastname, coreshop_test_form_attribute('guest-address-lastname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.company, coreshop_test_form_attribute('guest-address-company')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.phoneNumber, coreshop_test_form_attribute('guest-address-phone-number')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.street, coreshop_test_form_attribute('guest-address-street')) }}
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        {{ form_row(guestForm.address.number, coreshop_test_form_attribute('guest-address-number')) }}
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        {{ form_row(guestForm.address.postcode, coreshop_test_form_attribute('guest-address-post-code')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.city, coreshop_test_form_attribute('guest-address-city')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(guestForm.address.country, coreshop_test_form_attribute('guest-address-country'), {attr:{class:'form-select'}}) }}
+                                    </div>
+
+                                </div>
                                 {{ form_row(guestForm.termsAccepted, coreshop_test_form_attribute('guest-terms')) }}
 
                                 {{ form_row(guestForm.submit, coreshop_test_form_attribute('guest-button')) }}

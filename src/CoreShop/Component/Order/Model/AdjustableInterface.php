@@ -23,7 +23,7 @@ interface AdjustableInterface
     /**
      * @return AdjustmentInterface[]
      */
-    public function getAdjustments(string $type = null);
+    public function getAdjustments(?string $type = null);
 
     public function addAdjustment(AdjustmentInterface $adjustment);
 
@@ -33,9 +33,9 @@ interface AdjustableInterface
 
     public function getNeutralAdjustmentsTotal(?string $type = null, bool $withTax = true): int;
 
-    public function removeAdjustments(string $type = null);
+    public function removeAdjustments(?string $type = null);
 
-    public function removeAdjustmentsRecursively(string $type = null);
+    public function removeAdjustmentsRecursively(?string $type = null);
 
     /**
      * Recalculates adjustments total. Should be used after adjustment change.
