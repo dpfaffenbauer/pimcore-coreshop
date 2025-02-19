@@ -25,5 +25,5 @@ use CoreShop\Component\Rule\Condition\RuleValidationProcessorInterface;
 
 interface CartPriceRuleValidationProcessorInterface extends RuleValidationProcessorInterface
 {
-    public function isValidCartRule(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, CartPriceRuleVoucherCodeInterface $voucherCode = null): bool;
+    public function isValidCartRule(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, ?CartPriceRuleVoucherCodeInterface $voucherCode = null): bool;
 }

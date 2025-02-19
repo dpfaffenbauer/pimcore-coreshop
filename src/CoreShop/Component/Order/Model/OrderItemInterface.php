@@ -175,11 +175,11 @@ interface OrderItemInterface extends
 
     public function hasCartPriceRule(
         CartPriceRuleInterface $cartPriceRule,
-        CartPriceRuleVoucherCodeInterface $voucherCode = null,
+        ?CartPriceRuleVoucherCodeInterface $voucherCode = null,
     ): bool;
 
     public function getPriceRuleByCartPriceRule(
         CartPriceRuleInterface $cartPriceRule,
-        CartPriceRuleVoucherCodeInterface $voucherCode = null,
+        ?CartPriceRuleVoucherCodeInterface $voucherCode = null,
     ): ?PriceRuleItemInterface;
 }

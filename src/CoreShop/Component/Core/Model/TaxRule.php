@@ -54,7 +54,7 @@ class TaxRule extends BaseTaxRule implements TaxRuleInterface, \Stringable
         return $this->country;
     }
 
-    public function setCountry(CountryInterface $country = null)
+    public function setCountry(?CountryInterface $country = null)
     {
         $this->country = $country;
 
@@ -66,7 +66,7 @@ class TaxRule extends BaseTaxRule implements TaxRuleInterface, \Stringable
         return $this->state;
     }
 
-    public function setState(StateInterface $state = null)
+    public function setState(?StateInterface $state = null)
     {
         $this->state = $state;
 

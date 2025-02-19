@@ -60,7 +60,7 @@ interface IndexColumnInterface extends ResourceInterface, TimestampableInterface
      */
     public function getIndex();
 
-    public function setIndex(IndexInterface $index = null);
+    public function setIndex(?IndexInterface $index = null);
 
     /**
      * @return string

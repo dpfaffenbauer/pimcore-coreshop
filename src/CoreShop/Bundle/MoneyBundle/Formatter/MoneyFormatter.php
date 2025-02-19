@@ -28,7 +28,7 @@ final class MoneyFormatter implements MoneyFormatterInterface
     ) {
     }
 
-    public function format(int $amount, string $currencyCode, string $locale = 'en', int $fraction = 2, int $factor = null): string
+    public function format(int $amount, string $currencyCode, string $locale = 'en', int $fraction = 2, ?int $factor = null): string
     {
         $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $fraction);

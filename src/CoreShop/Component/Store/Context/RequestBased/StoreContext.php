@@ -60,7 +60,7 @@ final class StoreContext implements StoreContextInterface
         return $masterRequest;
     }
 
-    private function assertStoreWasFound(StoreInterface $store = null): void
+    private function assertStoreWasFound(?StoreInterface $store = null): void
     {
         if (null === $store) {
             throw new \UnexpectedValueException('Store was not found for given request');

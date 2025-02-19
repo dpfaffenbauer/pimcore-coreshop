@@ -300,7 +300,7 @@ class ProductUnitDefinitions extends Data implements
         return $this->unmarshalVersion($concrete, $data);
     }
 
-    public function getDataFromResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         return [];
     }
@@ -385,7 +385,7 @@ class ProductUnitDefinitions extends Data implements
         $this->getEntityManager()->flush();
     }
 
-    public function getDataForEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if (!$object instanceof ProductInterface) {
             return [];
@@ -402,7 +402,7 @@ class ProductUnitDefinitions extends Data implements
         return $this->getSerializer()->toArray($data, $context);
     }
 
-    public function getDataFromEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if (!is_array($data)) {
             return null;
@@ -448,7 +448,7 @@ class ProductUnitDefinitions extends Data implements
         return $productUnitDefinitionsValues;
     }
 
-    public function getVersionPreview(mixed $data, Concrete $object = null, array $params = []): string
+    public function getVersionPreview(mixed $data, ?Concrete $object = null, array $params = []): string
     {
         if (!$data instanceof \CoreShop\Component\Product\Model\ProductUnitDefinitionsInterface) {
             return '';
@@ -482,7 +482,7 @@ class ProductUnitDefinitions extends Data implements
         return false;
     }
 
-    public function getDiffDataForEditMode(mixed $data, Concrete $object = null, array $params = []): ?array
+    public function getDiffDataForEditMode(mixed $data, ?Concrete $object = null, array $params = []): ?array
     {
         return [];
     }

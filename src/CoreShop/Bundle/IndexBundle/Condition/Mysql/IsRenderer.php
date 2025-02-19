@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 
 class IsRenderer extends AbstractMysqlDynamicRenderer
 {
-    public function render(WorkerInterface $worker, ConditionInterface $condition, string $prefix = null): string
+    public function render(WorkerInterface $worker, ConditionInterface $condition, ?string $prefix = null): string
     {
         /**
          * @var IsCondition $condition

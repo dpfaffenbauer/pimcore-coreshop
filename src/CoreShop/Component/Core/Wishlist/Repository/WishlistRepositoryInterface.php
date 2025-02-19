@@ -27,5 +27,5 @@ interface WishlistRepositoryInterface extends
     \CoreShop\Component\Wishlist\Repository\WishlistRepositoryInterface,
     CustomerAndStoreAwareRepositoryInterface
 {
-    public function findLatestByStoreAndCustomer(StoreInterface $store, CustomerInterface $customer, string $name = null): ?WishlistInterface;
+    public function findLatestByStoreAndCustomer(StoreInterface $store, CustomerInterface $customer, ?string $name = null): ?WishlistInterface;
 }

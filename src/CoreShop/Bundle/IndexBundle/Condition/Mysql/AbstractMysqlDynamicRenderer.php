@@ -47,7 +47,7 @@ abstract class AbstractMysqlDynamicRenderer implements DynamicRendererInterface
         return $prefix . '.';
     }
 
-    protected function quoteFieldName(string $fieldName, string $prefix = null): string
+    protected function quoteFieldName(string $fieldName, ?string $prefix = null): string
     {
         return $this->renderPrefix($prefix) . $this->quoteIdentifier($fieldName);
     }

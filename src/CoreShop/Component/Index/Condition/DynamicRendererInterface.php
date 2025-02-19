@@ -28,7 +28,7 @@ interface DynamicRendererInterface
      *
      * @return mixed
      */
-    public function render(WorkerInterface $worker, ConditionInterface $condition, string $prefix = null);
+    public function render(WorkerInterface $worker, ConditionInterface $condition, ?string $prefix = null);
 
     public function supports(WorkerInterface $worker, ConditionInterface $condition): bool;
 }

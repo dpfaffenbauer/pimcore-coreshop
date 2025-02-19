@@ -28,7 +28,7 @@ final class OrderRenderer implements OrderRendererInterface
     ) {
     }
 
-    public function render(WorkerInterface $worker, OrderInterface $condition, string $prefix = null)
+    public function render(WorkerInterface $worker, OrderInterface $condition, ?string $prefix = null)
     {
         /**
          * @var DynamicOrderRendererInterface $renderer

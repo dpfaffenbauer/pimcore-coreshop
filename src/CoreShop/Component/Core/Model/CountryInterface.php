@@ -28,5 +28,5 @@ interface CountryInterface extends BaseCountryInterface, StoresAwareInterface
      */
     public function getCurrency();
 
-    public function setCurrency(CurrencyInterface $currency = null);
+    public function setCurrency(?CurrencyInterface $currency = null);
 }

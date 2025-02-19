@@ -152,7 +152,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         return $data;
     }
 
-    public function getDataForResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if ($data instanceof \CoreShop\Component\Currency\Model\Money) {
             if ($data->getCurrency() instanceof CurrencyInterface) {
@@ -169,7 +169,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         ];
     }
 
-    public function getDataFromResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         $currencyIndex = $this->getName() . '__currency';
 
@@ -184,12 +184,12 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         return null;
     }
 
-    public function getDataForQueryResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForQueryResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         return $this->getDataForResource($data, $object, $params);
     }
 
-    public function getDataForEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if ($data instanceof \CoreShop\Component\Currency\Model\Money) {
             if ($data->getCurrency() instanceof CurrencyInterface) {
@@ -206,7 +206,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         ];
     }
 
-    public function getDataFromEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if (is_array($data)) {
             $currency = $this->getCurrencyById($data['currency']);
@@ -219,7 +219,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         return null;
     }
 
-    public function getDataForGrid(?Money $data, Concrete $object = null, array $params = []): ?array
+    public function getDataForGrid(?Money $data, ?Concrete $object = null, array $params = []): ?array
     {
         if (null === $data) {
             return null;
@@ -235,7 +235,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         ];
     }
 
-    public function getVersionPreview(mixed $data, Concrete $object = null, array $params = []): string
+    public function getVersionPreview(mixed $data, ?Concrete $object = null, array $params = []): string
     {
         return (string) $data;
     }
@@ -283,7 +283,7 @@ class MoneyCurrency extends Model\DataObject\ClassDefinition\Data implements
         return false;
     }
 
-    public function getDiffDataForEditMode(mixed $data, Concrete $object = null, array $params = []): ?array
+    public function getDiffDataForEditMode(mixed $data, ?Concrete $object = null, array $params = []): ?array
     {
         return [];
     }

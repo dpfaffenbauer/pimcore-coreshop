@@ -27,9 +27,9 @@ interface ConfigurationServiceInterface extends BaseConfigurationServiceInterfac
     /**
      * @return ConfigurationInterface|mixed|null
      */
-    public function getForStore(string $key, StoreInterface $store = null, bool $returnObject = false): mixed;
+    public function getForStore(string $key, ?StoreInterface $store = null, bool $returnObject = false): mixed;
 
-    public function setForStore(string $key, mixed $data, StoreInterface $store = null): ConfigurationInterface;
+    public function setForStore(string $key, mixed $data, ?StoreInterface $store = null): ConfigurationInterface;
 
-    public function removeForStore(string $key, StoreInterface $store = null): void;
+    public function removeForStore(string $key, ?StoreInterface $store = null): void;
 }
