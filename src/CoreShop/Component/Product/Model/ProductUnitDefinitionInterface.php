@@ -36,7 +36,7 @@ interface ProductUnitDefinitionInterface extends ResourceInterface
      */
     public function getConversionRate();
 
-    public function setConversionRate(float $conversionRate = null);
+    public function setConversionRate(?float $conversionRate = null);
 
     /**
      * @return int
@@ -50,7 +50,7 @@ interface ProductUnitDefinitionInterface extends ResourceInterface
      */
     public function getProductUnitDefinitions();
 
-    public function setProductUnitDefinitions(ProductUnitDefinitionsInterface $productUnitDefinitions = null);
+    public function setProductUnitDefinitions(?ProductUnitDefinitionsInterface $productUnitDefinitions = null);
 
     /**
      * @return string|null
