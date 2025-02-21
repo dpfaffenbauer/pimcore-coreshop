@@ -35,14 +35,14 @@ interface QuantityRangeInterface extends BaseQuantityRangeInterface
      */
     public function getCurrency();
 
-    public function setCurrency(CurrencyInterface $currency = null);
+    public function setCurrency(?CurrencyInterface $currency = null);
 
     /**
      * @return ProductUnitDefinitionInterface|null
      */
     public function getUnitDefinition();
 
-    public function setUnitDefinition(ProductUnitDefinitionInterface $unitDefinition = null);
+    public function setUnitDefinition(?ProductUnitDefinitionInterface $unitDefinition = null);
 
     /**
      * @return bool

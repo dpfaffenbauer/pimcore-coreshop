@@ -40,7 +40,7 @@ interface TaxRuleInterface extends ResourceInterface, TimestampableInterface
      */
     public function getTaxRuleGroup();
 
-    public function setTaxRuleGroup(TaxRuleGroupInterface $taxRuleGroup = null);
+    public function setTaxRuleGroup(?TaxRuleGroupInterface $taxRuleGroup = null);
 
     /**
      * @return TaxRateInterface

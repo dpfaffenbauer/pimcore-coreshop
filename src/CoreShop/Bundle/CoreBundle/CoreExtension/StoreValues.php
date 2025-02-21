@@ -313,7 +313,7 @@ class StoreValues extends Model\DataObject\ClassDefinition\Data implements
         return $code;
     }
 
-    public function getDataFromResource($data, $object = null, $params = [])
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         return [];
     }
@@ -582,7 +582,7 @@ class StoreValues extends Model\DataObject\ClassDefinition\Data implements
         $this->getEntityManager()->flush();
     }
 
-    public function getDataForEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         $storeData = [];
         $stores = $this->getStoreRepository()->findAll();

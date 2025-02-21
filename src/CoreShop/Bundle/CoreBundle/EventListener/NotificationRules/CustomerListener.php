@@ -89,7 +89,7 @@ final class CustomerListener extends AbstractNotificationRuleListener
             return;
         }
 
-        $customer->setNewsletterToken(hash('md5', $customer->getId() . $customer->getEmail() . mt_rand() . time()));
+        $customer->setNewsletterToken(hash('md5', sprintf('%s%s%s%s', $customer->getId(), $customer->getEmail(), mt_rand(), time())));
 
         VersionHelper::useVersioning(
             function () use ($customer) {

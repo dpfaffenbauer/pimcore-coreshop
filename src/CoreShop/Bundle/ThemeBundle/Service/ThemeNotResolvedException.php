@@ -21,7 +21,7 @@ namespace CoreShop\Bundle\ThemeBundle\Service;
 class ThemeNotResolvedException extends \RuntimeException
 {
     public function __construct(
-        \Exception $previousException = null,
+        ?\Exception $previousException = null,
     ) {
         parent::__construct('Theme could not be resolved', 0, $previousException);
     }

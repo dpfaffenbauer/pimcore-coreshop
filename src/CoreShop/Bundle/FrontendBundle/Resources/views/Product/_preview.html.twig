@@ -1,28 +1,50 @@
 {% import "@CoreShopFrontend/Common/Macro/currency.html.twig" as currency %}
+{% import "@CoreShopFrontend/Common/Macro/product_price.html.twig" as product_price %}
 {% set href = pimcore_object_path(product) %}
+{% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
 
-<div class="product-col">
-    <div class="image">
-        {% if product.image is pimcore_asset_image %}
-            <a href="{{ href }}">
-                {{ product.image|pimcore_image_thumbnail_html('coreshop_productList', {'imgAttributes': {'class': 'img-fluid'}, 'alt': product.name, 'id': 'image' ~ product.id}) }}
-            </a>
+<div class="position-relative">
+    {% if product.image is pimcore_asset_image %}
+        <a href="{{ href }}">
+            {{ product.image|pimcore_image_thumbnail_html('coreshop_productList', {'imgAttributes': {'class': 'card-img-top object-fit-cover'}, 'alt': product.name, 'id': 'image' ~ product.id}) }}
+        </a>
+
+        {% if wishlist_allowed %}
+            {%  if not coreshop_wishlist_product_in(product) %}
+                <div class="position-absolute top-0 end-0 pt-3 pe-2 btn-wishlist-wrapper-white">
+                    {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                </div>
+            {%  else %}
+                <div class="position-absolute top-0 end-0 pt-3 pe-2 btn-wishlist-wrapper-white">
+                    {% set wishlist_product_id = coreshop_wishlist_product_id(product) %}
+                    {% if wishlist_product_id %}
+                        <a
+                                href="{{ path('coreshop_wishlist_remove', {item: wishlist_product_id|coreshop_string}) }}"
+                                title="{{ 'coreshop.ui.remove'|trans }}"
+                                class="btn btn-link pb-0"
+                                data-id="{{ wishlist_product_id }}"
+                                {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
+                        >
+                            <i class="bi bi-heart-fill"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {%  endif %}
         {% endif %}
-    </div>
-    <div class="caption">
-        <h4><a href="{{ href }}" {{ coreshop_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a></h4>
-        <div class="description">
-            {{ product.shortDescription }}
-        </div>
-
-        <div class="price">
-            <span class="price-new">{{ currency.getPrice(product) }}</span>
-        </div>
-
-        {% if coreshop_inventory_is_available(product) %}
-        <div class="cart-button">
-            {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
-        </div>
-        {% endif %}
-    </div>
+    {% endif %}
 </div>
+<div class="d-flex flex-column card-body">
+    <div class="card-title h5">
+        <a href="{{ href }}" class="text-decoration-none text-body" {{ coreshop_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a>
+    </div>
+    {{ product.shortDescription }}
+</div>
+<div class="product-price d-flex flex-column mb-2 mt-auto px-3">
+    {{ product_price.display_product_price(product) }}
+</div>
+{% if coreshop_inventory_is_available(product) %}
+    <div class="cart-button px-3 pb-3">
+        {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string, '_redirect': document.getFullPath() })) }}
+    </div>
+{% endif %}
+

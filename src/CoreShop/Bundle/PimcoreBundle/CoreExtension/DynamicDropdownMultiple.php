@@ -35,7 +35,7 @@ class DynamicDropdownMultiple extends ManyToManyObjectRelation
         return $this->fieldtype;
     }
 
-    public function getDataFromEditmode(mixed $data, DataObject\Concrete $object = null, array $params = []): ?array
+    public function getDataFromEditmode(mixed $data, ?DataObject\Concrete $object = null, array $params = []): ?array
     {
         //if not set, return null
         if ($data === null || $data === false) {

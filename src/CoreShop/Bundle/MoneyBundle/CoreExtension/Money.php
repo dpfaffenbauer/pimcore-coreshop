@@ -546,7 +546,7 @@ class Money extends DataObject\ClassDefinition\Data implements
         return $code;
     }
 
-    public function getDataFromResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if (is_numeric($data)) {
             return $this->toNumeric($data);
@@ -559,12 +559,12 @@ class Money extends DataObject\ClassDefinition\Data implements
         return $data;
     }
 
-    public function getDataForQueryResource(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForQueryResource(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         return $this->getDataForResource($data, $object, $params);
     }
 
-    public function getDataForEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataForEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if (null === $data) {
             return $this->nullable ? null : 0;
@@ -573,7 +573,7 @@ class Money extends DataObject\ClassDefinition\Data implements
         return round($data / $this->getDecimalFactor(), $this->getDecimalPrecision());
     }
 
-    public function getDataFromEditmode(mixed $data, Concrete $object = null, array $params = []): mixed
+    public function getDataFromEditmode(mixed $data, ?Concrete $object = null, array $params = []): mixed
     {
         if (is_numeric($data)) {
             return (int) round((round((float) $data, $this->getDecimalPrecision()) * $this->getDecimalFactor()), 0);
@@ -586,7 +586,7 @@ class Money extends DataObject\ClassDefinition\Data implements
         return $data;
     }
 
-    public function getVersionPreview(mixed $data, Concrete $object = null, array $params = []): string
+    public function getVersionPreview(mixed $data, ?Concrete $object = null, array $params = []): string
     {
         return (string) $data;
     }
@@ -630,7 +630,7 @@ class Money extends DataObject\ClassDefinition\Data implements
         return false;
     }
 
-    public function getDiffDataForEditMode(mixed $data, Concrete $object = null, array $params = []): ?array
+    public function getDiffDataForEditMode(mixed $data, ?Concrete $object = null, array $params = []): ?array
     {
         return [];
     }

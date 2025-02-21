@@ -25,6 +25,6 @@ interface PaymentProviderValidatorInterface
 {
     public function isPaymentProviderValid(
         PaymentProviderInterface $paymentProvider,
-        ResourceInterface $subject = null,
+        ?ResourceInterface $subject = null,
     ): bool;
 }

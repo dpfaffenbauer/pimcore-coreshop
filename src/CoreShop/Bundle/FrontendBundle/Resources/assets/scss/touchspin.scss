@@ -1,0 +1,39 @@
+.touchspin {
+    &-container {
+        position: relative;
+
+        input {
+            appearance: textfield;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+    }
+    
+    &-decrement {
+        position: absolute;
+        right: 0;
+        left: auto;
+        line-height: 1;
+        appearance: none;
+        border: 0;
+        top: 0;
+        width: 24px;
+        border-top-right-radius: var(--bs-border-radius);
+    }
+
+    &-increment {
+        position: absolute;
+        right: 0;
+        left: auto;
+        line-height: 1;
+        appearance: none;
+        border: 0;
+        bottom: 0;
+        width: 24px;
+        border-bottom-right-radius: var(--bs-border-radius);
+    }
+}

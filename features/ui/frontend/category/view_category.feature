@@ -56,13 +56,13 @@ Feature: Viewing a product details
     When I switch to category "Coats" on main menu
     Then I should see 3 products in the category list
     And I change order to "Name Descending"
-    And I should see products in order "WINTER COAT,RAIN COAT,JACKET" in list
+    And I should see products in order "Winter Coat,Rain Coat,Jacket" in list
     And I change order to "Name Ascending"
-    And I should see products in order "JACKET,RAIN COAT,WINTER COAT" in list
+    And I should see products in order "Jacket,Rain Coat,Winter Coat" in list
     When I switch to category "Shoes" on left menu
     And I change order to "Name Descending"
-    And I should see products in order "SHOE 2,SHOE" in list
+    And I should see products in order "Shoe 2,Shoe" in list
     And I switch to view to "grid"
-    And I should see products in order "SHOE 2,SHOE" in grid
+    And I should see products in order "Shoe 2,Shoe" in grid
     And I change order to "Name Ascending"
-    And I should see products in order "SHOE,SHOE 2" in grid
+    And I should see products in order "Shoe,Shoe 2" in grid

@@ -77,7 +77,7 @@ class TaxRule extends AbstractResource implements TaxRuleInterface, \Stringable
         return $this->taxRuleGroup;
     }
 
-    public function setTaxRuleGroup(TaxRuleGroupInterface $taxRuleGroup = null)
+    public function setTaxRuleGroup(?TaxRuleGroupInterface $taxRuleGroup = null)
     {
         $this->taxRuleGroup = $taxRuleGroup;
 

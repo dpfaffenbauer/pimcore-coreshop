@@ -151,14 +151,14 @@ trait ProposalPriceRuleTrait
 
     public function hasCartPriceRule(
         CartPriceRuleInterface $cartPriceRule,
-        CartPriceRuleVoucherCodeInterface $voucherCode = null,
+        ?CartPriceRuleVoucherCodeInterface $voucherCode = null,
     ): bool {
         return null !== $this->getPriceRuleByCartPriceRule($cartPriceRule, $voucherCode);
     }
 
     public function getPriceRuleByCartPriceRule(
         CartPriceRuleInterface $cartPriceRule,
-        CartPriceRuleVoucherCodeInterface $voucherCode = null,
+        ?CartPriceRuleVoucherCodeInterface $voucherCode = null,
     ): ?PriceRuleItemInterface {
         $items = $this->getPriceRuleItems();
 

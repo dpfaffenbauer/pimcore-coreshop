@@ -5,112 +5,62 @@
 {% set discount = cart.discount(false) %}
 {% set discountIt = cart.discount(true) %}
 {% set taxes = cart.taxes %}
-{% set rowspan = 10 + taxes|length %}
 {% set payment_fee = cart.paymentproviderfee() %}
 
+{% include '@CoreShopFrontend/Checkout/steps/summary/_rules.html.twig' %}
 
+<div class="d-flex justify-content-between gap-2">
+    <strong>{{ 'coreshop.ui.subtotal_inc'|trans }}:</strong>{{ currency.convertAndFormat(cart.subtotal(true)) }}
+</div>
 
-{% if shipping == 0 %}
-    {% set rowspan = rowspan - 1 %}
-{% endif %}
+<div class="d-flex justify-content-between gap-2">
+    <strong>{{ 'coreshop.ui.subtotal_excl'|trans }}:</strong> {{ currency.convertAndFormat(cart.subtotal(false)) }}
+</div>
 
-{% if discount == 0 %}
-    {% set rowspan = rowspan - 2 %}
-{% endif %}
-<tr>
-    <td class="text-right" colspan="3">
-        <strong>{{ 'coreshop.ui.subtotal_inc'|trans }}:</strong>
-    </td>
-    <td colspan="2" class="text-right cart-sub-total">
-        {{ currency.convertAndFormat(cart.subtotal(true)) }}
-    </td>
-</tr>
-<tr>
-    <td class="text-right" colspan="3">
-        <strong>{{ 'coreshop.ui.subtotal_excl'|trans }}:</strong>
-    </td>
-    <td colspan="2" class="text-right cart-discount">
-        {{ currency.convertAndFormat(cart.subtotal(false)) }}
-    </td>
-</tr>
 {% if discount != 0 %}
-    <tr>
-        <td class="text-right" colspan="3">
-            <strong>{{ discount > 0 ? 'coreshop.ui.surcharge_incl'|trans : 'coreshop.ui.discount_incl'|trans }}:</strong>
-        </td>
-        <td colspan="2" class="text-right cart-discount">
-            {{ currency.convertAndFormat(discountIt) }}
-        </td>
-    </tr>
-    <tr>
-        <td class="text-right" colspan="3">
-            <strong>{{ discount > 0 ? 'coreshop.ui.surcharge_excl'|trans : 'coreshop.ui.discount_excl'|trans }}:</strong>
-        </td>
-        <td colspan="2" class="text-right cart-discount">
-            {{ currency.convertAndFormat(discount) }}
-        </td>
-    </tr>
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ discount > 0 ? 'coreshop.ui.surcharge_incl'|trans : 'coreshop.ui.discount_incl'|trans }}:</strong> {{ currency.convertAndFormat(cart.subtotal(false)) }} {{ currency.convertAndFormat(discountIt) }}
+    </div>
+
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ discount > 0 ? 'coreshop.ui.surcharge_excl'|trans : 'coreshop.ui.discount_excl'|trans }}:</strong> {{ currency.convertAndFormat(discount) }}
+    </div>
+
 {% endif %}
 {% if shipping > 0 %}
-    <tr>
-        <td class="text-right" colspan="3">
-            <strong>{{ 'coreshop.ui.shipping_incl'|trans }}:</strong>
-        </td>
-        <td colspan="2" class="text-right cart-shipping">
-            {{ currency.convertAndFormat(shippingIt) }}
-        </td>
-    </tr>
-    <tr>
-        <td class="text-right" colspan="3">
-            <strong>{{ 'coreshop.ui.shipping_excl'|trans }}:</strong>
-        </td>
-        <td colspan="2" class="text-right cart-shipping">
-            {{ currency.convertAndFormat(shipping) }}
-        </td>
-    </tr>
-{% endif %}
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ 'coreshop.ui.shipping_incl'|trans }}:</strong> {{ currency.convertAndFormat(shippingIt) }}
+    </div>
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ 'coreshop.ui.shipping_excl'|trans }}:</strong> {{ currency.convertAndFormat(shipping) }}
+    </div>
 
+{% endif %}
 {% for taxItem in taxes %}
-    <tr>
-        <td class="text-right cart-tax-detail" colspan="3">
-            <strong>{{ 'coreshop.ui.tax_name'|trans|format(taxItem.name) }}:</strong>
-        </td>
-        <td colspan="2" class="text-right cart-tax-detail">
-            {{ currency.convertAndFormat(taxItem.amount) }}
-        </td>
-    </tr>
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ 'coreshop.ui.tax_name'|trans|format(taxItem.name) }}:</strong> {{ currency.convertAndFormat(taxItem.amount) }}
+    </div>
 {% endfor %}
 
-<tr>
-    <td class="text-right" colspan="3">
-        <strong>{{ 'coreshop.ui.total_tax'|trans }}:</strong>
-    </td>
-    <td colspan="2" class="text-right cart-tax">
-        {{ currency.convertAndFormat(cart.totalTax) }}
-    </td>
-</tr>
 {% if payment_fee != 0 %}
-    <tr>
-        <td class="text-right" colspan="3">
-            <strong>{{ 'coreshop.ui.payment_fee'|trans }}:</strong>
-        </td>
-        <td colspan="2" class="text-right cart-discount">
-            {{ currency.convertAndFormat(payment_fee) }}
-        </td>
-    </tr>
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ 'coreshop.ui.payment_fee'|trans }}:</strong> {{ currency.convertAndFormat(payment_fee) }}
+    </div>
 {% endif %}
-<tr>
-    <td class="text-right" colspan="3">
-        <strong>{{ 'coreshop.ui.total'|trans }}:</strong>
-    </td>
-    <td colspan="2" class="text-right cart-total-price">
-        {{ currency.convertAndFormat(cart.total) }}
-    </td>
-</tr>
+
+<div class="d-flex justify-content-between gap-2">
+    <strong>{{ 'coreshop.ui.total_tax'|trans }}:</strong> {{ currency.convertAndFormat(cart.totalTax) }}
+</div>
+
+<hr>
+<div class="d-flex justify-content-between gap-2">
+    <strong>{{ 'coreshop.ui.total'|trans }}:</strong> <span {{ coreshop_test_html_attribute('order-total') }}>{{ currency.convertAndFormat(cart.total) }}</span>
+</div>
+
+
+
 {% if cart.comment is not empty %}
-    <tr>
-        <td colspan="5">
-           <strong>{{ 'coreshop.ui.comment'|trans }}</strong>: {{ cart.comment|nl2br }}
-        </td>
-    </tr>
+    <div class="d-flex justify-content-between gap-2">
+        <strong>{{ 'coreshop.ui.comment'|trans }}</strong>: {{ cart.comment|nl2br }}
+    </div>
 {% endif %}

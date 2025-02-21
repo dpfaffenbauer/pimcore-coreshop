@@ -35,7 +35,7 @@
     "coreshop/money-bundle": "^5.0",
     "coreshop/workflow-bundle": "^5.0",
     "coreshop/order": "^5.0",
-    "pimcore/pimcore": "^11.5 || ^12.0",
+    "pimcore/pimcore": "^12.0",
     "pimcore/web-to-print-bundle": "^1.3.0"
   },
   "require-dev": {

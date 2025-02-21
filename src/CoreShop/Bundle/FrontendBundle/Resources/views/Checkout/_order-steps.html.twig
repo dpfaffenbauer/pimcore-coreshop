@@ -1,18 +1,10 @@
-<div class="row bs-wizard" style="border-bottom:0;">
+<div class="cartprogress mb-5" style="border-bottom:0;">
     {% set steps = coreshop_checkout_steps() %}
     {% set stepCount = steps|length %}
     {% set columnWidth = (12 / stepCount)|round(0, 'floor') %}
     {% set columnsLeft = (12 % stepCount) / 2 %}
 
     {% for identifier, step in steps %}
-        {% set title = step.valid ? '<a href="' ~ step.url ~ '">' ~ identifier|trans ~ '</a>' : identifier|trans %}
-        <div class="{% if loop.index == 1 and columnsLeft >= 1 %}col-sm-offset-{{ columnsLeft }} {% endif %}col-sm-{{ columnWidth }} bs-wizard-step{% if step.current %} active{% endif %}{% if step.done %} complete{% endif %}{% if step.waiting %} disabled{% endif %}">
-            <div class="text-center bs-wizard-stepnum">{{ title|raw }}</div>
-            <div class="progress">
-                <div class="progress-bar"></div>
-            </div>
-            <a href="#" class="bs-wizard-dot"></a>
-            <div class="bs-wizard-info text-center"></div>
-        </div>
+        <a href="{{ step.url }}" class="{% if step.current %}active {% elseif step.done %}completed {% endif %}">{{ identifier|trans }}</a>
     {% endfor %}
 </div>

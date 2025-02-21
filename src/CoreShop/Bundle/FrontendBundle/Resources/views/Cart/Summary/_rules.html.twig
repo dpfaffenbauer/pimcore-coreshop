@@ -1,24 +1,26 @@
 {% import "@CoreShopFrontend/Common/Macro/currency.html.twig" as currency %}
 
 {% if cart.hasPriceRules %}
+    <hr>
+
     {% for priceRule in cart.priceRuleItems %}
-        <tr>
-            <td colspan="2" class="text-left">
-                {{ priceRule.cartPriceRule.label ?: priceRule.cartPriceRule.name }}
-            </td>
-            <td class="text-center"></td>
-            <td class="text-right" colspan="2">
-                {% if priceRule.discount != 0 %}
-                    {{ currency.convertAndFormat(priceRule.discount(true)) }} ({{ currency.convertAndFormat(priceRule.discount(false)) }})
+        <div class="d-flex justify-content-between align-items-center gap-2">
+            <span class="d-inline-block">
+                <strong>{{ priceRule.cartPriceRule.label ?: priceRule.cartPriceRule.name }}:</strong>
+                {% if priceRule.cartPriceRule.description %}
+                    <span>{{ priceRule.cartPriceRule.description }}</span>
                 {% endif %}
-            </td>
-            <td colspan="1" class="text-left cart-sub-total">
-                {% if priceRule.cartPriceRule.isVoucherRule and is_granted('CORESHOP_CART_REMOVE_PRICE_RULE') %}
-                <a title="{{ 'coreshop.ui.remove'|trans }}" class="btn btn-danger tool-tip" href="{{ path('coreshop_cart_remove_price_rule', {'code' : priceRule.voucherCode }) }}">
-                    <i class="fa fa-times-circle"></i>
+            </span>
+            {% if priceRule.discount != 0 %}
+                <span>
+                    {{ currency.convertAndFormat(priceRule.discount(true)) }} <small>({{ currency.convertAndFormat(priceRule.discount(false)) }})</small>
+                </span>
+            {% endif %}
+            {% if priceRule.cartPriceRule.isVoucherRule and is_granted('CORESHOP_CART_REMOVE_PRICE_RULE') %}
+                <a title="{{ 'coreshop.ui.remove'|trans }}" class="btn btn-icon" href="{{ path('coreshop_cart_remove_price_rule', {'code' : priceRule.voucherCode }) }}">
+                    <i class="bi bi-trash"></i>
                 </a>
-                {% endif %}
-            </td>
-        </tr>
+            {% endif %}
+        </div>
     {% endfor %}
 {% endif %}

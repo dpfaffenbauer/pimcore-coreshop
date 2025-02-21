@@ -20,7 +20,7 @@ namespace CoreShop\Component\Pimcore;
 
 class Mail extends \Pimcore\Mail
 {
-    public function addRecipients(array|string $recipients = null)
+    public function addRecipients(array|string|null $recipients = null)
     {
         $toRecipients = [];
 

@@ -248,7 +248,7 @@ class IndexColumn extends AbstractResource implements IndexColumnInterface, \Str
         return $this->index;
     }
 
-    public function setIndex(IndexInterface $index = null)
+    public function setIndex(?IndexInterface $index = null)
     {
         $this->index = $index;
     }

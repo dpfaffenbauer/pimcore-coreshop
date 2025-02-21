@@ -188,12 +188,12 @@ class ProductSpecificPriceRules extends Data implements
         return false;
     }
 
-    public function getDiffDataForEditMode(mixed $data, Concrete $object = null, array $params = []): ?array
+    public function getDiffDataForEditMode(mixed $data, ?Concrete $object = null, array $params = []): ?array
     {
         return [];
     }
 
-    public function getDataFromResource(mixed $data, Concrete $object = null, array $params = [])
+    public function getDataFromResource(mixed $data, ?Concrete $object = null, array $params = [])
     {
         return [];
     }
@@ -263,7 +263,7 @@ class ProductSpecificPriceRules extends Data implements
         return $this->unmarshalVersion($concrete, $data);
     }
 
-    public function getVersionPreview(mixed $data, Concrete $object = null, array $params = []): string
+    public function getVersionPreview(mixed $data, ?Concrete $object = null, array $params = []): string
     {
         if (!is_array($data)) {
             return 'empty';
@@ -272,7 +272,7 @@ class ProductSpecificPriceRules extends Data implements
         return sprintf('Rules: %s', count($data));
     }
 
-    public function getDataForEditmode(mixed $data, Concrete $object = null, array $params = []): array
+    public function getDataForEditmode(mixed $data, ?Concrete $object = null, array $params = []): array
     {
         $result = [
             'actions' => array_keys($this->getConfigActions()),
@@ -295,7 +295,7 @@ class ProductSpecificPriceRules extends Data implements
         return $result;
     }
 
-    public function getDataFromEditmode(mixed $data, Concrete $object = null, array $params = []): array
+    public function getDataFromEditmode(mixed $data, ?Concrete $object = null, array $params = []): array
     {
         $prices = [];
         $errors = [];

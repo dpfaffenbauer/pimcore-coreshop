@@ -21,7 +21,7 @@ namespace CoreShop\Component\Customer\Context;
 class CustomerNotFoundException extends \RuntimeException
 {
     public function __construct(
-        \Exception $previousException = null,
+        ?\Exception $previousException = null,
     ) {
         parent::__construct('Customer could not be found!', 0, $previousException);
     }

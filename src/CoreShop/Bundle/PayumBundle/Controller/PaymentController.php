@@ -68,7 +68,7 @@ class PaymentController extends AbstractController
          */
         $payment = $this->getOrderPaymentProvider()->provideOrderPayment($order);
 
-        $storage = $this->getPayum()->getStorage($payment);
+        $storage = $this->getPayum()->getStorage(get_class($payment));
         $storage->update($payment);
 
         $token = $this->provideTokenBasedOnPayment($payment);

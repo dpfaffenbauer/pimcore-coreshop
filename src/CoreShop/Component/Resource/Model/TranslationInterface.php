@@ -25,7 +25,7 @@ interface TranslationInterface
      */
     public function getTranslatable();
 
-    public function setTranslatable(TranslatableInterface $translatable = null);
+    public function setTranslatable(?TranslatableInterface $translatable = null);
 
     /**
      * @return string

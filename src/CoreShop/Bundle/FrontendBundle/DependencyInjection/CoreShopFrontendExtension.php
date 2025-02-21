@@ -53,6 +53,8 @@ final class CoreShopFrontendExtension extends AbstractModelExtension
         $container->setParameter('coreshop.frontend.category.default_sort_name', $configs['category']['default_sort_name']);
         $container->setParameter('coreshop.frontend.category.default_sort_direction', $configs['category']['default_sort_direction']);
 
+        $container->setParameter('coreshop.frontend_dir', dirname(__DIR__));
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }

@@ -4,8 +4,8 @@
 {{ form_start(form, {'action': path('coreshop_wishlist_add', {'product': product.id|coreshop_string})}) }}
     {{ form_errors(form) }}
 
-    <button type="submit" href="{{ path('coreshop_wishlist_add', {product: product.id|coreshop_string}) }}" class="btn btn-wishlist" {{ coreshop_test_html_attribute('add-to-wishlist') }}>
-        <i class="fa fa-heart"></i>
+    <button type="submit" href="{{ path('coreshop_wishlist_add', {product: product.id|coreshop_string}) }}" class="btn btn-link ps-0" {{ coreshop_test_html_attribute('add-to-wishlist') }}>
+        <i class="bi bi-heart"></i>
     </button>
 
     {{ form_row(form._token) }}

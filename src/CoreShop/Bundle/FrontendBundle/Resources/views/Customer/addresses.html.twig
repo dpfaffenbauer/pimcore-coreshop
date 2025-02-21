@@ -12,52 +12,64 @@
         </ol>
     </nav>
 
-    <h2 class="main-heading text-center">
-        {{ 'coreshop.ui.addresses'|trans }}
-    </h2>
 
     {% include '@CoreShopFrontend/Common/flash_messages.html.twig' %}
+    <div class="row">
+        {% include '@CoreShopFrontend/Customer/_sidebar.html.twig' %}
+        <div class="col-12 col-lg-9">
+            <h3>{{ 'coreshop.ui.addresses'|trans }}</h3>
+            <div class="row mb-4">
+                <table class="mt-3 table">
+                    <thead>
+                        <tr>
+                            <th class="text-nowrap">{{ 'coreshop.form.address.street'|trans }}</th>
+                            <th>{{ 'coreshop.form.address.number'|trans }}</th>
+                            <th>{{ 'coreshop.form.address.postcode'|trans }}</th>
+                            <th>{{ 'coreshop.form.address.city'|trans }}</th>
+                            <th class="text-nowrap">{{ 'coreshop.form.address.country'|trans }}</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for address in customer|coreshop_allocate_valid_addresses %}
+                        <tr>
+                            <td class="align-middle">{{ address.street }}</td>
+                            <td class="align-middle">{{ address.number }}</td>
+                            <td class="align-middle">{{ address.postcode }}</td>
+                            <td class="align-middle">{{ address.city }}</td>
+                            <td class="align-middle">{{ address.country }}</td>
+                            <td colspan="2" class="text-end align-middle">
+                                <div class="d-inline-flex gap-2">
+                                    {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_EDIT') %}
+                                        <a href="{{ path('coreshop_customer_address_edit', {name: address.street, address: address.id|coreshop_string}) }}" class="btn btn-primary" {{ coreshop_test_html_attribute('addresses-link',  address.street) }}>
+                                            <i class="bi bi-pencil me-2"></i>
+                                            {{ 'coreshop.ui.edit'|trans }}
+                                        </a>
+                                    {% endif %}
 
-    <section class="addresses-area">
-        <div class="row mb-4">
-            {% for address in customer|coreshop_allocate_valid_addresses %}
-                <div class="col-6">
-                    <div class="card card-smart">
-                        <div class="card-body">
-                            {% if customer is not coreshop_address_owner_of(address) %}
-                                <span class="badge badge-secondary float-right">{{ 'coreshop.ui.company_address'|trans }}</span>
-                            {% elseif address.addressIdentifier is not empty %}
-                                <span class="badge badge-secondary float-right">{{ ('coreshop.ui.' ~ address.addressIdentifier.name ~ '_address')|trans }}</span>
-                            {% endif %}
-                            {{ address|coreshop_format_address }}
-                            <br/>
-                            <br/>
-                            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_EDIT') %}
-                                <a href="{{ path('coreshop_customer_address_edit', {name: address.street, address: address.id|coreshop_string}) }}" class="btn btn-success" {{ coreshop_test_html_attribute('addresses-link',  address.street) }}>
-                                    {{ 'coreshop.ui.edit'|trans }}
-                                </a>
-                            {% endif %}
+                                    {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_DELETE') %}
+                                        <a href="{{ path('coreshop_customer_address_delete', {address: address.id|coreshop_string}) }}"
+                                           class="btn btn-secondary" {{ coreshop_test_html_attribute('address-delete',  address.street) }}>
+                                            <i class="bi bi-trash me-2"></i>
+                                            {{ 'coreshop.ui.delete'|trans }}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-                            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_DELETE') %}
-                                <a href="{{ path('coreshop_customer_address_delete', {address: address.id|coreshop_string}) }}" class="btn btn-danger" {{ coreshop_test_html_attribute('address-delete',  address.street) }}>
-                                    {{ 'coreshop.ui.delete'|trans }}
-                                </a>
-                            {% endif %}
-                        </div>
+                {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_ADD') %}
+                    <div class="d-flex mt-5">
+                        <a href="{{ path('coreshop_customer_address_new') }}" class="btn btn-primary ms-auto" {{ coreshop_test_html_attribute('address-add') }}>
+                            {{ 'coreshop.ui.add_new_address'|trans }}
+                        </a>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESS_ADD') %}
-            <div class="row">
-                <div class="col-12">
-                    <a href="{{ path('coreshop_customer_address_new') }}" class="btn btn-success" {{ coreshop_test_html_attribute('address-add') }}>
-                        {{ 'coreshop.ui.add_new_address'|trans }}
-                    </a>
-                </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </section>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -42,7 +42,7 @@ class ConfigurationService extends BaseConfigurationService implements Configura
         $this->myConfigurationRepository = $configurationRepository;
     }
 
-    public function getForStore(string $key, StoreInterface $store = null, $returnObject = false): mixed
+    public function getForStore(string $key, ?StoreInterface $store = null, $returnObject = false): mixed
     {
         if (null === $store) {
             $store = $this->getStore();
@@ -65,7 +65,7 @@ class ConfigurationService extends BaseConfigurationService implements Configura
         return null;
     }
 
-    public function setForStore(string $key, mixed $data, StoreInterface $store = null): \CoreShop\Component\Core\Model\ConfigurationInterface
+    public function setForStore(string $key, mixed $data, ?StoreInterface $store = null): \CoreShop\Component\Core\Model\ConfigurationInterface
     {
         if (null === $store) {
             $store = $this->getStore();
@@ -87,7 +87,7 @@ class ConfigurationService extends BaseConfigurationService implements Configura
         return $config;
     }
 
-    public function removeForStore(string $key, StoreInterface $store = null): void
+    public function removeForStore(string $key, ?StoreInterface $store = null): void
     {
         if (null === $store) {
             $store = $this->getStore();

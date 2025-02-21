@@ -99,7 +99,7 @@ final class CategoryContext implements Context
         $this->saveCategory($child);
     }
 
-    private function createCategory(string $categoryName, StoreInterface $store = null): CategoryInterface
+    private function createCategory(string $categoryName, ?StoreInterface $store = null): CategoryInterface
     {
         if (null === $store && $this->sharedStorage->has('store')) {
             $store = $this->sharedStorage->get('store');

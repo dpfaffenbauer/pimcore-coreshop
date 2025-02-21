@@ -61,7 +61,7 @@ interface CountryInterface extends
      */
     public function getZone();
 
-    public function setZone(ZoneInterface $zone = null);
+    public function setZone(?ZoneInterface $zone = null);
 
     /**
      * @return string

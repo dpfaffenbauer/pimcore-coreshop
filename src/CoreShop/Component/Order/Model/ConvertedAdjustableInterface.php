@@ -23,17 +23,17 @@ interface ConvertedAdjustableInterface
     /**
      * @return AdjustmentInterface[]
      */
-    public function getConvertedAdjustments(string $type = null);
+    public function getConvertedAdjustments(?string $type = null);
 
     public function addConvertedAdjustment(AdjustmentInterface $adjustment);
 
     public function removeConvertedAdjustment(AdjustmentInterface $adjustment);
 
-    public function getConvertedAdjustmentsTotal(string $type = null, bool $withTax = true): int;
+    public function getConvertedAdjustmentsTotal(?string $type = null, bool $withTax = true): int;
 
-    public function removeConvertedAdjustments(string $type = null);
+    public function removeConvertedAdjustments(?string $type = null);
 
-    public function removeConvertedAdjustmentsRecursively(string $type = null);
+    public function removeConvertedAdjustmentsRecursively(?string $type = null);
 
     /**
      * Recalculates adjustments total. Should be used after adjustment change.

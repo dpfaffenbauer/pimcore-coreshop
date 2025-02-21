@@ -29,7 +29,7 @@
     "coreshop/payum-payment-bundle": "^5.0",
     "coreshop/core": "^5.0",
     "payum/payum-bundle": "^2.5",
-    "payum/payum": "^1.7",
+    "payum/payum": "^2.0",
     "php-http/message-factory": "^1.0",
     "symfony/notifier": "^6.3",
     "symfony/serializer": "^6.3",

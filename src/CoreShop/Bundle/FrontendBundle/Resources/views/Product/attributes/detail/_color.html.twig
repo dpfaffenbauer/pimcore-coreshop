@@ -1,8 +1,11 @@
-<div class="attribute-color">
+<div class="attribute-color gap-2">
     {% for attribute in group.attributes|sort((a, b) => a.attribute.sorting <=> b.attribute.sorting) %}
         <div data-bs-toggle="tooltip" title="{{ attribute.attribute.name }}" class="attribute-color__item">
             <input disabled data-group="{{ group.group.id }}" type="radio" class="btn-check" name="attributes[{{ group.group.id }}]" id="attribute-{{ attribute.attribute.id }}" value="{{ attribute.attribute.id }}" autocomplete="off" {{ coreshop_test_html_attribute('attribute', attribute.attribute.id) }}>
-            <label {{ coreshop_test_html_attribute('attribute-label', attribute.attribute.id) }} for="attribute-{{ attribute.attribute.id }}" style="--bs-product-color: {{ attribute.attribute.valueColor }}"></label>
+            <label for="attribute-{{ attribute.attribute.id }}" {{ coreshop_test_html_attribute('attribute-label', attribute.attribute.id) }}>
+                <span class="badge-spec" style="background: {{ attribute.attribute.valueColor }}"></span>
+                <span>{{ attribute.attribute.valueText|capitalize }}</span>
+            </label>
         </div>
     {% endfor %}
 </div>

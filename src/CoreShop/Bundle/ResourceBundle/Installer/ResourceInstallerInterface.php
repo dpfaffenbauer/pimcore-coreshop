@@ -22,5 +22,5 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface ResourceInstallerInterface
 {
-    public function installResources(OutputInterface $output, string $applicationName = null, array $options = []): void;
+    public function installResources(OutputInterface $output, ?string $applicationName = null, array $options = []): void;
 }

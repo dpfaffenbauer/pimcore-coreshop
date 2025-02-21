@@ -5,6 +5,7 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     findUnusedBaselineEntry="false"
     findUnusedCode="false"
+    ensureOverrideAttribute="false"
 >
     <projectFiles>
         <directory name="src" />
@@ -30,6 +31,11 @@
     </projectFiles>
 
     <issueHandlers>
+        <ClassMustBeFinal>
+            <errorLevel type="info">
+                <directory name="src/CoreShop/*" />
+            </errorLevel>
+        </ClassMustBeFinal>
         <RiskyCast>
             <errorLevel type="info">
                 <directory name="src/CoreShop/*" />
@@ -46,12 +52,6 @@
             </errorLevel>
         </MissingTemplateParam>
         <!-- level 3 issues - slightly lazy code writing, but probably low false-negatives -->
-        <UndefinedDocblockClass>
-            <errorLevel type="suppress">
-                <referencedClass name="UnitEnum" />
-            </errorLevel>
-        </UndefinedDocblockClass>
-
         <DeprecatedClass>
             <errorLevel type="info">
                 <referencedClass name="Doctrine\Common\Persistence\ManagerRegistry" />
@@ -132,6 +132,21 @@
                 <referencedClass name="Pimcore\File" />
             </errorLevel>
         </InternalClass>
+        
+        <TooManyTemplateParams>
+            <errorLevel type="info">
+                <file name="src/CoreShop/Bundle/PayumBundle/Action/AuthorizePaymentAction.php" />
+                <file name="src/CoreShop/Bundle/PayumBundle/Action/CapturePaymentAction.php" />
+                <file name="src/CoreShop/Bundle/PayumBundle/Action/ExecuteSameRequestWithPaymentDetailsAction.php" />
+                <file name="src/CoreShop/Bundle/PayumBundle/Action/Offline/StatusAction.php" />
+            </errorLevel>
+        </TooManyTemplateParams>
+
+        <InvalidOperand>
+            <errorLevel type="info">
+                <directory name="src/CoreShop/*" />
+            </errorLevel>
+        </InvalidOperand>
 
         <MissingReturnType errorLevel="info" />
 

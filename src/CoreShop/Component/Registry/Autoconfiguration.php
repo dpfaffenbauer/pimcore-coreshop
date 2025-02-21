@@ -27,7 +27,7 @@ final class Autoconfiguration
         ContainerBuilder $container,
         string $interface,
         string $tag,
-        string $attribute = null,
+        ?string $attribute = null,
         bool $autoconfigureWithAttributes = false,
     ): void {
         if (!$autoconfigureWithAttributes) {

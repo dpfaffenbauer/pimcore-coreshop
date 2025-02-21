@@ -20,9 +20,9 @@ namespace CoreShop\Component\SEO\Model;
 
 interface SEOOpenGraphAwareInterface
 {
-    public function getOGTitle(string $language = null): ?string;
+    public function getOGTitle(?string $language = null): ?string;
 
-    public function getOGDescription(string $language = null): ?string;
+    public function getOGDescription(?string $language = null): ?string;
 
     public function getOGType(): ?string;
 }

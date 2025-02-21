@@ -43,7 +43,7 @@ class WishlistRepository extends BaseWishlistRepository implements WishlistRepos
     public function findLatestByStoreAndCustomer(
         StoreInterface $store,
         CustomerInterface $customer,
-        string $name = null,
+        ?string $name = null,
     ): ?WishlistInterface {
         $list = $this->getList();
         $list->setCondition('customer__id = ? AND store = ?', [$customer->getId(), $store->getId()]);

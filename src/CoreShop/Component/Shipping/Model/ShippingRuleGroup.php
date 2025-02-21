@@ -64,7 +64,7 @@ class ShippingRuleGroup implements ShippingRuleGroupInterface
         return $this->carrier;
     }
 
-    public function setCarrier(CarrierInterface $carrier = null)
+    public function setCarrier(?CarrierInterface $carrier = null)
     {
         $this->carrier = $carrier;
     }

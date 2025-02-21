@@ -28,8 +28,8 @@ class TaxRuleRepository extends BaseTaxRuleRepository implements TaxRuleReposito
 {
     public function findForCountryAndState(
         TaxRuleGroupInterface $taxRuleGroup,
-        CountryInterface $country = null,
-        StateInterface $state = null,
+        ?CountryInterface $country = null,
+        ?StateInterface $state = null,
     ): array {
         return $this->createQueryBuilder('o')
             ->andWhere('o.taxRuleGroup = :taxRuleGroup')

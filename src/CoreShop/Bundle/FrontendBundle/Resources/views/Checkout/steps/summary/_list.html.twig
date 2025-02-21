@@ -1,32 +1,16 @@
-<div class="table-responsive shopping-cart-table">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <td class="text-center">
-                {{ 'coreshop.ui.image'|trans }}
-            </td>
-            <td class="text-center">
-                {{ 'coreshop.ui.product_details'|trans }}
-            </td>
-            <td class="text-center">
-                {{ 'coreshop.ui.quantity'|trans }}
-            </td>
-            <td class="text-center">
-                {{ 'coreshop.ui.price'|trans }}
-            </td>
-            <td class="text-center">
-                {{ 'coreshop.ui.total'|trans }}
-            </td>
-        </tr>
-        </thead>
-        <tbody>
+<div class="shopping-cart-table">
+    <div class="row">
+
+        <div class="col-12 col-xl-8">
+            {{ form_errors(form) }}
+
             {% for item in cart.items %}
-                {% include '@CoreShopFrontend/Checkout/steps/summary/_item.html.twig' with {'item': item} %}
+                {% include '@CoreShopFrontend/Common/Order/_item.html.twig' with {'item': item, 'btnremove': false} %}
             {% endfor %}
-            {% include '@CoreShopFrontend/Checkout/steps/summary/_rules.html.twig' %}
-        </tbody>
-        <tfoot>
+
+        </div>
+        <div class="col-12 col-xl-4">
             {% include '@CoreShopFrontend/Checkout/steps/summary/_summary.html.twig' %}
-        </tfoot>
-    </table>
+        </div>
+    </div>
 </div>
