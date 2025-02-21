@@ -100,7 +100,7 @@ class CustomerTransformerController extends AdminController
         ]);
     }
 
-    public function validateAssignmentAction(int $customerId, int $companyId = null): JsonResponse
+    public function validateAssignmentAction(int $customerId, ?int $companyId = null): JsonResponse
     {
         $error = false;
         $message = null;

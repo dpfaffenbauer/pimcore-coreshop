@@ -75,7 +75,7 @@ final class PimcoreDriver extends AbstractDriver
         $this->addPimcoreController($container, $metadata, $metadata->getClass('pimcore_controller'));
     }
 
-    protected function addPimcoreController(ContainerBuilder $container, MetadataInterface $metadata, string $classValue, string $suffix = null): void
+    protected function addPimcoreController(ContainerBuilder $container, MetadataInterface $metadata, string $classValue, ?string $suffix = null): void
     {
         $parents = array_values(class_parents($classValue) ?: []);
 

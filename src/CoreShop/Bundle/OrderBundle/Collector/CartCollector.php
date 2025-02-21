@@ -55,7 +55,7 @@ final class CartCollector extends DataCollector
         return $this->data['admin'];
     }
 
-    public function collect(Request $request, Response $response, \Throwable $exception = null): void
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         if ($this->pimcoreContext->matchesPimcoreContext($request, PimcoreContextResolver::CONTEXT_ADMIN)) {
             $this->data['admin'] = true;

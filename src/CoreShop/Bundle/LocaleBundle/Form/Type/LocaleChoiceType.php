@@ -48,7 +48,7 @@ final class LocaleChoiceType extends AbstractType
 
                     return $locales;
                 },
-                'choice_value' => static function (string $value = null) {
+                'choice_value' => static function (?string $value = null) {
                     return $value;
                 },
                 'choice_label' => static function (string $value) {
