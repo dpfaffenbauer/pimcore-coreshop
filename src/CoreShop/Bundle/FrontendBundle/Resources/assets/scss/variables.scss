@@ -1,0 +1,60 @@
+:root {
+    --coreshop-primary: #CD1017;
+    --coreshop-primary-hover: #9c0c12;
+    --coreshop-primary-rgb: 205,16,23;
+    --coreshop-primary-hover-rgb: 156, 12, 18;
+    --coreshop-secondary: #333333;
+    --coreshop-secondary-hover: #1a1a1a;
+    --coreshop-secondary-rgb: 51, 51, 51;
+    --coreshop-third-border: #DEE2E6;
+    --coreshop-third: #6D757E;
+    --coreshop-btn-link-color: #333333;
+    --coreshop-btn-link-hover: var(--coreshop-btn-link-color);
+    --coreshop-btn-link-rgb: 0,0,0;
+    --coreshop-body-color: #333333;
+    --coreshop-white: #ffffff;
+    --coreshop-white-rgb: 255,255,255;
+    --coreshop-gray: #cecece;
+    --coreshop-gray-100: #F9FAFB;
+    --coreshop-gray-200: #EAEDF0;
+    --coreshop-gray-400: #CED4DA;
+    --coreshop-gray-600: #6C757D;
+    --coreshop-gray-800: #353B41;
+    --coreshop-gray-900: #22262A;
+    --coreshop-font-family: 'RedHatText';
+    --coreshop-font-family-heading: 'RedHatDisplay';
+    --coreshop-font-300: 300;
+    --coreshop-font-400: 400;
+    --coreshop-font-500: 500;
+    --coreshop-font-600: 600;
+    --coreshop-font-700: 700;
+    --coreshop-font-900: 900;
+    --coreshop-theme-light: #F4F5F5;
+    --coreshop-accordion-active-bg: #FCDEDF;
+    --coreshop-accordion-border-color: #F9AFB1;
+    --coreshop-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27none%27 stroke=%27%23CD1017%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpath d=%27M2 5L8 11L14 5%27/%3e%3c/svg%3e");
+    --coreshop-nav-link-font-size: 0.875rem;
+    --coreshop-topbar-nav-link-font-size: 1rem;
+    --coreshop-available: #52BD5D;
+    --coreshop-limited: #F9DF5A;
+    --coreshop-outofstock: #FC1414;
+    --coreshop-border-color: #E0E0E0;
+    --coreshop-header-height: 14.5rem;
+
+    /* overwrite default boostrap */
+    --bs-body-font-family: var(--coreshop-font-family);
+    --bs-body-font-weight: var(--coreshop-font-400);
+    --bs-body-color: var(--coreshop-body-color);
+    --bs-link-color-rgb: var(--coreshop-primary-rgb);
+    --bs-link-hover-color-rgb: var(--coreshop-primary-hover-rgb);
+    --bs-secondary-color: var(--coreshop-gray-600);
+    --bs-border-color: var(--coreshop-border-color);
+
+    --bs-primary: var(--coreshop-primary);
+    --bs-primary-rgb: var(--coreshop-primary-rgb);
+
+    --bs-secondary: var(--coreshop-secondary);
+    --bs-secondary-rgb: var(--coreshop-secondary-rgb);
+
+    --bs-border-radius: 0.275rem;
+}

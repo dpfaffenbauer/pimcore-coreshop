@@ -64,7 +64,7 @@ class PaymentProviderRuleGroup implements PaymentProviderRuleGroupInterface
         return $this->paymentProvider;
     }
 
-    public function setPaymentProvider(PaymentProviderInterface $paymentProvider = null)
+    public function setPaymentProvider(?PaymentProviderInterface $paymentProvider = null)
     {
         $this->paymentProvider = $paymentProvider;
     }

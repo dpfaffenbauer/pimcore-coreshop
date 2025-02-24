@@ -1,10 +1,13 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<div class="col-md-3 p-sm-2">
+<div>
     {{ form_start(form, {'attr' : {'id': 'search'}}) }}
+    <div class="d-flex">
         <div class="input-group">
-            {{ form_row(form.text, {'label' : false,  'attr' : {'placeholder':'coreshop.ui.search'|trans,'class': 'form-control-lg'}}) }}
-            <!--<input type="text" name="text" class="form-control form-control-lg" placeholder="{{ 'coreshop.ui.search'|trans }}">-->
+            {{ form_widget(form.text, {'label' : false,  'attr' : {'placeholder':'coreshop.ui.search'|trans,'class': 'form-control'}}) }}
+            <button type="submit" class="d-flex align-items-center justify-content-center with-icon  btn btn-primary input-group-text">Submit <i class="bi bi-search ms-2"></i></button>
         </div>
+
+    </div>
     {{ form_end(form,{'method': 'GET'}) }}
 </div>

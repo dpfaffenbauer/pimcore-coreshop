@@ -1,0 +1,42 @@
+<header id="header-area">
+    <div class="header-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div>
+                    <button class="navbar-toggler ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="bi bi-gear fs-6 "></i> <small>Menu</small>
+                    </button>
+                    {% if(app.user) %}
+                        <a href="{{ path('coreshop_logout') }}" {{ coreshop_test_html_attribute('logout-button') }} class="d-flex align-items-center justify-content-center btn btn-secondary">
+                            {{ 'coreshop.ui.logout'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+                {% include '@CoreShopFrontend/Header/_topbar_buttons.html.twig' %}
+                <div class="collapse navbar-collapse order-lg-1" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('coreshop_index') }}">
+                                {{ 'coreshop.ui.home'|trans }}
+                            </a>
+                        </li>
+                        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CustomerController::headerAction')) }}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        {% include '@CoreShopFrontend/Header/_widgetbar.html.twig' %}
+    </div>
+    <div class="main-nav">
+        {% include '@CoreShopFrontend/Header/_navigation.html.twig' %}
+    </div>
+
+{#    {% if is_granted('CORESHOP_CATEGORY_SHOW') %}#}
+{#        {{ render(controller('CoreShop\\Bundle\\FrontendBundle\\Controller\\CategoryController::menuAction')) }}#}
+{#    {% endif %}#}
+
+</header>

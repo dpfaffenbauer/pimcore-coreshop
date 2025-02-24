@@ -1,48 +1,24 @@
-<div class="table-responsive shopping-cart-table">
+<div class="shopping-cart-table">
     {{ form_start(form, {}) }}
-        {{ form_errors(form) }}
+    <div class="row">
 
-        <table class="table table-bordered" {{ coreshop_test_html_attribute('cart-items') }}>
-            <thead>
-            <tr>
-                <td class="text-center">
-                    {{ 'coreshop.ui.image'|trans }}
-                </td>
-                <td class="text-center">
-                    {{ 'coreshop.ui.product_details'|trans }}
-                </td>
-                <td class="text-center">
-                    {{ 'coreshop.ui.quantity'|trans }}
-                </td>
-                <td class="text-center">
-                    {{ 'coreshop.ui.price'|trans }}
-                </td>
-                <td class="text-center">
-                    {{ 'coreshop.ui.total'|trans }}
-                </td>
-                <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in cart.items %}
-                {% include '@CoreShopFrontend/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[loop.index0]} %}
-            {% endfor %}
-            <tr>
-                <td colspan="6" class="text-right">
-                    {% include '@CoreShopFrontend/Cart/Summary/_update.html.twig' %}
-                </td>
-            </tr>
+        <div class="col-12 col-xl-8">
+            {{ form_errors(form) }}
+            <div  {{ coreshop_test_html_attribute('cart-items') }}>
+                {% for item in cart.items %}
+                    {% include '@CoreShopFrontend/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[loop.index0]} %}
+                {% endfor %}
+            </div>
 
-            {% include '@CoreShopFrontend/Cart/Summary/_rules.html.twig' %}
-
-            </tbody>
-            <tfoot>
+            {% include '@CoreShopFrontend/Cart/Summary/_update.html.twig' %}
+        </div>
+        <div class="col-12 col-xl-4">
             {% include '@CoreShopFrontend/Cart/Summary/_summary.html.twig' %}
-            </tfoot>
-        </table>
+        </div>
+    </div>
 
-        {{ form_row(form._token) }}
-    {{ form_end(form, {'render_rest': false}) }}
+   {{ form_row(form._token) }}
+   {{ form_end(form, {'render_rest': false}) }}
 
 </div>
 

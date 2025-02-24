@@ -32,7 +32,7 @@ final class PimcoreDependantBundleInstaller implements ResourceInstallerInterfac
     ) {
     }
 
-    public function installResources(OutputInterface $output, string $applicationName = null, array $options = []): void
+    public function installResources(OutputInterface $output, ?string $applicationName = null, array $options = []): void
     {
         $parameter = $applicationName ?
             sprintf('%s.dependant.bundles', $applicationName) :

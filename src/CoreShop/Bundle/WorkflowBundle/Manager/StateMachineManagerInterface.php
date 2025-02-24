@@ -22,7 +22,7 @@ use Symfony\Component\Workflow\WorkflowInterface;
 
 interface StateMachineManagerInterface
 {
-    public function get(object $subject, string $workflowName = null): WorkflowInterface;
+    public function get(object $subject, ?string $workflowName = null): WorkflowInterface;
 
     public function getTransitionFromState(WorkflowInterface $workflow, object $subject, string $fromState): ?string;
 

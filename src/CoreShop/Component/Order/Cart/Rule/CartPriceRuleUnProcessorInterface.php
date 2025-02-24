@@ -24,5 +24,5 @@ use CoreShop\Component\Order\Model\OrderInterface;
 
 interface CartPriceRuleUnProcessorInterface
 {
-    public function unProcess(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, CartPriceRuleVoucherCodeInterface $voucherCode = null): bool;
+    public function unProcess(OrderInterface $cart, CartPriceRuleInterface $cartPriceRule, ?CartPriceRuleVoucherCodeInterface $voucherCode = null): bool;
 }

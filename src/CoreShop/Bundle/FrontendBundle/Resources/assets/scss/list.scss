@@ -1,0 +1,9 @@
+.list-group {
+    --bs-list-group-border-width: 0;
+    --bs-list-group-item-padding-y: 0;
+    --bs-list-group-item-padding-x: 0;
+
+    &-item {
+        text-wrap: nowrap;
+    }
+}

@@ -34,7 +34,7 @@ class AbstractTranslation implements TranslationInterface
         return $this->translatable;
     }
 
-    public function setTranslatable(TranslatableInterface $translatable = null)
+    public function setTranslatable(?TranslatableInterface $translatable = null)
     {
         if ($translatable === $this->translatable) {
             return;

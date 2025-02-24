@@ -19,38 +19,80 @@
         <section class="registration-area">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card card-smart">
+                    <div class="card bg-light border-0">
                         <div class="card-body">
 
                             {{ form_start(form, {'method': 'POST', attr: {'novalidate': 'novalidate'}}) }}
-                                {{ form_row(form.salutation, coreshop_test_form_attribute('register-salutation')) }}
-                                {{ form_row(form.gender, coreshop_test_form_attribute('register-gender')) }}
-                                {{ form_row(form.firstname, coreshop_test_form_attribute('register-firstname')) }}
-                                {{ form_row(form.lastname, coreshop_test_form_attribute('register-lastname')) }}
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.salutation,coreshop_test_form_attribute('register-salutation'), {attr:{class:'form-select'}}) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.gender, coreshop_test_form_attribute('register-gender'), {attr:{class:'form-select'}}) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.firstname, coreshop_test_form_attribute('register-firstname')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.lastname, coreshop_test_form_attribute('register-lastname')) }}
+                                    </div>
 
-                                {% if form.user.loginIdentifier is defined %}
-                                    {{ form_row(form.user.loginIdentifier, coreshop_test_form_attribute('register-user-username')) }}
-                                {% endif %}
+                                    {% if form.user.loginIdentifier is defined %}
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.user.loginIdentifier, coreshop_test_form_attribute('register-user-username')) }}
+                                    </div>
+                                    {% endif %}
 
-                                {{ form_row(form.email.first, coreshop_test_form_attribute('register-email-first')) }}
-                                {{ form_row(form.email.second, coreshop_test_form_attribute('register-email-second')) }}
-                                {{ form_row(form.user.plainPassword.first, coreshop_test_form_attribute('register-password-first')) }}
-                                {{ form_row(form.user.plainPassword.second, coreshop_test_form_attribute('register-password-second')) }}
-                                {{ form_row(form.newsletterActive, coreshop_test_form_attribute('register-newsletter-active')) }}
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.email.first, coreshop_test_form_attribute('register-email-first')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.email.second, coreshop_test_form_attribute('register-email-second')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.user.plainPassword.first, coreshop_test_form_attribute('register-password-first')) }}
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.user.plainPassword.second, coreshop_test_form_attribute('register-password-second')) }}
+                                    </div>
+                                </div>
+                                    {{ form_row(form.newsletterActive, coreshop_test_form_attribute('register-newsletter-active')) }}
 
-                                {{ form_label(form.address) }}
-
-                                {{ form_row(form.address.company, coreshop_test_form_attribute('register-address-company')) }}
-                                {{ form_row(form.address.salutation, coreshop_test_form_attribute('register-address-salutation')) }}
-                                {{ form_row(form.address.firstname, coreshop_test_form_attribute('register-address-firstname')) }}
-                                {{ form_row(form.address.lastname, coreshop_test_form_attribute('register-address-lastname')) }}
-                                {{ form_row(form.address.street, coreshop_test_form_attribute('register-address-street')) }}
-                                {{ form_row(form.address.number, coreshop_test_form_attribute('register-address-number')) }}
-                                {{ form_row(form.address.postcode, coreshop_test_form_attribute('register-address-post-code')) }}
-                                {{ form_row(form.address.city, coreshop_test_form_attribute('register-address-city')) }}
-                                {{ form_row(form.address.country, coreshop_test_form_attribute('register-address-country')) }}
-                                {{ form_row(form.address.phoneNumber, coreshop_test_form_attribute('register-address-phone-number')) }}
-
+                                    {{ form_label(form.address) }}
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        {{ form_row(form.address.salutation, coreshop_test_form_attribute('register-address-salutation'), {attr:{class:'form-select'}}) }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-12 col-lg-6">
+                                        {{ form_row(form.address.firstname, coreshop_test_form_attribute('register-address-firstname')) }}
+                                   </div>
+                                   <div class="col-12 col-lg-6">
+                                    {{ form_row(form.address.lastname, coreshop_test_form_attribute('register-address-lastname')) }}
+                                   </div>
+                                   <div class="col-12 col-lg-6">
+                                    {{ form_row(form.address.company, coreshop_test_form_attribute('register-address-company')) }}
+                                   </div>
+                                   <div class="col-12 col-lg-6">
+                                    {{ form_row(form.address.phoneNumber, coreshop_test_form_attribute('register-address-phone-number')) }}
+                                   </div>
+                                   <div class="col-12 col-lg-6">
+                                    {{ form_row(form.address.street, coreshop_test_form_attribute('register-address-street')) }}
+                                   </div>
+                                   <div class="col-6 col-lg-3">
+                                    {{ form_row(form.address.number, coreshop_test_form_attribute('register-address-number')) }}
+                                   </div>
+                                   <div class="col-6 col-lg-3">
+                                    {{ form_row(form.address.postcode, coreshop_test_form_attribute('register-address-post-code')) }}
+                                   </div>
+                                   <div class="col-12 col-lg-6">
+                                    {{ form_row(form.address.city, coreshop_test_form_attribute('register-address-city')) }}
+                                   </div>
+                                   <div class="col-12 col-lg-6">
+                                    {{ form_row(form.address.country, coreshop_test_form_attribute('register-address-country'), {attr:{class:'form-select'}}) }}
+                                   </div>
+                               </div>
                                 {{ form_row(form.termsAccepted, coreshop_test_form_attribute('register-terms')) }}
 
                                 {{ form_row(form.submit, coreshop_test_form_attribute('register-button')) }}

@@ -1,15 +1,13 @@
 <section class="product-carousel">
     <h2 class="product-head">{{ 'coreshop.ui.latest_products'|trans }}</h2>
 
-    <div class="row">
-        <div class="col-12 p-0">
-            <div id="owl-product" class="owl-carousel" {{ coreshop_test_html_attribute('latest-products') }}>
-                {% for product in products %}
-                <div class="item">
+    <div class="row" {{ coreshop_test_html_attribute('latest-products') }}>
+        {% for product in products %}
+            <div class="d-flex col-12 col-md-6 col-xxl-4 mb-3">
+                <div class="layout1 card flex-grow-1">
                     {% include '@CoreShopFrontend/Product/_preview.html.twig' with {'product': product} %}
                 </div>
-                {% endfor %}
             </div>
-        </div>
+        {% endfor %}
     </div>
 </section>

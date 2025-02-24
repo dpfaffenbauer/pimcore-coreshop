@@ -1,0 +1,57 @@
+$font-path: '../fonts/';
+
+$font-styles: (
+  'light': (
+    'weight': 300,
+    'file': 'RedHatText-Light',
+  ),
+  'regular': (
+    'weight': 400,
+    'file': 'RedHatText-Regular',
+  ),
+  'semibold': (
+    'weight': 600,
+    'file': 'RedHatText-SemiBold',
+  ),
+  'bold': (
+    'weight': 700,
+    'file': 'RedHatText-Bold',
+  ),
+  'black': (
+    'weight': 900,
+    'file': 'RedHatDisplay-Black',
+  )
+);
+
+$font-styles-heading: (
+  'semibold': (
+    'weight': 500,
+    'file': 'RedHatDisplay-SemiBold'
+  ),
+  'bold': (
+    'weight': 700,
+    'file': 'RedHatDisplay-Bold'
+  )
+);
+
+@each $style, $details in $font-styles {
+  $file: map-get($details, 'file');
+  @font-face {
+    font-family: 'RedHatText';
+    src: url('build/#{$font-path}#{$file}.woff2') format('woff2'),
+          url('#{$font-path}#{$file}.woff') format('woff');
+    font-weight: map-get($details, 'weight');
+    font-style: normal;
+  }
+}
+
+@each $style, $details in $font-styles-heading {
+  $file: map-get($details, 'file');
+  @font-face {
+    font-family: 'RedHatDisplay';
+    src: url('build/#{$font-path}#{$file}.woff2') format('woff2'),
+          url('#{$font-path}#{$file}.woff') format('woff');
+    font-weight: map-get($details, 'weight');
+    font-style: normal;
+  }
+}

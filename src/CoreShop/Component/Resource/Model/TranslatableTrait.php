@@ -55,7 +55,7 @@ trait TranslatableTrait
         $this->translations = new ArrayCollection();
     }
 
-    public function getTranslation(string $locale = null, bool $useFallbackTranslation = true): TranslationInterface
+    public function getTranslation(?string $locale = null, bool $useFallbackTranslation = true): TranslationInterface
     {
         $locale = $locale ?: $this->currentLocale;
         if (null === $locale) {

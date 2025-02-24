@@ -55,7 +55,7 @@ class DataObjectSiteSlugGenerator implements DataObjectSiteSlugGeneratorInterfac
         return $slug;
     }
 
-    private function dispatchSlugEvent(SluggableInterface $sluggable, string $slug, string $prefix = null, ?Site $site = null, ?string $locale = null)
+    private function dispatchSlugEvent(SluggableInterface $sluggable, string $slug, ?string $prefix = null, ?Site $site = null, ?string $locale = null)
     {
         $event = new SlugGenerationEvent($sluggable, $slug, $prefix, $site, $locale);
         $this->eventDispatcher->dispatch($event);

@@ -4,6 +4,9 @@
 {% extends '@CoreShopFrontend/layout-column.html.twig' %}
 
 {% block center %}
+    {% set cart_allowed = is_granted('CORESHOP_CART') and is_granted('CORESHOP_CART_ADD_ITEM') %}
+    {% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('coreshop_index') }}">{{ 'coreshop.ui.home'|trans }}</a></li>
@@ -17,71 +20,96 @@
     </nav>
 
     <div class="row product-info">
-
-        <div class="col-sm-5 images-block">
-            {% if product.image is pimcore_asset_image %}
-                {{ product.image|pimcore_image_thumbnail_html("coreshop_productDetail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}
-            {% endif %}
-
+        <div class="col-12 col-lg-5 images-block">
             {% if product.images|length > 0 %}
-                <div class="row">
+                <div class="swiper js-slider mb-2">
+                    <div class="swiper-wrapper">
                     {% for image in product.images %}
-                        <div class="col-12 col-sm-6">
-                            {{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}
-                        </div>
+                        <div class="swiper-slide">{{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}</div>
                     {% endfor %}
+                    </div>
+                </div>
+
+                <div class="swiper js-slider-thumbnail">
+                    <div class="swiper-wrapper">
+                        {% for image in product.images %}
+                        <div class="swiper-slide">{{ image|pimcore_image_thumbnail_html("coreshop_productDetailThumbnail", {'imgAttributes': {'class': 'img-fluid img-thumbnail'}}) }}</div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endif %}
         </div>
 
-        <div class="col-sm-7 product-details">
-            <h2 {{ coreshop_test_html_attribute('product-name', product.name) }}>{{ product.name }}</h2>
-            <hr/>
+        <div class="col-12 col-lg-7 product-details">
+            {% if coreshop_add_to_cart_available(product) and (cart_allowed or wishlist_allowed) %}
+                {% if wishlist_allowed %}
+                    {%  if not coreshop_wishlist_product_in(product) %}
+                        <div class="d-flex align-items-center">
+                            {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                            <span class="link-description">Add to favorites</span>
+                        </div>
+                    {%  else %}
+                        <div class="d-flex align-items-center">
+                            {% set wishlist_product_id = coreshop_wishlist_product_id(product) %}
+                            {% if wishlist_product_id %}
+                                <a
+                                        href="{{ path('coreshop_wishlist_remove', {item: wishlist_product_id|coreshop_string}) }}"
+                                        title="{{ 'coreshop.ui.remove'|trans }}"
+                                        class="btn btn-link pb-0 ps-0"
+                                        data-id="{{ wishlist_product_id }}"
+                                        {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
+                                >
+                                    <i class="bi bi-heart-fill me-3"></i><span class="link-description">Remove to favorites</span>
+                                </a>
+                            {% endif %}
 
-            {% if product.shortDescription|length > 0 %}
-                <div class="description">
-                    {{ product.shortDescription }}
-                </div>
-                <hr/>
+                        </div>
+                    {%  endif %}
+                {% endif %}
             {% endif %}
 
-            <ul class="list-unstyled manufacturer">
-                {% if product.manufacturer %}
-                    <li>
-                        <span>{{ 'coreshop.ui.brand'|trans }}:</span> {{ product.manufacturer.name }}
-                    </li>
-                {% endif %}
+            <h2 {{ coreshop_test_html_attribute('product-name', product.name) }}>{{ product.name }}</h2>
 
-                {% if product.ean %}
-                <li><span>{{ 'coreshop.ui.ean'|trans }}:</span> {{ product.ean }}
-                    {% endif %}
-                <li>
-                    <span>{{ 'coreshop.ui.availability'|trans }}:</span>
+            <div class="d-flex justify-content-between mb-3 text-14">
+                {% if product.ean %}<div class="mb-2"><strong>EAN:</strong> {{ product.ean }} </div>{% endif %}
+                <div class="d-flex align-items-center gap-2 stock">
                     {% if product.isTracked %}
                         {% if coreshop_inventory_is_available(product) %}
-                            <strong class="label label-success"> {{ 'coreshop.ui.in_stock'|trans }}</strong>
+                            <i class="bi bi-circle-fill stock-available"></i><span>{{ 'coreshop.ui.in_stock'|trans }}</span>
                         {% else %}
+                            <i class="bi bi-circle-fill stock--outofstock"></i>
                             <span {{ coreshop_test_html_attribute('product-out-of-stock') }}>
                                 {{ 'coreshop.ui.out_of_stock'|trans }}
                             </span>
                         {% endif %}
                     {% else %}
-                        <strong class="label label-success"> {{ 'coreshop.ui.in_stock'|trans }}</strong>
+                        <i class="bi bi-circle-fill stock-available"></i><span>{{ 'coreshop.ui.in_stock'|trans }}</span>
                     {% endif %}
-                </li>
-            </ul>
-            <hr/>
+                </div>
+            </div>
 
+            {% if product.shortDescription|length > 0 %}
+                <div class="description">
+                    {{ product.shortDescription }}
+                </div>
+            {% endif %}
+
+            {% if product.manufacturer %}
+                <div class="manufacturer">
+                    <span>{{ 'coreshop.ui.brand'|trans }}:</span> {{ product.manufacturer.name }}
+                </div>
+            {% endif %}
             {% include '@CoreShopFrontend/Product/_variants.html.twig' %}
 
+
+            {# TODO THE PRICE PER UNIT #}
             {% if product.hasUnitDefinitions == true %}
-                <div class="unit-prices">
-                    {{ product_price.display_product_unit_prices(product) }}
+                <div class="product-price d-flex flex-column">
+                    {{ product_price.display_product_unit_prices(product, true, false, true) }}
                 </div>
             {% else %}
-                <div class="price">
-                    <span class="price-head">{{ 'coreshop.ui.price'|trans }}:</span>
-                    {{ product_price.display_product_price(product) }}
+                <div class="product-price d-flex flex-column">
+                    {{ product_price.display_product_price(product, null, false, true) }}
                 </div>
                 <div class="tax">
                     <span {{ coreshop_test_html_attribute('product-tax-rate', product|coreshop_product_tax_rate(coreshop.context)) }}>
@@ -94,39 +122,29 @@
                 </div>
             {% endif %}
 
-            <hr/>
 
             {% if coreshop_quantity_price_rule_ranges_available(product, coreshop.context) %}
                 {% set rule = coreshop_quantity_price_rule(product, coreshop.context) %}
                 {% include '@CoreShopFrontend/ProductQuantityPriceRanges/quantity_price_ranges_' ~ rule.calculationBehaviour ~'.html.twig' with { rule: rule, product: product } only %}
-                <hr/>
             {% endif %}
 
-            {% set cart_allowed = is_granted('CORESHOP_CART') and is_granted('CORESHOP_CART_ADD_ITEM') %}
-            {% set wishlist_allowed = is_granted('CORESHOP_WISHLIST') and is_granted('CORESHOP_WISHLIST_ADD_ITEM') %}
-
             {% if coreshop_add_to_cart_available(product) and (cart_allowed or wishlist_allowed) %}
-                <div class="options">
-                    <div class="cart-button btn-group">
-                        {% if wishlist_allowed %}
-                            {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
-                        {% endif %}
-
+                <div class="options mt-3">
+                    <div class="d-flex cart-button btn-group">
                         {% if cart_allowed %}
-                            {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
+                            {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string, '_redirect': app.request.requestUri})) }}
                         {% endif %}
                     </div>
                 </div>
-                <hr/>
             {% endif %}
 
         </div>
     </div>
 
-    <div class="tabs-panel card-smart">
-        <ul class="nav nav-tabs">
+    <div class="tabs-panel card-smart mt-3 mb-5">
+        <ul class="nav nav-tabs mb-2">
             <li class="nav-item active">
-                <a class="nav-link" href="#tab-description">{{ 'coreshop.ui.description'|trans }}</a>
+                <a class="nav-link text-body px-0" href="#tab-description">{{ 'coreshop.ui.description'|trans }}</a>
             </li>
         </ul>
 
@@ -141,5 +159,5 @@
         </div>
     </div>
 
-    <br/>
+
 {% endblock %}

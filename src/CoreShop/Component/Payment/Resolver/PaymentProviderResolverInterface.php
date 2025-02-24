@@ -22,5 +22,5 @@ use CoreShop\Component\Resource\Model\ResourceInterface;
 
 interface PaymentProviderResolverInterface
 {
-    public function resolvePaymentProviders(ResourceInterface $subject = null): array;
+    public function resolvePaymentProviders(?ResourceInterface $subject = null): array;
 }

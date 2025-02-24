@@ -151,7 +151,7 @@ class Country extends AbstractResource implements CountryInterface, \Stringable
         return $this->zone;
     }
 
-    public function setZone(ZoneInterface $zone = null)
+    public function setZone(?ZoneInterface $zone = null)
     {
         $this->zone = $zone;
 

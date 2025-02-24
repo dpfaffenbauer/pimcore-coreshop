@@ -1,0 +1,70 @@
+@import 'breakpoints';
+@import 'mixins';
+
+.cart {
+    &-widget {
+        .dropdown-menu {
+            left: auto;
+            right: 0;
+            min-width: 16rem;
+        }
+
+        &-item {
+            &:not(:last-child) {
+                padding-bottom: 0.5rem;
+                margin-bottom: 0.5rem;
+                border-bottom: 1px solid var(--coreshop-gray-400);
+            }
+            > div:first-child {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: calc(100% - 1.5rem);
+            }
+        }
+
+        .cart-total {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: rem(90px);
+            display: inline-block;
+        }
+    }
+
+    &-close-item {
+        a.icon-only {
+            padding: 0;
+
+            svg {
+                font-size: rem(22px);
+                fill: var(--coreshop-primary);
+            }
+        }
+    }
+
+    &-number {
+        position: absolute;
+        top: 0;
+        left: rem(4px);
+        font-size: rem(10px);
+        width: rem(16px);
+        height: rem(16px);
+        background-color: var(--coreshop-gray-800);
+        color: var(--coreshop-white);
+        border-radius: 100%;
+        line-height: 1.5;
+    }
+
+    &-loader {
+        background: var(--coreshop-white);
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 2.5px solid var(--coreshop-gray-400);
+        border-bottom-color: var(--coreshop-primary);
+
+        &-wrapper {
+            position: relative;
+            padding: rem(6px) 1.25rem;
+        }
+    }
+}

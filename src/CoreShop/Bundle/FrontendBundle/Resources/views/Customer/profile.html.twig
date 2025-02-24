@@ -10,41 +10,115 @@
         </ol>
     </nav>
 
-    <h2 class="main-heading text-center" {{ coreshop_test_html_attribute('customer-information') }}>
-        {{ 'coreshop.ui.account'|trans }}
-        {{ customer.firstname }} {{ customer.lastname }} ({{ customer.email }})
-    </h2>
-
     {% include '@CoreShopFrontend/Common/flash_messages.html.twig' %}
 
-    <div class="list-group">
-        {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDERS') %}
-            <a href="{{ path('coreshop_customer_orders') }}" title="{{ 'coreshop.ui.orders'|trans }}" class="list-group-item">
-                <i class="fa fa-list-ol"></i>
-                <span>{{ 'coreshop.ui.order_history_and_details'|trans }}</span>
-            </a>
-        {% endif %}
+    <div class="row">
+        {% include '@CoreShopFrontend/Customer/_sidebar.html.twig' %}
 
-        {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESSES') %}
-            <a href="{{ path('coreshop_customer_addresses') }}" title="{{ 'coreshop.ui.addresses'|trans }}" class="list-group-item">
-                <i class="fa fa-building"></i>
-                <span>{{ 'coreshop.ui.addresses'|trans }}</span>
-            </a>
-        {% endif %}
-
-        {% if is_granted('CORESHOP_CUSTOMER_PROFILE_SETTINGS') %}
-            <a href="{{ path('coreshop_customer_settings') }}" title="{{ 'coreshop.ui.personal_information'|trans }}" class="list-group-item">
-                <i class="fa fa-user"></i>
-                <span>{{ 'coreshop.ui.personal_information'|trans }}</span>
-            </a>
-        {% endif %}
-
-        {% if is_granted('CORESHOP_CUSTOMER_PROFILE_CHANGE_PASSWORD') %}
-            <a href="{{ path('coreshop_customer_change_password') }}" title="{{ 'coreshop.ui.change_password'|trans }}" class="list-group-item">
-                <i class="fa fa-lock"></i>
-                <span>{{ 'coreshop.ui.change_password'|trans }}</span>
-            </a>
-        {% endif %}
+        <div class="col-12 col-lg-9">
+            <div class="row">
+                {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDERS') %}
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="bg-light">
+                        <div class="icon-card bg-light border-0 p-3 card">
+                            <div class="card-body">
+                                <div class="card-title h3 d-flex align-items-center text-decoration-none text-body gap-3">
+                                    <i class="bi bi-list-ul text-red"></i>
+                                    {{ 'coreshop.ui.order_history_and_details'|trans }}
+                                </div>
+                                <div class="card-body--details" style="margin-left: calc(60px);">
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Aenean massa.
+                                    </p>
+                                    <div class="d-inline-flex">
+                                        <a class="btn btn-primary d-flex align-items-center justify-content-center"
+                                                target="_self" href="{{ path('coreshop_customer_orders') }}">Check order
+                                            history
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESSES') %}
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="bg-light">
+                        <div class="icon-card bg-light border-0 p-3 card">
+                            <div class="card-body">
+                                <div class="card-title h3 d-flex align-items-center text-decoration-none text-body gap-3">
+                                    <i class="bi bi-person-workspace text-red"></i>
+                                    {{ 'coreshop.ui.addresses'|trans }}
+                                </div>
+                                <div class="card-body--details" style="margin-left: calc(60px);">
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Aenean massa.
+                                    </p>
+                                    <div class="d-inline-flex">
+                                        <a class="btn btn-primary  d-flex align-items-center justify-content-center"
+                                                target="_self" href="{{ path('coreshop_customer_addresses') }}">Check
+                                            addresses</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if is_granted('CORESHOP_CUSTOMER_PROFILE_SETTINGS') %}
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="bg-light">
+                        <div class="icon-card bg-light border-0 p-3 card">
+                            <div class="card-body">
+                                <div class="card-title h3 d-flex align-items-center text-decoration-none text-body gap-3">
+                                    <i class="bi bi-person-lines-fill text-red"></i>
+                                    {{ 'coreshop.ui.personal_information'|trans }}
+                                </div>
+                                <div class="card-body--details" style="margin-left: calc(60px);"><p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Aenean massa.</p>
+                                    <div class="d-inline-flex"><a
+                                                class="btn btn-primary  d-flex align-items-center justify-content-center  "
+                                                 target="_self" href="{{ path('coreshop_customer_settings') }}">Check
+                                            information</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if is_granted('CORESHOP_CUSTOMER_PROFILE_CHANGE_PASSWORD') %}
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="bg-light">
+                        <div class="icon-card bg-light border-0 p-3 card">
+                            <div class="card-body">
+                                <div class="card-title h3 d-flex align-items-center text-decoration-none text-body gap-3">
+                                    <i class="bi bi-lock-fill text-red"></i>
+                                    {{ 'coreshop.ui.change_password'|trans }}
+                                </div>
+                                <div class="card-body--details" style="margin-left: calc(60px);"><p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Aenean massa.</p>
+                                    <div class="d-inline-flex">
+                                        <a class="btn btn-primary  d-flex align-items-center justify-content-center  "
+                                                 target="_self" href="{{ path('coreshop_customer_change_password') }}">Change
+                                            password
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+
+
 </div>
 {% endblock %}

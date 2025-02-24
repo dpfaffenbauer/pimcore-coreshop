@@ -1,0 +1,59 @@
+@import 'breakpoints';
+@import 'mixins';
+
+.cartprogress {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+        position: relative;
+        text-decoration: none;
+        text-align: center;
+        line-height: 1.2;
+        font-weight: var(--coreshop-font-500);
+        font-family: var(--coreshop-font-family-heading), serif;
+        font-size: rem(14px);
+
+        .link-description {
+            display: none;
+
+            @media(min-width: $md) {
+                display: block;
+            }
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            position: relative;
+            width: rem(30px);
+            height: rem(30px);
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid var(--coreshop-primary);
+            border-radius: 100%;
+            margin-bottom: rem(8px);
+        }
+
+        &.completed {     
+            &::before {
+                background-color: var(--coreshop-primary);
+            }
+        }
+
+        &.active {
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: rem(8px);
+                left: 50%;
+                transform: translate(-50%, -1px);
+                width: rem(16px);
+                height: rem(16px);
+                border-radius: 100%;
+                background-color: var(--coreshop-primary);
+            }
+        }
+    }
+}

@@ -32,6 +32,12 @@ services:
         tags:
             - { name: twig.extension }
 
+    CoreShop\Bundle\FrontendBundle\Twig\WishlistExtension:
+        arguments:
+            $wishlistContext: '@coreshop.context.storage_list.wishlist'
+        tags:
+            - { name: twig.extension }
+
     CoreShop\Bundle\FrontendBundle\Twig\MergeRecursiveExtension:
         tags:
             - { name: twig.extension }
@@ -39,3 +45,9 @@ services:
     CoreShop\Bundle\FrontendBundle\Twig\TypeCastExtension:
         tags:
             - { name: twig.extension }
+
+    CoreShop\Bundle\FrontendBundle\Controller\Extend\CartWidgetController:
+        arguments:
+            $shopperContext: '@CoreShop\Component\Core\Context\ShopperContextInterface'
+            $container: '@service_container'
+        tags: [ 'controller.service_arguments' ]

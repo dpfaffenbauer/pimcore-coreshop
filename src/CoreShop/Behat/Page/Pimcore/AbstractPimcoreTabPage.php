@@ -76,7 +76,7 @@ abstract class AbstractPimcoreTabPage implements PimcoreTabPageInterface
         $this->session->executeScript(sprintf('Ext.getCmp(\'%s\').destroy()', $id));
     }
 
-    protected function extjsComponentQuery(string $query, string $componentId = null): NodeElement
+    protected function extjsComponentQuery(string $query, ?string $componentId = null): NodeElement
     {
         $js = "Elements.DOMPath.xPath(Ext.getCmp('" . ($componentId ?? $this->getLayoutId()) . "').query('" . $query . "')[0].el.dom, true)";
 

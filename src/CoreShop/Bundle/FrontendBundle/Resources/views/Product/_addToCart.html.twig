@@ -1,23 +1,23 @@
 {% if form %}
-{% form_theme form '@CoreShopFrontend/Form/theme.html.twig' %}
-{{ form_start(form, {'action': path('coreshop_cart_add', {'product': product.id|coreshop_string})}) }}
+    {% form_theme form '@CoreShopFrontend/Form/theme.html.twig' %}
+    {{ form_start(form, {'action': path('coreshop_cart_add', {'product': product.id|coreshop_string})}) }}
     {{ form_errors(form) }}
 
-    <div class="input-group">
+    <div class="input-group gap-2">
         {% set relation_id = random() %}
         {{ form_row(form.cartItem.quantity, coreshop_test_form_attribute('quantity')|coreshop_merge_recursive({label: false, attr: {class: 'form-control cart-item-quantity cs-unit-input', 'data-cs-unit-identifier': relation_id }})) }}
 
         {% if form.cartItem.unitDefinition is defined %}
-            {{ form_row(form.cartItem.unitDefinition, coreshop_test_form_attribute('unit')|coreshop_merge_recursive({label: false, row_attr: {class: 'ml-1'}, attr: {class: 'form-control cs-unit-selector', 'data-cs-unit-identifier': relation_id}})) }}
+            {{ form_row(form.cartItem.unitDefinition, coreshop_test_form_attribute('unit')|coreshop_merge_recursive({label: false, attr: {class: 'form-control form-select cs-unit-selector', 'data-cs-unit-identifier': relation_id}})) }}
         {% endif %}
 
-        <div class="input-group-append ml-2">
-            <button type="submit" class="btn btn-cart mt-0" rel="nofollow" {{ coreshop_test_html_attribute('add-to-cart') }}>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-cart btn-primary" rel="nofollow" {{ coreshop_test_html_attribute('add-to-cart') }}>
                 {{ 'coreshop.ui.add_to_cart'|trans }}
             </button>
         </div>
     </div>
 
     {{ form_row(form._token) }}
-{{ form_end(form, {'render_rest': false}) }}
+    {{ form_end(form, {'render_rest': false}) }}
 {% endif %}

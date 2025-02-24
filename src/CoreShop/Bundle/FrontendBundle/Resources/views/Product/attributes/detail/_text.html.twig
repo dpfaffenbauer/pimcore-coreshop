@@ -1,8 +1,8 @@
-<div class="attribute-text">
+<div class="attribute-text gap-2">
     {% for attribute in group.attributes|sort((a, b) => a.attribute.sorting <=> b.attribute.sorting) %}
-        <div class="attribute-text__item">
+        <div class="attribute-text__item ">
             <input disabled data-group="{{ group.group.id }}" type="radio" class="btn-check" name="attributes[{{ group.group.id }}]" id="attribute-{{ attribute.attribute.id }}" value="{{ attribute.attribute.id }}" autocomplete="off" {{ coreshop_test_html_attribute('attribute', attribute.attribute.id) }}>
-            <label {{ coreshop_test_html_attribute('attribute-label', attribute.attribute.id) }} class="btn btn-sm btn-outline-secondary" for="attribute-{{ attribute.attribute.id }}">{{ attribute.attribute.name }}</label>
+            <label {{ coreshop_test_html_attribute('attribute-label', attribute.attribute.id) }} class="btn btn-outline-secondary" for="attribute-{{ attribute.attribute.id }}">{{ attribute.attribute.name }}</label>
         </div>
     {% endfor %}
 </div>

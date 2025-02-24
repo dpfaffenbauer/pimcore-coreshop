@@ -316,7 +316,7 @@ class CheckoutController extends FrontendController
         return $this->container->get('coreshop.checkout_manager.factory');
     }
 
-    protected function addEventFlash(string $type, string $message = null, array $parameters = []): void
+    protected function addEventFlash(string $type, ?string $message = null, array $parameters = []): void
     {
         if (!$message) {
             return;

@@ -1,7 +1,9 @@
 {% extends '@CoreShopFrontend/layout.html.twig' %}
 
 {% block content %}
-    <p {{ coreshop_test_html_attribute('order-token', order.token) }}>{{ 'coreshop.ui.checkout.thank_you'|trans }}</p>
+    <div class="alert alert-success" role="alert">
+        <h6 class="mb-0" {{ coreshop_test_html_attribute('order-token', order.token) }}>{{ 'coreshop.ui.checkout.thank_you'|trans }}</h6>
+    </div>
 
     {% include '@CoreShopFrontend/Common/order_detail.html.twig' with {order: order} only %}
 {% endblock %}

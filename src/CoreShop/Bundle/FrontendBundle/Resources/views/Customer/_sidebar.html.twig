@@ -1,0 +1,48 @@
+<div class="col-12 col-lg-3 mb-3">
+    <div class="border border-1">
+        <div class="bg-primary text-white py-2 px-3">
+            <div {{ coreshop_test_html_attribute('customer-information') }}>
+                <div class="h5 mb-0">{{ customer.firstname }} {{ customer.lastname }}</div>
+                <div>({{ customer.email }})</div>
+            </div>
+        </div>
+        <div class="p-3">
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDERS') %}
+            <div class="mb-4">
+                <a class="d-flex align-items-center text-decoration-none text-body gap-2" target="_self"
+                   href="{{ path('coreshop_customer_orders') }}">
+                    <i class="bi bi-list-ul text-primary"></i>
+                    <span class="link-description">{{ 'coreshop.ui.order_history_and_details'|trans }}</span>
+                </a>
+            </div>
+            {% endif %}
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESSES') %}
+            <div class="mb-4">
+                <a class="d-flex align-items-center text-decoration-none text-body gap-2" target="_self"
+                   href="{{ path('coreshop_customer_addresses') }}">
+                    <i class="bi bi-person-workspace text-primary"></i>
+                    <span class="link-description">{{ 'coreshop.ui.addresses'|trans }}</span>
+                </a>
+            </div>
+            {% endif %}
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_SETTINGS') %}
+            <div class="mb-4">
+                <a class="d-flex align-items-center text-decoration-none text-body gap-2" target="_self"
+                   href="{{ path('coreshop_customer_settings') }}">
+                    <i class="bi bi-person-lines-fill text-primary"></i>
+                    <span class="link-description">{{ 'coreshop.ui.personal_information'|trans }}</span>
+                </a>
+            </div>
+            {% endif %}
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_CHANGE_PASSWORD') %}
+            <div>
+                <a class="d-flex align-items-center text-decoration-none text-body gap-2" target="_self"
+                   href="{{ path('coreshop_customer_change_password') }}">
+                    <i class="bi bi-lock-fill text-primary"></i>
+                    <span class="link-description">{{ 'coreshop.ui.change_password'|trans }}</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

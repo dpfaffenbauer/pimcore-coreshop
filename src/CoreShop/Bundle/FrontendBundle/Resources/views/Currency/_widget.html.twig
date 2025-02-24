@@ -1,7 +1,8 @@
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {{ coreshop_test_html_attribute('currency-selector') }}>
-        {{ 'coreshop.ui.currency'|trans }}
+<li class="nav-item dropdown me-2 me-lg-1">
+    <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {{ coreshop_test_html_attribute('currency-selector') }}>
+        {{ coreshop.currency.symbol }} <small>({{ coreshop.currency.isoCode }})</small>
     </a>
+
     <div class="dropdown-menu" aria-labelledby="currencyDropdown" >
         {% for currency in currencies %}
             <a class="dropdown-item" href="{{ path('coreshop_switch_currency', {'currencyCode': currency.isoCode}) }}" {{ coreshop_test_html_attribute('currency-selector-code', currency.isoCode) }}>

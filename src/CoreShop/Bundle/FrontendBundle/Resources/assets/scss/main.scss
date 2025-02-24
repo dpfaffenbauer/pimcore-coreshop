@@ -1,0 +1,65 @@
+@import 'mixins.scss';
+
+html,
+body {
+    height: 100%;
+}
+
+main {
+    min-height: calc(100vh - var(--coreshop-header-height));
+}
+
+section {
+    padding-bottom: rem(48px);
+}
+
+.flag-border {
+    border: 1px solid var(--bs-white);
+}
+
+.bg-cover {
+    background-size: cover;
+}
+
+.border-radius-100 {
+    border-radius: 100%;
+}
+
+.text-red {
+    color: var(--bs-primary);
+}
+
+.price-new {
+    font-size: rem(24px);
+    line-height: 1;
+}
+
+.bi {
+    line-height: 1;
+}
+
+.list-group {
+    --bs-list-group-active-color: var(--bs-primary);
+    --bs-list-group-active-bg: transparent;
+    --bs-list-group-active-border-color: transparent;
+}
+
+.loader {
+    width: rem(48px);
+    height: rem(48px);
+    border: 5px solid #FFF;
+    border-bottom-color: var(--coreshop-primary);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

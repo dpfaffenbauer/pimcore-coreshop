@@ -28,7 +28,7 @@ final class ConditionRenderer implements ConditionRendererInterface
     ) {
     }
 
-    public function render(WorkerInterface $worker, ConditionInterface $condition, string $prefix = null): mixed
+    public function render(WorkerInterface $worker, ConditionInterface $condition, ?string $prefix = null): mixed
     {
         /**
          * @var DynamicRendererInterface $renderer

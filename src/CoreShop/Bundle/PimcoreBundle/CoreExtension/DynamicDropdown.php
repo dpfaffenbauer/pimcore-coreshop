@@ -35,7 +35,7 @@ class DynamicDropdown extends DataObject\ClassDefinition\Data\ManyToOneRelation
         return $this->fieldtype;
     }
 
-    public function getDataFromEditmode(mixed $data, DataObject\Concrete $object = null, array $params = []): null|\Pimcore\Model\Asset|DataObject\AbstractObject|\Pimcore\Model\Document
+    public function getDataFromEditmode(mixed $data, ?DataObject\Concrete $object = null, array $params = []): null|\Pimcore\Model\Asset|DataObject\AbstractObject|\Pimcore\Model\Document
     {
         return Element\Service::getElementById('object', $data);
     }

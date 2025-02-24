@@ -5,77 +5,66 @@
 
     {% include '@CoreShopFrontend/Common/flash_messages.html.twig' %}
 
+    <h3>{{ 'coreshop.ui.wishlist'|trans }}</h3>
+
     {% if share_link is defined and share_link %}
         <div class="input-group mb-3">
             <input {{ coreshop_test_html_attribute('share-wishlist-link') }} type="text" class="form-control" readonly="readonly" id="link" value="{{ share_link }}" >
-            <div class="input-group-append">
-                <button class="btn btn-outline-success copy-to-clipboard" data-copied-text="{{ 'coreshop.ui.copied'|trans }}" data-target="link" type="button" id="button-addon2">{{ 'coreshop.ui.copy'|trans }}</button>
-            </div>
+            <button class="d-flex align-items-center justify-content-center with-icon  btn btn-secondary input-group-text  copy-to-clipboard" data-copied-text="{{ 'coreshop.ui.copied'|trans }}" data-bs-target="link" type="button" id="button-addon2">{{ 'coreshop.ui.copy'|trans }}</button>
         </div>
 
     {% endif %}
 
-    {% if storage_list.hasItems %}
-    <div class="table-responsive shopping-wishlist-table">
-        <table class="table table-bordered" {{ coreshop_test_html_attribute('wishlist-items') }}>
-            <thead>
-            <tr>
-                <td class="text-center">
-                    {{ 'coreshop.ui.image'|trans }}
-                </td>
-                <td class="text-center">
-                    {{ 'coreshop.ui.product_details'|trans }}
-                </td>
-                <td class="text-center">
-                    {{ 'coreshop.ui.price'|trans }}
-                </td>
-                {% if not is_shared_list %}
-                <td class="text-center">
 
-                </td>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in storage_list.items %}
+    {% if storage_list.hasItems %}
+        <div class="row" {{ coreshop_test_html_attribute('wishlist-items') }}>
+        {% for item in storage_list.items %}
+            <div class="col-12 col-xl-6 mb-3" {{ coreshop_test_html_attribute('wishlist-item-row', item.product.name) }}>
                 {% set product = item.product %}
                 {% set productUrl = pimcore_object_path(product) %}
-                <tr class="shopping-wishlist-item" {{ coreshop_test_html_attribute('wishlist-item-row', product.name) }}>
-                    <td class="text-center">
-                        {% if item.product and item.product.image is pimcore_asset_image %}
-                            <a class="" href="{{ productUrl }}">
-                                {{ item.product.image|pimcore_image_thumbnail_html('coreshop_productCart', {'imgAttributes': {'class': 'img-fluid'}, 'alt': item.product.name, 'title': item.product.name}) }}
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td class="text-center">
-                        <a href="{{ productUrl }}" {{ coreshop_test_html_attribute('wishlist-item-name', product.name) }}>
-                            {{ product.name }}
-                        </a>
-                    </td>
-                    <td class="text-right wishlist-item-price">
-                        {{ currency.getPrice(product) }}
-                    </td>
-                    {% if not is_shared_list %}
-                    <td class="text-center">
-                        <a
-                                href="{{ path('coreshop_wishlist_remove', {item: item.id|coreshop_string}) }}"
-                                title="{{ 'coreshop.ui.remove'|trans }}"
-                                class="btn btn-danger tool-tip"
-                                data-id="{{ item.id }}"
-                                {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
-                        >
-                            <i class="fa fa-times-circle"></i>
-                        </a>
-                    </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                <div class="card p-2">
+                    <div class="shopping-cart-item-info">
+
+                            <div class="flex-sm-row gap-3 layout4 card border-0">
+                                {% if item.product and item.product.image is pimcore_asset_image %}
+                                    <a class="text-decoration-none" href="{{ productUrl }}">
+                                        {{ item.product.image|pimcore_image_thumbnail_html('coreshop_productCartPreview', {'imgAttributes': {'class': 'img-fluid'}, 'alt': product.name, 'title': product.name}) }}
+                                    </a>
+                                {% endif %}
+                                <div class="p-0 card-body">
+                                    <div class="d-flex flex-column mt-md-1 h-100">
+                                        <h5 class="mb-1 card-title">
+                                            <a class="text-decoration-none" href="{{ productUrl }}" {{ coreshop_test_html_attribute('wishlist-item-name', product.name) }}>{{ product.name }}</a>
+                                        </h5>
+                                        <div class="d-flex justify-content-between align-items-end mt-auto">
+                                            <div class="fs-3">
+                                                {{ currency.getPrice(product) }}
+                                            </div>
+                                            <div>
+                                                {% if not is_shared_list %}
+                                                    <a
+                                                            href="{{ path('coreshop_wishlist_remove', {item: item.id|coreshop_string}) }}"
+                                                            title="{{ 'coreshop.ui.remove'|trans }}"
+                                                            class="btn btn-link pb-0"
+                                                            data-id="{{ item.id }}"
+                                                            {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
+                                                    >
+                                                        <i class="bi bi-trash me-2"></i> {{ 'coreshop.ui.remove'|trans }}
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     {% else %}
         <p {{ coreshop_test_html_attribute('wishlist-empty') }}>{{ 'coreshop.ui.wishlist_empty'|trans }}</p>
     {% endif %}
-    <br/>
 {% endblock %}

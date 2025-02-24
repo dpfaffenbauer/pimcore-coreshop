@@ -3,9 +3,9 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <div class="card card-smart">
-            <div class="card-header">
-                <h3 class="card-title">{{ 'coreshop.ui.login'|trans }}</h3>
+        <div class="card bg-light border-0">
+            <div class="px-3 pt-3 border-0">
+                <h3 class="mb-0">{{ 'coreshop.ui.login'|trans }}</h3>
             </div>
             <div class="card-body">
                 {% if last_error %}
@@ -29,23 +29,27 @@
                         <input type="hidden" name="_failure_path" value="{{ failure }}" />
                     {% endif %}
 
-                    <button type="submit" class="btn-success btn submit button" {{ coreshop_test_html_attribute('login-button') }}>{{ 'coreshop.ui.login'|trans }}</button>
+                    <div class="d-flex align-items-end justify-content-between">
+                        <a href="{{ path('coreshop_customer_password_reset_request') }}">{{ 'coreshop.ui.reset_password'|trans }}</a>
 
-                    <a class="pull-right" href="{{ path('coreshop_customer_password_reset_request') }}">{{ 'coreshop.ui.reset_password'|trans }}</a>
+                        <button type="submit" class="btn-primary btn submit button" {{ coreshop_test_html_attribute('login-button') }}>{{ 'coreshop.ui.login'|trans }} <i class="bi bi-box-arrow-in-right ms-1"></i> </button>
+                    </div>
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="card card-smart">
-            <div class="card-header">
-                <h3 class="card-title">{{ 'coreshop.ui.create_new_account'|trans }}</h3>
+        <div class="card bg-light border-0">
+            <div class="px-3 pt-3 border-0">
+                <h3 class="mb-0">{{ 'coreshop.ui.create_new_account'|trans }}</h3>
             </div>
             <div class="card-body">
                 <p>
                     {{ 'coreshop.ui.registration_text'|trans }}
                 </p>
-                <a href="{{ path('coreshop_register', {'_redirect': target}) }}" class="btn btn-success">{{ 'coreshop.ui.register'|trans }}</a>
+                <div class="d-flex">
+                    <a href="{{ path('coreshop_register', {'_redirect': target}) }}" class="btn btn-primary ms-auto">{{ 'coreshop.ui.register'|trans }} <i class="bi bi-box-arrow-in-right ms-1"></i></a>
+                </div>
             </div>
         </div>
     </div>

@@ -312,7 +312,7 @@ final class ProductPriceRuleContext implements Context
     public function theProductPriceRuleHasAProductCondition(
         ProductPriceRuleInterface $rule,
         ProductInterface $product,
-        ProductInterface $product2 = null,
+        ?ProductInterface $product2 = null,
     ): void {
         $this->assertConditionForm(ProductsConfigurationType::class, 'products');
 
@@ -338,7 +338,7 @@ final class ProductPriceRuleContext implements Context
     public function theProductPriceRuleHasAProductConditionWhichIncludesVariants(
         ProductPriceRuleInterface $rule,
         ProductInterface $product,
-        ProductInterface $product2 = null,
+        ?ProductInterface $product2 = null,
     ): void {
         $this->assertConditionForm(ProductsConfigurationType::class, 'products');
 
@@ -474,7 +474,7 @@ final class ProductPriceRuleContext implements Context
      * @Given /^the (price rule) has a condition not combinable with (cart rule "[^"]+") and (cart rule "[^"]+")$/
      * @Given /^the (price rule "[^"]+") has a condition not combinable with (cart rule "[^"]+") and (cart rule "[^"]+")$/
      */
-    public function theCartPriceRuleHasANotCombinableCondition(ProductPriceRuleInterface $rule, CartPriceRuleInterface $notCombinable, CartPriceRuleInterface $notCombinable2 = null): void
+    public function theCartPriceRuleHasANotCombinableCondition(ProductPriceRuleInterface $rule, CartPriceRuleInterface $notCombinable, ?CartPriceRuleInterface $notCombinable2 = null): void
     {
         $this->assertConditionForm(NotCombinableConfigurationType::class, 'not_combinable_with_cart_price_voucher_rule');
 

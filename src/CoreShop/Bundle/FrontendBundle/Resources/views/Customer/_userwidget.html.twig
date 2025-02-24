@@ -1,0 +1,30 @@
+{% if app.user and app.user.customer %}
+    {% set customer = app.user.customer %}
+    <div class="dropdown">
+        <button type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                class="dropdown-toggle btn btn-link text-body">
+            <i class="bi bi-person"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownUser">
+            <div class="px-3 mb-2 text-nowrap h6">Hi, {{ customer.firstname }} {{ customer.lastname }}</div>
+            <a href="{{ path('coreshop_customer_profile') }}" data-rr-ui-dropdown-item="" class="dropdown-item">{{ 'coreshop.ui.profile'|trans }}</a>
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ORDERS') %}
+                <a href="{{ path('coreshop_customer_orders') }}"  class="ms-2 dropdown-item">{{ 'coreshop.ui.order_history_and_details'|trans }}</a>
+            {% endif %}
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_ADDRESSES') %}
+                <a href="{{ path('coreshop_customer_addresses') }}" class="ms-2 dropdown-item">{{ 'coreshop.ui.addresses'|trans }}</a>
+            {% endif %}
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_SETTINGS') %}
+                <a href="{{ path('coreshop_customer_settings') }}" class="ms-2 dropdown-item">{{ 'coreshop.ui.personal_information'|trans }}</a>
+            {% endif %}
+            {% if is_granted('CORESHOP_CUSTOMER_PROFILE_CHANGE_PASSWORD') %}
+                <a href="{{ path('coreshop_customer_change_password') }}" class="ms-2 dropdown-item">{{ 'coreshop.ui.change_password'|trans }}</a>
+            {% endif %}
+            <div class="px-3 mt-3">
+                <a href="{{ path('coreshop_logout') }}" {{ coreshop_test_html_attribute('logout-button') }} class="d-flex align-items-center justify-content-center btn btn-secondary">
+                    {{ 'coreshop.ui.logout'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endif %}

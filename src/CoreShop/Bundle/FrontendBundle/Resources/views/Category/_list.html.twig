@@ -1,17 +1,41 @@
 {% import "@CoreShopFrontend/Common/Macro/product_price.html.twig" as product_price %}
 
 <div class="col-12 mb-4">
-    <div class="product-col list clearfix">
+    <div class="product-category product-col list clearfix">
         <div class="row" {{ coreshop_test_html_attribute('category-products') }}>
             <div class="col-12 col-sm-3">
-                <div class="image">
+                <div class="position-relative image">
                     {% if product.image is pimcore_asset_image %}
                         <a href="{{ pimcore_object_path(product) }}" >
                             {{ product.image|pimcore_image_thumbnail_html("coreshop_productList", {"imgAttributes": {"class": "img-fluid"}}) }}
                         </a>
                     {% endif %}
+                    {% if coreshop_add_to_cart_available(product) and coreshop_inventory_is_available(product) and is_granted('CORESHOP_CART') and is_granted('CORESHOP_CART_ADD_ITEM')  %}
+                        {%  if not coreshop_wishlist_product_in(product) %}
+                            <div class="position-absolute top-0 end-0 pt-2 pe-1 btn-wishlist-wrapper-white">
+                                {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
+                            </div>
+                        {%  else %}
+                            <div class="position-absolute top-0 end-0 pt-2 pe-1 btn-wishlist-wrapper-white">
+                                {% set wishlist_product_id = coreshop_wishlist_product_id(product) %}
+                                {% if wishlist_product_id %}
+                                    <a
+                                            href="{{ path('coreshop_wishlist_remove', {item: wishlist_product_id|coreshop_string}) }}"
+                                            title="{{ 'coreshop.ui.remove'|trans }}"
+                                            class="btn btn-link pb-0"
+                                            data-id="{{ wishlist_product_id }}"
+                                            {{ coreshop_test_html_attribute('wishlist-remove-button', product.name) }}
+                                    >
+                                        <i class="bi bi-heart-fill"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {%  endif %}
+                    {%  endif %}
+
                 </div>
             </div>
+
             <div class="col-12 col-sm-9">
                 <div class="caption">
                     <h4>
@@ -20,24 +44,24 @@
                     <div class="description">
                         {{ product.shortDescription }}
                     </div>
+                    <div class="mt-3">
+                        {% set attributeGroups = coreshop_variant_attribute_list_variants(product, true)|sort((a, b) => a.group.sorting <=> b.group.sorting) %}
+                        {% for attributeGroup in attributeGroups %}
+                            {% if attributeGroup.type == "Pimcore\\Model\\DataObject\\CoreShopAttributeColor" %}
+                                {% include '@CoreShopFrontend/Product/attributes/detail/_color.html.twig' with { group: attributeGroup } %}
+                            {% else %}
+                                {% include '@CoreShopFrontend/Product/attributes/detail/_text.html.twig' with { group: attributeGroup } %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
 
-                    {% set attributeGroups = coreshop_variant_attribute_list_variants(product, true)|sort((a, b) => a.group.sorting <=> b.group.sorting) %}
-                    {% for attributeGroup in attributeGroups %}
-                        {% if attributeGroup.type == "Pimcore\\Model\\DataObject\\CoreShopAttributeColor" %}
-                            {% include '@CoreShopFrontend/Product/attributes/detail/_color.html.twig' with { group: attributeGroup } %}
-                        {% else %}
-                            {% include '@CoreShopFrontend/Product/attributes/detail/_text.html.twig' with { group: attributeGroup } %}
-                        {% endif %}
-                    {% endfor %}
-
-                    <div class="price">
+                    <div class="price py-3">
                         {{ product_price.display_product_price(product) }}
                     </div>
 
                     {% if coreshop_add_to_cart_available(product) and is_granted('CORESHOP_CART') and is_granted('CORESHOP_CART_ADD_ITEM') %}
                         <div class="cart-button btn-group">
                             {% if coreshop_inventory_is_available(product) %}
-                                {{ render(url('coreshop_partial_wishlist_add', {'product': product.id|coreshop_string})) }}
                                 {{ render(url('coreshop_partial_cart_add', {'product': product.id|coreshop_string})) }}
                             {% endif %}
                         </div>

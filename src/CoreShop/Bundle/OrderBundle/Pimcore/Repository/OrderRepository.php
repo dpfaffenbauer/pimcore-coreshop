@@ -34,7 +34,7 @@ class OrderRepository extends PimcoreRepository implements OrderRepositoryInterf
     public function findLatestByStoreAndCustomer(
         StoreInterface $store,
         CustomerInterface $customer,
-        string $name = null,
+        ?string $name = null,
     ): ?StorageListInterface {
         return $this->findLatestCartByStoreAndCustomer($store, $customer);
     }

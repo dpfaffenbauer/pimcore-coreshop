@@ -23,7 +23,7 @@ use CoreShop\Component\Rule\Model\RuleInterface;
 
 interface PaymentProviderRuleInterface extends RuleInterface, TranslatableInterface
 {
-    public function getLabel(string $language = null);
+    public function getLabel(?string $language = null);
 
-    public function setLabel(string $label, string $language = null);
+    public function setLabel(string $label, ?string $language = null);
 }

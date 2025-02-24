@@ -75,7 +75,7 @@ class ProductUnitDefinition extends AbstractResource implements ProductUnitDefin
         return $this->conversionRate;
     }
 
-    public function setConversionRate(float $conversionRate = null)
+    public function setConversionRate(?float $conversionRate = null)
     {
         $this->conversionRate = $conversionRate;
     }
@@ -95,7 +95,7 @@ class ProductUnitDefinition extends AbstractResource implements ProductUnitDefin
         return $this->productUnitDefinitions;
     }
 
-    public function setProductUnitDefinitions(ProductUnitDefinitionsInterface $productUnitDefinitions = null)
+    public function setProductUnitDefinitions(?ProductUnitDefinitionsInterface $productUnitDefinitions = null)
     {
         $this->productUnitDefinitions = $productUnitDefinitions;
     }

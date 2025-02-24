@@ -22,5 +22,5 @@ use CoreShop\Component\Index\Worker\WorkerInterface;
 
 interface ConditionRendererInterface
 {
-    public function render(WorkerInterface $worker, ConditionInterface $condition, string $prefix = null): mixed;
+    public function render(WorkerInterface $worker, ConditionInterface $condition, ?string $prefix = null): mixed;
 }

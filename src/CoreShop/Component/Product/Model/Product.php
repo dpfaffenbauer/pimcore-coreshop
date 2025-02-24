@@ -50,7 +50,7 @@ abstract class Product extends AbstractPimcoreModel implements ProductInterface
         return $this->hasUnitDefinitions() && $this->getUnitDefinitions()->getAdditionalUnitDefinitions()->count() > 0;
     }
 
-    public function getNameForSlug(string $language = null): ?string
+    public function getNameForSlug(?string $language = null): ?string
     {
         return $this->getName($language);
     }

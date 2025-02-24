@@ -1,0 +1,22 @@
+.header-top {
+    .navbar {
+        --bs-navbar-color: var(--bs-white);
+        --bs-navbar-hover-color: var(--bs-gray-200);
+        --bs-navbar-active-color: var(--bs-gray-200);
+        --bs-navbar-padding-x: 0;
+        --bs-navbar-padding-y: 0;
+    }
+
+    background-color: var(--bs-primary);
+
+    .navbar-expand-lg .navbar-nav .dropdown-menu {
+        position: absolute;
+        left: auto;
+        right: 0;
+    }
+
+    .navbar-toggler {
+        border: 0;
+        box-shadow: none;
+    }
+}

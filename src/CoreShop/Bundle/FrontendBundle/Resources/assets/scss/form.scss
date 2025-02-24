@@ -1,0 +1,70 @@
+@import "mixins";
+
+.form-group {
+    margin-bottom: 0.875rem;
+}
+
+.form-control-sm {
+    border-color: var(--coreshop-border-color);
+}
+
+.col-form-label {
+    font-family: var(--coreshop-font-family-heading), serif;
+    font-size: 1.25rem;
+    margin-bottom: 0.875rem;
+}
+
+.was-validated .form-control:valid,
+.form-control.is-valid {
+    background-image: none;
+    padding-right: 0.75rem;
+}
+.form-check-input {
+    &:focus {
+        @include box-shadow-opacity(0, 0, 0, 0.15rem, var(--coreshop-primary-rgb), 0.25);
+        border-color: var(--coreshop-primary);
+    }
+
+    &:checked {
+        background-color: var(--coreshop-primary);
+        border-color: var(--coreshop-primary);
+    }
+}
+
+.bootstrap-touchspin {
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+}
+
+.cart-button {
+    .bootstrap-touchspin {
+        max-width: 7rem;
+
+        .input-group-btn-vertical .btn {
+            width: rem(24px);
+            right: 0;
+            left: auto;
+            display: block;
+            border-radius: 0;
+
+            &.bootstrap-touchspin-up {
+                border-top-right-radius: 4px;
+            }
+
+            &.bootstrap-touchspin-down {
+                border-bottom-right-radius: 4px;
+            }
+        }
+    }
+}
+
+.form-error-icon {
+    color: var(--bs-form-invalid-color);
+}

@@ -1,0 +1,86 @@
+{% import '@CoreShopFrontend/Common/Macro/currency.html.twig' as currency %}
+
+
+    <div class="shopping-cart-item mb-3">
+        <div class="d-md-flex justify-content-md-between gap-md-3 mb-2">
+            {% if item.product %}
+                {% set productUrl = pimcore_object_path(item.product) %}
+                <div class="shopping-cart-item-info">
+                    <a class="text-decoration-none" href="{{ productUrl }}">
+                        <div class="flex-row gap-3 mb-2 layout4 card border-0">
+                            {% if item.product and item.product.image is pimcore_asset_image %}
+                                {{ item.product.image|pimcore_image_thumbnail_html('coreshop_productCartPreview', {'imgAttributes': {'class': 'img-fluid'}, 'alt': item.product.name, 'title': item.product.name}) }}
+                            {% endif %}
+
+                            <div class="p-0 card-body">
+                                <div class="mt-md-1">
+                                    <h6 class="mb-1 card-title">
+                                        {{ item.name }}
+                                    </h6>
+                                    {% if item.isGiftItem %}
+                                        <br/><span>{{ 'coreshop.ui.gift_item'|trans }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+            {% if item %}
+                <div class="d-flex justify-content-between gap-3 gap-md-5 mb-3">
+                <div class="text-right cart-item-price">
+                    {% set price = item.itemPrice %}
+                    {% set discount = item.itemDiscount %}
+                    {% set discountPrice = item.itemDiscountPrice %}
+                    {% set retailPrice = item.itemRetailPrice %}
+
+                    <div><small>Each:</small></div>
+                    <span class="price-new">{{ currency.convertAndFormat(price) }}</span>
+                    {% if price < retailPrice %}
+                        {% if discountPrice > 0 %}
+                            <span class="price-old order-2 text-decoration-line-through text-red">{{ currency.convertAndFormat(retailPrice) }}</span>
+                        {% endif %}
+                        {% if discount < 0 %}
+                            <span class="price-discount">(-{{ currency.convertAndFormat(discount) }})</span>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+                <div class="text-right cart-item-total-price">
+                    <div><small>Total:</small></div>
+                    <div class="price-new">
+                        {% if item.discount < 0 %}
+                            <span>({{ currency.convertAndFormat(item.discount) }})</span>
+                        {% endif %}
+
+                        {{ currency.convertAndFormat(item.total) }}
+                    </div>
+
+                    {%  set with_tax = coreshop_display_with_tax(coreshop.context) %}
+                    {% if with_tax %}
+                        <span class="order-3"><small>{{ 'coreshop.ui.inc_vat'|trans }}</small></span>
+                    {% else %}
+                        <span class="order-3"><small>{{ 'coreshop.ui.excl_vat'|trans }}</small></span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% if item %}
+        <div class="d-flex justify-content-end gap-3">
+            <div class="text-center">
+                {% if is_granted('CORESHOP_CART_REMOVE_ITEM') and not btnremove %}
+                    <a
+                            href="{{ path('coreshop_cart_remove', {cartItem: item.id|coreshop_string}) }}"
+                            title="{{ 'coreshop.ui.remove'|trans }}"
+                            class="btn btn-link"
+                            data-id="{{ item.id }}"
+                            {{ coreshop_test_html_attribute('cart-remove-button', item.name) }}
+                    >
+                        <i class="bi bi-trash me-2"></i> Remove
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>

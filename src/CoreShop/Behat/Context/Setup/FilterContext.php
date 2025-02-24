@@ -78,7 +78,7 @@ final class FilterContext implements Context
      * @Given /the (filter) has a category condition with (category "[^"]+")$/
      * @Given /the (filter) has a category condition with (category "[^"]+") and it (includes all subcategories)$/
      */
-    public function theFilterHasACategoryConditionWithCategory(FilterInterface $filter, CategoryInterface $category = null, $includeAllChilds = ''): void
+    public function theFilterHasACategoryConditionWithCategory(FilterInterface $filter, ?CategoryInterface $category = null, string $includeAllChilds = ''): void
     {
         $condition = $this->filterConditionFactory->createNew();
         $condition->setType('category_select');
@@ -100,7 +100,7 @@ final class FilterContext implements Context
      * @Given /the (filter) has a condition with label "([^"]+)" and type "([^"]+)" and a preselect for "([^"]+)"$/
      * @Given /the (filter) has a condition with label "([^"]+)" and type "([^"]+)" on field "([^"]+)"$/
      */
-    public function theFilterHasNameSelect(FilterInterface $filter, string $label, string $type, string $preselect = null, $field = null)
+    public function theFilterHasNameSelect(FilterInterface $filter, string $label, string $type, ?string $preselect = null, ?string $field = null)
     {
         /**
          * @var FilterInterface $filter
@@ -133,7 +133,7 @@ final class FilterContext implements Context
     /**
      * @Given /the (filter) gets added to (category "[^"]+")$/
      */
-    public function theFilterAddedToCategory(FilterInterface $filter, CoreCategoryInterface $category = null, $includeAllChilds = ''): void
+    public function theFilterAddedToCategory(FilterInterface $filter, ?CoreCategoryInterface $category = null): void
     {
         /**
          * @var CoreCategoryInterface $category

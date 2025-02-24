@@ -22,7 +22,7 @@ use CoreShop\Component\Resource\Pimcore\Model\PimcoreModelInterface;
 
 interface AttributeGroupInterface extends PimcoreModelInterface
 {
-    public function getName(string $language = null): ?string;
+    public function getName(?string $language = null): ?string;
 
     public function setName(?string $name, ?string $language = null): static;
 

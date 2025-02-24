@@ -29,7 +29,7 @@ interface TranslatableInterface
      */
     public function getTranslations(): Collection;
 
-    public function getTranslation(string $locale = null): TranslationInterface;
+    public function getTranslation(?string $locale = null): TranslationInterface;
 
     public function hasTranslation(TranslationInterface $translation): bool;
 

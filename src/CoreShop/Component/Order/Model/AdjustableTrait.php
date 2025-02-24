@@ -64,7 +64,7 @@ trait AdjustableTrait
     /**
      * @return AdjustmentInterface[]
      */
-    public function getAdjustments(string $type = null)
+    public function getAdjustments(?string $type = null)
     {
         $adjustments = [];
 
@@ -149,14 +149,14 @@ trait AdjustableTrait
         $this->addToAdjustmentsTotal($adjustment);
     }
 
-    public function removeAdjustments(string $type = null)
+    public function removeAdjustments(?string $type = null)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
             $this->removeAdjustment($adjustment);
         }
     }
 
-    public function removeAdjustmentsRecursively(string $type = null)
+    public function removeAdjustmentsRecursively(?string $type = null)
     {
         $this->removeAdjustments($type);
 

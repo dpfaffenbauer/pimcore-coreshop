@@ -29,7 +29,7 @@ final class StateMachineManager implements StateMachineManagerInterface
     ) {
     }
 
-    public function get(object $subject, string $workflowName = null): WorkflowInterface
+    public function get(object $subject, ?string $workflowName = null): WorkflowInterface
     {
         return $this->registry->get($subject, $workflowName);
     }

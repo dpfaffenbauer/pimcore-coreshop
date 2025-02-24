@@ -7,15 +7,16 @@
 {% endblock %}
 
 {% block checkout %}
-    <div class="card">
-        <div class="card-header">
-            {{ 'coreshop.ui.payment'|trans }}
-        </div>
+    <div class="card bg-light border-0">
+        <h4 class="px-3 pt-3 mb-0">
+            {{ 'coreshop.ui.payment_provider'|trans }}
+        </h4>
         <div class="card-body">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 {{ form_errors(form) }}
-
-                {{ form_row(form.paymentProvider, coreshop_test_form_attribute('select-payment-provider')) }}
+                <div class="form-group">
+                    {{ form_widget(form.paymentProvider, coreshop_test_form_attribute('select-payment-provider'), {attr: {class: 'form-select'}}) }}
+                </div>
 
                 <div class="paymentSettings">
                     {% if form.paymentSettings is defined %}
@@ -31,17 +32,17 @@
                     </div>
                 {% endfor %}
 
-                <div class="row">
+                <div class="row pt-3">
                     {% set previousStep = coreshop_checkout_steps_get_previous() %}
                     {% if previousStep is not null %}
-                        <div class="col-12 col-sm-6">
+                        <div class="col-6">
                             <a href="{{ path('coreshop_checkout', {'stepIdentifier': previousStep}) }}" class="btn btn-secondary">
                                 {{ 'coreshop.ui.back'|trans }}
                             </a>
                         </div>
                     {% endif %}
-                    <div class="col-12 {{ previousStep is not null ? 'col-sm-6' : '' }}">
-                        <button type="submit" class="btn btn-success pull-right" {{ coreshop_test_html_attribute('submit-payment-step') }}>
+                    <div class="d-flex col-6">
+                        <button type="submit" class="btn btn-primary ms-auto" {{ coreshop_test_html_attribute('submit-payment-step') }}>
                             {{ 'coreshop.ui.proceed'|trans }}
                         </button>
                     </div>

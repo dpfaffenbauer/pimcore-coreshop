@@ -31,7 +31,7 @@ class RuleBasedPaymentProviderResolver implements PaymentProviderResolverInterfa
     ) {
     }
 
-    public function resolvePaymentProviders(ResourceInterface $subject = null): array
+    public function resolvePaymentProviders(?ResourceInterface $subject = null): array
     {
         /**
          * @var PaymentProviderInterface[] $paymentProviders

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 use Pimcore\Kernel as PimcoreKernel;
 
-class BehatKernel extends PimcoreKernel
+final class BehatKernel extends PimcoreKernel
 {
     public function registerBundlesToCollection(\Pimcore\HttpKernel\BundleCollection\BundleCollection $collection): void
     {
@@ -38,7 +38,5 @@ class BehatKernel extends PimcoreKernel
     protected function build(\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         parent::build($container);
-
-        $container->setParameter('pimcore.geoip.db_file', $container->getParameter('kernel.project_dir') . '/var/config/GeoLite2-City.mmdb');
     }
 }
