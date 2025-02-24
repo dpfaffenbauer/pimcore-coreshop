@@ -58,7 +58,7 @@ final class ProductAvailabilityEventListener
             return;
         }
 
-        $originalPublished = (bool)$this->db->fetchOne('SELECT published FROM objects WHERE id=?', [$object->getId()]);
+        $originalPublished = (bool) $this->db->fetchOne('SELECT published FROM objects WHERE id=?', [$object->getId()]);
         if ($object->getPublished() === $originalPublished) {
             return;
         }
