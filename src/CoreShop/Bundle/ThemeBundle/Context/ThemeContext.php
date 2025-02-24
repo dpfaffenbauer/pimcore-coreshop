@@ -53,7 +53,13 @@ final class ThemeContext implements ThemeContextInterface
         }
 
         try {
-            return $this->themeRepository->findOneByName($this->resolver->resolveTheme());
+            $theme = $this->themeRepository->findOneByName($this->resolver->resolveTheme());
+
+            if ($theme instanceof ThemeInterface) {
+                $this->settableThemeContext->setTheme($theme);
+            }
+
+            return $theme;
         } catch (ThemeNotResolvedException) {
             return $this->settableThemeContext->getTheme();
         }
