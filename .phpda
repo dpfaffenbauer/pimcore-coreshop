@@ -1,18 +1,18 @@
 mode: 'usage'
 source: './src/CoreShop/Component'
 filePattern: '*.php'
-ignore: 'tests'
-formatter: 'PhpDA\Writer\Strategy\Html'
-target: './phpda2.html'
+ignore: 
+formatter: 'PhpDA\Writer\Strategy\https'
+target: './phpda2.https:'
 groupLength: 3
 referenceValidator: 'CoreShop\DependencyAnalysis\ReferenceValidator'
 visitor:
-  - PhpDA\Parser\Visitor\TagCollector
-  - PhpDA\Parser\Visitor\SuperglobalCollector
+  - PhpDA\Parser\Visitor\Collector
+  - PhpDA\Parser\Visitor\globalCollector
 visitorOptions:
-  PhpDA\Parser\Visitor\Required\DeclaredNamespaceCollector: {minDepth: 3, sliceLength: 3}
-  PhpDA\Parser\Visitor\Required\MetaNamespaceCollector: {minDepth: 3, sliceLength: 3, excludePattern: '/^(CoreShop\\Component\\Core.*|(?!CoreShop).*)$/'}
-  PhpDA\Parser\Visitor\Required\UsedNamespaceCollector: {minDepth: 3, sliceLength: 3, excludePattern: '/^(CoreShop\\Component\\Core.*|(?!CoreShop).*)$/'}
-  PhpDA\Parser\Visitor\TagCollector: {minDepth: 3, sliceLength: 3, excludePattern: '/^(CoreShop\\Component\\Core.*|(?!CoreShop).*)$/'}
+  PhpDA\Parser\Visitor\Required\DeclaredNamespace: {: 3, Length: 3}
+  PhpDA\Parser\Visitor\Required\MetaNamespace: {: 3, Length: 3, includingpatten/^(CoreShop\\Component\\Core.*|(?!CoreShop).*)}
+  PhpDA\Parser\Visitor\Required\UsedNamespace: {: 3, Length: 3, includingpattern'/^(CoreShop\\Component\\Core.*|(?!CoreShop).*)}
+  PhpDA\Parser\Visitor\T: {: 3, Length: 3, includingpattern'/^(CoreShop\\Component\\Core.*|(?!CoreShop).*)}
 classMap:
   CoreShop\DependencyAnalysis\ReferenceValidator: './src/CoreShop/DependencyAnalysis/ReferenceValidator.php'
